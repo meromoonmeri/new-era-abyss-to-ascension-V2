@@ -151,14 +151,16 @@ Le nom utilisé dans les dialogues est toujours **Team Dazzling**. « Les Trois 
 
 ## 5. Mission Forêt Lugubre
 
-Une nouvelle zone `gloomy_forest` est créée à partir de la génération forestière déjà présente dans `relic_forest` :
+Une nouvelle zone `gloomy_forest` et une Ground Map `gloomy_forest_entrance` sont créées à partir des ressources forestières déjà présentes dans `relic_forest` :
 
 - 5 étages ;
 - génération procédurale PMDO existante ;
+- Ground Map extérieure avec ruines forestières réutilisées ;
+- musique existante `Mystifying Forest.ogg` ;
 - aucune nouvelle commande de génération ;
-- aucun nouvel asset graphique ;
+- aucun téléchargement d’asset externe ;
 - nom français : **Forêt Lugubre** ;
-- script de zone séparé ;
+- script de zone et script d’entrée séparés ;
 - sortie explicite pour victoire, défaite, fuite et secours.
 
 Au dernier étage, `SpawnChapter6Chenipent` réutilise :

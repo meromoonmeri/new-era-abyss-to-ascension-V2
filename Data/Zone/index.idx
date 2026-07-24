@@ -1,4 +1,4 @@
-﻿{
+{
 "Version": "0.8.9.0",
 "Object": {
 "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[RogueEssence.Data.EntrySummary, RogueEssence]], System.Private.CoreLib",
@@ -692,7 +692,9 @@
 "Rescues": 0,
 "CountedFloors": 5,
 "Rogue": 0,
-"Grounds": [],
+"Grounds": [
+"gloomy_forest_entrance"
+],
 "Maps": [
 [
 0,

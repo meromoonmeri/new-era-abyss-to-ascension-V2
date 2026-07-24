@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="GF6E_001" xml:space="preserve">
+    <value>La forêt commence au-delà de ces vieilles ruines.</value>
+  </data>
+  <data name="GF6E_002" xml:space="preserve">
+    <value>Chenipent aime se cacher sous les feuilles... J’espère qu’il n’a pas peur.</value>
+  </data>
+  <data name="GF6E_003" xml:space="preserve">
+    <value>Nous allons le retrouver. Reste près de nous et ne nous quitte pas des yeux.</value>
+  </data>
+  <data name="GF6E_004" xml:space="preserve">
+    <value>Ce sentier est plus sombre qu’il n’en avait l’air depuis le village.</value>
+  </data>
+  <data name="GF6E_005" xml:space="preserve">
+    <value>Allons-y. Quelqu’un nous attend à l’intérieur.</value>
+  </data>
+  <data name="GF6E_006" xml:space="preserve">
+    <value>Merci. Je vais attendre ici que vous le rameniez.</value>
+  </data>
+  <data name="GF6E_007" xml:space="preserve">
+    <value>Soyez prudents. La forêt est silencieuse, mais elle n’est pas vide.</value>
+  </data>
+  <data name="GF6E_008" xml:space="preserve">
+    <value>L’entrée est juste devant. Je vais attendre ici pendant que vous vous préparez.</value>
+  </data>
+</root>

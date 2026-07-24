@@ -1,4 +1,4 @@
-﻿{
+{
   "Version": "0.8.9.0",
   "Object": {
     "$type": "RogueEssence.Data.ZoneData, RogueEssence",
@@ -3175,6 +3175,8 @@
         "Comment": ""
       }
     ],
-    "GroundMaps": []
+    "GroundMaps": [
+    "gloomy_forest_entrance"
+  ]
   }
 }

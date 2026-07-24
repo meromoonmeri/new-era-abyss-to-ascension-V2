@@ -1,4 +1,4 @@
-﻿{
+{
 "Version": "0.8.9.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
@@ -83081,6 +83081,7 @@
 "searing_tunnel_midpoint",
 "searing_crucible",
 "mount_windswept_entrance",
+"gloomy_forest_entrance",
 "testmap",
 "test_grounds"
 ]
