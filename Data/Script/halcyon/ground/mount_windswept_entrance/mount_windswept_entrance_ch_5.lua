@@ -197,6 +197,7 @@ function mount_windswept_entrance_ch_5.ArrivalCutscene()
 	SV.Chapter5.FinishedMountWindsweptIntro = true
 	GAME:CutsceneMode(false)
 	AI:EnableCharacterAI(partner)
+	SOUND:PlayBGM('Sky Peak Prairie.ogg', true)
 	GAME:FadeIn(40)
 
 end 

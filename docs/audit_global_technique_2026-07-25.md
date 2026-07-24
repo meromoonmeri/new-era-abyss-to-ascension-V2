@@ -350,3 +350,17 @@ Ajouter un script de CI qui vérifie :
 ## Conclusion
 
 Le projet est dans un état statiquement propre, mais pas encore dans un état de release finale vérifié en jeu. Les risques les plus sérieux sont les callbacks de secours, la cinématique du Mont Venteux non déclenchée, les rencontres mini-boss/gardiens non confirmées et les 58 descriptions d'objets absentes en français.
+
+## Mise à jour après correction — commit 99935aa
+
+Les deux problèmes de scripting confirmés ont été corrigés :
+
+- `COMMON.ExitDungeonMissionCheck` transmet maintenant les quatre arguments à `COMMON.EndRescue` ;
+- les callbacks `Rescued` d'Illuminant Riverbed et de `master_zone` utilisent maintenant `(zone, name, mail)` ;
+- `mount_windswept_entrance.PlotScripting()` déclenche désormais la cinématique du Mont Venteux au premier passage ;
+- la cinématique du Mont Venteux termine proprement son mode cinématique, nettoie ses personnages temporaires, pose `FinishedMountWindsweptIntro` et relance la musique ;
+- la version du mod passe à `0.5.1`.
+
+Validation après ces corrections : 178 Lua, 0 erreur de syntaxe.
+
+Les mini-boss/gardiens restent à valider ou à implémenter selon le contenu exact voulu dans les étages générés. Aucun test PMDO réel n'est simulé par cet audit.
