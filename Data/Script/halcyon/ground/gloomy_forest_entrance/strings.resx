@@ -24,4 +24,41 @@
   <data name="GF6E_008" xml:space="preserve">
     <value>The entrance is just ahead. I’ll wait here while you prepare.</value>
   </data>
+
+  <data name="GF6E_009" xml:space="preserve">
+    <value>Wait... did you see that shadow move between the trees?</value>
+  </data>
+  <data name="GF6E_010" xml:space="preserve">
+    <value>I saw it. The forest is watching the path.</value>
+  </data>
+  <data name="GF6E_011" xml:space="preserve">
+    <value>Stay between us. If anything happens, we turn back together.</value>
+  </data>
+  <data name="GF6E_012" xml:space="preserve">
+    <value>We came to find Chenipent. We will not let the silence scare us away.</value>
+  </data>
+  <data name="GF6E_013" xml:space="preserve">
+    <value>The sound came from deeper inside. Chenipent may have followed it.</value>
+  </data>
+  <data name="GF6E_014" xml:space="preserve">
+    <value>Please do not rush. The forest changes when no one is looking.</value>
+  </data>
+  <data name="GF6E_015" xml:space="preserve">
+    <value>Then we take one step at a time and keep our formation.</value>
+  </data>
+  <data name="GF6E_016" xml:space="preserve">
+    <value>Agreed. We look for tracks before we choose a path.</value>
+  </data>
+  <data name="GF6E_017" xml:space="preserve">
+    <value>That is why I trust you. You are careful, even when you are afraid.</value>
+  </data>
+  <data name="GF6E_018" xml:space="preserve">
+    <value>I will wait by these ruins. If you need me, call out.</value>
+  </data>
+  <data name="GF6E_019" xml:space="preserve">
+    <value>We will bring Chenipent back before the light is gone.</value>
+  </data>
+  <data name="GF6E_020" xml:space="preserve">
+    <value>Thank you. Please come back safely.</value>
+  </data>
 </root>

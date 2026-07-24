@@ -73,4 +73,50 @@
   <data name="MWE5_005" xml:space="preserve">
     <value>D'accord.[pause=0] Reposons-nous et reprenons des forces.</value>
   </data>
+
+  <data name="MWE5_006" xml:space="preserve">
+    <value>Le sommet est plus proche qu’il n’en a l’air, mais le vent ne nous facilitera pas la tâche.</value>
+  </data>
+  <data name="MWE5_007" xml:space="preserve">
+    <value>Nous devons rester ensemble. La montagne nous a déjà séparés une fois.</value>
+  </data>
+  <data name="MWE5_008" xml:space="preserve">
+    <value>Le temps a changé avant le coucher du soleil. Ce n’est pas normal sur ce chemin.</value>
+  </data>
+  <data name="MWE5_009" xml:space="preserve">
+    <value>Si le vent se lève encore, nous nous arrêtons. S’effondrer ne prouvera rien à personne.</value>
+  </data>
+  <data name="MWE5_010" xml:space="preserve">
+    <value>Nous avons traversé le tunnel. Nous pouvons aussi traverser une montagne.</value>
+  </data>
+  <data name="MWE5_011" xml:space="preserve">
+    <value>Et si le chemin change, nous le lirons ensemble et trouverons une autre voie.</value>
+  </data>
+  <data name="MWE5_012" xml:space="preserve">
+    <value>C’est l’esprit qu’il faut ! Nous sommes arrivés jusque-là parce que personne n’est resté derrière.</value>
+  </data>
+  <data name="MWE5_013" xml:space="preserve">
+    <value>Ne confondez pas enthousiasme et préparation. Vérifiez vos provisions avant de dormir.</value>
+  </data>
+  <data name="MWE5_014" xml:space="preserve">
+    <value>Je les ai déjà vérifiées deux fois. Je peux les vérifier une troisième !</value>
+  </data>
+  <data name="MWE5_015" xml:space="preserve">
+    <value>Faites-le. Le sommet n’est pas un endroit où l’on peut se permettre une erreur d’inattention.</value>
+  </data>
+  <data name="MWE5_016" xml:space="preserve">
+    <value>Nous serons prudents. Demain, nous terminerons cette ascension ensemble.</value>
+  </data>
+  <data name="MWE5_017" xml:space="preserve">
+    <value>Le vent porte un son étrange depuis les hauteurs.</value>
+  </data>
+  <data name="MWE5_018" xml:space="preserve">
+    <value>Cela vient peut-être des ruines. Ou la montagne essaie peut-être de nous éloigner.</value>
+  </data>
+  <data name="MWE5_019" xml:space="preserve">
+    <value>Alors nous écouterons, nous nous souviendrons de ce que nous avons entendu et nous resterons attentifs.</value>
+  </data>
+  <data name="MWE5_020" xml:space="preserve">
+    <value>Demain, nous atteindrons le sommet.</value>
+  </data>
 </root>

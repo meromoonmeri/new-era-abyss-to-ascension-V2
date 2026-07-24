@@ -11,7 +11,7 @@ Date : 25 juillet 2026
 | Profondeurs du Tunnel | `searing_tunnel_midpoint` | point médian et décision de continuer | transition du segment 0 vers le segment 1 | existante, auditée |
 | Crucible Incandescent | `searing_crucible` | arrivée dans l’arène et mise en place du boss | entrée du segment 2 | existante, auditée |
 | Mont Venteux | `mount_windswept_entrance` | arrivée au camp, inquiétude de Penticus et préparation | `Dungeon_Entrance_Touch` → `EnterDungeon` | existante, auditée |
-| Forêt Lugubre | `gloomy_forest_entrance` | ruines forestières, avertissement de Papilusion, dernier temps calme | `Dungeon_Entrance_Touch` → `EnterDungeon` | ajoutée au chapitre 6 |
+| Forêt Lugubre | `gloomy_forest_entrance` | ruines forestières, ombres, avertissement de Papilusion, formation de l’équipe et dernier temps calme | `Dungeon_Entrance_Touch` → `EnterDungeon` | ajoutée au chapitre 6, scène développée |
 
 Le Tunnel conserve 15 étages normaux + l’arène. Les maps `searing_tunnel_midpoint` et `searing_crucible` ne sont pas des téléportations silencieuses : elles sont déjà des étapes narratives de la progression du Tunnel.
 
