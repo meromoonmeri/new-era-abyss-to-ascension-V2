@@ -2087,8 +2087,8 @@ function GeneralFunctions.PagedChoiceMenu(message, choices, defaultchoice, cance
 		end
 
 		for i = 1, #choice_submenus, 1 do
-			table.insert(choice_submenus[i], "Prev Page")
-			table.insert(choice_submenus[i], "Next Page")
+			table.insert(choice_submenus[i], "Page précédente")
+			table.insert(choice_submenus[i], "Page suivante")
 		end
 
 		local continue = false
