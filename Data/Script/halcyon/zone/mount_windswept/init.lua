@@ -5,6 +5,7 @@
 ]]--
 -- Commonly included lua functions and data
 require 'origin.common'
+require 'halcyon.GeneralFunctions'
 
 -- Package name
 local mount_windswept = {}
@@ -28,8 +29,49 @@ end
 ---mount_windswept.ExitSegment(zone, result, rescue, segmentID, mapID)
 --Engine callback function
 function mount_windswept.ExitSegment(zone, result, rescue, segmentID, mapID)
+	GeneralFunctions.RestoreIdleAnim()
+	DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+	PrintInfo("=>> ExitSegment_mount_windswept (Mt. Windswept) result "..tostring(result).." segment "..tostring(segmentID))
 
+	--[[Different dungeon result types (cleared, died, etc)
+	       public enum ResultType
+        {
+            Unknown = -1,
+            Downed,
+            Failed,
+            Cleared,
+            Escaped,
+            TimedOut,
+            GaveUp,
+            Rescue
+        }
+		]]--
 
+	local exited = COMMON.ExitDungeonMissionCheck(result, rescue, zone.ID, segmentID)
+	--always clear the Thief flag when leaving the dungeon via any means.
+	SV.adventure.Thief = false
+
+	if exited == true then
+		--ExitDungeonMissionCheck already sent the player out (rescue case); do nothing.
+	else
+		--Generic win/loss handling. This zone has no end-of-dungeon ground map yet,
+		--so every outcome must route back to the guild or the run would never end.
+		if result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
+			--Other zones wait 20 frames on a loss; keep it consistent.
+			GAME:WaitFrames(20)
+		end
+
+		SV.TemporaryFlags.Dinnertime = true
+		SV.TemporaryFlags.Bedtime = true
+		SV.TemporaryFlags.MorningWakeup = true
+		SV.TemporaryFlags.MorningAddress = true
+
+		--Go to dinner if a mission wasn't completed, otherwise, go to 2nd floor
+		local exit_ground = 6
+		if SV.TemporaryFlags.MissionCompleted then exit_ground = 22 end
+
+		GeneralFunctions.EndDungeonRun(result, "master_zone", -1, exit_ground, 0, true, true)
+	end
 end
 
 ---mount_windswept.Rescued(zone, name, mail)

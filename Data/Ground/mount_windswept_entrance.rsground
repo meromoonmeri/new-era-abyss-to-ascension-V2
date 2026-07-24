@@ -289733,7 +289733,7 @@
 }
 },
 {
-"EntName": "Dungeon Entrance",
+"EntName": "Dungeon_Entrance",
 "Direction": 0,
 "EntEnabled": true,
 "EntOrder": 0,

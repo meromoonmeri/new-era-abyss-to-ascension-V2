@@ -5,6 +5,7 @@
 ]]--
 -- Commonly included lua functions and data
 require 'origin.common'
+require 'halcyon.GeneralFunctions'
 
 -- Package name
 local cloven_ruins = {}
@@ -29,15 +30,32 @@ end
 --Engine callback function
 function cloven_ruins.ExitSegment(zone, result, rescue, segmentID, mapID)
   GeneralFunctions.RestoreIdleAnim()
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  PrintInfo("=>> ExitSegment_cloven_ruins (Cloven Ruins) result "..tostring(result).." segment "..tostring(segmentID))
 
 	local exited = COMMON.ExitDungeonMissionCheck(result, rescue, zone.ID, segmentID)
+	--always clear the Thief flag when leaving the dungeon via any means.
+	SV.adventure.Thief = false
 
 	if exited == true then
-	--do nothing
-	elseif result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
-
+		--ExitDungeonMissionCheck already sent the player out (rescue case); do nothing.
 	else
-		
+		--This zone is still unreleased and has no dedicated end-of-dungeon ground map.
+		--Every outcome must still route somewhere, otherwise the run ends on a black screen.
+		if result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
+			GAME:WaitFrames(20)
+		end
+
+		SV.TemporaryFlags.Dinnertime = true
+		SV.TemporaryFlags.Bedtime = true
+		SV.TemporaryFlags.MorningWakeup = true
+		SV.TemporaryFlags.MorningAddress = true
+
+		--Go to dinner if a mission wasn't completed, otherwise, go to 2nd floor
+		local exit_ground = 6
+		if SV.TemporaryFlags.MissionCompleted then exit_ground = 22 end
+
+		GeneralFunctions.EndDungeonRun(result, "master_zone", -1, exit_ground, 0, true, true)
 	end
 end
 ---cloven_ruins.Rescued(zone, name, mail)

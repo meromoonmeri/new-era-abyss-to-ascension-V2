@@ -6,6 +6,7 @@
 -- Commonly included lua functions and data
 require 'origin.common'
 require 'halcyon.PartnerEssentials'
+require 'halcyon.GeneralFunctions'
 require 'halcyon.ground.mount_windswept_entrance.mount_windswept_entrance_ch_5'
 
 -- Package name
@@ -90,6 +91,41 @@ end
 function mount_windswept_entrance.Teammate3_Action(chara, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   COMMON.GroundInteract(activator, chara, true)
+end
+
+function mount_windswept_entrance.Kangaskhan_Rock_Action(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  GeneralFunctions.Kangashkhan_Rock_Interact(obj, activator)
+end
+
+---------------------------
+-- Map Transitions
+---------------------------
+function mount_windswept_entrance.Dungeon_Entrance_Touch(obj, activator)
+  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("mount_windswept")
+  UI:ResetSpeaker()
+  local hero = CH('PLAYER')
+  local partner = CH('Teammate1')
+  partner.IsInteracting = true
+  GROUND:CharSetAnim(partner, 'None', true)
+  GROUND:CharSetAnim(hero, 'None', true)
+  UI:ChoiceMenuYesNo("Would you like to enter " .. zone:GetColoredName() .. "?", true)
+  UI:WaitForChoice()
+  local yesnoResult = UI:ChoiceResult()
+  if yesnoResult then
+    SOUND:FadeOutBGM(60)
+    GAME:FadeOut(false, 60)
+    partner.IsInteracting = false
+    GROUND:CharEndAnim(partner)
+    GROUND:CharEndAnim(hero)
+    --default partner spawn, since it should be default wherever we end up after the dungeon.
+    SV.partner.Spawn = "Default"
+    GAME:EnterDungeon("mount_windswept", 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
+  end
+  partner.IsInteracting = false
+  GROUND:CharEndAnim(partner)
+  GROUND:CharEndAnim(hero)
 end
 
 return mount_windswept_entrance
