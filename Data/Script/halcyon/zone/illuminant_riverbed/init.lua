@@ -20,8 +20,8 @@ function illuminant_riverbed.EnterSegment(zone, rescuing, segmentID, mapID)
 	end
 end
 
-function illuminant_riverbed.Rescued(zone, mail)
-  COMMON.Rescued(zone, mail)
+function illuminant_riverbed.Rescued(zone, name, mail)
+  COMMON.Rescued(zone, name, mail)
 end
 
 

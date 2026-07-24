@@ -1004,7 +1004,7 @@ function COMMON.ExitDungeonMissionCheck(result, rescue, zoneId, segmentID)
 	end
 
   if rescue == true then
-    COMMON.EndRescue(zone, result, segmentID)
+    COMMON.EndRescue(zone, result, rescue, segmentID)
     exited = true
   end
 

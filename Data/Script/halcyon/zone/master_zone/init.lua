@@ -15,8 +15,8 @@ function master_zone.AllyInteract(chara, target, zone)
   COMMON.DungeonInteract(chara, target, zone)
 end
 
-function master_zone.Rescued(zone, mail)
-  COMMON.Rescued(zone, mail)
+function master_zone.Rescued(zone, name, mail)
+  COMMON.Rescued(zone, name, mail)
 end
 
 function master_zone.ExitSegment(zone, result, rescue, segmentID, mapID)

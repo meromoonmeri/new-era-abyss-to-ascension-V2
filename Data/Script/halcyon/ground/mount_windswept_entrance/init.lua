@@ -71,7 +71,16 @@ function mount_windswept_entrance.GameLoad(map)
 end
 
 function mount_windswept_entrance.PlotScripting()
-  GAME:FadeIn(20)
+  if SV.ChapterProgression.Chapter == 5 then
+    if not SV.Chapter5.FinishedMountWindsweptIntro then
+      mount_windswept_entrance_ch_5.ArrivalCutscene()
+    else
+      mount_windswept_entrance_ch_5.SetupGround()
+      GAME:FadeIn(20)
+    end
+  else
+    GAME:FadeIn(20)
+  end
 end 
 
 

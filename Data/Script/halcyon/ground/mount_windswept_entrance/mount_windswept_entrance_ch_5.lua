@@ -178,8 +178,26 @@ function mount_windswept_entrance_ch_5.ArrivalCutscene()
 	local coro3 = TASK:BranchCoroutine(function() GAME:WaitFrames(2) GROUND:MoveToPosition(growlithe, 60, 184, false, 1) end)
 	local coro4 = TASK:BranchCoroutine(function() GAME:WaitFrames(6) GROUND:MoveToPosition(zigzagoon, 60, 136, false, 1) end)
 	TASK:JoinCoroutines({coro1, coro2, coro3, coro4})
-
-
+	GAME:WaitFrames(20)
+	UI:SetSpeaker(partner)
+	UI:SetSpeakerEmotion("Worried")
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MWE5_003']))
+	UI:SetSpeaker(growlithe)
+	UI:SetSpeakerEmotion("Normal")
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MWE5_004']))
+	UI:SetSpeaker(partner)
+	UI:SetSpeakerEmotion("Happy")
+	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MWE5_005']))
+	GAME:WaitFrames(20)
+	GAME:FadeOut(false, 40)
+	GAME:WaitFrames(40)
+	for _, chara in ipairs({audino, snubbull, girafarig, breloom, growlithe, zigzagoon, tropius, noctowl, mareep, cranidos}) do
+		GAME:GetCurrentGround():RemoveTempChar(chara)
+	end
+	SV.Chapter5.FinishedMountWindsweptIntro = true
+	GAME:CutsceneMode(false)
+	AI:EnableCharacterAI(partner)
+	GAME:FadeIn(40)
 
 end 
 

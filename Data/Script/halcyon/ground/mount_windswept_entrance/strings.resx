@@ -64,4 +64,13 @@
   <data name="MWE5_002" xml:space="preserve">
     <value>Oh,[pause=10] it's already dark![pause=0] I hope we're not too late...</value>
   </data>
+  <data name="MWE5_003" xml:space="preserve">
+    <value>We should set up camp here and rest before the final climb.</value>
+  </data>
+  <data name="MWE5_004" xml:space="preserve">
+    <value>Tomorrow, we'll reach Cloven Ruins...[pause=0] assuming the mountain lets us pass.</value>
+  </data>
+  <data name="MWE5_005" xml:space="preserve">
+    <value>Alright.[pause=0] Let's rest up and regain our strength.</value>
+  </data>
 </root>
