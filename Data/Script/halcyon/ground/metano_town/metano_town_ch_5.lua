@@ -112,7 +112,7 @@ end
 function metano_town_ch_5.Mareep_Action(chara, activator)
 	local hero = CH('PLAYER')
 	local partner = CH('Teammate1')
-	GeneralFunctions.StartConversation(chara, "Oh,[pause=10] " .. hero:GetDisplayName() .. " and " .. partner:GetDisplayName() .. "![pause=0] Ca-a-a-an you believe the expedition's finally here?", "Happy")
+	GeneralFunctions.StartConversation(chara, "Oh,[pause=10] " .. hero:GetDisplayName() .. " et " .. partner:GetDisplayName() .. " ![pause=0] Vous y croyez ? L'expédition est enfin là !", "Happy")
 	UI:SetSpeakerEmotion("Joyous")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_001']))
 	UI:SetSpeakerEmotion("Normal")
@@ -122,7 +122,7 @@ end
 
 function metano_town_ch_5.Cranidos_Action(chara, activator)
 	local item = RogueEssence.Dungeon.InvItem("machine_recall_box")
-	GeneralFunctions.StartConversation(chara, "You greenhorns better get all your moves in order before we leave.")
+	GeneralFunctions.StartConversation(chara, "Vous les débutants, mettez vos capacités au point avant notre départ.")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_003'], item:GetDisplayName()))
 	UI:SetSpeakerEmotion("Determined")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_004']))
@@ -146,7 +146,7 @@ function metano_town_ch_5.Zigzagoon_Action(chara, activator)
 end
 
 function metano_town_ch_5.Mawile_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Word around town is that the guild is leaving on a big expedition today.")
+	GeneralFunctions.StartConversation(chara, "La rumeur court en ville : la guilde part aujourd'hui pour une grande expédition.")
 	UI:SetSpeakerEmotion("Inspired")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_005']))
 	UI:SetSpeakerEmotion("Happy")
@@ -155,7 +155,7 @@ function metano_town_ch_5.Mawile_Action(chara, activator)
 end
 
 function metano_town_ch_5.Electrike_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, CharacterEssentials.GetCharacterName("Wooper_Boy") .. " and " .. CharacterEssentials.GetCharacterName("Wooper_Girl") .. " are still playing with that other Pokémon,[pause=10] huh...?", "Sad")
+	GeneralFunctions.StartConversation(chara, CharacterEssentials.GetCharacterName("Wooper_Boy") .. " et " .. CharacterEssentials.GetCharacterName("Wooper_Girl") .. " jouent encore avec cet autre Pokémon,[pause=10] hein ?...", "Sad")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_007']))
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_008']))
@@ -165,7 +165,7 @@ function metano_town_ch_5.Electrike_Action(chara, activator)
 end
 
 function metano_town_ch_5.Azumarill_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, chara:GetDisplayName() .. " hear that guild is going away for a while.")
+	GeneralFunctions.StartConversation(chara, chara:GetDisplayName() .. " entend dire que la guilde s'en va pour un moment.")
 	UI:SetSpeakerEmotion("Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_010'], chara:GetDisplayName(), chara:GetDisplayName()))
 	UI:SetSpeakerEmotion("Happy")
@@ -198,14 +198,14 @@ end
 ]]--
 
 function metano_town_ch_5.Metapod_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, CharacterEssentials.GetCharacterName("Silcoon") .. " and I got a free drink from the café today.")
+	GeneralFunctions.StartConversation(chara, CharacterEssentials.GetCharacterName("Silcoon") .. " et moi avons reçu une boisson gratuite du café aujourd'hui.")
 	UI:SetSpeakerEmotion("Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_015']))
 	GeneralFunctions.EndConversation(chara)
 end
 
 function metano_town_ch_5.Silcoon_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Did you hear?[pause=0] " .. CharacterEssentials.GetCharacterName("Shuckle") .. "'s giving away free drinks today!")
+	GeneralFunctions.StartConversation(chara, "Tu as entendu ?[pause=0] " .. CharacterEssentials.GetCharacterName("Shuckle") .. " offre des boissons gratuites aujourd'hui !")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_016']))
 	GeneralFunctions.EndConversation(chara)
 end
@@ -213,7 +213,7 @@ end
 --Mountain - the cold turned her back or was too much for her?
 --Cave - ironic, given her current living situation? The lack of sun got to her and she now submits herself to it willingly as a weird self punishment?
 function metano_town_ch_5.Oddish_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "The weird lady told me an awesome story about an adventure she had in a cave a long time ago!", "Inspired")
+	GeneralFunctions.StartConversation(chara, "Cette dame étrange m'a raconté une histoire géniale sur une aventure qu'elle a vécue dans une grotte il y a longtemps !", "Inspired")
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_017']))
 	GROUND:CharSetAnim(chara, "Idle", true)
@@ -226,14 +226,14 @@ end
 
 
 function metano_town_ch_5.Numel_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "I've been working really hard so my momma will make me more Lava Cakes!", "Happy")
+	GeneralFunctions.StartConversation(chara, "Je travaille très dur pour que maman me prépare encore plus de gâteaux de lave !", "Happy")
 	UI:SetSpeakerEmotion("Joyous")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_019']))
 	GeneralFunctions.EndConversation(chara)
 end
 
 function metano_town_ch_5.Machamp_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Me daughter is off makin' merry wit' her new pals.")
+	GeneralFunctions.StartConversation(chara, "Ma fille est partie s'amuser avec ses nouveaux amis.")
 	UI:SetSpeakerEmotion("Joyous")
 	GROUND:CharSetEmote(chara, "glowing", 0)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_020']))
@@ -245,26 +245,26 @@ function metano_town_ch_5.Medicham_Action(chara, activator)
 	--Strength is not everything. A sharp mind is just as, if not more important.
 	--Clever thinking can help you to overcome any challenges you may face.
 	--It would be wise to keep that in mind on your upcoming journey!
-	GeneralFunctions.StartConversation(chara, "Everything strength not is.[pause=0] Just is a sharp mind as,[pause=10] if not important more.")
+	GeneralFunctions.StartConversation(chara, "La force n'est pas tout.[pause=0] L'esprit vif est tout aussi important,[pause=10] voire plus.")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_021']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_022']))
 	GeneralFunctions.EndConversation(chara)
 end
 
 function metano_town_ch_5.Spheal_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "An expedition?[pause=0] Sounds like hungry work![pause=0] Make sure to pack lots of food!")
+	GeneralFunctions.StartConversation(chara, "Une expédition ?[pause=0] Ça donne faim ![pause=0] Pensez à emporter beaucoup de nourriture !")
 	UI:SetSpeakerEmotion("Inspired")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_023']))
 	GeneralFunctions.EndConversation(chara)
 end 
 
 function metano_town_ch_5.Marill_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Good luck on the expedition![pause=0] I hope you all make a big discovery!", "Happy")
+	GeneralFunctions.StartConversation(chara, "Bonne chance pour l'expédition ![pause=0] J'espère que vous ferez une grande découverte !", "Happy")
 	GeneralFunctions.EndConversation(chara)
 end 
 
 function metano_town_ch_5.Jigglypuff_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Take care on your expedition.[pause=0] For a trip like that, you'll be on the road for some time,[pause=10] so make sure to pack lots of supplies.")
+	GeneralFunctions.StartConversation(chara, "Prenez soin de vous pendant l'expédition.[pause=0] Pour un voyage pareil, vous serez longtemps sur les routes,[pause=10] alors emportez beaucoup de provisions.")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_024'], CharacterEssentials.GetCharacterName('Kangaskhan')))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_025']))
 	GeneralFunctions.EndConversation(chara)

@@ -21,7 +21,7 @@ function altere_pond_ch_5.SetupGround()
 end
 
 function altere_pond_ch_5.Relicanth_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Placeholder.", "Normal", true, false)
+	GeneralFunctions.StartConversation(chara, "Pas de dialogue pour le moment.", "Normal", true, false)
 	GeneralFunctions.EndConversation(chara, false)
 end 
 

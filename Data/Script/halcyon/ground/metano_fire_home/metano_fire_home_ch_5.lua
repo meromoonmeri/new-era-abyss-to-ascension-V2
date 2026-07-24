@@ -17,7 +17,7 @@ function metano_fire_home_ch_5.SetupGround()
 end
 
 function metano_fire_home_ch_5.Camerupt_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "My baby boy's been working so hard lately,[pause=10] I'm so proud of him!", "Happy")
+	GeneralFunctions.StartConversation(chara, "Mon petit garçon travaille si dur ces derniers temps,[pause=10] je suis si fière de lui !", "Happy")
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MFH5_001']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MFH5_002']))

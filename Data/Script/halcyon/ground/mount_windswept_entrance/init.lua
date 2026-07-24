@@ -110,7 +110,7 @@ function mount_windswept_entrance.Dungeon_Entrance_Touch(obj, activator)
   partner.IsInteracting = true
   GROUND:CharSetAnim(partner, 'None', true)
   GROUND:CharSetAnim(hero, 'None', true)
-  UI:ChoiceMenuYesNo("Would you like to enter " .. zone:GetColoredName() .. "?", true)
+  UI:ChoiceMenuYesNo("Voulez-vous entrer dans " .. zone:GetColoredName() .. " ?", true)
   UI:WaitForChoice()
   local yesnoResult = UI:ChoiceResult()
   if yesnoResult then

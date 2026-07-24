@@ -4,7 +4,9 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Searing Tunnel",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Tunnel Incandescent"
+}
 },
 "Released": true,
 "Comment": "2nd dungeon of the expedition. 6th dungeon overall.",
@@ -2658,7 +2660,9 @@
 },
 "Name": {
 "DefaultText": "Searing Tunnel\\nB{0}F",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Tunnel Incandescent\\n{0}E"
+}
 },
 "Priority": {
 "str": [
@@ -8448,7 +8452,9 @@
 },
 "Name": {
 "DefaultText": "Searing Depths\\nB{0}F",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Profondeurs Incandescentes\\n{0}E"
+}
 },
 "Priority": {
 "str": [

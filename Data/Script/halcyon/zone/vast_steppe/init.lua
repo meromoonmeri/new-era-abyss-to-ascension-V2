@@ -65,8 +65,8 @@ function vast_steppe.ExitSegment(zone, result, rescue, segmentID, mapID)
 			GAME:EndDungeonRun(result, "master_zone", -1, 46, 0, true, true)
 			UI:SetSpeaker(GAME:GetPlayerPartyMember(3))--set audino as speaker 
 			UI:SetSpeakerEmotion("Pain")
-			UI:WaitShowDialogue("Oof![pause=0] It's t-too t-tough...")
-			GeneralFunctions.DeathFadeOutDialogue(GAME:GetPlayerPartyMember(3), "W-we need to f-fall back...", "Pain")
+			UI:WaitShowDialogue("Ouf ![pause=0] C'est t-trop difficile...")
+			GeneralFunctions.DeathFadeOutDialogue(GAME:GetPlayerPartyMember(3), "N-nous devons r-rebrousser chemin...", "Pain")
 			GAME:WaitFrames(20)
 			GAME:EnterZone("master_zone", -1, 46, 0)--Exit back to Vast Steppe Entrance
 		

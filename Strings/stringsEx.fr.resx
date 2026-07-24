@@ -5354,4 +5354,244 @@ Comme c'est un volontaire, il ne restera pas avec toi après la sortie.
   <data name="MISSION_BODY_SPECIAL_RIVAL_019" xml:space="preserve">
     <value>Secourez mon rival, pitié ! Nous n'avons pas fini\nde voir qui est le plus courageux ! Pitié, pitié !</value>
   </data>
+  <data name="TALK_FULL_3100" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (brusque) 1</value>
+  </data>
+  <data name="TALK_FULL_3101" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (brusque) 2</value>
+  </data>
+  <data name="TALK_FULL_3102" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (brusque) 3</value>
+  </data>
+  <data name="TALK_FULL_3103" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (brusque) 4</value>
+  </data>
+  <data name="TALK_FULL_3104" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (brusque) 5</value>
+  </data>
+  <data name="TALK_HALF_3100" xml:space="preserve">
+    <value>Cranidos — réplique à mi-PV (brusque) 1</value>
+  </data>
+  <data name="TALK_HALF_3101" xml:space="preserve">
+    <value>Cranidos — réplique à mi-PV (brusque) 2</value>
+  </data>
+  <data name="TALK_HALF_3102" xml:space="preserve">
+    <value>Cranidos — réplique à mi-PV (brusque) 3</value>
+  </data>
+  <data name="TALK_PINCH_3100" xml:space="preserve">
+    <value>Cranidos — réplique à PV critique (brusque) 1</value>
+  </data>
+  <data name="TALK_PINCH_3101" xml:space="preserve">
+    <value>Cranidos — réplique à PV critique (brusque) 2</value>
+  </data>
+  <data name="TALK_PINCH_3102" xml:space="preserve">
+    <value>Cranidos — réplique à PV critique (brusque) 3</value>
+  </data>
+  <data name="TALK_FULL_3110" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (timide) 1</value>
+  </data>
+  <data name="TALK_FULL_3111" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (timide) 2</value>
+  </data>
+  <data name="TALK_FULL_3112" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (timide) 3</value>
+  </data>
+  <data name="TALK_FULL_3113" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (timide) 4</value>
+  </data>
+  <data name="TALK_FULL_3114" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (timide) 5</value>
+  </data>
+  <data name="TALK_HALF_3110" xml:space="preserve">
+    <value>Cranidos — réplique à mi-PV (timide) 1</value>
+  </data>
+  <data name="TALK_HALF_3111" xml:space="preserve">
+    <value>Cranidos — réplique à mi-PV (timide) 2</value>
+  </data>
+  <data name="TALK_HALF_3112" xml:space="preserve">
+    <value>Cranidos — réplique à mi-PV (timide) 3</value>
+  </data>
+  <data name="TALK_PINCH_3110" xml:space="preserve">
+    <value>Cranidos — réplique à PV critique (timide) 1</value>
+  </data>
+  <data name="TALK_PINCH_3111" xml:space="preserve">
+    <value>Cranidos — réplique à PV critique (timide) 2</value>
+  </data>
+  <data name="TALK_PINCH_3112" xml:space="preserve">
+    <value>Cranidos — réplique à PV critique (timide) 3</value>
+  </data>
+  <data name="TALK_FULL_3120" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (gêné) 1</value>
+  </data>
+  <data name="TALK_FULL_3121" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (gêné) 2</value>
+  </data>
+  <data name="TALK_FULL_3122" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (gêné) 3</value>
+  </data>
+  <data name="TALK_FULL_3123" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (gêné) 4</value>
+  </data>
+  <data name="TALK_FULL_3124" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (gêné) 5</value>
+  </data>
+  <data name="TALK_HALF_3120" xml:space="preserve">
+    <value>Cranidos — réplique à mi-PV (gêné) 1</value>
+  </data>
+  <data name="TALK_HALF_3121" xml:space="preserve">
+    <value>Cranidos — réplique à mi-PV (gêné) 2</value>
+  </data>
+  <data name="TALK_HALF_3122" xml:space="preserve">
+    <value>Cranidos — réplique à mi-PV (gêné) 3</value>
+  </data>
+  <data name="TALK_PINCH_3120" xml:space="preserve">
+    <value>Cranidos — réplique à PV critique (gêné) 1</value>
+  </data>
+  <data name="TALK_PINCH_3121" xml:space="preserve">
+    <value>Cranidos — réplique à PV critique (gêné) 2</value>
+  </data>
+  <data name="TALK_PINCH_3122" xml:space="preserve">
+    <value>Cranidos — réplique à PV critique (gêné) 3</value>
+  </data>
+  <data name="TALK_FULL_3130" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (critique, Shuca en difficulté) 1</value>
+  </data>
+  <data name="TALK_FULL_3131" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (critique, Shuca en difficulté) 2</value>
+  </data>
+  <data name="TALK_FULL_3132" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (critique, Shuca en difficulté) 3</value>
+  </data>
+  <data name="TALK_FULL_3133" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (critique, Shuca en difficulté) 4</value>
+  </data>
+  <data name="TALK_FULL_3134" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (critique, Shuca en difficulté) 5</value>
+  </data>
+  <data name="TALK_HALF_3130" xml:space="preserve">
+    <value>Cranidos — réplique à mi-PV (critique, Shuca en difficulté) 1</value>
+  </data>
+  <data name="TALK_HALF_3131" xml:space="preserve">
+    <value>Cranidos — réplique à mi-PV (critique, Shuca en difficulté) 2</value>
+  </data>
+  <data name="TALK_HALF_3132" xml:space="preserve">
+    <value>Cranidos — réplique à mi-PV (critique, Shuca en difficulté) 3</value>
+  </data>
+  <data name="TALK_PINCH_3130" xml:space="preserve">
+    <value>Cranidos — réplique à PV critique (critique, Shuca en difficulté) 1</value>
+  </data>
+  <data name="TALK_PINCH_3131" xml:space="preserve">
+    <value>Cranidos — réplique à PV critique (critique, Shuca en difficulté) 2</value>
+  </data>
+  <data name="TALK_PINCH_3132" xml:space="preserve">
+    <value>Cranidos — réplique à PV critique (critique, Shuca en difficulté) 3</value>
+  </data>
+  <data name="TALK_FULL_3140" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (à Shuca, qui est en difficulté) 1</value>
+  </data>
+  <data name="TALK_FULL_3141" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (à Shuca, qui est en difficulté) 2</value>
+  </data>
+  <data name="TALK_FULL_3142" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (à Shuca, qui est en difficulté) 3</value>
+  </data>
+  <data name="TALK_FULL_3143" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (à Shuca, qui est en difficulté) 4</value>
+  </data>
+  <data name="TALK_FULL_3144" xml:space="preserve">
+    <value>Cranidos — commentaire d’expédition (à Shuca, qui est en difficulté) 5</value>
+  </data>
+  <data name="TALK_HALF_3140" xml:space="preserve">
+    <value>Cranidos — réplique à mi-PV (à Shuca, qui est en difficulté) 1</value>
+  </data>
+  <data name="TALK_HALF_3141" xml:space="preserve">
+    <value>Cranidos — réplique à mi-PV (à Shuca, qui est en difficulté) 2</value>
+  </data>
+  <data name="TALK_HALF_3142" xml:space="preserve">
+    <value>Cranidos — réplique à mi-PV (à Shuca, qui est en difficulté) 3</value>
+  </data>
+  <data name="TALK_PINCH_3140" xml:space="preserve">
+    <value>Cranidos — réplique à PV critique (à Shuca, qui est en difficulté) 1</value>
+  </data>
+  <data name="TALK_PINCH_3141" xml:space="preserve">
+    <value>Cranidos — réplique à PV critique (à Shuca, qui est en difficulté) 2</value>
+  </data>
+  <data name="TALK_PINCH_3142" xml:space="preserve">
+    <value>Cranidos — réplique à PV critique (à Shuca, qui est en difficulté) 3</value>
+  </data>
+  <data name="TALK_FULL_3150" xml:space="preserve">
+    <value>Mareep — commentaire d’expédition 1</value>
+  </data>
+  <data name="TALK_FULL_3151" xml:space="preserve">
+    <value>Mareep — commentaire d’expédition 2</value>
+  </data>
+  <data name="TALK_FULL_3152" xml:space="preserve">
+    <value>Mareep — commentaire d’expédition 3</value>
+  </data>
+  <data name="TALK_FULL_3153" xml:space="preserve">
+    <value>Mareep — commentaire d’expédition 4</value>
+  </data>
+  <data name="TALK_FULL_3154" xml:space="preserve">
+    <value>Mareep — commentaire d’expédition 5</value>
+  </data>
+  <data name="TALK_HALF_3150" xml:space="preserve">
+    <value>Mareep — réplique à mi-PV 1</value>
+  </data>
+  <data name="TALK_HALF_3151" xml:space="preserve">
+    <value>Mareep — réplique à mi-PV 2</value>
+  </data>
+  <data name="TALK_HALF_3152" xml:space="preserve">
+    <value>Mareep — réplique à mi-PV 3</value>
+  </data>
+  <data name="TALK_PINCH_3150" xml:space="preserve">
+    <value>Mareep — réplique à PV critique 1</value>
+  </data>
+  <data name="TALK_PINCH_3151" xml:space="preserve">
+    <value>Mareep — réplique à PV critique 2</value>
+  </data>
+  <data name="TALK_PINCH_3152" xml:space="preserve">
+    <value>Mareep — réplique à PV critique 3</value>
+  </data>
+  <data name="TALK_FULL_3160" xml:space="preserve">
+    <value>Mareep — commentaire d’expédition (à Cranidos) 1</value>
+  </data>
+  <data name="TALK_FULL_3161" xml:space="preserve">
+    <value>Mareep — commentaire d’expédition (à Cranidos) 2</value>
+  </data>
+  <data name="TALK_FULL_3162" xml:space="preserve">
+    <value>Mareep — commentaire d’expédition (à Cranidos) 3</value>
+  </data>
+  <data name="TALK_FULL_3163" xml:space="preserve">
+    <value>Mareep — commentaire d’expédition (à Cranidos) 4</value>
+  </data>
+  <data name="TALK_FULL_3164" xml:space="preserve">
+    <value>Mareep — commentaire d’expédition (à Cranidos) 5</value>
+  </data>
+  <data name="TALK_HALF_3160" xml:space="preserve">
+    <value>Mareep — réplique à mi-PV (à Cranidos) 1</value>
+  </data>
+  <data name="TALK_HALF_3161" xml:space="preserve">
+    <value>Mareep — réplique à mi-PV (à Cranidos) 2</value>
+  </data>
+  <data name="TALK_HALF_3162" xml:space="preserve">
+    <value>Mareep — réplique à mi-PV (à Cranidos) 3</value>
+  </data>
+  <data name="TALK_PINCH_3160" xml:space="preserve">
+    <value>Mareep — réplique à PV critique (à Cranidos) 1</value>
+  </data>
+  <data name="TALK_PINCH_3161" xml:space="preserve">
+    <value>Mareep — réplique à PV critique (à Cranidos) 2</value>
+  </data>
+  <data name="TALK_PINCH_3162" xml:space="preserve">
+    <value>Mareep — réplique à PV critique (à Cranidos) 3</value>
+  </data>
+  <data name="TALK_FULL_9999" xml:space="preserve">
+    <value>C'est un message d'erreur de personnalité. Indique à Palika ce qui a conduit à cette erreur.</value>
+  </data>
+  <data name="TALK_HALF_9999" xml:space="preserve">
+    <value>C'est un message d'erreur de personnalité. Indique à Palika ce qui a conduit à cette erreur.</value>
+  </data>
+  <data name="TALK_PINCH_9999" xml:space="preserve">
+    <value>C'est un message d'erreur de personnalité. Indique à Palika ce qui a conduit à cette erreur.</value>
+  </data>
 </root>

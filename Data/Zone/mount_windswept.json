@@ -4,7 +4,9 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Mt. Windswept",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Mont Venteux"
+}
 },
 "Released": true,
 "Comment": "3rd dungeon of the expedition. 7th dungeon overall.",
@@ -1317,7 +1319,9 @@
 },
 "Name": {
 "DefaultText": "Mt. Windswept\\n{0}F",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Mont Venteux\\n{0}E"
+}
 },
 "Priority": {
 "str": [

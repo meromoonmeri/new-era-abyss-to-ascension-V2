@@ -887,7 +887,7 @@ function searing_tunnel_entrance_ch_5.ArrivalDinnerNightAndAddressCutscene()
 	GROUND:RemoveMapStatus("darkness")
 		
 	UI:SetAutoFinish(true)
-	UI:WaitShowVoiceOver("The next morning...\n\n", -1)
+	UI:WaitShowVoiceOver("Le lendemain matin...\n\n", -1)
 	UI:SetAutoFinish(false)
 	
 	
@@ -1495,14 +1495,14 @@ function searing_tunnel_entrance_ch_5.Tropius_Action(chara, activator)
 	--speak to him after wiping to the boss, which prompts Hyko to get you to not give details about the boss
 	--since he wouldn't want the guildmaster to flip
 	if not SV.Chapter5.EnteredTunnel then
-		GeneralFunctions.StartConversation(chara, "Team " .. GAME:GetTeamName() .. "...[pause=0] I'm trusting you to get through this next dungeon safely.", "Worried")
+	GeneralFunctions.StartConversation(chara, "Équipe " .. GAME:GetTeamName() .. "...[pause=0] Je compte sur vous pour traverser ce prochain donjon sans danger.", "Worried")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_122']))
 	elseif SV.Chapter5.TunnelLastExitReason == 'Died' then
-		GeneralFunctions.StartConversation(chara, "Please be more careful on your next attempt.[pause=0]\nI'd hate to see you all wiped out again!", "Worried")
+	GeneralFunctions.StartConversation(chara, "Soyez plus prudents lors de votre prochaine tentative.[pause=0]\nJe ne veux pas vous voir tous K.O. une nouvelle fois !", "Worried")
 	elseif SV.Chapter5.TunnelLastExitReason == 'Escaped' then
-		GeneralFunctions.StartConversation(chara, "Good luck and stay safe on your next attempt.[pause=0]\nDon't be afraid to escape again if things go south!", "Normal")
+	GeneralFunctions.StartConversation(chara, "Bonne chance et faites attention lors de votre prochaine tentative.[pause=0]\nN'hésitez pas à fuir encore si la situation dégénère !", "Normal")
 	elseif SV.Chapter5.TunnelLastExitReason == 'Retreated' then
-		GeneralFunctions.StartConversation(chara, "Good luck and stay safe on your next attempt.[pause=0]\nAnd remember,[pause=10] only come back here if you need to!", "Normal")
+	GeneralFunctions.StartConversation(chara, "Bonne chance et faites attention lors de votre prochaine tentative.[pause=0]\nEt souvenez-vous,[pause=10] ne revenez ici qu'en cas de besoin !", "Normal")
 	end
 	
 	--Say something extra if you've encountered the boss.
@@ -1661,17 +1661,17 @@ function searing_tunnel_entrance_ch_5.Noctowl_Action(chara, activator)
 	--He sleeps if you die and visit him. This is where he finds his rest after all.
 		UI:ResetSpeaker(false)
 		UI:SetCenter(true)
-		GeneralFunctions.StartConversation(chara, "(" .. chara:GetDisplayName() .. " is sleeping.)\n(He must be catching up on his sleep...)", "Normal", false, false, false)
+	GeneralFunctions.StartConversation(chara, "(" .. chara:GetDisplayName() .. " dort.)\n(Il doit rattraper son sommeil...)", "Normal", false, false, false)
 		UI:SetCenter(false)
 		GeneralFunctions.EndConversation(chara, false)
 	elseif SV.Chapter5.SpokeToNoctowlTunnel then
-		GeneralFunctions.StartConversation(chara, "As I said earlier,[pause=10] the Guildmaster has insisted that he be the one to hand out supplies for your party.")
+	GeneralFunctions.StartConversation(chara, "Comme je l'ai dit,[pause=10] le Maître de Guilde a insisté pour distribuer lui-même les provisions à votre équipe.")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_137']))
 		GeneralFunctions.EndConversation(chara)
 	else
 		local partner = CH('Teammate1')
 		
-		GeneralFunctions.StartConversation(chara, "The Guildmaster has insisted that he be the one to hand out supplies for your party.")
+	GeneralFunctions.StartConversation(chara, "Le Maître de Guilde a insisté pour distribuer lui-même les provisions à votre équipe.")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_138']))
 		GAME:WaitFrames(20)
 		
@@ -1712,7 +1712,7 @@ end
 
 function searing_tunnel_entrance_ch_5.Breloom_Action(chara, activator)
 	--Reiterates how the place is unstable. It's strange, since he's heard of this place before, and it was never said to be unstable then! (his memory is good so HMMM)
-	GeneralFunctions.StartConversation(chara, "Be careful in the tunnel.[pause=0] All that lava in there is unstable!")
+	GeneralFunctions.StartConversation(chara, "Soyez prudents dans le tunnel.[pause=0] Toute cette lave est instable !")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_148']))
 	UI:SetSpeakerEmotion("Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_149'], CharacterEssentials.GetCharacterName("Girafarig")))
@@ -1723,7 +1723,7 @@ end
 
 function searing_tunnel_entrance_ch_5.Girafarig_Action(chara, activator)
 	--Tells you about treasure boxes
-	GeneralFunctions.StartConversation(chara, "Have you two found any Treasure Boxes yet?")
+	GeneralFunctions.StartConversation(chara, "Avez-vous trouvé des coffres au trésor ?")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_152'], CharacterEssentials.GetCharacterName("Breloom"), CharacterEssentials.GetCharacterName("Tail")))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_153']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_154']))
@@ -1740,7 +1740,7 @@ end
 function searing_tunnel_entrance_ch_5.Growlithe_Action(chara, activator)
 	--I'm heat resistant!
 	if not SV.Chapter5.EnteredTunnel then
-		GeneralFunctions.StartConversation(chara, "We're good to go anytime,[pause=10] ruff![pause=0] We can head out as soon as you're ready!", "Happy")
+	GeneralFunctions.StartConversation(chara, "Nous sommes prêts quand vous voulez,[pause=10] wouf ![pause=0] Nous pouvons partir dès que vous êtes prêts !", "Happy")
 	elseif SV.Chapter5.GrowlitheTropiusBossInterrupt then
 		--Whisper this if you didn't retreat as the last exit reason; death/escape puts you next to Penticus after all.
 		local prefix = '('
@@ -1749,13 +1749,13 @@ function searing_tunnel_entrance_ch_5.Growlithe_Action(chara, activator)
 			prefix = ''
 			suffix = ''
 		end
-		GeneralFunctions.StartConversation(chara, prefix .. "Thanks for not telling " .. CharacterEssentials.GetCharacterName("Tropius") .. " about the " .. _DATA:GetMonster('slugma'):GetColoredName() .. " tribe,[pause=10] ruff." .. suffix)
+	GeneralFunctions.StartConversation(chara, prefix .. "Merci de ne pas avoir parlé à " .. CharacterEssentials.GetCharacterName("Tropius") .. " de la tribu " .. _DATA:GetMonster('slugma'):GetColoredName() .. ",[pause=10] wouf." .. suffix)
 		UI:SetSpeakerEmotion("Happy")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_159'], prefix, suffix))
 	elseif SV.Chapter5.TunnelLastExitReason == 'Retreated' then
-		GeneralFunctions.StartConversation(chara, "I don't mind having to travel though the tunnel again.[pause=0] It means we all get to adventure more,[pause=10] ruff!", "Happy")
+	GeneralFunctions.StartConversation(chara, "Ça ne me dérange pas de retraverser le tunnel.[pause=0] Cela nous permettra de vivre encore plus d'aventures,[pause=10] wouf !", "Happy")
 	else--last exit reason was Died or Escaped
-		GeneralFunctions.StartConversation(chara, "This dungeon isn't easy,[pause=10] but it's nothing we can't handle,[pause=10] ruff!")
+	GeneralFunctions.StartConversation(chara, "Ce donjon n'est pas facile,[pause=10] mais rien ne nous résiste,[pause=10] wouf !")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_160']))
 	end
 	GeneralFunctions.EndConversation(chara)
@@ -1764,7 +1764,7 @@ end
 function searing_tunnel_entrance_ch_5.Zigzagoon_Action(chara, activator)
 	if not SV.Chapter5.EnteredTunnel then
 		local berry_name = STRINGS:Format('\\uE0A3')..'[color=#FFCEFF]Rawst Berries[color]'
-		GeneralFunctions.StartConversation(chara, "Hmm.[pause=0] With all the fire,[pause=10] this dungeon will be tough if we're not prepared.")
+	GeneralFunctions.StartConversation(chara, "Hmm.[pause=0] Avec toute cette chaleur,[pause=10] ce donjon sera difficile si nous ne sommes pas préparés.")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_161'], berry_name))
 	elseif SV.Chapter5.GrowlitheTropiusBossInterrupt then
 		--Whisper this if you didn't retreat as the last exit reason; death/escape puts you next to Penticus after all.
@@ -1774,15 +1774,15 @@ function searing_tunnel_entrance_ch_5.Zigzagoon_Action(chara, activator)
 			prefix = ''
 			suffix = ''
 		end
-		GeneralFunctions.StartConversation(chara, prefix .. "I don't like being secretive,[pause=10] but I also want to keep adventuring with " ..CharacterEssentials.GetCharacterName("Growlithe") .. "..." .. suffix, "Worried")
+	GeneralFunctions.StartConversation(chara, prefix .. "Je n'aime pas garder des secrets,[pause=10] mais je veux aussi continuer à partir à l'aventure avec " .. CharacterEssentials.GetCharacterName("Growlithe") .. "..." .. suffix, "Worried")
 		UI:SetSpeakerEmotion("Normal")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_162'], prefix, suffix))
 	elseif SV.Chapter5.TunnelLastExitReason == 'Retreated' then
-		GeneralFunctions.StartConversation(chara, "Turning back after we had made it to the midpoint wasn't our brighest moment...", "Worried")
+	GeneralFunctions.StartConversation(chara, "Rebrousser chemin après avoir atteint le point de contrôle n'était pas notre meilleure idée...", "Worried")
 		UI:SetSpeakerEmotion("Normal")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_163']))
 	else--last exit reason was Died or Escaped
-		GeneralFunctions.StartConversation(chara, "That was rough...[pause=0] But if we play it smarter next time,[pause=10] I know we can make it through!")
+	GeneralFunctions.StartConversation(chara, "C'était rude...[pause=0] Mais si nous sommes plus malins la prochaine fois,[pause=10] je sais que nous y arriverons !")
 	end
 	GeneralFunctions.EndConversation(chara)
 end 
@@ -1790,7 +1790,7 @@ end
 function searing_tunnel_entrance_ch_5.Audino_Action(chara, activator)
 	--We're bound to get burned with all the lava and fire-types in there. Heal bell will be useful for us in there!
 	local heal_bell = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Skill]:Get("heal_bell")
-  	GeneralFunctions.StartConversation(chara, "We're bound to get b-burned with all the Fire-types and lava in there...", "Worried", false)
+	GeneralFunctions.StartConversation(chara, "Nous allons forcément être b-brûlés avec tous ces Pokémon Feu et cette lave...", "Worried", false)
 	GAME:WaitFrames(20)
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_164'], heal_bell:GetColoredName()))
@@ -1798,7 +1798,7 @@ function searing_tunnel_entrance_ch_5.Audino_Action(chara, activator)
 end 
 
 function searing_tunnel_entrance_ch_5.Snubbull_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "This dungeon is scorching hot.[pause=0] We'll need to take caution or we'll end up cooked by the heat!", "Worried", false)
+	GeneralFunctions.StartConversation(chara, "Ce donjon est brûlant.[pause=0] Nous devrons être prudents ou la chaleur nous fera griller !", "Worried", false)
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_165']))
 	UI:SetSpeakerEmotion("Special0")
@@ -1807,7 +1807,7 @@ function searing_tunnel_entrance_ch_5.Snubbull_Action(chara, activator)
 end 
 
 function searing_tunnel_entrance_ch_5.Mareep_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "We're gonna have a grea-a-a-at adventure gals![pause=0] This is gonna be a fun team up!", "Happy", false)
+	GeneralFunctions.StartConversation(chara, "Nous allons vivre une formi-i-idable aventure ![pause=0] Cette équipe va être géniale !", "Happy", false)
 	
 	GeneralFunctions.EndConversation(chara)
 end 
@@ -1815,7 +1815,7 @@ end
 --todo: should he be less uwu here and more angy? hard to strike a balance; i don't want to flanderize him too hard.
 function searing_tunnel_entrance_ch_5.Cranidos_Action(chara, activator)
 	if not SV.Chapter5.SpokeToCranidosTunnel then
-		GeneralFunctions.StartConversation(chara, CharacterEssentials.GetCharacterName("Mareep") .. ",[pause=10] I know you're excited to team up and all,[pause=10] but don't get careless.", "Worried", false)
+	GeneralFunctions.StartConversation(chara, CharacterEssentials.GetCharacterName("Mareep") .. ",[pause=10] je sais que tu es impatient de faire équipe,[pause=10] mais ne baisse pas ta garde.", "Worried", false)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_167']), {function() TASK:BranchCoroutine(function() GROUND:CharSetEmote(chara, "sweating", 1) end) end})
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_168'], CharacterEssentials.GetCharacterName("Audino"), CharacterEssentials.GetCharacterName("Snubbull")))
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['STE5_169']))
@@ -1832,7 +1832,7 @@ function searing_tunnel_entrance_ch_5.Cranidos_Action(chara, activator)
 		GROUND:CharSetEmote(chara, "", 0)
 		SV.Chapter5.SpokeToCranidosTunnel = true
 	else
-		GeneralFunctions.StartConversation(chara, "I told you two to buzz off![pause=0] This dungeon is no joke,[pause=10] so stop wasting your time and go get yourselves ready!", "Special0")
+	GeneralFunctions.StartConversation(chara, "Je vous ai dit de dégager ![pause=0] Ce donjon n'est pas une plaisanterie,[pause=10] alors cessez de perdre votre temps et allez vous préparer !", "Special0")
 	end
 	GeneralFunctions.EndConversation(chara)
 end 
@@ -2194,7 +2194,7 @@ function searing_tunnel_entrance_ch_5.Dungeon_Entrance_Touch(obj, activator)
 	
 	GROUND:CharSetAnim(partner, "None", true)
 	GROUND:CharSetAnim(hero, "None", true)
-	local coro1 = TASK:BranchCoroutine(function() result = GeneralFunctions.StartPartnerYesNo("Are we ready to roll out,[pause=10] " .. hero:GetDisplayName() .. "?") end)
+	local coro1 = TASK:BranchCoroutine(function() result = GeneralFunctions.StartPartnerYesNo("Sommes-nous prêts à partir,[pause=10] " .. hero:GetDisplayName() .. " ?") end)
 	local coro2 = TASK:BranchCoroutine(function() GAME:WaitFrames(10) GROUND:CharTurnToCharAnimated(growlithe, hero, 4) GROUND:CharSetAnim(growlithe, "None", true) end)
 	local coro3 = TASK:BranchCoroutine(function() GAME:WaitFrames(16) GROUND:CharTurnToCharAnimated(zigzagoon, hero, 4) GROUND:CharSetAnim(zigzagoon, "None", true) end)
 	

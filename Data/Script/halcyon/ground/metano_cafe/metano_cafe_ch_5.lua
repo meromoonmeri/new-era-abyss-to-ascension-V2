@@ -20,14 +20,14 @@ end
 
 
 function metano_cafe_ch_5.Lickitung_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "It was kind of " .. CharacterEssentials.GetCharacterName("Shuckle") .. " to give out free drinks today,[pause=10] but...")
+	GeneralFunctions.StartConversation(chara, "C'était gentil de la part de " .. CharacterEssentials.GetCharacterName("Shuckle") .. " d'offrir des boissons aujourd'hui,[pause=10] mais...")
 	--GROUND:CharSetEmote(chara, "sweating", 1)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MCF5_001']))
 	GeneralFunctions.EndConversation(chara)
 end 
 
 function metano_cafe_ch_5.Gulpin_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "A free drink from " .. CharacterEssentials.GetCharacterName("Shuckle") .. "...[pause=0] It's a dream come true!", "Inspired")
+	GeneralFunctions.StartConversation(chara, "Une boisson offerte par " .. CharacterEssentials.GetCharacterName("Shuckle") .. "...[pause=0] C'est un rêve qui devient réalité !", "Inspired")
 	UI:SetSpeakerEmotion("Sad")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MCF5_002']))
 	UI:SetSpeakerEmotion("Pain")
@@ -36,20 +36,20 @@ function metano_cafe_ch_5.Gulpin_Action(chara, activator)
 end 
 
 function metano_cafe_ch_5.Cleffa_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "alo")
+	GeneralFunctions.StartConversation(chara, "Bonjour !")
 	GeneralFunctions.EndConversation(chara)
 end 
 
 function metano_cafe_ch_5.Aggron_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "alo")
+	GeneralFunctions.StartConversation(chara, "Bonjour !")
 	GeneralFunctions.EndConversation(chara)
 end 
 --[[
-	GeneralFunctions.StartConversation(chara, "You two are leaving on some sort of expedition today,[pause=10] aren't you?[pause=0] You should take some of " .. CharacterEssentials.GetCharacterName("Shuckle") .. "'s drinks along with you.")
+	GeneralFunctions.StartConversation(chara, "Vous partez en expédition aujourd'hui,[pause=10] n'est-ce pas ?[pause=0] Vous devriez prendre quelques boissons de " .. CharacterEssentials.GetCharacterName("Shuckle") .. " avec vous.")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MCF5_004']))
 	GeneralFunctions.EndConversation(chara)
 	
-	GeneralFunctions.StartConversation(chara, "Bring as many of " .. CharacterEssentials.GetCharacterName("Shuckle") .. "'s drinks along as you can on your expedition...")
+	GeneralFunctions.StartConversation(chara, "Emportez autant de boissons de " .. CharacterEssentials.GetCharacterName("Shuckle") .. " que possible pendant votre expédition...")
 	UI:SetSpeakerEmotion("Inspired")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MCF5_005']))
 	GeneralFunctions.EndConversation(chara)

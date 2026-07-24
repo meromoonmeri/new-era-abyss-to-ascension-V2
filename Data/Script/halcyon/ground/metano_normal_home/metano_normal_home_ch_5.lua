@@ -409,7 +409,7 @@ end
 
 --Have fun! Make sure to get plenty of rest!
 function metano_normal_home_ch_5.Furret_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Oh, you two must be friends of my son!")
+	GeneralFunctions.StartConversation(chara, "Oh, vous devez être les amis de mon fils !")
 	GeneralFunctions.EndConversation(chara)
 end
 
@@ -420,7 +420,7 @@ function metano_normal_home_ch_5.Sentret_Action(chara, activator)
 end
 
 function metano_normal_home_ch_5.Linoone_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "You two are adventurers with the guild,[pause=10] aren't you?[pause=0] My son,[pause=10] " .. CharacterEssentials.GetCharacterName("Zigzagoon") .. ",[pause=10] has talked about you before.")
+	GeneralFunctions.StartConversation(chara, "Vous êtes des aventuriers de la guilde,[pause=10] n'est-ce pas ?[pause=0] Mon fils,[pause=10] " .. CharacterEssentials.GetCharacterName("Zigzagoon") .. ",[pause=10] m'a déjà parlé de vous.")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MNH5_061']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MNH5_062']))
 	GeneralFunctions.EndConversation(chara)

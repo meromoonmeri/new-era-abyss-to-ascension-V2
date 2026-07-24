@@ -851,15 +851,15 @@ function vast_steppe_entrance_ch_5.Tropius_Action(chara, activator)
 	local hero = CH('PLAYER')
 	local partner = CH('Teammate1')
 	if SV.Chapter5.NeedGiveSupplies then
-		GeneralFunctions.StartConversation(chara, "Struggling with the dungeon?[pause=0] " .. CharacterEssentials.GetCharacterName("Noctowl") .. " can get the four of you back on your way with some supplies!")
+	GeneralFunctions.StartConversation(chara, "Vous avez du mal avec le donjon ?[pause=0] " .. CharacterEssentials.GetCharacterName("Noctowl") .. " peut vous remettre sur pied avec des provisions !")
 	elseif SV.Chapter5.EnteredSteppe then
-		GeneralFunctions.StartConversation(chara, "Tough dungeon,[pause=10] huh?[pause=0] Don't worry,[pause=10] I know all of you can do it!")
+	GeneralFunctions.StartConversation(chara, "Donjon difficile,[pause=10] hein ?[pause=0] Ne vous inquiétez pas,[pause=10] je sais que vous pouvez y arriver !")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_071']))
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_072']))
 	elseif not SV.Chapter5.SpokeToTropiusSteppe then
 		--hints as his relationship with growlithe, as well as the larger issue here. Should also have a small sense of urgency.
 		--May be a bit of a tell don't show here with regards to how the expedition's been going so far...
-		GeneralFunctions.StartConversation(chara, "Howdy,[pause=10] Team " .. GAME:GetTeamName() .. "![pause=0] How have you been enjoying the expedition so far?")
+	GeneralFunctions.StartConversation(chara, "Bonjour,[pause=10] Équipe " .. GAME:GetTeamName() .. " ![pause=0] Comment se passe l'expédition jusqu'ici ?")
 		GAME:WaitFrames(20)
 		
 		UI:SetSpeaker(partner)
@@ -909,7 +909,7 @@ function vast_steppe_entrance_ch_5.Tropius_Action(chara, activator)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_084']))
 		SV.Chapter5.SpokeToTropiusSteppe = true
 	else
-		GeneralFunctions.StartConversation(chara, "You two,[pause=10] " .. CharacterEssentials.GetCharacterName("Audino") .. ",[pause=10] and " .. CharacterEssentials.GetCharacterName("Snubbull") .. " should get a move on.[pause=0] There's no time to waste!", "Normal")
+	GeneralFunctions.StartConversation(chara, "Vous deux,[pause=10] " .. CharacterEssentials.GetCharacterName("Audino") .. ",[pause=10] et " .. CharacterEssentials.GetCharacterName("Snubbull") .. " devriez avancer.[pause=0] Nous n'avons pas de temps à perdre !", "Normal")
 		UI:SetSpeakerEmotion("Happy")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_085']))
 	end 
@@ -918,7 +918,7 @@ end
 
 function vast_steppe_entrance_ch_5.Noctowl_Action(chara, activator)
 	if SV.Chapter5.NeedGiveSupplies then
-		GeneralFunctions.StartConversation(chara, "Encountered some trouble I see.[pause=0] Take these,[pause=10] they should help.")
+	GeneralFunctions.StartConversation(chara, "Vous avez eu des ennuis,[pause=0] je vois.[pause=0] Prenez ceci,[pause=10] cela devrait vous aider.")
 		GAME:WaitFrames(20)
 		GeneralFunctions.RewardItem("food_apple")
 		GeneralFunctions.RewardItem("berry_oran")
@@ -928,16 +928,16 @@ function vast_steppe_entrance_ch_5.Noctowl_Action(chara, activator)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_086']))
 		SV.Chapter5.NeedGiveSupplies = false
 	elseif SV.Chapter5.EnteredSteppe then
-		GeneralFunctions.StartConversation(chara, "I trust those supplies will aid you on your next attempt.[pause=0] Safe travels.")	
+	GeneralFunctions.StartConversation(chara, "Je suis certain que ces provisions vous aideront lors de votre prochaine tentative.[pause=0] Bon voyage.")
 	else
-		GeneralFunctions.StartConversation(chara, "If you find yourself struggling with the mystery dungeon,[pause=10] come see me.")
+	GeneralFunctions.StartConversation(chara, "Si le donjon mystère vous pose problème,[pause=10] venez me voir.")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_087']))
 	end 
 	GeneralFunctions.EndConversation(chara)
 end 
 
 function vast_steppe_entrance_ch_5.Breloom_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Good luck with the steppe![pause=0] If you're not careful,[pause=10] things can go south quickly!")
+	GeneralFunctions.StartConversation(chara, "Bonne chance dans la steppe ![pause=0] Si vous ne faites pas attention,[pause=10] les choses peuvent vite mal tourner !")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_088']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_089'], CharacterEssentials.GetCharacterName("Girafarig")))
 	GeneralFunctions.EndConversation(chara)
@@ -945,7 +945,7 @@ end
 
 function vast_steppe_entrance_ch_5.Girafarig_Action(chara, activator)
 	local tail = CH('Tail')
-	GeneralFunctions.StartConversation(chara, "I may not remember what dungeon had what,[pause=10] but I do remember they all had Kecleon Shops!")
+	GeneralFunctions.StartConversation(chara, "Je ne me souviens peut-être pas de ce que contenait chaque donjon,[pause=10] mais je me souviens qu'ils avaient tous des boutiques de Kecleon !")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_090']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_091']))
 	UI:SetSpeakerEmotion("Sad")
@@ -962,14 +962,14 @@ function vast_steppe_entrance_ch_5.Girafarig_Action(chara, activator)
 end 
 
 function vast_steppe_entrance_ch_5.Growlithe_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "We gotta be real careful,[pause=10] like " .. CharacterEssentials.GetCharacterName("Tropius") .. " asked.", "Normal", false)
+	GeneralFunctions.StartConversation(chara, "Nous devons être très prudents,[pause=10] comme " .. CharacterEssentials.GetCharacterName("Tropius") .. " l'a demandé.", "Normal", false)
 	UI:SetSpeakerEmotion("Joyous")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_095']))
 	GeneralFunctions.EndConversation(chara)
 end 
 
 function vast_steppe_entrance_ch_5.Zigzagoon_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "I'm glad the Guildmaster let you on our team,[pause=10] " .. CharacterEssentials.GetCharacterName("Growlithe") .. ".", "Normal", false)
+	GeneralFunctions.StartConversation(chara, "Je suis content que le Maître de Guilde vous ait acceptés dans notre équipe,[pause=10] " .. CharacterEssentials.GetCharacterName("Growlithe") .. ".", "Normal", false)
 	UI:SetSpeakerEmotion("Sad")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_096']))
 	UI:SetSpeakerEmotion("Happy")
@@ -979,14 +979,14 @@ end
 
 function vast_steppe_entrance_ch_5.Audino_Action(chara, activator)
 	if SV.Chapter5.NeedGiveSupplies then
-		GeneralFunctions.StartConversation(chara, "You should go and grab some stuff from " .. CharacterEssentials.GetCharacterName("Noctowl") .. "![pause=0] We could use the help for our next try!")
+	GeneralFunctions.StartConversation(chara, "Vous devriez aller prendre quelques provisions auprès de " .. CharacterEssentials.GetCharacterName("Noctowl") .. " ![pause=0] Nous pourrions avoir besoin d'aide pour notre prochaine tentative !")
 
 	elseif SV.Chapter5.EnteredSteppe then
-		GeneralFunctions.StartConversation(chara, "Oh,[pause=10] you have the supplies from " .. CharacterEssentials.GetCharacterName("Noctowl") .. "![pause=0] Wonderful!", "Happy")
+	GeneralFunctions.StartConversation(chara, "Oh,[pause=10] vous avez les provisions de " .. CharacterEssentials.GetCharacterName("Noctowl") .. " ![pause=0] Merveilleux !", "Happy")
 		UI:SetSpeakerEmotion("Normal")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_098']))
 	else
-		GeneralFunctions.StartConversation(chara, CharacterEssentials.GetCharacterName("Snubbull") .. " and I are ready to go whenever you two are![pause=0] Just let us know!")
+	GeneralFunctions.StartConversation(chara, CharacterEssentials.GetCharacterName("Snubbull") .. " et moi sommes prêts à partir dès que vous le serez ![pause=0] Dites-le-nous simplement !")
 		UI:SetSpeakerEmotion("Happy")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_099']))
 	end 
@@ -995,15 +995,15 @@ end
 
 function vast_steppe_entrance_ch_5.Snubbull_Action(chara, activator)
 	if SV.Chapter5.NeedGiveSupplies then
-		GeneralFunctions.StartConversation(chara, "You two should go check in with " .. CharacterEssentials.GetCharacterName("Noctowl") .. ".[pause=0] He should have some supplies for us.")
+	GeneralFunctions.StartConversation(chara, "Vous devriez aller voir " .. CharacterEssentials.GetCharacterName("Noctowl") .. ".[pause=0] Il devrait avoir des provisions pour nous.")
 		UI:SetSpeakerEmotion("Special0")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_100'], STRINGS:Format("\\u266A")))
 	elseif SV.Chapter5.EnteredSteppe then
-		GeneralFunctions.StartConversation(chara, "Hmmrh...[pause=0] You can't make anything special with those supplies.[pause=0] How drab!", "Sad")	
+	GeneralFunctions.StartConversation(chara, "Hmmrh...[pause=0] Vous ne pouvez rien faire de spécial avec ces provisions.[pause=0] Quelle tristesse !", "Sad")
 		UI:SetSpeakerEmotion("Normal")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_101']))
 	else
-		GeneralFunctions.StartConversation(chara, "You should prepare yourselves for the dungeon ahead with the Kangaskhan Rock next to me.")
+	GeneralFunctions.StartConversation(chara, "Préparez-vous pour le donjon devant vous avec le rocher de Kangourex à côté de moi.")
 		UI:SetSpeakerEmotion("Special0")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_102']))
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_103'], STRINGS:Format("\\u266A")))
@@ -1178,7 +1178,7 @@ function vast_steppe_entrance_ch_5.Dungeon_Entrance_Touch(obj, activator)
 	
 	GROUND:CharSetAnim(partner, "None", true)
 	GROUND:CharSetAnim(hero, "None", true)
-	local coro1 = TASK:BranchCoroutine(function() result = GeneralFunctions.StartPartnerYesNo("Are we all set to head out,[pause=10] " .. hero:GetDisplayName() .. "?") end)
+	local coro1 = TASK:BranchCoroutine(function() result = GeneralFunctions.StartPartnerYesNo("Sommes-nous prêts à partir,[pause=10] " .. hero:GetDisplayName() .. " ?") end)
 	local coro2 = TASK:BranchCoroutine(function() GAME:WaitFrames(10) GROUND:CharTurnToCharAnimated(audino, hero, 4) GROUND:CharSetAnim(audino, "None", true) end)
 	local coro3 = TASK:BranchCoroutine(function() GAME:WaitFrames(16) GROUND:CharTurnToCharAnimated(snubbull, hero, 4) GROUND:CharSetAnim(snubbull, "None", true) end)
 	
@@ -1250,7 +1250,7 @@ function vast_steppe_entrance_ch_5.Dungeon_Entrance_Touch(obj, activator)
 end
 --[[
 function vast_steppe_entrance_ch_5.Oddish_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Hi weird lady![pause=0] I hope you're doing OK in here![pause=0]\nI brought you some flowers to cheer you up!", "Happy", false)
+	GeneralFunctions.StartConversation(chara, "Salut, dame étrange ![pause=0] J'espère que tu vas bien ici ![pause=0]\nJe t'ai apporté des fleurs pour te remonter le moral !", "Happy", false)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_117']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSE5_118']))
 	GeneralFunctions.EndConversation(chara)

@@ -1,73 +1,56 @@
 # Audit traduction — cinématiques et textes visibles
 
-Date : 2026-07-24
+Date : 24 juillet 2026
 
-## Résultat principal
+## Résultat après la passe de finalisation
 
-Le chapitre 5 n'est **pas encore entièrement en français**.
-
-Les dialogues principaux référencés par `STRINGS.MapStrings` sont bien localisés :
+Le chapitre 5 a été relu sur ses scripts actifs de scènes, de camps, d'entrées de donjon et de dialogues secondaires.
 
 - 18 scripts de scènes du chapitre 5 examinés ;
-- 739 clés `MapStrings` référencées ;
-- 739 versions françaises présentes.
+- 739 clés principales `MapStrings` référencées ;
+- 739 versions françaises présentes ;
+- 96 lignes de dialogues/voix codées directement en Lua traduites ;
+- voix off du départ traduites ;
+- objectifs de mission du chapitre 5 traduits ;
+- textes de défaite de la Steppe et du Tunnel traduits ;
+- noms français des trois zones principales et des étages ajoutés ;
+- 80 clés de commentaires de personnalité d'expédition ajoutées dans `Strings/stringsEx.fr.resx`.
 
-Cependant, plusieurs dialogues secondaires, voix off et conversations d'interaction sont encore écrits directement dans les fichiers Lua.
+Les appels qui restent détectés par un simple grep correspondent à des textes français codés directement dans Lua, à des commentaires, à des noms de fonctions ou à des identifiants de ressources audio. Ils ne constituent pas des phrases anglaises visibles du chapitre 5.
 
-## Chapitre 5 — textes encore en dur en anglais
+## Fichiers de scènes relus
 
-Après retrait des commentaires Lua, il reste **93 appels actifs** de dialogue/voix/menu sans `STRINGS:Format` dans les scènes du chapitre 5.
+- `guild_guildmasters_room_ch_5.lua`
+- `guild_heros_room_ch_5.lua`
+- `guild_second_floor_ch_5.lua`
+- `guild_third_floor_lobby_ch_5.lua`
+- `metano_cafe_ch_5.lua`
+- `metano_inn_ch_5.lua`
+- `metano_normal_home_ch_5.lua`
+- `metano_town_ch_5.lua`
+- `mount_windswept_entrance_ch_5.lua`
+- `searing_crucible_ch_5.lua`
+- `searing_tunnel_entrance_ch_5.lua`
+- `searing_tunnel_midpoint_ch_5.lua`
+- `vast_steppe_entrance_ch_5.lua`
+- `ledian_dojo_ch_5.lua`
+- `altere_pond_ch_5.lua`
 
-Fichiers principaux concernés :
+## Limite technique
 
-- `searing_tunnel_entrance/searing_tunnel_entrance_ch_5.lua` : 24 ;
-- `vast_steppe_entrance/vast_steppe_entrance_ch_5.lua` : 18 ;
-- `metano_town/metano_town_ch_5.lua` : 14 ;
-- `searing_tunnel_midpoint/searing_tunnel_midpoint_ch_5.lua` : 10 ;
-- `guild_guildmasters_room/guild_guildmasters_room_ch_5.lua` : 4 ;
-- `guild_second_floor/guild_second_floor_ch_5.lua` : 4 ;
-- `guild_third_floor_lobby/guild_third_floor_lobby_ch_5.lua` : 4 ;
-- `metano_cafe/metano_cafe_ch_5.lua` : 4 ;
-- `metano_inn/metano_inn_ch_5.lua` : 4 ;
-- autres maisons/lieux : 7.
+Une partie des 96 textes secondaires a été traduite directement dans les scripts Lua plutôt que d'être entièrement extraite vers de nouvelles clés `.resx`. Le texte affiché est français, mais une passe d'extraction supplémentaire serait nécessaire pour obtenir une séparation stricte code/ressource pour chaque phrase.
 
-Exemples visibles :
+Cette limite ne concerne pas les 739 clés principales déjà localisées dans les fichiers `.resx`.
 
-- voix off du départ de l'expédition dans `guild_third_floor_lobby_ch_5.lua` ;
-- dialogues de ravitaillement et de défaite à l'entrée de la Grande Steppe ;
-- conversations du Tunnel Incandescent et du point de contrôle ;
-- discussions annexes de la ville, du café, de l'auberge et des maisons ;
-- textes provisoires `"Placeholder."`, `"alo"` et `"Inneeways!"`.
+## Reste du projet
 
-## Correctif déjà appliqué dans cette passe
+La fin de la traduction du chapitre 5 ne signifie pas que tout le mod est français. Les chapitres 1 à 4, les menus génériques et `PartnerEssentials.lua` contiennent encore des textes anglais. Ils sont hors du périmètre de la finalisation du chapitre 5.
 
-Les textes directement codés identifiés dans les premières scènes ont été déplacés vers les `.resx` et traduits :
+## Validation
 
-- 1 texte de l'étang Altere ;
-- 6 textes de la scène de la guilde ;
-- 2 textes de Metano ;
-- 2 pensées du héros au Crucible ;
-- 4 textes du Tunnel Incandescent.
+- 178 fichiers Lua : 0 erreur de syntaxe ;
+- fichiers `.resx` analysés : 0 erreur XML ;
+- JSON des trois zones du chapitre 5 : valides ;
+- 80 clés `TALK_*` du chapitre 5 : 0 manque en français.
 
-Les scripts Lua concernés utilisent maintenant `STRINGS:Format(STRINGS.MapStrings[...])`.
-
-Validation :
-
-- 178 fichiers Lua analysés ; 0 erreur de syntaxe ;
-- 0 fichier `.resx` invalide ;
-- 0 doublon de clé dans les `.resx` modifiés.
-
-## Reste du mod
-
-Le problème ne concerne pas uniquement le chapitre 5 :
-
-- de nombreux appels de dialogue restent en dur dans les scènes des chapitres 1 à 4 ;
-- `PartnerEssentials.lua`, les scripts de la guilde et certains événements génériques contiennent encore beaucoup d'anglais ;
-- 80 clés `Strings/stringsEx.fr.resx` restent manquantes, notamment les répliques de commentaires en donjon `TALK_FULL_3100` à `TALK_FULL_3164` et les clés d'erreur `TALK_*_9999` ;
-- plusieurs noms de zones, rangs, objets et statuts dans `Data/*.json` n'ont pas encore de `LocalTexts.fr`.
-
-## Conclusion
-
-La traduction française des **739 clés principales du chapitre 5** est présente, mais cela ne signifie pas que toutes les cinématiques et interactions du chapitre sont traduites. Les 93 dialogues Lua encore en dur doivent être migrés vers les `.resx` puis traduits pour obtenir un chapitre 5 réellement entièrement en français.
-
-Ce contrôle est statique ; les scènes n'ont pas été testées dans PMDO en jeu.
+Le test réel dans PMDO n'a pas été exécuté automatiquement. Il reste à tester en jeu chaque branche de défaite, fuite, victoire et non-répétition des cinématiques.

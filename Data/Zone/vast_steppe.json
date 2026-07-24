@@ -4,7 +4,9 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Vast Steppe",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Grande Steppe"
+}
 },
 "Released": true,
 "Comment": "1st dungeon of the expedition. 5th dungeon overall.\r\n\r\nLarge, open floors without any real rooms. Has pokemon that tend to form herds or packs, so that when encounters are made, a good chance it’s a lot of pokemon moving together that’ll work together.\r\n-Pokemon to add in the future if they get sprites: Blitzle, replace stantler probably\r\n-purp kec shop stocks Low Tier TMs",
@@ -1598,7 +1600,9 @@
 },
 "Name": {
 "DefaultText": "Vast Steppe\\n{0}F",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Grande Steppe\\n{0}E"
+}
 },
 "Priority": {
 "str": [

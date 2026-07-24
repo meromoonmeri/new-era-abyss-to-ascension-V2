@@ -74,26 +74,26 @@ end
 
 
 function guild_second_floor_ch_5.Roselia_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Tah![pause=0] An expedition?[pause=0] We wouldn't know anything about that. " ..  STRINGS:Format("\\u266A"), "Normal", true, false)
+	GeneralFunctions.StartConversation(chara, "Bah ![pause=0] Une expédition ?[pause=0] Nous ne savons rien de tout ça. " ..  STRINGS:Format("\\u266A"), "Normal", true, false)
 	GeneralFunctions.EndConversation(chara)
 end
 
 function guild_second_floor_ch_5.Ludicolo_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Yah![pause=0] We'll have a dance party with the Pokémon we rescue!", "Normal", true, false)
+	GeneralFunctions.StartConversation(chara, "Ouais ![pause=0] Nous ferons la fête avec les Pokémon que nous secourrons !", "Normal", true, false)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G2F5_007']))
 	GeneralFunctions.EndConversation(chara)
 
 end
 
 function guild_second_floor_ch_5.Spinda_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Lah![pause=0] There's no task that can't be accomplished with dancing.", "Normal", true, false)
+	GeneralFunctions.StartConversation(chara, "Lah ![pause=0] Aucune tâche ne résiste à la danse.", "Normal", true, false)
 	UI:SetSpeakerEmotion("Happy")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G2F5_008']))
 	GeneralFunctions.EndConversation(chara)
 end
 
 function guild_second_floor_ch_5.Seviper_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Lookssss like the guild is ssssuddenly leaving on their expedition.")
+	GeneralFunctions.StartConversation(chara, "On dirait que la guilde part soudainement en expédition.")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G2F5_009']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G2F5_010']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G2F5_011'], CharacterEssentials.GetCharacterName("Zangoose")))
@@ -101,7 +101,7 @@ function guild_second_floor_ch_5.Seviper_Action(chara, activator)
 end
 
 function guild_second_floor_ch_5.Zangoose_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "We're lucky the Pelipper Post Office will manage the boards while the guild's locked up.")
+	GeneralFunctions.StartConversation(chara, "Heureusement, le bureau de poste de Békipan s'occupera des tableaux pendant que la guilde sera fermée.")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G2F5_012'], CharacterEssentials.GetCharacterName("Seviper")))
 	GeneralFunctions.EndConversation(chara)
 end

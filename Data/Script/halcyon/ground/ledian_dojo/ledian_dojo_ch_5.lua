@@ -28,7 +28,7 @@ function ledian_dojo_ch_5.SetupGround()
 end
 
 function ledian_dojo_ch_5.Gible_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "alo ")
+	GeneralFunctions.StartConversation(chara, "Bonjour !")
 	GeneralFunctions.EndConversation(chara)
 end
 

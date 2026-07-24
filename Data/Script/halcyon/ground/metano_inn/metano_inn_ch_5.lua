@@ -22,7 +22,7 @@ end
 
 --Cory cracking lame jokes
 function metano_inn_ch_5.Passerby_1_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Seems like everyone in town is CROW-ing about some sort of guild expedition.", "Happy")
+	GeneralFunctions.StartConversation(chara, "On dirait que toute la ville CROÂ-sse au sujet de l'expédition de la guilde.", "Happy")
 	UI:SetSpeakerEmotion("Inspired")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MI5_001']))
 	UI:SetSpeakerEmotion("Joyous")
@@ -42,21 +42,21 @@ end
 
 
 function metano_inn_ch_5.Nidoran_M_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Inneeways!")
+	GeneralFunctions.StartConversation(chara, "Bref !")
 	GeneralFunctions.EndConversation(chara)
 end
 
 
 function metano_inn_ch_5.Innkeeper_Desk_Right_Action(chara, activator) 
 	local nidoqueen = CH('Nidoqueen')
-	GeneralFunctions.StartConversation(nidoqueen, "I'm startin' to worry about my littlest one.", "Worried")
+	GeneralFunctions.StartConversation(nidoqueen, "Je commence à m'inquiéter pour mon petit dernier.", "Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MI5_004']))
 	GeneralFunctions.EndConversation(nidoqueen)
 end
 
 function metano_inn_ch_5.Innkeeper_Desk_Left_Action(chara, activator) 
 	local nidoking = CH('Nidoking')
-	GeneralFunctions.StartConversation(nidoking, "Business been a bit slow as of late...[pause=0] Seems like we only get one 'er so guests a day!", "Worried")
+	GeneralFunctions.StartConversation(nidoking, "Les affaires sont un peu calmes ces derniers temps...[pause=0] On ne reçoit qu'un ou deux clients par jour !", "Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MI5_005']))
 	GeneralFunctions.EndConversation(nidoking)	
 end

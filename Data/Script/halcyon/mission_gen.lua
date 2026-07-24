@@ -2720,17 +2720,17 @@ function DungeonJobList:DrawMenu()
 	elseif SV.ChapterProgression.Chapter == 4 and self.dungeon == 'apricorn_grove' and SV.Chapter4.ReachedGlade and not SV.Chapter4.FinishedGrove then
 		message = 'Return to the large Apricorn tree with enough\nPokémon to reach the big Apricorn.'
 	elseif SV.ChapterProgression.Chapter == 5 and self.dungeon == 'vast_steppe' then 
-		message = 'Proceed through the steppe towards the\nfirst base camp.'
+		message = 'Avancez dans la steppe vers le\npremier camp de base.'
 	elseif SV.ChapterProgression.Chapter == 5 and self.dungeon == 'searing_tunnel' and _ZONE.CurrentMapID.Segment == 0 and not SV.Chapter5.EncounteredBoss then
-		message = 'Proceed through the tunnel towards the second base camp.'
+		message = 'Avancez dans le tunnel vers le\ndeuxième camp de base.'
 	elseif SV.ChapterProgression.Chapter == 5 and self.dungeon == 'searing_tunnel' and _ZONE.CurrentMapID.Segment == 0 and SV.Chapter5.EncounteredBoss then
-		message = 'Make it past ' .. CharacterEssentials.GetCharacterName("Magcargo") .. "'s clan."
+		message = 'Passez au-delà de la tribu de ' .. CharacterEssentials.GetCharacterName("Magcargo") .. '.'
 	elseif SV.ChapterProgression.Chapter == 5 and self.dungeon == 'searing_tunnel' and _ZONE.CurrentMapID.Segment == 1 then
-		message = "Defeat " .. CharacterEssentials.GetCharacterName("Magcargo") .. "'s clan!"
+		message = "Vainquez la tribu de " .. CharacterEssentials.GetCharacterName("Magcargo") .. " !"
 	elseif SV.ChapterProgression.Chapter == 5 and self.dungeon == 'mount_windswept' then
-		message = "Proceed through the mountain to the final\nbase camp at [color=#FFC663]Cloven Ruins[color]."	
+		message = "Traversez la montagne jusqu'au dernier\ncamp de base aux [color=#FFC663]Ruines Fendues[color]."	
 	else
-		message = "Go as far as you can."
+		message = "Allez aussi loin que possible."
 	end 
 	self.menu.Elements:Add(RogueEssence.Menu.MenuText(message, RogueElements.Loc(16, 12 + 14)))
   end 
