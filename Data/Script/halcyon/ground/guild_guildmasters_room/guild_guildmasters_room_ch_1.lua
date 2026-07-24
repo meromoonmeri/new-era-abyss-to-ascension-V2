@@ -372,7 +372,7 @@ function guild_guildmasters_room_ch_1.MeetGuildmaster()
 	UI:ResetSpeaker()
 	local yesnoResult = false
 	while not yesnoResult do
-		UI:NameMenu("Quel sera le nom de votre équipe ?", "You don't need to put 'Team' in the name itself.", 60)
+		UI:NameMenu("Quel sera le nom de votre équipe ?", "Tu n'as pas besoin d'inclure « Équipe » dans le nom.", 60)
 		UI:WaitForChoice()
 		result = UI:ChoiceResult()
 		GAME:SetTeamName(result)

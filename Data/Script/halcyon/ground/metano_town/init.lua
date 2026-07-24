@@ -2974,7 +2974,7 @@ function metano_town.Well_Action(obj, activator)
   GeneralFunctions.TurnTowardsLocation(hero, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
   GeneralFunctions.TurnTowardsLocation(partner, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
 
-  UI:ChoiceMenuYesNo("Veux-tu lancer un " .. STRINGS:Format("\\uE024") .. " in?")
+  UI:ChoiceMenuYesNo("Veux-tu lancer un " .. STRINGS:Format("\\uE024") .. " ?")
   UI:WaitForChoice()
   local result = UI:ChoiceResult()
   if result then

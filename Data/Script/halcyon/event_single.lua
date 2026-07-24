@@ -1180,7 +1180,7 @@ function SINGLE_CHAR_SCRIPT.QueueRockFall(owner, ownerChar, context, args)
 	SOUND:PlayBattleSE("EVT_Tower_Quake")
 	--minshake, maxshake, shaketime
 	DUNGEON:MoveScreen(RogueEssence.Content.ScreenMover(3, 6, 40))
-	_DUNGEON:LogMsg(STRINGS:Format("A great power shakes the cavern!"))
+	_DUNGEON:LogMsg(STRINGS:Format("Une grande puissance fait trembler la caverne !"))
 
 	--flavor rocks; rocks should fall all over, not just on you.
 	for xx = 0, map.Width - 1, 1 do

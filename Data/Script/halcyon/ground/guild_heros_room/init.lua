@@ -177,7 +177,7 @@ function guild_heros_room.Book_Action(obj, activator)
 	--Change where the choice menu goes; put it on the left because of placement of book in the map.
 	--UI:SetChoiceLoc(8, 102)
 
-	local choices = {"Change scarves", "Change nicknames", "Change team name", "Check rank", "Nothing"}
+	local choices = {"Changer les foulards", "Changer les surnoms", "Changer le nom de l'équipe", "Voir le rang", "Rien"}
 	UI:BeginChoiceMenu("Qu'aimeriez-vous faire ?", choices, 1, #choices)
 	UI:WaitForChoice()
 	local choice_result = UI:ChoiceResult()

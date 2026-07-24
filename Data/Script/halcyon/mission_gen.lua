@@ -1503,7 +1503,7 @@ function MISSION_GEN.GenerateBoard(board_type)
 		local item = ""
 		local special = ""
 		local title = "Default title."
-		local flavor = "Default flavor text.\nHow did you see this? Tell Palika, please!"
+		local flavor = "Texte d'ambiance par défaut.\nComment as-tu vu ça ? Préviens Palika, s'il te plaît !"
 
 
 		--generate the objective.

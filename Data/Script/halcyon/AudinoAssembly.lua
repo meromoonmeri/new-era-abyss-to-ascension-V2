@@ -159,13 +159,13 @@ function AudinoAssembly.WriteContents(list)
 	local length = #list
 	if length == 0 then return "null"
 	elseif length == 1 then return list[1]:GetDisplayName(true)
-	elseif length == 2 then return list[1]:GetDisplayName(true) .. " and " .. list[2]:GetDisplayName(true)
+	elseif length == 2 then return list[1]:GetDisplayName(true) .. " et " .. list[2]:GetDisplayName(true)
 	else
 		local retString = ""
 		for i = 1, length - 1, 1 do--length of list - 1 as last character is a special case and this is a nicer way of doing it
 			retString = retString .. list[i]:GetDisplayName(true) .. ", "
 		end
-		retString = retString .. " and " .. list[length]:GetDisplayName(true)
+		retString = retString .. " et " .. list[length]:GetDisplayName(true)
 		return retString
 	end
 end

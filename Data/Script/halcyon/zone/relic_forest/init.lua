@@ -42,7 +42,7 @@ function relic_forest.ExitSegment(zone, result, rescue, segmentID, mapID)
 			if SV.Chapter1.PartnerEnteredForest and not SV.Chapter1.PartnerCompletedForest then--partner died solo before clearing
 				GAME:EndDungeonRun(result, "master_zone", -1, 9, 0, false, false)
 				--set partner as speaker
-				GeneralFunctions.DeathFadeOutDialogue(GAME:GetPlayerPartyMember(0), "Urf...[pause=0] This is tough...", "Pain")
+				GeneralFunctions.DeathFadeOutDialogue(GAME:GetPlayerPartyMember(0), "Ouf...[pause=0] C'est difficile...", "Pain")
 	
 				GAME:WaitFrames(20)
 				
@@ -51,7 +51,7 @@ function relic_forest.ExitSegment(zone, result, rescue, segmentID, mapID)
 			elseif SV.Chapter1.PartnerCompletedForest then--the duo wiped before making it back to town
 				GAME:EndDungeonRun(result, "master_zone", -1, 0, 0, false, false)
 				--set partner as speaker
-				GeneralFunctions.DeathFadeOutDialogue(GAME:GetPlayerPartyMember(1), "Urf...[pause=0] This is tough...", "Pain")
+				GeneralFunctions.DeathFadeOutDialogue(GAME:GetPlayerPartyMember(1), "Ouf...[pause=0] C'est difficile...", "Pain")
 				
 				GAME:WaitFrames(20)
 
