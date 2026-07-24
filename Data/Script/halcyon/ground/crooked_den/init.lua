@@ -27,7 +27,7 @@ function crooked_den.Init(map, time)
 
 	DEBUG.EnableDbgCoro()
 	print('=>> Init_crooked_den <<=')
-	
+
 	COMMON.RespawnAllies(true)
 	PartnerEssentials.InitializePartnerSpawn()
 end
@@ -65,14 +65,14 @@ end
 
 
 function crooked_den.PlotScripting()
-	if SV.ChapterProgression.Chapter == 3 then 
+	if SV.ChapterProgression.Chapter == 3 then
 		if SV.Chapter3.FinishedRootScene then
 			crooked_den.GenericEnding()
 		elseif SV.Chapter3.LostToBoss then--player just died
 			crooked_den_ch_3.DiedToBoss()
 		elseif SV.Chapter3.DefeatedBoss then--player won
 			crooked_den_ch_3.DefeatedBoss()
-		elseif SV.Chapter3.EncounteredBoss then--player came back after dying 
+		elseif SV.Chapter3.EncounteredBoss then--player came back after dying
 			crooked_den_ch_3.SecondPreBossScene()
 		else--first encounter
 			crooked_den_ch_3.FirstPreBossScene()
@@ -96,7 +96,7 @@ function crooked_den.GenericEnding()
 	AI:DisableCharacterAI(partner)
 	SOUND:StopBGM()
 	GAME:WaitFrames(20)
-	
+
 	GROUND:TeleportTo(hero, 188, 256, Direction.Up)
 	GROUND:TeleportTo(partner, 156, 256, Direction.Up)
 	if team2 ~= nil then
@@ -106,49 +106,49 @@ function crooked_den.GenericEnding()
 		GROUND:TeleportTo(team3, 204, 288, Direction.Up)
 	end
 	GAME:MoveCamera(180, 120, 1, false)
-		
+
 	GAME:CutsceneMode(true)
 	UI:ResetSpeaker()
 	UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
 	GAME:WaitFrames(60)
 	UI:WaitHideTitle(20)
 	GAME:FadeIn(40)
-	
+
 	SOUND:PlayBGM('In The Depths of the Pit.ogg', true)
-	
+
 	local coro1 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(partner, 156, 144, false, 1) end)
 	local coro2 = TASK:BranchCoroutine(function() GAME:WaitFrames(10) GROUND:MoveToPosition(hero, 188, 144, false, 1) end)
 	local coro3 = TASK:BranchCoroutine(function() if team2 ~= nil then GAME:WaitFrames(14) GROUND:MoveToPosition(team2, 172, 176, false, 1) end end)
 	local coro4 = TASK:BranchCoroutine(function() if team3 ~= nil then GAME:WaitFrames(18) GROUND:MoveToPosition(team3, 204, 176, false, 1) end end)
-	
+
 	TASK:JoinCoroutines({coro1, coro2, coro3, coro4})
-	GAME:WaitFrames(10)	
-	
+	GAME:WaitFrames(10)
+
 	coro1 = TASK:BranchCoroutine(function() GeneralFunctions.LookAround(partner, 3, 4, false, false, true, Direction.Up) end)
 	coro2 = TASK:BranchCoroutine(function() GAME:WaitFrames(10)
 											GeneralFunctions.LookAround(hero, 3, 4, false, false, true, Direction.Up) end)
-	coro3 = TASK:BranchCoroutine(function() if team2 ~= nil then GAME:WaitFrames(14) GeneralFunctions.LookAround(team2, 3, 4, false, false, true, Direction.Right) end end)										  
-	coro4 = TASK:BranchCoroutine(function() if team3 ~= nil then GAME:WaitFrames(18) GeneralFunctions.LookAround(team3, 3, 4, false, false, true, Direction.Down) end end)										  
+	coro3 = TASK:BranchCoroutine(function() if team2 ~= nil then GAME:WaitFrames(14) GeneralFunctions.LookAround(team2, 3, 4, false, false, true, Direction.Right) end end)
+	coro4 = TASK:BranchCoroutine(function() if team3 ~= nil then GAME:WaitFrames(18) GeneralFunctions.LookAround(team3, 3, 4, false, false, true, Direction.Down) end end)
 	TASK:JoinCoroutines({coro1, coro2, coro3, coro4})
 
 	--temporary flags are set by the zone script rather than here.
 	GAME:WaitFrames(20)
 	UI:SetCenter(true)
-	UI:WaitShowDialogue("There doesn't appear to be anything of interest here.")
-	UI:WaitShowDialogue("It's impossible to go any further.[pause=0]\nIt's time to go back.")
+	UI:WaitShowDialogue("Il ne semble y avoir rien d'intéressant ici.")
+	UI:WaitShowDialogue("Impossible d'aller plus loin.[pause=0]Il est temps de rentrer.")
 	UI:SetCenter(false)
 	SOUND:FadeOutBGM(60)
 	GAME:FadeOut(false, 60)
 	GAME:CutsceneMode(false)
 	GAME:WaitFrames(20)
-	
+
 	--Go to second floor if mission was done, else, dinner room
 	if SV.TemporaryFlags.MissionCompleted then
 		GeneralFunctions.EndDungeonRun(RogueEssence.Data.GameProgress.ResultType.Cleared, "master_zone", -1, 22, 0, true, true)
 	else
 		GeneralFunctions.EndDungeonRun(RogueEssence.Data.GameProgress.ResultType.Cleared, "master_zone", -1, 6, 0, true, true)
 	end
-	
+
 end
 
 

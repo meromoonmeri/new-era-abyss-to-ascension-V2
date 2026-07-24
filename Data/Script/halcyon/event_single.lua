@@ -41,7 +41,7 @@ function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, context, args)
 	  local security_state = COMMON.GetShopPriceState()
       local price = security_state.Cart
 	  local sell_price = COMMON.GetDungeonSellPrice()
-  
+
       if price > 0 or sell_price > 0 then
 	    local is_near = false
 		local loc_diff = _DUNGEON.ActiveTeam.Leader.CharLoc - found_shopkeep.CharLoc
@@ -54,7 +54,7 @@ function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, context, args)
 		      near_mat = true
 		    end
 		  end
-		  
+
 		  if (near_mat or found_shopkeep:CanSeeCharacter(_DUNGEON.ActiveTeam.Leader)) then
 	        -- attempt to warp the shopkeeper next to the player
 		    local cand_locs = _ZONE.CurrentMap:FindNearLocs(found_shopkeep, baseLoc, 1)
@@ -73,12 +73,12 @@ function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, context, args)
 		  DUNGEON:CharTurnToChar(found_shopkeep, _DUNGEON.ActiveTeam.Leader)
 		  DUNGEON:CharTurnToChar(_DUNGEON.ActiveTeam.Leader, found_shopkeep)
           UI:SetSpeaker(found_shopkeep)
-		  
+
 		  if sell_price > 0 then
 		    UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_SELL_%04d", found_shopkeep.Discriminator)):ToLocal(), STRINGS:FormatKey("MONEY_AMOUNT", sell_price)), false)
 		    UI:WaitForChoice()
 		    result = UI:ChoiceResult()
-		  
+
 		    if SV.adventure.Thief then
 			  COMMON.ThiefReturn()
 			  price = 0
@@ -91,7 +91,7 @@ function SINGLE_CHAR_SCRIPT.ShopCheckout(owner, ownerChar, context, args)
 			  -- nothing
 		    end
 		  end
-		  
+
 		  if price > 0 then
 	        UI:ChoiceMenuYesNo(STRINGS:Format(RogueEssence.StringKey(string.format("TALK_SHOP_PAY_%04d", found_shopkeep.Discriminator)):ToLocal(), STRINGS:FormatKey("MONEY_AMOUNT", price)), false)
 	        UI:WaitForChoice()
@@ -127,7 +127,7 @@ function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, context, args)
 	end
 	if mission.Type == COMMON.MISSION_TYPE_EXPLORATION then
 		UI:ResetSpeaker()
-		UI:WaitShowDialogue("Yes! You've reached the destination! " .. _DATA:GetMonster(mission.Client):GetColoredName().. " seems happy!")
+		UI:WaitShowDialogue("Oui! Vous avez atteint la destination ! " .. _DATA:GetMonster(mission.Client):GetColoredName() .. " semble heureux !")
 		local escort = COMMON.FindMissionEscort(missionNum)
 		if escort then
 			--Clear but remember minimap state
@@ -139,9 +139,9 @@ function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, context, args)
 			UI:SetSpeaker(escort)
 			DUNGEON:CharTurnToChar(escort, GAME:GetPlayerPartyMember(0))
 			DUNGEON:CharTurnToChar(GAME:GetPlayerPartyMember(0), escort)
-			UI:WaitShowDialogue("Thank you for exploring this place with me!")
+			UI:WaitShowDialogue("Merci d'avoir exploré cet endroit avec moi!")
 
-			GAME:WaitFrames(30)		
+			GAME:WaitFrames(30)
 			--Set max team size to 4 as the guest is no longer "taking" up a party slot
 			RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS = 4
 			TASK:WaitTask(_DUNGEON:ProcessBattleFX(escort, escort, _DATA.SendHomeFX))
@@ -152,7 +152,7 @@ function SINGLE_CHAR_SCRIPT.DestinationFloor(owner, ownerChar, context, args)
 	else
 		SOUND:PlayFanfare("Fanfare/Note")
 		UI:ResetSpeaker()
-		UI:WaitShowDialogue("You've reached a destination floor!")
+		UI:WaitShowDialogue("Vous avez atteint un étage de destination !")
  	end
 	GAME:WaitFrames(10)
 end
@@ -183,7 +183,7 @@ function SpawnOutlaw(origin, radius, mission_num)
 	function checkDiagBlock(loc)
 		return true
 	end
-	
+
 	local spawn_candidates = {}
 	for x = top_left.X, bottom_right.X, 1 do
 		for y = top_left.Y, bottom_right.Y, 1 do
@@ -194,23 +194,23 @@ function SpawnOutlaw(origin, radius, mission_num)
 
 			--don't spawn the outlaw directly next to the player or their teammates
 			local next_to_player_units = false
-			for i = 1, GAME:GetPlayerPartyCount(), 1 do 
+			for i = 1, GAME:GetPlayerPartyCount(), 1 do
 				local party_member = GAME:GetPlayerPartyMember(i-1)
 				if math.abs(party_member.CharLoc.X - x) <= 1 and math.abs(party_member.CharLoc.Y - y) <= 1 then
 					next_to_player_units = true
 					break
 				end
 			end
-				
+
 			--guests too!
-			for i = 1, GAME:GetPlayerGuestCount(), 1 do 
+			for i = 1, GAME:GetPlayerGuestCount(), 1 do
 				local party_member = GAME:GetPlayerGuestMember(i-1)
 				if math.abs(party_member.CharLoc.X - x) <= 1 and math.abs(party_member.CharLoc.Y - y) <= 1 then
 					next_to_player_units = true
 					break
 				end
-			end	
-			
+			end
+
 			if tile_block == false and char_at == nil and not is_choke_point and not next_to_player_units then
 				table.insert(spawn_candidates, testLoc)
 			end
@@ -237,17 +237,17 @@ function SpawnOutlaw(origin, radius, mission_num)
 	--	local skill = final_skills[i]
 	--	new_mob:LearnSkill(skill, true)
     --end
-	
-	
+
+
 	--TODO: Add logic to make sure outlaw has at least one decent attacking move based on their level.
 	--<skilldata>.Data.Category == RogueEssence.Data.BattleData.SkillCategory.Physical
-	--Pick 4 moves at random in the mon's level up table at that point. 
+	--Pick 4 moves at random in the mon's level up table at that point.
 	--certain moves are blacklisted due to snaids.
 	local skill_candidates = {}
 	local skill_blacklist = {'teleport', 'gullotine', 'sheer_cold', 'horn_drill', 'fissure', 'memento',
 							 'healing_wish', 'lunar_dance', 'self_destruct', 'explosion', 'final_gambit', 'perish_song',
 							 'dragon_rage'}
-	
+
 	--print("Outlaw level is!: " .. tostring(mob_data.Level))
 	--generate the skill candidate list based on level and the blacklist
 	for i = 0,  _DATA:GetMonster(new_mob.BaseForm.Species).Forms[new_mob.BaseForm.Form].LevelSkills.Count - 1, 1 do
@@ -255,12 +255,12 @@ function SpawnOutlaw(origin, radius, mission_num)
 		if _DATA:GetMonster(new_mob.BaseForm.Species).Forms[new_mob.BaseForm.Form].LevelSkills[i].Level <= new_mob.Level and not in_array(skill, skill_blacklist) then
 			--print("new skill candidate!: " .. skill)
 			table.insert(skill_candidates, skill)
-		end 
+		end
 	end
-	
+
 	--learn as many skills as we can from the candidate list.
 	local learn_count = 0
-	while learn_count < 4 and #skill_candidates > 0 do	
+	while learn_count < 4 and #skill_candidates > 0 do
 		local randval = _DATA.Save.Rand:Next(1, #skill_candidates)
 		local learned_skill = skill_candidates[randval]
 		new_mob:LearnSkill(learned_skill, true)
@@ -268,8 +268,8 @@ function SpawnOutlaw(origin, radius, mission_num)
 		--print("Outlaw learned " .. learned_skill)
 		table.remove(skill_candidates, randval)
 	end
-	
-	
+
+
 	local tactic = nil
 	if mission.Type == COMMON.MISSION_TYPE_OUTLAW_FLEE then
 		local speedMin = math.floor(MISSION_GEN.EXPECTED_LEVEL[mission.Zone] * (4 / 3))
@@ -283,21 +283,21 @@ function SpawnOutlaw(origin, radius, mission_num)
 	if mission.Type == COMMON.MISSION_TYPE_OUTLAW_ITEM then
 		new_mob.EquippedItem = RogueEssence.Dungeon.InvItem(mission.Item)
 	end
-	
+
 	new_mob.MaxHPBonus = math.min(MISSION_GEN.EXPECTED_LEVEL[mission.Zone] * 4, max_boost);
 	new_mob.HP = new_mob.MaxHP;
 	new_mob.Unrecruitable = true
 	new_mob.Tactic = tactic
 	new_mob.CharLoc = spawn_loc
 	new_team.Players:Add(new_mob)
-	
+
 	tbl = LTBL(new_mob)
 	tbl.Mission = mission_num
-			
+
 	_ZONE.CurrentMap.MapTeams:Add(new_team)
 	new_mob:RefreshTraits()
 	_ZONE.CurrentMap:UpdateExploration(new_mob)
-	
+
 	local base_name = RogueEssence.Data.DataManager.Instance.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:Get(new_mob.BaseForm.Species).Name:ToLocal()
 	GAME:SetCharacterNickname(new_mob, base_name)
 	return new_mob
@@ -315,22 +315,22 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
 		UI:ResetSpeaker()
 		DUNGEON:CharTurnToChar(outlaw, GAME:GetPlayerPartyMember(0))
 		GeneralFunctions.TeamTurnTo(outlaw)
-		UI:WaitShowDialogue("Wanted outlaw spotted!")
+		UI:WaitShowDialogue("Un hors-la-loi recherché a été repéré !")
 
 		if mission.Type == COMMON.MISSION_TYPE_OUTLAW_FLEE then
 			GAME:WaitFrames(20)
 			UI:SetSpeaker(outlaw)
 			UI:SetSpeakerEmotion("Surprised")
-			UI:WaitShowDialogue("Waah! A-adventurers! Run for it!")
+			UI:WaitShowDialogue("Waah ! A-aventuriers ! Courez!")
 			local leaderDir = _DUNGEON.ActiveTeam.Leader.CharDir
 			outlaw.CharDir = leaderDir
 		elseif mission.Type == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
 			GAME:WaitFrames(20)
 			UI:SetSpeaker(outlaw)
-			UI:WaitShowDialogue("You've fallen into my trap!")
+			UI:WaitShowDialogue("Vous êtes tombé dans mon piège !")
 			SOUND:FadeOutBGM(20)
 			GAME:WaitFrames(20)
-      
+
 			-- ===========Monster house spawning logic============
 			local rect_area = RogueElements.Loc(1)
 			local rect_area2 = RogueElements.Loc(3)
@@ -339,14 +339,14 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
 				local result = _ZONE.CurrentMap:TileBlocked(loc)
 				return result
 			end
-		
+
 			function checkDiagBlock(loc)
 				return true
 			end
-			
-			
+
+
 			local goon_spawn_radius = 5
-      
+
 			local origin = _DUNGEON.ActiveTeam.Leader.CharLoc
 
 			local leftmost_x = math.maxinteger
@@ -388,7 +388,7 @@ function SINGLE_CHAR_SCRIPT.OutlawFloor(owner, ownerChar, context, args)
 			local min_goons = math.floor(valid_tile_total / 5)
 			local max_goons = math.floor(valid_tile_total / 4)
 			local total_goons = _DATA.Save.Rand:Next(min_goons, max_goons)
-			
+
 			local all_spawns = LUA_ENGINE:MakeGenericType( ListType, { MobSpawnType }, { })
 			for i = 0,  _ZONE.CurrentMap.TeamSpawns.Count - 1, 1 do
 				local possible_spawns = _ZONE.CurrentMap.TeamSpawns:GetSpawn(i):GetPossibleSpawns()
@@ -449,13 +449,13 @@ function SINGLE_CHAR_SCRIPT.OnMonsterHouseOutlawCheck(owner, ownerChar, context,
 			if found_goon and not found_outlaw then
 				GAME:WaitFrames(20)
 				UI:ResetSpeaker()
-				UI:WaitShowDialogue("Yes! You defeated " .. outlaw_name .. "! Defeat the rest of the goons!" )
+				UI:WaitShowDialogue("Oui! Vous avez vaincu " .. outlaw_name .. " ! Battez le reste des crétins !")
 				SV.MonsterHouseMessageNotified = true
 			end
 			if not found_goon and found_outlaw then
 				GAME:WaitFrames(40)
 				UI:SetSpeaker(found_outlaw)
-				UI:WaitShowDialogue("Grr! You won't be able to defeat me!")
+				UI:WaitShowDialogue("Grr! Vous ne pourrez pas me vaincre !")
 				SV.MonsterHouseMessageNotified = true
 			end
 		end
@@ -466,7 +466,7 @@ function SINGLE_CHAR_SCRIPT.OnMonsterHouseOutlawCheck(owner, ownerChar, context,
 			curr_mission.Completion = 1
 			GAME:WaitFrames(20)
 			UI:ResetSpeaker()
-			UI:WaitShowDialogue("Yes!\nKnocked out outlaw " .. outlaw_name .. " and goons!")
+			UI:WaitShowDialogue("Oui!\nHors-la-loi éliminé " .. outlaw_name .. " et crétins !")
 			SV.TemporaryFlags.PriorMapSetting = _DUNGEON.ShowMap
 			_DUNGEON.ShowMap = _DUNGEON.MinimapState.None
 			GeneralFunctions.AskMissionWarpOut()
@@ -474,7 +474,7 @@ function SINGLE_CHAR_SCRIPT.OnMonsterHouseOutlawCheck(owner, ownerChar, context,
 	end
 end
 
-function SINGLE_CHAR_SCRIPT.SpawnOutlaw(owner, ownerChar, context, args) 
+function SINGLE_CHAR_SCRIPT.SpawnOutlaw(owner, ownerChar, context, args)
 	if context.User ~= nil then
     return
 	end
@@ -499,7 +499,7 @@ function SINGLE_CHAR_SCRIPT.OutlawCheck(owner, ownerChar, context, args)
 			curr_mission.Completion = 1
 			GAME:WaitFrames(50)
 			UI:ResetSpeaker()
-			UI:WaitShowDialogue("Yes!\nKnocked out outlaw " .. outlaw_name .. "!")
+			UI:WaitShowDialogue("Oui!\nHors-la-loi éliminé " .. outlaw_name .. " !")
 			--Clear but remember minimap state
 			SV.TemporaryFlags.PriorMapSetting = _DUNGEON.ShowMap
 			_DUNGEON.ShowMap = _DUNGEON.MinimapState.None
@@ -519,7 +519,7 @@ function SINGLE_CHAR_SCRIPT.OutlawItemCheck(owner, ownerChar, context, args)
 			SOUND:PlayBGM(_ZONE.CurrentMap.Music, true)
 			GAME:WaitFrames(50)
 			UI:ResetSpeaker()
-			UI:WaitShowDialogue("Yes!\nYou reclaimed the " .. item_name .. "!")
+			UI:WaitShowDialogue("Oui!\nVous avez récupéré le " .. item_name .. " !")
 			--Clear but remember minimap state
 			SV.TemporaryFlags.PriorMapSetting = _DUNGEON.ShowMap
 			_DUNGEON.ShowMap = _DUNGEON.MinimapState.None
@@ -530,7 +530,7 @@ end
 
 function SINGLE_CHAR_SCRIPT.OutlawFleeStairsCheck(owner, ownerChar, context, args)
 	local stairs_arr = {
-		"stairs_back_down", "stairs_back_up", "stairs_exit_down", 
+		"stairs_back_down", "stairs_back_up", "stairs_exit_down",
 		"stairs_exit_up", "stairs_go_up", "stairs_go_down"
 	}
 
@@ -565,7 +565,7 @@ end
 
 
 function SINGLE_CHAR_SCRIPT.MissionGuestCheck(owner, ownerChar, context, args)
-	
+
 	if not context.User.Dead then
 		return
 	end
@@ -575,7 +575,7 @@ function SINGLE_CHAR_SCRIPT.MissionGuestCheck(owner, ownerChar, context, args)
 	if tbl ~= nil and tbl.Escort ~= nil then
 		local targetName = _DATA:GetMonster(context.User.BaseForm.Species):GetColoredName()
 		UI:ResetSpeaker()
-		UI:WaitShowDialogue("Oh no! " ..  targetName .. " fainted!")
+		UI:WaitShowDialogue("Oh non ! " ..  targetName .. " fainted!")
 		GAME:WaitFrames(40)
 		--Set max team size to 4 as the guest is no longer "taking" up a party slot
 		RogueEssence.Dungeon.ExplorerTeam.MAX_TEAM_SLOTS = 4
@@ -605,9 +605,9 @@ function SINGLE_CHAR_SCRIPT.AllyDeathCheck(owner, ownerChar, context, args)
 	local player_count = GAME:GetPlayerPartyCount()
 	local guest_count = GAME:GetPlayerGuestCount()
 	if player_count < 1 then return end--If there's no party members then we dont need to do anything
-	for i = 0, player_count - 1, 1 do 
+	for i = 0, player_count - 1, 1 do
 		local player = GAME:GetPlayerPartyMember(i)
-		if player.Dead and player.IsPartner then --someone died 
+		if player.Dead and player.IsPartner then --someone died
 			for j = 0, player_count - 1, 1 do --beam everyone else out
 				player = GAME:GetPlayerPartyMember(j)
 				if not player.Dead then--dont beam out whoever died
@@ -629,17 +629,17 @@ function SINGLE_CHAR_SCRIPT.AllyDeathCheck(owner, ownerChar, context, args)
 			end
 			--TASK:WaitTask(_GAME:EndSegment(RogueEssence.Data.GameProgress.ResultType.Failed))
 			return--cut the script short here if someone died, no need to check guests
-		elseif player.Dead and not player.IsPartner then 
+		elseif player.Dead and not player.IsPartner then
 			--Send them back to the assembly and boot them from the current team if they died and aren't important.
 			TASK:WaitTask(_DUNGEON:SilentSendHome(i))
 		end
 	end
-	
+
 	--check guests as well
 	if guest_count < 1 then return end--If there's no guest members then we dont need to do anything
-	for i = 0, guest_count - 1, 1 do 
+	for i = 0, guest_count - 1, 1 do
 		local guest = GAME:GetPlayerGuestMember(i)
-		if guest.Dead and guest.IsPartner then --someone died 
+		if guest.Dead and guest.IsPartner then --someone died
 			--beam player's team out first
 			for j = 0, player_count - 1, 1 do --beam everyone else out
 				player = GAME:GetPlayerPartyMember(j)
@@ -660,7 +660,7 @@ function SINGLE_CHAR_SCRIPT.AllyDeathCheck(owner, ownerChar, context, args)
 			--TASK:WaitTask(_GAME:EndSegment(RogueEssence.Data.GameProgress.ResultType.Failed))
 		end
 	end
-			
+
 end
 
 --sets critical health status if teammate's health is low. This just adds a cosmetic Exclamation point over their head.
@@ -669,9 +669,9 @@ function SINGLE_CHAR_SCRIPT.SetCriticalHealthStatus(owner, ownerChar, context, a
 	local critical = RogueEssence.Dungeon.StatusEffect("critical_health")
 	--initialize status data before adding it to anything
 	critical:LoadFromData()
-	for i = 0, player_count - 1, 1 do 
+	for i = 0, player_count - 1, 1 do
 	local player = GAME:GetPlayerPartyMember(i)
-		if player.HP <= player.MaxHP / 4 and player:GetStatusEffect("critical_health") == nil then 
+		if player.HP <= player.MaxHP / 4 and player:GetStatusEffect("critical_health") == nil then
 			TASK:WaitTask(player:AddStatusEffect(nil, critical, false))
 			--print("Set crit health!")
 		elseif player.HP > player.MaxHP / 4 and player:GetStatusEffect("critical_health") ~= nil then
@@ -702,20 +702,20 @@ function SINGLE_CHAR_SCRIPT.DrawLavaPool(leftBottom, rightBottom, remove_lava)
 	local rightFlip = 0
 	local fliptype = luanet.import_type('RogueEssence.Content.SpriteFlip')
 
-	if leftBottom then 
+	if leftBottom then
 		leftY = 13
-	end 
-	
+	end
+
 	if rightBottom then
 		rightY = 13
 	end
-	
+
 	local lava_anim_left = RogueEssence.Content.ObjAnimData('Spring_Cave_Pit_Lava_Pool_Connected', 4)
 	local lava_anim_right = RogueEssence.Content.ObjAnimData('Spring_Cave_Pit_Lava_Pool_Connected', 4)
 	lava_anim_left.AnimFlip = LUA_ENGINE:LuaCast(leftFlip, fliptype)
 	lava_anim_right.AnimFlip = LUA_ENGINE:LuaCast(rightFlip, fliptype)
 
-	
+
 	--Do both lava pools at the same time. Do left, then right.
 	SOUND:PlayBattleSE('_UNK_EVT_102')
 	DUNGEON:MoveScreen(RogueEssence.Content.ScreenMover(2, 4, 30))
@@ -728,9 +728,9 @@ function SINGLE_CHAR_SCRIPT.DrawLavaPool(leftBottom, rightBottom, remove_lava)
 		map.Decorations[0].Anims:Add(RogueEssence.Ground.GroundAnim(lava_anim_left, RogueElements.Loc(leftX * 24, leftY * 24)))
 		map.Decorations[0].Anims:Add(RogueEssence.Ground.GroundAnim(lava_anim_right, RogueElements.Loc(rightX * 24, rightY * 24)))
 	end
-	
+
 	GAME:WaitFrames(40)
-end 
+end
 
 --left and right bottom should always match for this function, but im writing it like this to match the skeleton of the others where it doesnt necessarily match
 --this WAS more elegant before I had to rewrite it to avoid using couroutines from the parent call, but what can you do :v(
@@ -750,22 +750,22 @@ function SINGLE_CHAR_SCRIPT.DrawStraightFlow(leftBottom, rightBottom, remove_lav
 	local leftOffsetY = 0--Need to offset the flipped sprites by an amount. Being on right side needs an x offset, being on the bottom needs a y offset.
 	local rightOffsetY = 0
 
-	if leftBottom then 
+	if leftBottom then
 		leftY = 13
 		leftDirectionY = -1
 		leftOffsetY = -24
 		leftFlip = 3
-	end 
-	
+	end
+
 	if rightBottom then
 		rightY = 13
 		rightDirectionY = -1
 		rightOffsetY = -24
 		rightFlip = 2
 	end
-	
+
 	if remove_lava then effect_tile = '' end
-	
+
 	local lava_anim_small_left = RogueEssence.Content.ObjAnimData('Spring_Cave_Pit_Small_Lava_Stream', 4)
 	local lava_anim_big_left = RogueEssence.Content.ObjAnimData('Spring_Cave_Pit_Big_Lava_Stream', 4)
 	lava_anim_small_left.AnimFlip = LUA_ENGINE:LuaCast(leftFlip, fliptype)
@@ -780,7 +780,7 @@ function SINGLE_CHAR_SCRIPT.DrawStraightFlow(leftBottom, rightBottom, remove_lav
 	--Do 2 "sections" of lava at a time, the equivalent ones on both the left and right side.
 	SOUND:PlayBattleSE('_UNK_EVT_102')
 	DUNGEON:MoveScreen(RogueEssence.Content.ScreenMover(2, 4, 30))
-	
+
 	--vfx
 	if remove_lava then
 		map.Decorations[0].Anims:RemoveAt(2)--Two decorations are placed on the map that shouldn't be removed, so 2 is where we need to delete from.
@@ -791,7 +791,7 @@ function SINGLE_CHAR_SCRIPT.DrawStraightFlow(leftBottom, rightBottom, remove_lav
 		map.Decorations[0].Anims:Add(RogueEssence.Ground.GroundAnim(lava_anim_small_right, RogueElements.Loc(rightX * 24 - 24, rightY * 24 + rightOffsetY)))
 
 	end
-	
+
 	--tiles
 	local leftLoc = RogueElements.Loc(leftX, leftY)
 	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)
@@ -802,7 +802,7 @@ function SINGLE_CHAR_SCRIPT.DrawStraightFlow(leftBottom, rightBottom, remove_lav
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(leftLoc)
 
 	leftLoc = RogueElements.Loc(leftX, leftY + leftDirectionY)
-	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)			
+	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(leftLoc)
 
 	--then do right side.
@@ -815,18 +815,18 @@ function SINGLE_CHAR_SCRIPT.DrawStraightFlow(leftBottom, rightBottom, remove_lav
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(rightLoc)
 
 	rightLoc = RogueElements.Loc(rightX, rightY + rightDirectionY)
-	map:GetTile(rightLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, rightLoc)			
+	map:GetTile(rightLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, rightLoc)
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(rightLoc)
-	
-	
+
+
 	--second wave
 	GAME:WaitFrames(40)
-	
+
 	SOUND:PlayBattleSE('_UNK_EVT_102')
 	DUNGEON:MoveScreen(RogueEssence.Content.ScreenMover(2, 4, 30))
 	leftX = leftX + 2
 	rightX = rightX - 2
-	
+
 	--vfx
 	if remove_lava then
 		map.Decorations[0].Anims:RemoveAt(2)--Two decorations are placed on the map that shouldn't be removed, so 2 is where we need to delete from.
@@ -846,11 +846,11 @@ function SINGLE_CHAR_SCRIPT.DrawStraightFlow(leftBottom, rightBottom, remove_lav
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(leftLoc)
 
 	leftLoc = RogueElements.Loc(leftX, leftY + leftDirectionY)
-	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)			
-	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(leftLoc)	
-	
+	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)
+	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(leftLoc)
+
 	leftLoc = RogueElements.Loc(leftX + 1, leftY + leftDirectionY)
-	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)			
+	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(leftLoc)
 
 	--then do right side.
@@ -863,17 +863,17 @@ function SINGLE_CHAR_SCRIPT.DrawStraightFlow(leftBottom, rightBottom, remove_lav
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(rightLoc)
 
 	rightLoc = RogueElements.Loc(rightX, rightY + rightDirectionY)
-	map:GetTile(rightLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, rightLoc)			
+	map:GetTile(rightLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, rightLoc)
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(rightLoc)
 
 	rightLoc = RogueElements.Loc(rightX - 1, rightY + rightDirectionY)
-	map:GetTile(rightLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, rightLoc)			
+	map:GetTile(rightLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, rightLoc)
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(rightLoc)
-	
-		
+
+
 	GAME:WaitFrames(40)
 
-end 
+end
 
 --gets the tile at location, and applies its effect if someone is also standing at the location.
 --Created for use with the lava flow scripts.
@@ -883,7 +883,7 @@ function SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(loc)
 	if chara ~= nil and tile.Effect.ID ~= '' then--don't try to apply the tile if it's a nothing tile
 		TASK:WaitTask(tile.Effect:InteractWithTile(RogueEssence.Dungeon.SingleCharContext(chara)))
 	end
-end 
+end
 
 function SINGLE_CHAR_SCRIPT.DrawDiagonalFlow(leftBottom, rightBottom, remove_lava)
 	local map = _ZONE.CurrentMap
@@ -901,22 +901,22 @@ function SINGLE_CHAR_SCRIPT.DrawDiagonalFlow(leftBottom, rightBottom, remove_lav
 	local leftOffsetY = 0--Need to offset the flipped sprites by an amount. Being on right side needs an x offset, being on the bottom needs a y offset.
 	local rightOffsetY = 0
 
-	if leftBottom then 
+	if leftBottom then
 		leftY = 13
 		leftDirectionY = -1
 		leftOffsetY = -24
 		leftFlip = 3
-	end 
-	
+	end
+
 	if rightBottom then
 		rightY = 13
 		rightDirectionY = -1
 		rightOffsetY = -24
 		rightFlip = 2
 	end
-	
+
 	if remove_lava then effect_tile = '' end
-	
+
 	local lava_anim_small_left = RogueEssence.Content.ObjAnimData('Spring_Cave_Pit_Small_Lava_Stream', 4)
 	local lava_anim_big_left = RogueEssence.Content.ObjAnimData('Spring_Cave_Pit_Big_Lava_Stream', 4)
 	lava_anim_small_left.AnimFlip = LUA_ENGINE:LuaCast(leftFlip, fliptype)
@@ -940,8 +940,8 @@ function SINGLE_CHAR_SCRIPT.DrawDiagonalFlow(leftBottom, rightBottom, remove_lav
 		--right needs to be offset on x axis by -24
 		map.Decorations[0].Anims:Add(RogueEssence.Ground.GroundAnim(lava_anim_small_right, RogueElements.Loc(rightX * 24 - 24, rightY * 24 + rightOffsetY)))
 	end
-	
-	
+
+
 	--tiles
 	local leftLoc = RogueElements.Loc(leftX, leftY)
 	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)
@@ -952,7 +952,7 @@ function SINGLE_CHAR_SCRIPT.DrawDiagonalFlow(leftBottom, rightBottom, remove_lav
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(leftLoc)
 
 	leftLoc = RogueElements.Loc(leftX, leftY + leftDirectionY)
-	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)			
+	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(leftLoc)
 
 	--then do right side.
@@ -965,12 +965,12 @@ function SINGLE_CHAR_SCRIPT.DrawDiagonalFlow(leftBottom, rightBottom, remove_lav
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(rightLoc)
 
 	rightLoc = RogueElements.Loc(rightX, rightY + rightDirectionY)
-	map:GetTile(rightLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, rightLoc)			
+	map:GetTile(rightLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, rightLoc)
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(rightLoc)
-	
-		
+
+
 	GAME:WaitFrames(40)
-	
+
 	--second wave
 	SOUND:PlayBattleSE('_UNK_EVT_102')
 	DUNGEON:MoveScreen(RogueEssence.Content.ScreenMover(2, 4, 30))
@@ -978,7 +978,7 @@ function SINGLE_CHAR_SCRIPT.DrawDiagonalFlow(leftBottom, rightBottom, remove_lav
 	rightX = rightX - 1
 	leftY = leftY + leftDirectionY
 	rightY = rightY + rightDirectionY
-	
+
 	--vfx
 	if remove_lava then
 		map.Decorations[0].Anims:RemoveAt(2)--Two decorations are placed on the map that shouldn't be removed, so 2 is where we need to delete from.
@@ -1000,9 +1000,9 @@ function SINGLE_CHAR_SCRIPT.DrawDiagonalFlow(leftBottom, rightBottom, remove_lav
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(leftLoc)
 
 	leftLoc = RogueElements.Loc(leftX, leftY + leftDirectionY)
-	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)			
-	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(leftLoc)	
-	
+	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)
+	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(leftLoc)
+
 
 	--then do right side.
 	rightLoc = RogueElements.Loc(rightX, rightY)
@@ -1014,9 +1014,9 @@ function SINGLE_CHAR_SCRIPT.DrawDiagonalFlow(leftBottom, rightBottom, remove_lav
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(rightLoc)
 
 	rightLoc = RogueElements.Loc(rightX, rightY + rightDirectionY)
-	map:GetTile(rightLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, rightLoc)			
+	map:GetTile(rightLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, rightLoc)
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(rightLoc)
-	
+
 	GAME:WaitFrames(40)
 
 	SOUND:PlayBattleSE('_UNK_EVT_102')
@@ -1025,7 +1025,7 @@ function SINGLE_CHAR_SCRIPT.DrawDiagonalFlow(leftBottom, rightBottom, remove_lav
 	rightX = rightX - 1
 	leftY = leftY + leftDirectionY
 	rightY = rightY + rightDirectionY
-	
+
 	--vfx
 	if remove_lava then
 		map.Decorations[0].Anims:RemoveAt(2)--Two decorations are placed on the map that shouldn't be removed, so 2 is where we need to delete from.
@@ -1045,11 +1045,11 @@ function SINGLE_CHAR_SCRIPT.DrawDiagonalFlow(leftBottom, rightBottom, remove_lav
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(leftLoc)
 
 	leftLoc = RogueElements.Loc(leftX, leftY + leftDirectionY)
-	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)			
-	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(leftLoc)	
-	
+	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)
+	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(leftLoc)
+
 	leftLoc = RogueElements.Loc(leftX + 1, leftY + leftDirectionY)
-	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)			
+	map:GetTile(leftLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, leftLoc)
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(leftLoc)
 
 	--then do right side.
@@ -1062,25 +1062,25 @@ function SINGLE_CHAR_SCRIPT.DrawDiagonalFlow(leftBottom, rightBottom, remove_lav
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(rightLoc)
 
 	rightLoc = RogueElements.Loc(rightX, rightY + rightDirectionY)
-	map:GetTile(rightLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, rightLoc)			
+	map:GetTile(rightLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, rightLoc)
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(rightLoc)
 
 	rightLoc = RogueElements.Loc(rightX - 1, rightY + rightDirectionY)
-	map:GetTile(rightLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, rightLoc)			
+	map:GetTile(rightLoc).Effect = RogueEssence.Dungeon.EffectTile(effect_tile, true, rightLoc)
 	SINGLE_CHAR_SCRIPT.ApplyTileToCharacter(rightLoc)
-		
+
 	GAME:WaitFrames(40)
 
 end
 function SINGLE_CHAR_SCRIPT.QueueLavaFlow()
 	--Randomly choose top or bottom on each side. Draw a scripted lava flow from point A to point B afterwards.
 	local map = _ZONE.CurrentMap
-	
+
 	--local top_left = RogueElements.Loc(7, 8)
 	--local top_right = RogueElements.Loc(14, 8)
 	--local bottom_left = RogueElements.Loc(7, 13)
 	--local bottom_right = RogueElements.Loc(14, 13)
-	
+
 	--0 is top, 1 is bottom
 	local left_side = map.Rand:Next(0,2)
 	local right_side = map.Rand:Next(0,2)
@@ -1092,7 +1092,7 @@ function SINGLE_CHAR_SCRIPT.QueueLavaFlow()
 	if left_side == right_side and left_side == 0 then
 		SV.SearingTunnel.LavaFlowDirection = "TopStraight"
 		SINGLE_CHAR_SCRIPT.DrawLavaPool(false, false, false)
-		SINGLE_CHAR_SCRIPT.DrawStraightFlow(false, false, false)		
+		SINGLE_CHAR_SCRIPT.DrawStraightFlow(false, false, false)
 	--Straight line across the bottom
 	elseif left_side == right_side and left_side == 1 then
 		SV.SearingTunnel.LavaFlowDirection = "BottomStraight"
@@ -1109,15 +1109,15 @@ function SINGLE_CHAR_SCRIPT.QueueLavaFlow()
 		SINGLE_CHAR_SCRIPT.DrawLavaPool(true, false, false)
 		SINGLE_CHAR_SCRIPT.DrawDiagonalFlow(true, false, false)
 	end
-	
 
-end 
+
+end
 
 
 function SINGLE_CHAR_SCRIPT.RemoveLavaFlow()
 	--Remove the current lava flow.
 	local map = _ZONE.CurrentMap
-		
+
 	print("Removing lava flow! " .. SV.SearingTunnel.LavaFlowDirection)
 	--straight line across the top
 	if SV.SearingTunnel.LavaFlowDirection == 'TopStraight' then
@@ -1136,10 +1136,10 @@ function SINGLE_CHAR_SCRIPT.RemoveLavaFlow()
 		SINGLE_CHAR_SCRIPT.DrawLavaPool(true, false, true)
 		SINGLE_CHAR_SCRIPT.DrawDiagonalFlow(true, false, true)
 	end
-	
+
 	--clear the flag
 	SV.SearingTunnel.LavaFlowDirection = "None"
-end 
+end
 
 function SINGLE_CHAR_SCRIPT.LavaFlowHandler(owner, ownerChar, context, args)
 	--args.LavaDuration - how long the lava is out before it recedes. Should be 1 pretty much always. Dont let it be less than 1!!!!
@@ -1147,23 +1147,23 @@ function SINGLE_CHAR_SCRIPT.LavaFlowHandler(owner, ownerChar, context, args)
 	if context.User == nil then
 		--failsafes
 		if SV.SearingTunnel.LavaCountdown == nil then SV.SearingTunnel.LavaCountdown = -1 end
-		
+
 		--reset the counter when we go past 0. -1 or else it would end up taking 1 more turn than intended
 		if SV.SearingTunnel.LavaCountdown < 0 then
 			SV.SearingTunnel.LavaCountdown = args.LavaDuration + args.NothingDuration - 1
 		end
-		
+
 		--When there's only Nothing Duration left, remove lava.
 		if SV.SearingTunnel.LavaCountdown == args.NothingDuration then
 			GAME:WaitFrames(20)--Pause a bit so it doesn't insta clear as soon as the map turn is done.
 			SINGLE_CHAR_SCRIPT.RemoveLavaFlow()
 		end
-		
+
 		if SV.SearingTunnel.LavaCountdown == 0 then
 			GAME:WaitFrames(20)--Pause a bit so it doesn't insta clear as soon as the map turn is done.
 			SINGLE_CHAR_SCRIPT.QueueLavaFlow()
-		end 
-		
+		end
+
 		SV.SearingTunnel.LavaCountdown = SV.SearingTunnel.LavaCountdown - 1
 		print("Lava counter " .. tostring(SV.SearingTunnel.LavaCountdown))
 	end
@@ -1173,7 +1173,7 @@ end
 
 --For use in the Terrakion Fight and his dungeon after the midway point.
 function SINGLE_CHAR_SCRIPT.QueueRockFall(owner, ownerChar, context, args)
-	
+
 	--random chance for floor tiles to become a "falling rock shadow" tile.
 	local map = _ZONE.CurrentMap
 
@@ -1186,7 +1186,7 @@ function SINGLE_CHAR_SCRIPT.QueueRockFall(owner, ownerChar, context, args)
 	for xx = 0, map.Width - 1, 1 do
 		for yy = 0, map.Height - 1, 1 do
 			--1/8 chance to set a tile to rock fall.  is
-			if map.Rand:Next(1,9) == 1 then 
+			if map.Rand:Next(1,9) == 1 then
 				local loc = RogueElements.Loc(xx, yy)
 				local tile = map:GetTile(loc)
 				--Make sure the tile is a floor tile and has nothing on it already (traps)
@@ -1196,31 +1196,31 @@ function SINGLE_CHAR_SCRIPT.QueueRockFall(owner, ownerChar, context, args)
 			end
 		end
 	end
-			
+
 	--for every pokemon on the floor, queue up extra rocks around them. Always make sure a spot is clear within one tile of them though!
 	--todo: Improve code efficiency. Multiple for loops for each party instead of transferring to a lua table if this proves to be too slow.
 	local floor_mons = {}
 
-	--your team 
+	--your team
 	for i = 0, GAME:GetPlayerPartyCount() - 1, 1 do
 		table.insert(floor_mons, GAME:GetPlayerPartyMember(i))
 		print("PlayerParty" .. i)
 	end
-		
+
 	for i = 0, GAME:GetPlayerGuestCount() - 1, 1 do
 		table.insert(floor_mons, GAME:GetPlayerGuestMember(i))
 		print("GuestParty" .. i)
 	end
-	
+
 	--enemy teams
 	for i = 0, map.MapTeams.Count - 1, 1 do
 		local team = map.MapTeams[i].Players
 		for j = 0, team.Count - 1, 1 do
-			table.insert(floor_mons, team[j])	
+			table.insert(floor_mons, team[j])
 			print("EnemyTeam" .. i)
 		end
 	end
-	
+
 	--neutrals
 	for i = 0, map.AllyTeams.Count - 1, 1 do
 		local team = map.AllyTeams[i].Players
@@ -1229,73 +1229,73 @@ function SINGLE_CHAR_SCRIPT.QueueRockFall(owner, ownerChar, context, args)
 			print("Neutral" .. i)
 		end
 	end
-	
+
 	print("length = " .. tostring(#floor_mons))
 
 	for i = 1, #floor_mons, 1 do
 		local member = floor_mons[i] --RogueEssence.Dungeon.Character
 		local charLoc = member.CharLoc
-		
+
 		--Spawn extra boulders near Pokemon in a 3x3 radius.
 		--Don't spawn boulders on top of terrakion; they'll be too good at killing him if this happens.
 		if member.CurrentForm.Species ~= 'terrakion' then
 			for xx = -1, 1, 1 do
-				for yy = -1, 1, 1 do 
+				for yy = -1, 1, 1 do
 					--pass a check with 66% success rate. If you do, spawn a boulder shadow.
 					--Bound these values to stay in bounds. This has a byproduct of condensing boulders a bit when at map edges, but this shouldn't come into practice much.
-					if map.Rand:Next(1, 4) ~= 1 then 
+					if map.Rand:Next(1, 4) ~= 1 then
 						local boulderX = charLoc.X + xx
 						local boulderY = charLoc.Y + yy
-					
-						if boulderX < 0 then boulderX = 0 end 
-						if boulderY < 0 then boulderY = 0 end							
-						
-						if boulderX >= map.Width then boulderX = map.Width - 1 end 
+
+						if boulderX < 0 then boulderX = 0 end
+						if boulderY < 0 then boulderY = 0 end
+
+						if boulderX >= map.Width then boulderX = map.Width - 1 end
 						if boulderY >= map.Height then boulderY = map.Height - 1 end
-						
+
 						local loc = RogueElements.Loc(charLoc.X + xx, charLoc.Y + yy)
 						local tile = map:GetTile(loc)
 						if tile.ID == _DATA.GenFloor and tile.Effect.ID == '' then
 							tile.Effect = RogueEssence.Dungeon.EffectTile('falling_rock_shadow', true, loc)
 						end
 					end
-				end			
+				end
 			end
 		end
-	end		
+	end
 
-	
+
 	--loop through the pokemon on the floor again; this time clean 1 boulder next to each pokemon.
 	--this is to help prevent RNG screwing you over into a checkmate scenario
 	for i = 1, #floor_mons, 1 do
 		local member = floor_mons[i] --RogueEssence.Dungeon.Character
 		local charLoc = member.CharLoc
-		
+
 		--Clear 1 space nearby each pokemon.
 		local nearby_boulder_locs = {}
-		
+
 		--again, Terrakion is an exception. Dont remove boulders near him since we aren't spawning them near him.
 		--todo: make this less hacky? Maybe just remove him from the overall list instead of exceptioning him twice? but would such a search be too slow?
-		if member.CurrentForm.Species ~= 'terrakion' then 
+		if member.CurrentForm.Species ~= 'terrakion' then
 			for xx = -1, 1, 1 do
-				for yy = -1, 1, 1 do 
+				for yy = -1, 1, 1 do
 					local boulderX = charLoc.X + xx
 					local boulderY = charLoc.Y + yy
-				
-					if boulderX < 0 then boulderX = 0 end 
-					if boulderY < 0 then boulderY = 0 end							
-					
-					if boulderX >= map.Width then boulderX = map.Width - 1 end 
+
+					if boulderX < 0 then boulderX = 0 end
+					if boulderY < 0 then boulderY = 0 end
+
+					if boulderX >= map.Width then boulderX = map.Width - 1 end
 					if boulderY >= map.Height then boulderY = map.Height - 1 end
-					
+
 					local loc = RogueElements.Loc(charLoc.X + xx, charLoc.Y + yy)
 					local tile = map:GetTile(loc)
 					if tile.Effect.ID == 'falling_rock_shadow' then
 						table.insert(nearby_boulder_locs, loc)
 					end
-				end			
+				end
 			end
-		
+
 			--Finally clear the tile.
 			if #nearby_boulder_locs > 0 then
 				local loc = nearby_boulder_locs[map.Rand:Next(1, #nearby_boulder_locs + 1)]
@@ -1304,29 +1304,29 @@ function SINGLE_CHAR_SCRIPT.QueueRockFall(owner, ownerChar, context, args)
 			end
 		end
 	end
-			
 
-	
+
+
 	GAME:WaitFrames(30)
-end 
+end
 
 function SINGLE_CHAR_SCRIPT.ResolveRockFall(owner, ownerChar, context, args)
 	--Resolve the queued up rock falls. Play the animation in 4 waves so the animations aren't 100% synced up; what wave you're in is your x pos + y pos modulo 4 + 1.
-	
+
 	local waves = {{}, {}, {}, {}}
 	local map = _ZONE.CurrentMap
-	local width = map.Width 
+	local width = map.Width
 	local height = map.Height
 
 	SOUND:PlayBattleSE("DUN_Rock_Throw")
-	
+
 	--drops a boulder on a location
 	local function DropBoulder(loc)
-	
+
 		--emitter for the result anim of our main emitter
 		local result_emitter = RogueEssence.Content.SingleEmitter(RogueEssence.Content.AnimData("Rock_Smash_Front", 2))
 		result_emitter.Layer = RogueEssence.Content.DrawLayer.Front
-						
+
 		--falling boulder animation. Emitter attributes are mostly self explanatory.
 		local emitter = RogueEssence.Content.MoveToEmitter()
 		emitter.MoveTime = 30
@@ -1342,34 +1342,34 @@ function SINGLE_CHAR_SCRIPT.ResolveRockFall(owner, ownerChar, context, args)
 		DUNGEON:PlayVFX(emitter, loc.X * 24 + 12, loc.Y * 24 + 16)
 
 		GAME:WaitFrames(30)
-		
+
 		--clear the shadow
 		map:GetTile(loc).Effect = RogueEssence.Dungeon.EffectTile('', true, loc)
-		
+
 		local flinch = RogueEssence.Dungeon.StatusEffect("flinch")
 		--initialize status data before adding it to anything
 		flinch:LoadFromData()
 		local chara =  map:GetCharAtLoc(loc)
-		
+
 		--damage anyone standing under a rock when it resolves.
 		if chara ~= nil then
 			--deal 1/4 max hp as damage, multiplied based on type effectiveness. Also flinch the target.
 			local damage = chara.MaxHP / 4
-			
+
 			--get the type effectiveness on each of the chara's types, then add that together. then run it through GetEffectivenessMult to get the actual multiplier. This is the numerator for x/4. so divide by 4 after for true amount
 			local type_effectiveness = PMDC.Dungeon.PreTypeEvent.CalculateTypeMatchup('rock', chara.Element1) + PMDC.Dungeon.PreTypeEvent.CalculateTypeMatchup('rock', chara.Element2)
 			type_effectiveness = PMDC.Dungeon.PreTypeEvent.GetEffectivenessMult(type_effectiveness)
 
 
 			damage = type_effectiveness * damage
-			damage = math.floor(damage / 4) 
-			
+			damage = math.floor(damage / 4)
+
 			TASK:WaitTask(chara:InflictDamage(damage))
 			TASK:WaitTask(chara:AddStatusEffect(nil, flinch, true))
-		end		
-		
+		end
+
 	end
-		
+
 		--local arriveAnim = RogueEssence.Content.StaticAnim(RogueEssence.Content.AnimData("Rock_Pieces", 1), 1)
 		--arriveAnim:SetupEmitted(RogueElements.Loc(waves[i][j].X * 24 + 12, waves[i][j].Y * 24 + 12), 32, RogueElements.Dir8.Down)
 		--DUNGEON:PlayVFXAnim(arriveAnim, RogueEssence.Content.DrawLayer.Front)
@@ -1387,17 +1387,17 @@ function SINGLE_CHAR_SCRIPT.ResolveRockFall(owner, ownerChar, context, args)
 	end
 
 	local boulder_coroutines = {}
-	for i = 1, #waves, 1 do 
+	for i = 1, #waves, 1 do
 		for j = 1, #waves[i], 1 do
 			table.insert(boulder_coroutines, TASK:BranchCoroutine(function() GAME:WaitFrames((i-1) * 10) DropBoulder(waves[i][j]) end))
-		end 
-	end 	
-	
+		end
+	end
+
 	TASK:JoinCoroutines(boulder_coroutines)
-	
+
 	--pause a bit after dropping all boulders
 	GAME:WaitFrames(20)
-		
+
 end
 
 
@@ -1408,21 +1408,21 @@ function SINGLE_CHAR_SCRIPT.RockfallTemors(owner, ownerChar, context, args)
 	if context.User == nil then
 		--failsafes
 		if SV.ClovenRuins.BoulderCountdown == nil then SV.ClovenRuins.BoulderCountdown = -1 end
-		
+
 		--reset the counter when we go past 0. -1 or else it would end up taking 1 more turn than intended
 		if SV.ClovenRuins.BoulderCountdown < 0 then
 			SV.ClovenRuins.BoulderCountdown = args.TurnsBetweenTremors - 1
 		end
-		
+
 		--when there's only ShadowDuration turns left, trigger the shadow spawns.
 		if SV.ClovenRuins.BoulderCountdown == args.ShadowDuration then
 			SINGLE_CHAR_SCRIPT.QueueRockFall(owner, ownerChar, context, args)
 		end
-		
+
 		if SV.ClovenRuins.BoulderCountdown == 0 then
 			SINGLE_CHAR_SCRIPT.ResolveRockFall(owner, ownerChar, context, args)
-		end 
-		
+		end
+
 		SV.ClovenRuins.BoulderCountdown = SV.ClovenRuins.BoulderCountdown - 1
 	end
 
@@ -1439,11 +1439,11 @@ function SINGLE_CHAR_SCRIPT.LavaChipDamage(owner, ownerChar, context, args)
 	if chara.Element1 == 'fire' or chara.Element2 == 'fire' or chara.Intrinsic == 'flash_fire' or chara.Intrinsic == 'well_baked_body' then
 		type_effectiveness = 0
 	end
-	
+
 	if chara.Intrinsic == 'heatproof' then
 		type_effectiveness = type_effectiveness / 4
 	end
-	
+
 	--local burn = RogueEssence.Dungeon.StatusEffect("burn")
 	--initialize status data before adding it to anything
 	--burn:LoadFromData()
@@ -1452,7 +1452,7 @@ function SINGLE_CHAR_SCRIPT.LavaChipDamage(owner, ownerChar, context, args)
 	local damage = chara.MaxHP / 16
 	damage = type_effectiveness * damage
 	damage = math.floor(damage / 4)--you need to divide by 4 again, as type effectiveness is 4 times the real value that gets used.
-	
+
 	--round damage up to 1 from 0 if not outright immune.
 	if damage == 0 and type_effectiveness ~= 0 then
 		damage = 1
@@ -1462,7 +1462,7 @@ function SINGLE_CHAR_SCRIPT.LavaChipDamage(owner, ownerChar, context, args)
 		local searingAnimData = RogueEssence.Content.AnimData("Weather_Ball_Fire_2", 3)
 		local searingAnim = RogueEssence.Content.StaticAnim(searingAnimData, 1)
 		searingAnim:SetupEmitted(RogueElements.Loc(24 * chara.CharLoc.X + 12, 24 * chara.CharLoc.Y + 12), 0, RogueElements.Dir8.None)
-	
+
 		_DUNGEON:LogMsg(STRINGS:Format("{0} is singed by the searing lava!", context.User:GetDisplayName(false)))
 		SOUND:PlayBattleSE('DUN_Ember_2')
 		DUNGEON:PlayVFXAnim(searingAnim, RogueEssence.Content.DrawLayer.Front)
@@ -1479,7 +1479,7 @@ end
 --For Ledian's speeches within the beginner lesson
 function SINGLE_CHAR_SCRIPT.BeginnerLessonSpeech(owner, ownerChar, context, args)
   if context.User == nil then return end
-  if context.User == GAME:GetPlayerPartyMember(0) then--this check is needed so that the script runs only once, otherwise it'll run for each entity in the map. 
+  if context.User == GAME:GetPlayerPartyMember(0) then--this check is needed so that the script runs only once, otherwise it'll run for each entity in the map.
 	GAME:QueueLeaderEvent(function() BeginnerLessonSpeechHelper(owner, ownerChar, context, args) end)--
   end
 end
@@ -1487,8 +1487,8 @@ end
 --helper function to go with queueleaderevent call in BeginnerLessonSpeech
 function BeginnerLessonSpeechHelper(owner, ownerChar, context, args)
 	--slight pause if this isn't being called by asking Ledian for help. Don't pause if ledian wouldn't say anything (restepping on trigger tile)
-	if SV.Tutorial.Progression ~= -1  and args.Speech > SV.Tutorial.Progression then GAME:WaitFrames(20) end 
-	
+	if SV.Tutorial.Progression ~= -1  and args.Speech > SV.Tutorial.Progression then GAME:WaitFrames(20) end
+
 	if args.Speech == 1 and SV.Tutorial.Progression < 1 then
 		beginner_lesson_evt.Floor_1_Intro(owner, ownerChar, context.User, args)
 		GAME:WaitFrames(20)--prevent mashing causing you to accidentially speak to Ledian or attack the air
@@ -1534,11 +1534,11 @@ function SINGLE_CHAR_SCRIPT.CheckOngoingMissions(owner, ownerChar, context, args
 	local curr_zone = _ZONE.CurrentZoneID
 	local curr_segment = _ZONE.CurrentMapID.Segment
 	local curr_floor = GAME:GetCurrentFloor().ID + 1
-	
+
 	for _, mission in ipairs(SV.TakenBoard) do
 		if mission.BackReference ~= COMMON.FLEE_BACKREFERENCE and mission.Taken and mission.Completion == COMMON.MISSION_INCOMPLETE and curr_floor == mission.Floor and curr_zone == mission.Zone and curr_segment == mission.Segment then
 			UI:ResetSpeaker()
-			UI:ChoiceMenuYesNo("You currently have an ongoing mission on this floor.\nDo you still want to proceed?", true)
+			UI:ChoiceMenuYesNo("Vous avez actuellement une mission en cours à cet étage.\nVoulez-vous quand même continuer ?", true)
 			UI:WaitForChoice()
 			local continue = UI:ChoiceResult()
 			if not continue then
@@ -1572,7 +1572,7 @@ function SINGLE_CHAR_SCRIPT.CheckOngoingMissions(owner, ownerChar, context, args
 
 	if has_ongoing_mission then
 		UI:ResetSpeaker()
-		UI:ChoiceMenuYesNo("You currently have an ongoing mission on this floor.\nDo you still want to proceed?", true)
+		UI:ChoiceMenuYesNo("Vous avez actuellement une mission en cours à cet étage.\nVoulez-vous quand même continuer ?", true)
 		UI:WaitForChoice()
 		local continue = UI:ChoiceResult()
 		if not continue then
@@ -1605,11 +1605,11 @@ end
 --Halcyon Script
 --Popup in Normal maze IF player skipped the tutorial to let them know that Team Mode exists.
 function SINGLE_CHAR_SCRIPT.SkippedTutorialTeamModeNotification(owner, ownerChar, context, args)
-	if context.User == nil and SV.Chapter2.SkippedTutorial and not SV.Dojo.SkippedTutorialNotifiedTeamMode then 
+	if context.User == nil and SV.Chapter2.SkippedTutorial and not SV.Dojo.SkippedTutorialNotifiedTeamMode then
 		UI:ResetSpeaker()
 		SOUND:PlayFanfare("Fanfare/Note")
-		UI:WaitShowDialogue("Did you know?[pause=0] You can control each of your party member's actions for a given turn with Team Mode!")
-		UI:WaitShowDialogue("You can toggle Team Mode by pressing " .. STRINGS:LocalKeyString(7) .. ".")
+		UI:WaitShowDialogue("Le saviez-vous ?[pause=0]Vous pouvez contrôler chacune des actions des membres de votre groupe pendant un tour donné grâce au mode équipe !")
+		UI:WaitShowDialogue("Vous pouvez basculer en mode équipe en appuyant sur " .. STRINGS:LocalKeyString(7) .. ".")
 		SV.Dojo.SkippedTutorialNotifiedTeamMode = true
 		GAME:WaitFrames(20)--to prevent mashing making you do an attack after clearing box
 	end
@@ -1623,74 +1623,74 @@ function SINGLE_CHAR_SCRIPT.RelicForestTutorial(owner, ownerChar, context, args)
     if args.Floor == 1 then
 			if SV.Chapter1.TutorialProgression < 1 then
 				SOUND:PlayFanfare("Fanfare/Note")
-				UI:WaitShowDialogue("Head for the stairs![pause=0] You can attack enemies by pressing " .. STRINGS:LocalKeyString(2) .. ".[pause=0] Enemies don't move or attack until you do.")
-				UI:WaitShowDialogue("Press " .. STRINGS:LocalKeyString(0) .. " to confirm selections or press " .. STRINGS:LocalKeyString(1) .. " to cancel.")
+				UI:WaitShowDialogue("Dirigez-vous vers les escaliers ![pause=0]Vous pouvez attaquer les ennemis en appuyant sur " .. STRINGS:LocalKeyString(2) .. ".[pause=0]. Les ennemis ne bougent pas et n'attaquent pas tant que vous ne le faites pas.")
+				UI:WaitShowDialogue("Appuyez sur " .. STRINGS:LocalKeyString(0) .. " pour confirmer les sélections ou appuyez sur " .. STRINGS:LocalKeyString(1) .. " pour annuler.")
 				SV.Chapter1.TutorialProgression = 1
 				GAME:WaitFrames(20)
 			elseif SV.Chapter1.PartnerMetHero and SV.Chapter1.TutorialProgression < 10 then
 				SOUND:PlayFanfare("Fanfare/Note")
-				UI:WaitShowDialogue("Want to change settings such as controls, battle speed, or window size?[pause=0] Press " .. STRINGS:LocalKeyString(9) .. " and check the Others menu.")
+				UI:WaitShowDialogue("Vous souhaitez modifier des paramètres tels que les commandes, la vitesse de combat ou la taille de la fenêtre ?[pause=0]Appuyez sur " .. STRINGS:LocalKeyString(9) .. " et consultez le menu Autres.")
 				SV.Chapter1.TutorialProgression = 10
 				GAME:WaitFrames(20)
-			end 		
+			end
     elseif args.Floor == 2 then
 	  	if SV.Chapter1.TutorialProgression < 2 then
 				SOUND:PlayFanfare("Fanfare/Note")
-				UI:WaitShowDialogue("To earn Exp. Points,[pause=10] a Pokémon must use at least one move against a foe,[pause=10] rather than just its basic " .. STRINGS:LocalKeyString(2) .. " attack.")
-				UI:WaitShowDialogue("To use moves,[pause=10] hold " .. STRINGS:LocalKeyString(4) .. ",[pause=10] then press " .. STRINGS:LocalKeyString(21) .. ",[pause=10] " .. STRINGS:LocalKeyString(22) .. ",[pause=10] " .. STRINGS:LocalKeyString(23) .. ",[pause=10] or " .. STRINGS:LocalKeyString(24) .. " to use the corresponding move.")
-				UI:WaitShowDialogue("Alternatively,[pause=10] press " .. STRINGS:LocalKeyString(9) .. " and choose the Moves option or press " .. STRINGS:LocalKeyString(11) .. " to access the Moves menu.")
+				UI:WaitShowDialogue("Pour gagner de l'Exp. Points,[pause=10]un Pokémon doit utiliser au moins une attaque contre un ennemi,[pause=10]plutôt que son attaque de base " .. STRINGS:LocalKeyString(2) .. ".")
+				UI:WaitShowDialogue("Pour utiliser des mouvements,[pause=10]maintenez " .. STRINGS:LocalKeyString(4) .. ",[pause=10]puis appuyez sur " .. STRINGS:LocalKeyString(21) .. ",[pause=10]" .. STRINGS:LocalKeyString(22) .. ",[pause=10]" .. STRINGS:LocalKeyString(23) .. ",[pause=10]ou " .. STRINGS:LocalKeyString(24) .. " pour utiliser le mouvement correspondant.")
+				UI:WaitShowDialogue("Alternativement,[pause=10]appuyez sur " .. STRINGS:LocalKeyString(9) .. " et choisissez l'option Déplacements ou appuyez sur " .. STRINGS:LocalKeyString(11) .. " pour accéder au menu Déplacements.")
 				SV.Chapter1.TutorialProgression = 2
 				GAME:WaitFrames(20)
 			elseif SV.Chapter1.PartnerMetHero and SV.Chapter1.TutorialProgression < 9 then
 				SOUND:PlayFanfare("Fanfare/Note")
-				UI:WaitShowDialogue("To view a history of recent actions,[pause=10] press " .. STRINGS:LocalKeyString(10) .. ".")
-				UI:WaitShowDialogue("You can also toggle minimap modes using " .. STRINGS:LocalKeyString(8) .. ",[pause=10] and view the status of your team using " .. STRINGS:LocalKeyString(14) .. ".")
-				SV.Chapter1.TutorialProgression = 9 
+				UI:WaitShowDialogue("Pour afficher un historique des actions récentes,[pause=10]appuyez sur " .. STRINGS:LocalKeyString(10) .. ".")
+				UI:WaitShowDialogue("Vous pouvez également basculer entre les modes mini-carte en utilisant " .. STRINGS:LocalKeyString(8) .. ",[pause=10]et afficher le statut de votre équipe en utilisant " .. STRINGS:LocalKeyString(14) .. ".")
+				SV.Chapter1.TutorialProgression = 9
 				GAME:WaitFrames(20)
-			end 
+			end
     elseif args.Floor == 3 then
 			if SV.Chapter1.TutorialProgression < 3 then
 				SOUND:PlayFanfare("Fanfare/Note")
-				UI:WaitShowDialogue("You can carry a number of items.[pause=0] Items have a number of various effects and uses.")
-				UI:WaitShowDialogue("To see what items you are carrying,[pause=10] press " .. STRINGS:LocalKeyString(9) .. " and choose the Items option.")
-				UI:WaitShowDialogue("Alternatively,[pause=10] press " .. STRINGS:LocalKeyString(12) .. " to access your items more quickly.") 
+				UI:WaitShowDialogue("Vous pouvez transporter un certain nombre d'objets.[pause=0]Les objets ont un certain nombre d'effets et d'utilisations variés.")
+				UI:WaitShowDialogue("Pour voir quels articles vous transportez,[pause=10]appuyez sur " .. STRINGS:LocalKeyString(9) .. " et choisissez l'option Articles.")
+				UI:WaitShowDialogue("Alternativement,[pause=10]appuyez sur " .. STRINGS:LocalKeyString(12) .. " pour accéder plus rapidement à vos articles.")
 				SV.Chapter1.TutorialProgression = 3
 				GAME:WaitFrames(20)
 			elseif SV.Chapter1.PartnerMetHero and SV.Chapter1.TutorialProgression < 8 then
 				SOUND:PlayFanfare("Fanfare/Note")
-				UI:WaitShowDialogue("You can hold " .. STRINGS:LocalKeyString(3) .. " to run![pause=0] This doesn't let you travel more distance in a single turn,[pause=10] but helps you navigate faster.")
-				UI:WaitShowDialogue("Hold " .. STRINGS:LocalKeyString(5) .. " and press a direction to look that way without moving or using up your turn.")
-				UI:WaitShowDialogue("You can also hold " .. STRINGS:LocalKeyString(6) .. " to only allow for diagonal movement.")
-				SV.Chapter1.TutorialProgression = 8 
+				UI:WaitShowDialogue("Vous pouvez maintenir " .. STRINGS:LocalKeyString(3) .. " pour courir ![pause=0]Cela ne vous permet pas de parcourir plus de distance en un seul tour,[pause=10]mais vous aide à naviguer plus rapidement.")
+				UI:WaitShowDialogue("Maintenez " .. STRINGS:LocalKeyString(5) .. " et appuyez dans une direction pour regarder dans cette direction sans bouger ni utiliser votre tour.")
+				UI:WaitShowDialogue("Vous pouvez également maintenir " .. STRINGS:LocalKeyString(6) .. " pour autoriser uniquement les mouvements en diagonale.")
+				SV.Chapter1.TutorialProgression = 8
 				GAME:WaitFrames(20)
-			end 
+			end
     elseif args.Floor == 4 then
 	  	if SV.Chapter1.TutorialProgression < 4 then
 				local apple  = RogueEssence.Dungeon.InvItem("food_apple"):GetDisplayName()
 				SOUND:PlayFanfare("Fanfare/Note")
-				UI:WaitShowDialogue("If you get hungry,[pause=10] eat an " .. apple .. ".[pause=0] If your Belly runs empty,[pause=10] you will slowly lose health until you faint or eat something!")
+				UI:WaitShowDialogue("Si vous avez faim,[pause=10]mangez un " .. apple .. ".[pause=0]Si votre ventre est vide,[pause=10]vous perdrez lentement de la santé jusqu'à ce que vous vous évanouissiez ou que vous mangiez quelque chose !")
 				SV.Chapter1.TutorialProgression = 4
 				GAME:WaitFrames(20)
 			elseif SV.Chapter1.PartnerMetHero and SV.Chapter1.TutorialProgression < 7 then
 				SOUND:PlayFanfare("Fanfare/Note")
-				UI:WaitShowDialogue("Team members will receive Exp. Points when enemies are defeated.[pause=0] When a teammate gets enough,[pause=10] they will level up!")
-				UI:WaitShowDialogue("A Pokémon will get more HP,[pause=10] higher stats,[pause=10] and possibly a new move each time it levels up.")
-				UI:WaitShowDialogue("Make sure to fight enemies if you want to toughen up!")
-				SV.Chapter1.TutorialProgression = 7 
+				UI:WaitShowDialogue("Les membres de l'équipe recevront Exp. Points lorsque les ennemis sont vaincus.[pause=0]Lorsqu'un coéquipier en obtient assez,[pause=10], il passe au niveau supérieur !")
+				UI:WaitShowDialogue("Un Pokémon obtiendra plus de HP, des statistiques plus élevées[pause=10],[pause=10]et éventuellement une nouvelle capacité à chaque fois qu'il monte de niveau.")
+				UI:WaitShowDialogue("Assurez-vous de combattre les ennemis si vous voulez vous endurcir !")
+				SV.Chapter1.TutorialProgression = 7
 				GAME:WaitFrames(20)
 			end
     elseif args.Floor == 5 then
 	  if SV.Chapter1.TutorialProgression < 5 then
 				SOUND:PlayFanfare("Fanfare/Note")
-				UI:WaitShowDialogue("In your travels you may see a black tile with a green arrow.[pause=0] This is known as a Wonder Tile.")
-				UI:WaitShowDialogue("Step on one to reset the stat changes of yourself and anyone nearby.")
+				UI:WaitShowDialogue("Au cours de vos voyages, vous verrez peut-être une tuile noire avec une flèche verte.[pause=0]C'est ce qu'on appelle une tuile Merveille.")
+				UI:WaitShowDialogue("Appuyez sur l'un d'eux pour réinitialiser les changements de statistiques de vous-même et de toute personne à proximité.")
 				SV.Chapter1.TutorialProgression = 5
 				GAME:WaitFrames(20)
 			elseif SV.Chapter1.PartnerMetHero and SV.Chapter1.TutorialProgression < 6 then
 				SOUND:PlayFanfare("Fanfare/Note")
-				UI:WaitShowDialogue("Watch the HP stats of you and your partner at the top of the screen.[pause=0] If a Pokémon's HP reaches 0,[pause=10] it will faint!")
-				UI:WaitShowDialogue("If either you or your partner faint,[pause=10] you will both be ejected from the dungeon![pause=0] So work together to get through danger!")
-				SV.Chapter1.TutorialProgression = 6 
+				UI:WaitShowDialogue("Regardez vos statistiques HP et celles de votre partenaire en haut de l'écran.[pause=0]Si les HP d'un Pokémon atteignent 0,[pause=10], il s'évanouira !")
+				UI:WaitShowDialogue("Si vous ou votre partenaire vous évanouissez,[pause=10], vous serez tous les deux éjectés du donjon ![pause=0]Alors travaillez ensemble pour surmonter le danger !")
+				SV.Chapter1.TutorialProgression = 6
 				GAME:WaitFrames(20)
 		end
 	end
@@ -1699,85 +1699,85 @@ end
 
 
 
---Reimplementing Audino's C# event for BeginBattleEvent. 
+--Reimplementing Audino's C# event for BeginBattleEvent.
 --This will allow us to inject custom function code before ending a battle (such as clearing existing lava flows when a boss fight ends).
 MapCheckState = luanet.import_type('RogueEssence.Dungeon.MapCheckState')
 SingleCharScriptEvent = luanet.import_type('RogueEssence.Dungeon.SingleCharScriptEvent')
 
 function SINGLE_CHAR_SCRIPT.LuaBeginBattleEvent(owner, ownerChar, context, args)
-	
+
 	local map_clear_idx = 'map_clear_check'
 
 
 	if context.User ~= nil then return end
 	--if a custom clear event is not given, use the default one.
 	if args.CustomClearEvent == nil then args.CustomClearEvent = 'LuaCheckBossClearEvent' end
-	
+
 	--Turn on Team Mode if allowed when the boss fight starts.
 	if _DUNGEON:CanUseTeamMode() then
 		_DUNGEON:SetTeamMode(true)
 	end
-	
+
 	local clear_status = RogueEssence.Dungeon.MapStatus(map_clear_idx)
 	clear_status:LoadFromData()
-	
+
 	local check = clear_status.StatusStates:GetWithDefault(luanet.ctype(MapCheckState))
 	--The 2nd argument in the function below needs a string that represents a lua table of the arguments to pass. Serpent.line will convert the lua table to a string representing it for us.
 	--We only NEED to pass args, as owner, ownerchar, and context are automatically passed in when the check event is called
 	check.CheckEvents:Add(SingleCharScriptEvent(args.CustomClearEvent, Serpent.line(args)))
 	--check.CheckEvents:Add(LuaCheckBossClearEvent(owner, ownerChar, context, args))
-	
+
 	TASK:WaitTask(_DUNGEON:AddMapStatus(clear_status))
 end
 
---Reimplementation of the basic CheckBossClearEvent. 
+--Reimplementation of the basic CheckBossClearEvent.
 --Call something different from LuaBeginBattleEvent or edit this accordingly if you want a different wincon for your map or special effects/anims on win.
 function SINGLE_CHAR_SCRIPT.LuaCheckBossClearEvent(owner, ownerChar, context, args)
-	
+
 	--Sequence that runs when map is over. Fade out, cut the music, etc.
 	function end_sequence()
-		
+
 		--HALCYON ONLY CHANGE, the only change I've made to this from the original reimplementation:
 		--A small wait before calling the end sequence proper so we can see more of the "won" battlefield
 		GAME:WaitFrames(40)
-		
+
 		_GAME:BGM("", true)
-		 
+
 		TASK:WaitTask(_GAME:FadeOut(false))
-		 
+
 		_DUNGEON:ResetTurns()
-		
+
 		--restore all and remove all map status
 		local statuses_to_remove = {}
 		for i = 0, _ZONE.CurrentMap.Status.Keys.Count - 1, 1 do
 			statuses_to_remove[i] = _ZONE.CurrentMap.Status.Keys[i]
 		end
-		
+
 		for i = 0, #statuses_to_remove - 1, 1 do
 			TASK:WaitTask(_DUNGEON:RemoveMapStatus(statuses_to_remove[i], false))
-		end 
-		
+		end
+
 		--heal everyone in the party
 		for i = 0, GAME:GetPlayerPartyCount() - 1, 1 do
 			_DATA.Save.ActiveTeam.Players[i]:FullRestore()
 		end
-		
+
 		TASK:WaitTask(_GAME:EndSegment(RogueEssence.Data.GameProgress.ResultType.Cleared))
 
 	end
 
 	--For each enemy team, check each chara in that team. If any are still alive, then fail this check and return early.
-	for i = 0, _ZONE.CurrentMap.MapTeams.Count - 1, 1 do 
+	for i = 0, _ZONE.CurrentMap.MapTeams.Count - 1, 1 do
 		local team = _ZONE.CurrentMap.MapTeams[i].Players
 		for j = 0, team.Count - 1, 1 do
 			--Break and return early if even one enemy is not dead.
 			if not team[j].Dead then return end
 		end
 	end
-	
+
 	--Everyone's dead, clear the scene.
 	local checks = owner.StatusStates:GetWithDefault(luanet.ctype(MapCheckState))
-	
+
 	--The call originally for this was to remove(this), which isn't in lua. So we need to find the LuaCheckBossClearEvent and remove that (remove ourself)
 	for i = 0, checks.CheckEvents.Count - 1, 1 do
 		if LUA_ENGINE:TypeOf(checks.CheckEvents[i]) == luanet.ctype(SingleCharScriptEvent) then
@@ -1786,67 +1786,67 @@ function SINGLE_CHAR_SCRIPT.LuaCheckBossClearEvent(owner, ownerChar, context, ar
 			end
 		end
 	end
-	
+
 	if _DATA.CurrentReplay == nil then
 		TASK:WaitTask(end_sequence())
-	else 
+	else
 		TASK:WaitTask(_GAME:EndSegment(RogueEssence.Data.GameProgress.ResultType.Cleared))
 	end
-	
+
 end
 
 
 
 --For Searing Tunnel's boss: Remove any existing lava, if it exists, before fading out.
 function SINGLE_CHAR_SCRIPT.LavaBossClear(owner, ownerChar, context, args)
-	
+
 	--Sequence that runs when map is over. Fade out, cut the music, etc.
 	function end_sequence()
-		
+
 		GAME:WaitFrames(40)
-	
+
 		if SV.SearingTunnel.LavaFlowDirection ~= "None" then
 			SINGLE_CHAR_SCRIPT.RemoveLavaFlow()
 			GAME:WaitFrames(20)
-		end		
-		
+		end
+
 		_GAME:BGM("", true)
-		 
+
 		TASK:WaitTask(_GAME:FadeOut(false))
-		 
+
 		_DUNGEON:ResetTurns()
-		
+
 		--restore all and remove all map status
 		local statuses_to_remove = {}
 		for i = 0, _ZONE.CurrentMap.Status.Keys.Count - 1, 1 do
 			statuses_to_remove[i] = _ZONE.CurrentMap.Status.Keys[i]
 		end
-		
+
 		for i = 0, #statuses_to_remove - 1, 1 do
 			TASK:WaitTask(_DUNGEON:RemoveMapStatus(statuses_to_remove[i], false))
-		end 
-		
+		end
+
 		--heal everyone in the party
 		for i = 0, GAME:GetPlayerPartyCount() - 1, 1 do
 			_DATA.Save.ActiveTeam.Players[i]:FullRestore()
 		end
-		
+
 		TASK:WaitTask(_GAME:EndSegment(RogueEssence.Data.GameProgress.ResultType.Cleared))
 
 	end
 
 	--For each enemy team, check each chara in that team. If any are still alive, then fail this check and return early.
-	for i = 0, _ZONE.CurrentMap.MapTeams.Count - 1, 1 do 
+	for i = 0, _ZONE.CurrentMap.MapTeams.Count - 1, 1 do
 		local team = _ZONE.CurrentMap.MapTeams[i].Players
 		for j = 0, team.Count - 1, 1 do
 			--Break and return early if even one enemy is not dead.
 			if not team[j].Dead then return end
 		end
 	end
-	
+
 	--Everyone's dead, clear the scene.
 	local checks = owner.StatusStates:GetWithDefault(luanet.ctype(MapCheckState))
-	
+
 	--The call originally for this was to remove(this), which isn't in lua. So we need to find the LuaCheckBossClearEvent and remove that (remove ourself)
 	for i = 0, checks.CheckEvents.Count - 1, 1 do
 		if LUA_ENGINE:TypeOf(checks.CheckEvents[i]) == luanet.ctype(SingleCharScriptEvent) then
@@ -1855,11 +1855,11 @@ function SINGLE_CHAR_SCRIPT.LavaBossClear(owner, ownerChar, context, args)
 			end
 		end
 	end
-	
+
 	if _DATA.CurrentReplay == nil then
 		TASK:WaitTask(end_sequence())
-	else 
+	else
 		TASK:WaitTask(_GAME:EndSegment(RogueEssence.Data.GameProgress.ResultType.Cleared))
 	end
-	
+
 end

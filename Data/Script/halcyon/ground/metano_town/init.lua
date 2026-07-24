@@ -20,27 +20,27 @@ local metano_town = {}
 function metano_town.Init(map)
 	DEBUG.EnableDbgCoro()
 	print('=>> Init_metano_town <<=')
-	
+
 	COMMON.RespawnAllies()
 	PartnerEssentials.InitializePartnerSpawn()
 	GROUND:AddMapStatus("clouds_overhead")
-	
+
 	--Remove nicknames from characters if the nickname mod is enabled.
 	if CONFIG.UseNicknames() then
 		metano_town.SetMerchantNicknames()
-	else 
+	else
 		metano_town.RemoveMerchantNicknames()
 	end
-	
+
 	if SOUND:GetCurrentSong() ~= SV.metano_town.Song then
       SOUND:PlayBGM(SV.metano_town.Song, true)
     end
-	
-	--Musician must wiggle as long as he's playing a song!	
+
+	--Musician must wiggle as long as he's playing a song!
 	if SV.metano_town.Song ~= 'Treasure Town.ogg' then
 	   GROUND:CharSetAnim(CH('Musician'), "Wiggle", true)
 	end
-	
+
 	if not SV.ChapterProgression.UnlockedAssembly then
 		GROUND:Hide('Assembly')
 	end
@@ -72,7 +72,7 @@ end
 
 function metano_town.PlotScripting()
 	--plot scripting
-	if SV.ChapterProgression.Chapter == 1 then 
+	if SV.ChapterProgression.Chapter == 1 then
 		if not SV.Chapter1.PartnerCompletedForest then
 			metano_town_ch_1.PartnerLongingCutscene()
 		elseif SV.Chapter1.TeamCompletedForest then
@@ -80,20 +80,20 @@ function metano_town.PlotScripting()
 		end
 	elseif SV.ChapterProgression.Chapter == 2 then
 		metano_town_ch_2.SetupGround()
-		if SV.Chapter2.FinishedTraining and not SV.Chapter2.FinishedMarketIntro then 
+		if SV.Chapter2.FinishedTraining and not SV.Chapter2.FinishedMarketIntro then
 			metano_town_ch_2.MarketIntro()
 		end
-	elseif SV.ChapterProgression.Chapter == 3 then 
+	elseif SV.ChapterProgression.Chapter == 3 then
 		metano_town_ch_3.SetupGround()
-		if SV.Chapter3.FinishedOutlawIntro and not SV.Chapter3.MetTeamStyle then 
+		if SV.Chapter3.FinishedOutlawIntro and not SV.Chapter3.MetTeamStyle then
 			metano_town_ch_3.MeetTeamStyle()
-		elseif SV.Chapter3.DefeatedBoss and not SV.Chapter3.FinishedMerchantIntro then 
+		elseif SV.Chapter3.DefeatedBoss and not SV.Chapter3.FinishedMerchantIntro then
 			metano_town_ch_3.MerchantIntro()
-		end	
+		end
 	elseif SV.ChapterProgression.Chapter == 4 then
-		metano_town_ch_4.SetupGround()		
+		metano_town_ch_4.SetupGround()
 	elseif SV.ChapterProgression.Chapter == 5 then
-		metano_town_ch_5.SetupGround()	
+		metano_town_ch_5.SetupGround()
 	else
 		GAME:FadeIn(20)
 	end
@@ -134,33 +134,33 @@ end
 
 function metano_town.North_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("illuminant_riverbed") 
+  local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("illuminant_riverbed")
   UI:ResetSpeaker()
   local hero = CH('PLAYER')
   local partner = CH('Teammate1')
   partner.IsInteracting = true
   GROUND:CharSetAnim(partner, 'None', true)
-  GROUND:CharSetAnim(hero, 'None', true)		
+  GROUND:CharSetAnim(hero, 'None', true)
   UI:ChoiceMenuYesNo("Voulez-vous entrer dans " .. zone:GetColoredName() .. " ?", true)
   UI:WaitForChoice()
   local yesnoResult = UI:ChoiceResult()
-  if yesnoResult then 
+  if yesnoResult then
 	SOUND:FadeOutBGM(60)
 	GAME:FadeOut(false, 60)
 	partner.IsInteracting = false
 	GROUND:CharEndAnim(partner)
-	GROUND:CharEndAnim(hero)	
+	GROUND:CharEndAnim(hero)
 	SV.partner.Spawn = "Default"--default partner spawn, since it could be a bunch of things before this, but it should be default for wherever we end up after the dungeon.
 	GAME:EnterDungeon("illuminant_riverbed", 0, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, true)
   end
   partner.IsInteracting = false
   GROUND:CharEndAnim(partner)
-  GROUND:CharEndAnim(hero)	
+  GROUND:CharEndAnim(hero)
 end
 
 function metano_town.East_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  GeneralFunctions.StartPartnerConversation("Where should we go,[pause=10] " .. CH('PLAYER'):GetDisplayName() .. "?", "Normal", false)
+  GeneralFunctions.StartPartnerConversation("Où devrions-nous aller,[pause=10]" .. CH('PLAYER'):GetDisplayName() .. " ?", "Normal", false)
   GAME:WaitFrames(20)
   local dungeons = {"relic_forest", "illuminant_riverbed", "crooked_cavern", "apricorn_grove", "vast_steppe", "searing_tunnel", "mount_windswept"}--this needs to be updated when more dungeons come out.
   local grounds = {}
@@ -333,17 +333,17 @@ end
 -----------------------
 -- Helper Functions
 -----------------------
---Reimplemented, modified version of common's showdestination menu. 
+--Reimplemented, modified version of common's showdestination menu.
 --This is a bit messy since the original showdestination menu had a bunch of stuff updated from it, so be aware if things break in the future with it.
 function metano_town.ShowDestinationMenu(dungeon_entrances,ground_entrances)
-  
+
   --Story dungeons and their corresponding "entrance ground" used for story cutscenes during the relevant chapter.
   --Illuminant Riverbed and Relic Forest 1 are story dungeons not accessed via this menu and thus the flag doesn't track them.
   local dungeon_entrance_mapping = {}
   dungeon_entrance_mapping["illuminant_riverbed"] = 38 --Illuminant Riverbed, but this shouldn't ever be used.
   dungeon_entrance_mapping["crooked_cavern"] = 41--Crooked Cavern
   dungeon_entrance_mapping["apricorn_grove"] = 44--Apricorn Grove
-    
+
 
 	local mission_dests = {}
 	for ii = 1, 8 do
@@ -366,15 +366,15 @@ function metano_town.ShowDestinationMenu(dungeon_entrances,ground_entrances)
 	  end
 
 		local zone_title = zone_name
-	  if dungeon_entrances[ii] == SV.ChapterProgression.CurrentStoryDungeon then 
-	      zone_name = STRINGS:Format('\\uE111 ') .. zone_name --exclamation symbol 
-	  elseif mission_dests[dungeon_entrances[ii]] then 
+	  if dungeon_entrances[ii] == SV.ChapterProgression.CurrentStoryDungeon then
+	      zone_name = STRINGS:Format('\\uE111 ') .. zone_name --exclamation symbol
+	  elseif mission_dests[dungeon_entrances[ii]] then
 	      zone_name = STRINGS:Format("\\uE10F ") .. zone_name --open letter
       end
       table.insert(open_dests, { Name=zone_name, Title=zone_title, Dest=RogueEssence.Dungeon.ZoneLoc(dungeon_entrances[ii], 0, 0, 0) })
 	end
   end
-  
+
   --check for unlock of grounds
   for ii = 1,#ground_entrances,1 do
     if ground_entrances[ii].Flag then
@@ -385,13 +385,13 @@ function metano_town.ShowDestinationMenu(dungeon_entrances,ground_entrances)
       table.insert(open_dests, { Name=ground_name, Dest=RogueEssence.Dungeon.ZoneLoc(ground_id, -1, ground_entrances[ii].ID, ground_entrances[ii].Entry) })
 	end
   end
-  
+
   local dest = RogueEssence.Dungeon.ZoneLoc.Invalid
   local choice = 1
   local confirm = false
   local ask_dest
-  
-  --overhauled this quite a bit from original ShowDestinationMenu. 
+
+  --overhauled this quite a bit from original ShowDestinationMenu.
   --TODO (potentially)!!!: Needs to be adapted to handle overworld grounds and 1 ground / 1 dungeon scenarios potentially in the future.
   --For how to do that, check audino's version. I basically removed most of that functionality since I didn't envision myself needing to use it...
   if #open_dests >= 1 then
@@ -401,22 +401,22 @@ function metano_town.ShowDestinationMenu(dungeon_entrances,ground_entrances)
       UI:DestinationMenu(open_dests, choice)
 	  UI:WaitForChoice()
 	  choice = UI:ChoiceResult()
-	
+
 	  --stop showing the menu if cancel was pressed
 	  if choice == nil then
 		break
 	  end
-	  
+
 	  ask_dest = open_dests[choice].Dest
-      
-	  if ask_dest.StructID.Segment >= 0 then	  
+
+	  if ask_dest.StructID.Segment >= 0 then
 	    --chosen dungeon entry
         --confirm the choice
 		UI:ResetSpeaker(false)
 		UI:SetAutoFinish(true)
 		UI:SetCenter(true)
 		local dest_name = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(ask_dest.ID):GetColoredName()
-		UI:ChoiceMenuYesNo(dest_name .. " is the destination.\nIs that correct?")
+		UI:ChoiceMenuYesNo(dest_name .. " est la destination.\nEst-ce exact ?")
 		UI:WaitForChoice()
 		local confirm = UI:ChoiceResult()
 		UI:SetCenter(false)
@@ -466,17 +466,17 @@ function metano_town.GenerateGreenKecleonStock(generate_random_item)
 	--Start with predefined list of weighted items, then generate a stock of several items from those lists
 	--Stocks are separated based on category (food, medicine, hold item, etc).
 	--Kec stock isn't totally random, it pulls a gauranteed number from each stock  (i.e. always 1 hold item a day, but which it is is random)
-	
+
 	local stock = {}
-	
+
 	--This parameter determines whether to generate a random item or to actually refresh the stock.
 	--The parameter should be true if we want to generate and return a single kec item (useful for red merchant)
 	--This is a bit of a lazy/poor way of doing it, but it should work fine for how often it's used.
 	if generate_random_item == nil then generate_random_item = false end
-	
-	--TODO: Add more types of stock progressions later on 
+
+	--TODO: Add more types of stock progressions later on
 	--Basic Stock, early game
-	
+
 	--total weight = 200
 	local food_stock = {
 		{"food_apple", 182}, --Apple
@@ -499,57 +499,57 @@ function metano_town.GenerateGreenKecleonStock(generate_random_item)
 		{"gummi_gray", 1}, --Gray Gummi
 		{"gummi_magenta", 1}	--Magenta Gummi
 	}
-	
+
 	--total weight = 126
 	local medicine_stock = {
-		{"seed_reviver", 10},--Reviver seed 
-		{"seed_warp", 6}, --Warp Seed 
-		{"seed_sleep", 6}, --Sleep seed 
-		{"seed_vile", 2}, --Vile seed 
-		{"seed_decoy", 6}, --decoy seed 
+		{"seed_reviver", 10},--Reviver seed
+		{"seed_warp", 6}, --Warp Seed
+		{"seed_sleep", 6}, --Sleep seed
+		{"seed_vile", 2}, --Vile seed
+		{"seed_decoy", 6}, --decoy seed
 		{"seed_blast", 8}, --Blast seed
 		{"seed_quick", 6}, --Quick seed
-		
-		{"berry_leppa", 25}, --Leppa berry 
 
-		
+		{"berry_leppa", 25}, --Leppa berry
+
+
 		{"berry_oran", 32}, --Oran berry
-		{"berry_lum", 2}, --Lum berry 
-		{"berry_cheri", 6}, -- Cheri berry 
-		{"berry_chesto", 4}, -- Chesto berry 
-		{"berry_pecha", 8}, -- Pecha berry 
-		{"berry_aspear", 3}, -- Aspear berry 
-		{"berry_rawst", 4}, -- Rawst berry 
-		{"berry_persim", 6} -- Persim berry 
+		{"berry_lum", 2}, --Lum berry
+		{"berry_cheri", 6}, -- Cheri berry
+		{"berry_chesto", 4}, -- Chesto berry
+		{"berry_pecha", 8}, -- Pecha berry
+		{"berry_aspear", 3}, -- Aspear berry
+		{"berry_rawst", 4}, -- Rawst berry
+		{"berry_persim", 6} -- Persim berry
 	}
-	
-	
-	local ammo_stock = 
+
+
+	local ammo_stock =
 	{
-		{"ammo_geo_pebble", 50}, --Geo pebble 
-		{"ammo_gravelerock", 50}, --Geo pebble 
-		{"ammo_stick", 50},--stick 
-		{"ammo_iron_thorn", 50}--iron thorn 
+		{"ammo_geo_pebble", 50}, --Geo pebble
+		{"ammo_gravelerock", 50}, --Geo pebble
+		{"ammo_stick", 50},--stick
+		{"ammo_iron_thorn", 50}--iron thorn
 	}
-	
-	
+
+
 	local held_stock = {
-		{"held_power_band", 10}, -- power band 
-		{"held_special_band", 10}, --special band 
-		{"held_defense_scarf", 10}, --defense scarf 
-		{"held_zinc_band", 10}, --Zinc band 
-		
+		{"held_power_band", 10}, -- power band
+		{"held_special_band", 10}, --special band
+		{"held_defense_scarf", 10}, --defense scarf
+		{"held_zinc_band", 10}, --Zinc band
+
 		{"held_pecha_scarf", 10}, --Pecha Scarf
-		{"held_cheri_scarf", 10}, --Cheri scarf 
-		{"held_rawst_scarf", 10}, --Rawst scarf 
-		{"held_aspear_scarf", 10}, --Aspear Scarf 
+		{"held_cheri_scarf", 10}, --Cheri scarf
+		{"held_rawst_scarf", 10}, --Rawst scarf
+		{"held_aspear_scarf", 10}, --Aspear Scarf
 		{"held_insomniascope", 10}, --Insomnia scope
 		{"held_persim_band", 10}, --Persim Band
-		
-		{"held_reunion_cape", 2} --Reunion cape 
-		
+
+		{"held_reunion_cape", 2} --Reunion cape
+
 	}
-	
+
 	--replaces a medicine roll starting with chapter 4. Before then, isn't used.
 	local apricorn_stock = {
 		{"apricorn_plain", 10},
@@ -562,7 +562,7 @@ function metano_town.GenerateGreenKecleonStock(generate_random_item)
 		{"apricorn_white", 5},
 		{"apricorn_yellow", 5}
 	}
-	
+
 
 
 	--Apricorns become available once Chapter 4 starts
@@ -575,26 +575,26 @@ function metano_town.GenerateGreenKecleonStock(generate_random_item)
 		table.insert(stock, GeneralFunctions.WeightedRandom(medicine_stock))
 		table.insert(stock, GeneralFunctions.WeightedRandom(medicine_stock))
 		table.insert(stock, GeneralFunctions.WeightedRandom(medicine_stock))
-	
+
 	else
 		table.insert(stock, GeneralFunctions.WeightedRandom(held_stock))
 		table.insert(stock, GeneralFunctions.WeightedRandom(ammo_stock))
 		table.insert(stock, GeneralFunctions.WeightedRandom(food_stock))
 		table.insert(stock, GeneralFunctions.WeightedRandom(food_stock))
-		table.insert(stock, GeneralFunctions.WeightedRandom(medicine_stock))	
+		table.insert(stock, GeneralFunctions.WeightedRandom(medicine_stock))
 		table.insert(stock, GeneralFunctions.WeightedRandom(medicine_stock))
 		table.insert(stock, GeneralFunctions.WeightedRandom(medicine_stock))
 		table.insert(stock, GeneralFunctions.WeightedRandom(medicine_stock))
 	end
-	
-	if not generate_random_item then 
+
+	if not generate_random_item then
 		--set stock to randomized assortment and flag that the stock was refreshed for the day
 		SV.DailyFlags.GreenKecleonStockedRefreshed = true
 		SV.DailyFlags.GreenKecleonStock = stock
-	else 
+	else
 		return stock[math.random(1, #stock)]
 	end
-	
+
 end
 
 function metano_town.GeneratePurpleKecleonStock(generate_random_item)
@@ -602,89 +602,89 @@ function metano_town.GeneratePurpleKecleonStock(generate_random_item)
 	--Start with predefined list of weighted items, then generate a stock of several items from those lists
 	--Stocks are separated based on category (food, medicine, hold item, etc).
 	--Kec stock isn't totally random, it pulls a gauranteed number from each stock  (i.e. always 1 hold item a day, but which it is is random)
-	
+
 	local stock = {}
-	
+
 	--This parameter determines whether to generate a random item or to actually refresh the stock.
 	--The parameter should be true if we want to generate and return a single kec item (useful for red merchant)
 	--This is a bit of a lazy/poor way of doing it, but it should work fine for how often it's used.
 	if generate_random_item == nil then generate_random_item = false end
-	
-	
-	--TODO: Add more types of stock progressions later on 
+
+
+	--TODO: Add more types of stock progressions later on
 	--Basic Stock, early game
-	
-	--total weight = 
-	--mostly meh TMs for early game 
+
+	--total weight =
+	--mostly meh TMs for early game
 	local tm_stock = {
-		{"tm_secret_power", 10},--secret power 
-		{"tm_embargo", 10},--embargo 
+		{"tm_secret_power", 10},--secret power
+		{"tm_embargo", 10},--embargo
 		{"tm_echoed_voice", 10},--echoed voice
-		{"tm_protect", 5},--protect 
-		{"tm_roar", 10},--roar 
-		{"tm_swagger", 10},--swagger 
-		{"tm_facade", 10}, --facade 
-		{"tm_payback", 10}, --payback 
-		{"tm_dig", 2}, --dig 
-		{"tm_safeguard", 10},--safeguard 
+		{"tm_protect", 5},--protect
+		{"tm_roar", 10},--roar
+		{"tm_swagger", 10},--swagger
+		{"tm_facade", 10}, --facade
+		{"tm_payback", 10}, --payback
+		{"tm_dig", 2}, --dig
+		{"tm_safeguard", 10},--safeguard
 		{"tm_venoshock", 5}, --venoshock
 		{"tm_work_up", 5},--workup
-		{"tm_thunder_wave", 5}, --thunder wave 
+		{"tm_thunder_wave", 5}, --thunder wave
 		{"tm_return", 5},--return
-		{"tm_pluck", 5},--pluck 
+		{"tm_pluck", 5},--pluck
 		{"tm_frustration", 5},--frustration
-		{"tm_thief", 10},--thief 
+		{"tm_thief", 10},--thief
 		{"tm_water_pulse", 2},--water pulse
-		{"tm_shock_wave", 2},--shock wave 
-		{"tm_incinerate", 2},--incinerate 
-		{"tm_rock_tomb", 4},--rock tomb 
+		{"tm_shock_wave", 2},--shock wave
+		{"tm_incinerate", 2},--incinerate
+		{"tm_rock_tomb", 4},--rock tomb
 		{"tm_attract", 10},--attract
-		{"tm_hidden_power", 8},--hidden power 
-		{"tm_taunt", 10},--taunt 
-		{"tm_grass_knot", 4},--grass knot 
-		{"tm_brick_break", 2},--brick break 
-		{"tm_rest", 5},--rest 
+		{"tm_hidden_power", 8},--hidden power
+		{"tm_taunt", 10},--taunt
+		{"tm_grass_knot", 4},--grass knot
+		{"tm_brick_break", 2},--brick break
+		{"tm_rest", 5},--rest
 	}
-	
-	--total weight = 
+
+	--total weight =
 	local wand_stock = {
-		{"wand_path", 10},--path wand 
-		{"wand_pounce", 10},--pounce wand 
-		{"wand_whirlwind", 10},--whirlwind wand 
-		{"wand_switcher", 10},--switcher wand 
-		{"wand_lure", 10},--lure wand 
-		{"wand_slow", 10},--slow wand 
-		{"wand_fear", 10},--fear wand 
-		{"wand_topsy_turvy", 5},--topsy turvy wand 
-		{"wand_warp", 5},--warp wand 
-		{"wand_purge", 5},--purge wand 
-		{"wand_lob", 10}, --lob wand 
-		{"wand_totter", 10} --totter wand 
+		{"wand_path", 10},--path wand
+		{"wand_pounce", 10},--pounce wand
+		{"wand_whirlwind", 10},--whirlwind wand
+		{"wand_switcher", 10},--switcher wand
+		{"wand_lure", 10},--lure wand
+		{"wand_slow", 10},--slow wand
+		{"wand_fear", 10},--fear wand
+		{"wand_topsy_turvy", 5},--topsy turvy wand
+		{"wand_warp", 5},--warp wand
+		{"wand_purge", 5},--purge wand
+		{"wand_lob", 10}, --lob wand
+		{"wand_totter", 10} --totter wand
 	}
-	
-	
-	local orb_stock = 
+
+
+	local orb_stock =
 	{
-		{"orb_escape", 50},--escape orb 
-		{"orb_cleanse", 10},--cleanse orb 
-		
-		{"orb_petrify", 10},--petrify orb 
-		{"orb_slumber", 10},--slumber orb 
-		{"orb_totter", 10},--totter orb 
+		{"orb_escape", 50},--escape orb
+		{"orb_cleanse", 10},--cleanse orb
+
+		{"orb_petrify", 10},--petrify orb
+		{"orb_slumber", 10},--slumber orb
+		{"orb_totter", 10},--totter orb
 		{"orb_scanner", 10},--scanner orb
 		{"orb_luminous", 10},--luminous orb
-		{"orb_spurn", 10},--spurn orb 
-		{"orb_foe_hold", 10},--foe hold orb 
-		{"orb_foe_seal", 10},--foe seal orb 
-		{"orb_rollcall", 15},--rollcall orb 
-		{"orb_trawl", 5}, --trawl orb 
+		{"orb_spurn", 10},--spurn orb
+		{"orb_foe_hold", 10},--foe hold orb
+		{"orb_foe_seal", 10},--foe seal orb
+		{"orb_rollcall", 15},--rollcall orb
+		{"orb_trawl", 5}, --trawl orb
 		{"orb_all_aim", 10},--all aim orb
 		{"orb_slow", 10},--slow orb
-		{"orb_invert", 5}, --invert orb 
+		{"orb_invert", 5}, --invert orb
 		{"orb_fill_in", 5} --fill in orb
 	}
-	
-	
+
+
 	table.insert(stock, GeneralFunctions.WeightedRandom(tm_stock))
 	table.insert(stock, GeneralFunctions.WeightedRandom(orb_stock))
 	table.insert(stock, GeneralFunctions.WeightedRandom(orb_stock))
@@ -693,57 +693,57 @@ function metano_town.GeneratePurpleKecleonStock(generate_random_item)
 	table.insert(stock, GeneralFunctions.WeightedRandom(wand_stock))
 
 
-	
-	if not generate_random_item then 
+
+	if not generate_random_item then
 		--set stock to randomized assortment and flag that the stock was refreshed for the day
 		SV.DailyFlags.PurpleKecleonStockedRefreshed = true
-		SV.DailyFlags.PurpleKecleonStock = stock	
-	else 
+		SV.DailyFlags.PurpleKecleonStock = stock
+	else
 		return stock[math.random(1, #stock)]
 	end
-	
+
 end
 
 function metano_town.Shop_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-    
+
   local state = 0
   local repeated = false
   local cart = {}
   local catalog = { }
-  
-  --generate stock if it hasn't been for the day 
-  if not SV.DailyFlags.GreenKecleonStockedRefreshed then 
+
+  --generate stock if it hasn't been for the day
+  if not SV.DailyFlags.GreenKecleonStockedRefreshed then
 	metano_town.GenerateGreenKecleonStock()
   end
-  
+
   --populate the catalog of items to buy using the generated stock. Item and hidden (amount of items in the stack typically) are grabbed from the item's predefined values in the item editor
   for ii = 1, #SV.DailyFlags.GreenKecleonStock, 1 do
   	local itemEntry = RogueEssence.Data.DataManager.Instance:GetItem(SV.DailyFlags.GreenKecleonStock[ii])
 	local item = RogueEssence.Dungeon.InvItem(SV.DailyFlags.GreenKecleonStock[ii], false, itemEntry.MaxStack)
 
-	--item price is 5 times the sell value. 
+	--item price is 5 times the sell value.
 	local item_data = { Item = item, Price = item:GetSellValue() * 5 }
 	table.insert(catalog, item_data)
   end
 
-  
+
   local hero = CH('PLAYER')
   local partner = CH('Teammate1')
   local chara = CH('Shop_Owner')
   chara.IsInteracting = true
   partner.IsInteracting = true
   UI:SetSpeaker(chara)
-  
+
   GROUND:CharSetAnim(partner, 'None', true)
   GROUND:CharSetAnim(hero, 'None', true)
   --put kec in first frame of walk to simulate explorers behavior
   GROUND:CharSetAction(chara, RogueEssence.Ground.FrameGroundAction(chara.Position, chara.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Walk"), 0))
-		
+
   GROUND:CharTurnToChar(hero, chara)
   local coro1 = TASK:BranchCoroutine(function() GROUND:CharTurnToCharAnimated(partner, chara, 4) end)
 
-  
+
 	while state > -1 do
 		if state == 0 then
 			local msg = STRINGS:Format(STRINGS.MapStrings['Shop_Intro'])
@@ -825,7 +825,7 @@ function metano_town.Shop_Action(obj, activator)
 				UI:ChoiceMenuYesNo(msg, false)
 				UI:WaitForChoice()
 				result = UI:ChoiceResult()
-				
+
 				if result then
 					GAME:RemoveFromPlayerMoney(total)
 					for ii = 1, #cart, 1 do
@@ -836,7 +836,7 @@ function metano_town.Shop_Action(obj, activator)
 						table.remove(catalog, cart[ii])
 						table.remove(SV.DailyFlags.GreenKecleonStock, cart[ii])
 					end
-					
+
 					cart = {}
 					SOUND:PlayBattleSE("DUN_Money")
 					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Shop_Buy_Complete']))
@@ -849,7 +849,7 @@ function metano_town.Shop_Action(obj, activator)
 			UI:SellMenu()
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
-			
+
 			if #result > 0 then
 				cart = result
 				state = 4
@@ -882,7 +882,7 @@ function metano_town.Shop_Action(obj, activator)
 			UI:ChoiceMenuYesNo(msg, false)
 			UI:WaitForChoice()
 			result = UI:ChoiceResult()
-			
+
 			if result then
 				for ii = #cart, 1, -1 do
 					if cart[ii].IsEquipped then
@@ -904,7 +904,7 @@ function metano_town.Shop_Action(obj, activator)
 	TASK:JoinCoroutines({coro1})
 	partner.IsInteracting = false
 	chara.IsInteracting = false
-	
+
 	GROUND:CharEndAnim(partner)
 	GROUND:CharEndAnim(hero)
 	GROUND:CharEndAnim(chara)
@@ -916,28 +916,28 @@ end
 
 function metano_town.TM_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-    
+
   local state = 0
   local repeated = false
   local cart = {}
   local catalog = { }
-  
-  --generate stock if it hasn't been for the day 
-  if not SV.DailyFlags.PurpleKecleonStockedRefreshed then 
+
+  --generate stock if it hasn't been for the day
+  if not SV.DailyFlags.PurpleKecleonStockedRefreshed then
 	metano_town.GeneratePurpleKecleonStock()
   end
-  
+
   --populate the catalog of items to buy using the generated stock. Item and hidden (amount of items in the stack typically) are grabbed from the item's predefined values in the item editor
   for ii = 1, #SV.DailyFlags.PurpleKecleonStock, 1 do
   	local itemEntry = RogueEssence.Data.DataManager.Instance:GetItem(SV.DailyFlags.PurpleKecleonStock[ii])
 	local item = RogueEssence.Dungeon.InvItem(SV.DailyFlags.PurpleKecleonStock[ii], false, math.min(4, itemEntry.MaxStack))--only give 4 wands.
 
-	--item price is 5 times the sell value. 
+	--item price is 5 times the sell value.
 	local item_data = { Item = item, Price = item:GetSellValue() * 5 }
 	table.insert(catalog, item_data)
   end
 
-  
+
   local hero = CH('PLAYER')
   local partner = CH('Teammate1')
   local chara = CH('TM_Owner')
@@ -949,11 +949,11 @@ function metano_town.TM_Action(obj, activator)
   GROUND:CharSetAnim(hero, 'None', true)
   --put kec in first frame of walk to simulate explorers behavior
   GROUND:CharSetAction(chara, RogueEssence.Ground.FrameGroundAction(chara.Position, chara.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Walk"), 0))
-				
+
   GROUND:CharTurnToChar(hero, chara)
   local coro1 = TASK:BranchCoroutine(function() GROUND:CharTurnToCharAnimated(partner, chara, 4) end)
 
-  
+
 	while state > -1 do
 		if state == 0 then
 			local msg = STRINGS:Format(STRINGS.MapStrings['TM_Shop_Intro'])
@@ -1035,7 +1035,7 @@ function metano_town.TM_Action(obj, activator)
 				UI:ChoiceMenuYesNo(msg, false)
 				UI:WaitForChoice()
 				result = UI:ChoiceResult()
-				
+
 				if result then
 					GAME:RemoveFromPlayerMoney(total)
 					for ii = 1, #cart, 1 do
@@ -1046,7 +1046,7 @@ function metano_town.TM_Action(obj, activator)
 						table.remove(catalog, cart[ii])
 						table.remove(SV.DailyFlags.PurpleKecleonStock, cart[ii])
 					end
-					
+
 					cart = {}
 					SOUND:PlayBattleSE("DUN_Money")
 					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['TM_Shop_Buy_Complete']))
@@ -1059,7 +1059,7 @@ function metano_town.TM_Action(obj, activator)
 			UI:SellMenu()
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
-			
+
 			if #result > 0 then
 				cart = result
 				state = 4
@@ -1092,7 +1092,7 @@ function metano_town.TM_Action(obj, activator)
 			UI:ChoiceMenuYesNo(msg, false)
 			UI:WaitForChoice()
 			result = UI:ChoiceResult()
-			
+
 			if result then
 				for ii = #cart, 1, -1 do
 					if cart[ii].IsEquipped then
@@ -1111,12 +1111,12 @@ function metano_town.TM_Action(obj, activator)
 			end
 		end
 	end
-	
+
 	--reimplementing parts of endconversation
 	TASK:JoinCoroutines({coro1})
 	partner.IsInteracting = false
 	chara.IsInteracting = false
-	
+
 	GROUND:CharEndAnim(partner)
 	GROUND:CharEndAnim(hero)
 	GROUND:CharEndAnim(chara)
@@ -1134,10 +1134,10 @@ function metano_town.Musician_Action(obj, activator)
   local old_song = SOUND:GetCurrentSong()
   local default_song = 'Treasure Town.ogg'--default song
   UI:SetSpeaker(chara)
-  
-  
+
+
   --keep playing the metronome animation if it's playing (song is not treasure town)
-  if SOUND:GetCurrentSong() == default_song or SOUND:GetCurrentSong() == '' then 
+  if SOUND:GetCurrentSong() == default_song or SOUND:GetCurrentSong() == '' then
 	GeneralFunctions.StartConversation(chara, STRINGS:Format(STRINGS.MapStrings['Music_Intro']), 'Normal', false)
   else
 	GeneralFunctions.StartConversation(chara, STRINGS:Format(STRINGS.MapStrings['Music_Intro']), 'Normal', false, false)
@@ -1147,34 +1147,34 @@ function metano_town.Musician_Action(obj, activator)
   --Figure out list of songs to not display in music menu.
   --For now, simply block Anima Core from showing up if the player hasn't gotten to the Anima Core cutscene yet.
   local spoilers = {}
-  
-  if not SV.Chapter3.FinishedRootScene then 
+
+  if not SV.Chapter3.FinishedRootScene then
     table.insert(spoilers, 'Anima Core.ogg')
   end
-  
+
   UI:ShowMusicMenu(false, spoilers)
   UI:WaitForChoice()
   local result = UI:ChoiceResult()
   if result ~= nil then
 	SV.metano_town.Song = result
   end
-  
-  
-  --Set a metronome animation if we're playing a song that isn't the default or no music. Otherise turn it off.  
-  if (SOUND:GetCurrentSong() == default_song or SOUND:GetCurrentSong() == '') and (old_song == default_song or old_song == '') then 
+
+
+  --Set a metronome animation if we're playing a song that isn't the default or no music. Otherise turn it off.
+  if (SOUND:GetCurrentSong() == default_song or SOUND:GetCurrentSong() == '') and (old_song == default_song or old_song == '') then
   	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Music_End']))
 	GeneralFunctions.EndConversation(chara)
-  elseif (SOUND:GetCurrentSong() == default_song or SOUND:GetCurrentSong() == '') and (old_song ~= default_song and old_song ~= '') then  
+  elseif (SOUND:GetCurrentSong() == default_song or SOUND:GetCurrentSong() == '') and (old_song ~= default_song and old_song ~= '') then
 	GROUND:CharSetAnim(chara, "None", true)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Music_End']))
 	GeneralFunctions.EndConversation(chara)
-  elseif (SOUND:GetCurrentSong() ~= default_song and SOUND:GetCurrentSong() ~= '') and (old_song == default_song or old_song == '') then 
+  elseif (SOUND:GetCurrentSong() ~= default_song and SOUND:GetCurrentSong() ~= '') and (old_song == default_song or old_song == '') then
   	GROUND:CharSetAnim(chara, "Wiggle", true)
   	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Music_End']))
 	GeneralFunctions.EndConversation(chara, false)
   else
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Music_End']))
-	GeneralFunctions.EndConversation(chara, false)	
+	GeneralFunctions.EndConversation(chara, false)
   end
 end
 
@@ -1183,7 +1183,7 @@ end
 
 function metano_town.Storage_Action(obj, activator)
 	DEBUG.EnableDbgCoro()
-	
+
 	local hero = CH('PLAYER')
 	local partner = CH('Teammate1')
 	local chara = CH('Storage_Owner')
@@ -1193,45 +1193,45 @@ function metano_town.Storage_Action(obj, activator)
 	GROUND:CharSetAnim(partner, 'None', true)
 	GROUND:CharSetAnim(hero, 'None', true)
 	GROUND:CharSetAnim(chara, 'None', true)
-			
+
 	GROUND:CharTurnToChar(hero, chara)
 	local coro1 = TASK:BranchCoroutine(function() GROUND:CharTurnToCharAnimated(partner, chara, 4) end)
 	UI:SetSpeakerEmotion('Happy')
-	
+
 	local state = 0
 	local repeated = false
-	
+
 	while state > -1 do
 		local has_items = GAME:GetPlayerBagCount() > 0
 		local has_equipment = GAME:GetPlayerEquippedCount() > 0
 		local has_storage = GAME:GetPlayerStorageCount() > 0
-		
+
 		local item_count = GAME:GetPlayerBagCount()
-		
+
 		local storage_choices = { { STRINGS:FormatKey('MENU_STORAGE_STORE'), has_items or has_equipment},
 		{ STRINGS:FormatKey('MENU_STORAGE_TAKE_ITEM'), has_storage},
 		{ STRINGS:FormatKey('MENU_STORAGE_STORE_ALL'), has_items},
 		{ STRINGS:FormatKey('MENU_INFO'), true},
 		{ STRINGS:FormatKey("MENU_CANCEL"), true}}
-		
+
 		local msg = STRINGS:Format(STRINGS.MapStrings['Storage_Intro'])
-		if repeated then 
-			msg = STRINGS:Format(STRINGS.MapStrings['Storage_Intro_Return']) 
-			UI:SetSpeakerEmotion('Normal')			
+		if repeated then
+			msg = STRINGS:Format(STRINGS.MapStrings['Storage_Intro_Return'])
+			UI:SetSpeakerEmotion('Normal')
 		end
-		
+
 		UI:BeginChoiceMenu(msg, storage_choices, 1, 5)
 		UI:WaitForChoice()
-		local result = UI:ChoiceResult()	
+		local result = UI:ChoiceResult()
 		UI:SetSpeakerEmotion('Normal')
 
-		
+
 		if result == 1 then
 			repeated = true
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storage_Store'], STRINGS:LocalKeyString(26)))
 			UI:StorageMenu()
 			UI:WaitForChoice()
-			if item_count ~= GAME:GetPlayerBagCount() then 
+			if item_count ~= GAME:GetPlayerBagCount() then
 				UI:SetSpeakerEmotion('Happy')
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storage_Stored_Items']))
 			end
@@ -1240,10 +1240,10 @@ function metano_town.Storage_Action(obj, activator)
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storage_Withdraw'], STRINGS:LocalKeyString(26)))
 			UI:WithdrawMenu()
 			UI:WaitForChoice()
-			if item_count ~= GAME:GetPlayerBagCount() then 
+			if item_count ~= GAME:GetPlayerBagCount() then
 				UI:SetSpeakerEmotion('Happy')
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storage_Withdrew_Items']))
-			end 
+			end
 		elseif result == 3 then
 			repeated = true
 			GeneralFunctions.SendInvToStorage(true, false, true)
@@ -1258,7 +1258,7 @@ function metano_town.Storage_Action(obj, activator)
 			UI:SetSpeakerEmotion('Normal')
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storage_Info_4']))
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storage_Info_5']))
-		else 
+		else
 			UI:SetSpeakerEmotion('Happy')
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Storage_Goodbye']))
 			state = -1
@@ -1268,11 +1268,11 @@ function metano_town.Storage_Action(obj, activator)
 	TASK:JoinCoroutines({coro1})
 	partner.IsInteracting = false
 	chara.IsInteracting = false
-	
+
 	GROUND:CharEndAnim(partner)
 	GROUND:CharEndAnim(hero)
 	GROUND:CharEndAnim(chara)
-end 
+end
 
 
 
@@ -1287,7 +1287,7 @@ end
 
 function metano_town.Bank_Action(obj, activator)
 	DEBUG.EnableDbgCoro()
-	
+
     local hero = CH('PLAYER')
     local partner = CH('Teammate1')
     local chara = CH('Bank_Owner')
@@ -1297,27 +1297,27 @@ function metano_town.Bank_Action(obj, activator)
     GROUND:CharSetAnim(partner, 'None', true)
     GROUND:CharSetAnim(hero, 'None', true)
     GROUND:CharSetAnim(chara, 'None', true)
-		
+
     GROUND:CharTurnToChar(hero, chara)
     local coro1 = TASK:BranchCoroutine(function() GROUND:CharTurnToCharAnimated(partner, chara, 4) end)
-	
+
 	local state = 0
 	local repeated = false
-	
+
 	while state > -1 do
-		
+
 		local player_money = GAME:GetPlayerMoney()
 		local bank_choices = { { STRINGS:FormatKey('MENU_STORAGE_MONEY'), true},
 		{ STRINGS:FormatKey('MENU_INFO'), true},
 		{ STRINGS:FormatKey("MENU_CANCEL"), true}}
-		
+
 		local msg = STRINGS:Format(STRINGS.MapStrings['Bank_Intro'], GAME:GetPlayerMoneyBank())
 		if repeated then msg = STRINGS:Format(STRINGS.MapStrings['Bank_Intro_Return']) end
-		
+
 		UI:BeginChoiceMenu(msg, bank_choices, 1, 3)
 		UI:WaitForChoice()
-		local result = UI:ChoiceResult()	
-		
+		local result = UI:ChoiceResult()
+
 		if result == 1 then
 			repeated = true
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bank_Interact']))
@@ -1330,7 +1330,7 @@ function metano_town.Bank_Action(obj, activator)
 			elseif player_money < GAME:GetPlayerMoney() then --Withdrew money
 				UI:SetSpeakerEmotion('Sad')
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bank_Withdrew_Money'], difference))
-			else 
+			else
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bank_Canceled']))
 			end
 			UI:SetSpeakerEmotion('Normal')
@@ -1340,7 +1340,7 @@ function metano_town.Bank_Action(obj, activator)
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bank_Info_2']))
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bank_Info_3']))
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bank_Info_4']))
-		else 
+		else
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Bank_Goodbye']))
 			state = -1
 		end
@@ -1349,11 +1349,11 @@ function metano_town.Bank_Action(obj, activator)
 	TASK:JoinCoroutines({coro1})
 	partner.IsInteracting = false
 	chara.IsInteracting = false
-	
+
 	GROUND:CharEndAnim(partner)
 	GROUND:CharEndAnim(hero)
 	GROUND:CharEndAnim(chara)
-end 
+end
 
 function metano_town.GenerateRedMerchantItem()
 	if math.random(1,2) == 1 then
@@ -1368,17 +1368,17 @@ function metano_town.Red_Merchant_Action(obj, activator)
 	local state = 0
 	local repeated = false
 
-	
-	
+
+
 	--Generate an item for the red merchant
-	if SV.DailyFlags.RedMerchantItem == "" then 
+	if SV.DailyFlags.RedMerchantItem == "" then
 		SV.DailyFlags.RedMerchantItem = metano_town.GenerateRedMerchantItem()
 	end
-	
+
 	local chara = CH('Red_Merchant')
 	local hero = CH('PLAYER')
 	local partner = CH('Teammate1')
-	
+
 	local farfetchd_name = CharacterEssentials.GetCharacterName("Farfetchd")
 	local stunky_name = chara:GetDisplayName()
 
@@ -1397,27 +1397,27 @@ function metano_town.Red_Merchant_Action(obj, activator)
     GROUND:CharSetAnim(partner, 'None', true)
     GROUND:CharSetAnim(hero, 'None', true)
     GROUND:CharSetAnim(chara, 'None', true)
-		
+
     GROUND:CharTurnToChar(hero, chara)
 	GROUND:CharTurnToChar(chara, hero)
     local coro1 = TASK:BranchCoroutine(function() GROUND:CharTurnToCharAnimated(partner, chara, 4) end)
-	
-	
+
+
 	while state > -1 do
 		--merchant is angry and refuses to sell to you if you bought from the green merchant
 		local angry = SV.DailyFlags.GreenMerchantBought
 		--merchant is happy if you've bought from him, he can't sell you anything else though.
 		local happy = SV.DailyFlags.RedMerchantBought
-		
+
 		UI:SetSpeakerEmotion('Normal')
 		local msg = STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Intro'], stunky_name)
-		
-		
+
+
 		if repeated then
-			if happy then 
+			if happy then
 				msg = STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Intro_Return_Happy'])
 				UI:SetSpeakerEmotion('Happy')
-			elseif angry then 
+			elseif angry then
 				state = -1 --he won't loop back to the menu if he's angry, he's just done with you
 				break
 			else
@@ -1426,25 +1426,25 @@ function metano_town.Red_Merchant_Action(obj, activator)
 		elseif happy then
 			UI:SetSpeakerEmotion('Happy')
 			msg = STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Intro_Happy'], stunky_name)
-		elseif angry then 
+		elseif angry then
 			UI:SetSpeakerEmotion('Determined')
 			msg = STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Intro_Angry'])
 		end
-		
+
 		UI:BeginChoiceMenu(msg, merchant_choices, 1, 3)
 		UI:WaitForChoice()
 		local result = UI:ChoiceResult()
 		repeated = true
-		if result == 1 then 
-			if happy then 
+		if result == 1 then
+			if happy then
 				UI:SetSpeakerEmotion('Worried')
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Red_Merchant_No_Stock']))
-			elseif angry then 
+			elseif angry then
 				UI:SetSpeakerEmotion('Angry')
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Refuse_Service'], farfetchd_name))
 			else
 				--UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Daily_Item'], itemName, itemPrice, GeneralFunctions.GetItemArticle(item)))	--deprecated
-				local SingleItemDealMenu = SingleItemDealMenu() 
+				local SingleItemDealMenu = SingleItemDealMenu()
 				local menu = SingleItemDealMenu:new(stunky_name.."'s Deal", item, itemPrice)
 				UI:SetCustomMenu(menu.menu)
 				UI:WaitForChoice()
@@ -1464,12 +1464,12 @@ function metano_town.Red_Merchant_Action(obj, activator)
 						UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Purchase_Made'], itemName))
 					end
 				end
-			end				
-		elseif result == 2 then 
-			if angry then 
+			end
+		elseif result == 2 then
+			if angry then
 				UI:SetSpeakerEmotion('Angry')
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Info_Angry'], farfetchd_name))
-			elseif happy then 
+			elseif happy then
 				UI:SetSpeakerEmotion('Normal')
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Info_Happy_1']))
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Info_Happy_2']))
@@ -1479,7 +1479,7 @@ function metano_town.Red_Merchant_Action(obj, activator)
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Info_Happy_4'], farfetchd_name))
 				UI:SetSpeakerEmotion('Normal')
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Info_Happy_5']))
-			else 
+			else
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Info_1'], stunky_name))
 				UI:SetSpeakerEmotion('Sad')
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Info_2']))
@@ -1489,7 +1489,7 @@ function metano_town.Red_Merchant_Action(obj, activator)
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Info_4'], farfetchd_name))
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Info_5']))
 				UI:SetSpeakerEmotion('Normal')
-			end 
+			end
 		else
 			if angry then
 				UI:SetSpeakerEmotion('Determined')
@@ -1501,20 +1501,20 @@ function metano_town.Red_Merchant_Action(obj, activator)
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Red_Merchant_Goodbye']))
 			end
 			state = -1
-		end 
+		end
 	end
 
 	--reimplementing parts of endconversation
 	TASK:JoinCoroutines({coro1})
 	partner.IsInteracting = false
 	chara.IsInteracting = false
-	
+
 	GROUND:CharEndAnim(partner)
 	GROUND:CharEndAnim(hero)
 	GROUND:CharEndAnim(chara)
 	GROUND:EntTurn(chara, olddir)
-	
-	
+
+
 end
 
 function metano_town.GenerateGreenMerchantItem()
@@ -1539,7 +1539,7 @@ function metano_town.GenerateGreenMerchantItem()
 		{"held_soft_sand", 10},
 		{"held_spell_tag", 10},
 		{"held_twisted_spoon", 10},
-		
+
 		--these are renamed as Guards externally
 		{"held_blank_plate", 10},
 		{"held_draco_plate", 10},
@@ -1563,7 +1563,7 @@ function metano_town.GenerateGreenMerchantItem()
 		{"held_flame_orb", 10},
 		{"held_toxic_orb", 10}
 	}
-	
+
 	return GeneralFunctions.WeightedRandom(stock)
 end
 
@@ -1573,12 +1573,12 @@ function metano_town.Green_Merchant_Action(obj, activator)
 	local state = 0
 	local repeated = false
 
-	
-	
-	if SV.DailyFlags.GreenMerchantItem == "" then 
+
+
+	if SV.DailyFlags.GreenMerchantItem == "" then
 		SV.DailyFlags.GreenMerchantItem = metano_town.GenerateGreenMerchantItem()
 	end
-	
+
 	local chara = CH('Green_Merchant')
 	local hero = CH('PLAYER')
 	local partner = CH('Teammate1')
@@ -1600,26 +1600,26 @@ function metano_town.Green_Merchant_Action(obj, activator)
     GROUND:CharSetAnim(partner, 'None', true)
     GROUND:CharSetAnim(hero, 'None', true)
     GROUND:CharSetAnim(chara, 'None', true)
-		
+
     GROUND:CharTurnToChar(hero, chara)
     GROUND:CharTurnToChar(chara, hero)
 	local coro1 = TASK:BranchCoroutine(function() GROUND:CharTurnToCharAnimated(partner, chara, 4) end)
-	
+
 	while state > -1 do
 		--merchant is angry and refuses to sell to you if you bought from the red merchant
 		local angry = SV.DailyFlags.RedMerchantBought
 		--merchant is happy if you've bought from him, he can't sell you anything else though.
 		local happy = SV.DailyFlags.GreenMerchantBought
-		
+
 		UI:SetSpeakerEmotion('Normal')
 		local msg = STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Intro'], farfetchd_name)
-		
-		
+
+
 		if repeated then
-			if happy then 
+			if happy then
 				msg = STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Intro_Return_Happy'])
 				UI:SetSpeakerEmotion('Happy')
-			elseif angry then 
+			elseif angry then
 				state = -1 --he won't loop back to the menu if he's angry, he's just done with you
 				break
 			else
@@ -1628,17 +1628,17 @@ function metano_town.Green_Merchant_Action(obj, activator)
 		elseif happy then
 			UI:SetSpeakerEmotion('Happy')
 			msg = STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Intro_Happy'], farfetchd_name)
-		elseif angry then 
+		elseif angry then
 			UI:SetSpeakerEmotion('Determined')
 			msg = STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Intro_Angry'])
 		end
-		
+
 		UI:BeginChoiceMenu(msg, merchant_choices, 1, 3)
 		UI:WaitForChoice()
 		local result = UI:ChoiceResult()
 		repeated = true
-		if result == 1 then 
-			if happy then 
+		if result == 1 then
+			if happy then
 				UI:SetSpeakerEmotion('Worried')
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Green_Merchant_No_Stock']))
 			elseif angry then
@@ -1666,12 +1666,12 @@ function metano_town.Green_Merchant_Action(obj, activator)
 						UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Purchase_Made'], itemName))
 					end
 				end
-			end				
-		elseif result == 2 then 
-			if angry then 
+			end
+		elseif result == 2 then
+			if angry then
 				UI:SetSpeakerEmotion('Angry')
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Info_Angry'], stunky_name))
-			elseif happy then 
+			elseif happy then
 				UI:SetSpeakerEmotion('Normal')
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Info_Happy_1']))
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Info_Happy_2']))
@@ -1680,13 +1680,13 @@ function metano_town.Green_Merchant_Action(obj, activator)
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Info_Happy_4']))
 				UI:SetSpeakerEmotion('Normal')
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Info_Happy_5']))
-			else 
+			else
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Info_1'], farfetchd_name))
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Info_2']))
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Info_3']))
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Info_4'], stunky_name))
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Info_5']))
-			end 
+			end
 		else
 			if angry then
 				UI:SetSpeakerEmotion('Determined')
@@ -1698,20 +1698,20 @@ function metano_town.Green_Merchant_Action(obj, activator)
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Green_Merchant_Goodbye']))
 			end
 			state = -1
-		end 
+		end
 	end
 
 	--reimplementing parts of endconversation
 	TASK:JoinCoroutines({coro1})
 	partner.IsInteracting = false
 	chara.IsInteracting = false
-	
+
 	GROUND:CharEndAnim(partner)
 	GROUND:CharEndAnim(hero)
 	GROUND:CharEndAnim(chara)
 	GROUND:EntTurn(chara, olddir)
-	
-	
+
+
 end
 
 
@@ -1720,9 +1720,9 @@ end
 
 function metano_town.Swap_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+
   --silk/dust/gem/globes
-  local catalog = { 
+  local catalog = {
 	{ Item="xcl_element_bug_gem", ReqItem={"xcl_element_bug_silk","xcl_element_bug_dust"}},
 	{ Item="xcl_element_bug_globe", ReqItem={"xcl_element_bug_silk", "xcl_element_bug_dust", "xcl_element_bug_gem"}},
 	{ Item="xcl_element_dark_gem", ReqItem={"xcl_element_dark_silk","xcl_element_dark_dust"}},
@@ -1760,24 +1760,24 @@ function metano_town.Swap_Action(obj, activator)
 	{ Item="xcl_element_water_gem", ReqItem={"xcl_element_water_silk","xcl_element_water_dust"}},
 	{ Item="xcl_element_water_globe", ReqItem={"xcl_element_water_silk", "xcl_element_water_dust", "xcl_element_water_gem"}}
 }
-  
+
   local state = 0
   local repeated = false
   local cart = {} --catalog element chosen to trade for
   local tribute = {} --item IDs chosen to trade in
-  
+
   --normal trades
   for ii = 1, #COMMON_GEN.TRADES, 1 do
 	local base_data = COMMON_GEN.TRADES[ii]
 	table.insert(catalog, base_data)
   end
-  
+
   --random trades
   for ii = 1, #SV.base_trades, 1 do
 	local base_data = SV.base_trades[ii]
 	table.insert(catalog, base_data)
   end
-  
+
   local Prices = { 1000, 5000, 20000, 50000, 100000 }
   local player = CH('PLAYER')
   local partner = CH('Teammate1')
@@ -1788,10 +1788,10 @@ function metano_town.Swap_Action(obj, activator)
   GROUND:CharSetAnim(partner, 'None', true)
   GROUND:CharSetAnim(player, 'None', true)
   GROUND:CharSetAnim(chara, 'None', true)
-		
+
   GROUND:CharTurnToChar(player, chara)
   local coro1 = TASK:BranchCoroutine(function() GROUND:CharTurnToCharAnimated(partner, chara, 4) end)
-  
+
 	while state > -1 do
 		if state == 0 then
 			local msg = STRINGS:Format(STRINGS.MapStrings['Swap_Intro'])
@@ -1840,7 +1840,7 @@ function metano_town.Swap_Action(obj, activator)
 					table.insert(tribute, trade.ReqItem[ii])
 				end
 			end
-			
+
 			if free_slots > 0 then
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Give_Choose'], receive_item:GetDisplayName()))
 				--tribute simply aggregates all items period
@@ -1868,15 +1868,15 @@ function metano_town.Swap_Action(obj, activator)
 				local give_item = RogueEssence.Dungeon.InvItem(tribute[ii])
 				table.insert(give_items, give_item:GetDisplayName())
 			end
-			
+
 			local itemEntry = RogueEssence.Data.DataManager.Instance:GetItem(trade.Item)
 			local total = Prices[itemEntry.Rarity]
-			
+
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Confirm_001'], STRINGS:CreateList(give_items), receive_item:GetDisplayName()))
 			UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['Swap_Confirm_002'], total), false)
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
-			
+
 			if result then
 				for ii = #tribute, 1, -1 do
 					local item_slot = GAME:FindPlayerItem(tribute[ii], true, true)
@@ -1891,17 +1891,17 @@ function metano_town.Swap_Action(obj, activator)
 				end
 				SOUND:PlayBattleSE("DUN_Money")
 				GAME:RemoveFromPlayerMoney(total)
-				
+
 				UI:SetSpeakerEmotion("Angry")
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Complete_001']))
 				UI:SetSpeakerEmotion("Stunned")
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Complete_002']))
 				UI:SetSpeakerEmotion("Normal")
-				
+
 				UI:ResetSpeaker()
 				SOUND:PlayFanfare("Fanfare/Treasure")
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Swap_Give'], player:GetDisplayName(), receive_item:GetDisplayName()))
-				
+
 				--local bag_count = GAME:GetPlayerBagCount()
 				--local bag_cap = GAME:GetPlayerBagLimit()
 				--if bag_count < bag_cap then
@@ -1910,7 +1910,7 @@ function metano_town.Swap_Action(obj, activator)
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Item_Give_Storage'], receive_item:GetDisplayName()))
 				GAME:GivePlayerStorageItem(trade.Item, 1)
 				--end
-				
+
 				UI:SetSpeaker(chara)
 				tribute = {}
 				cart = {}
@@ -1924,7 +1924,7 @@ function metano_town.Swap_Action(obj, activator)
 	TASK:JoinCoroutines({coro1})
 	partner.IsInteracting = false
 	chara.IsInteracting = false
-	
+
 	GROUND:CharEndAnim(partner)
 	GROUND:CharEndAnim(player)
 	GROUND:CharEndAnim(chara)
@@ -1953,7 +1953,7 @@ end
 BasePowerType = luanet.import_type('RogueEssence.Dungeon.BasePowerState')
 function metano_town.Tutor_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+
   local price = 0
   local state = 0
   local repeated = false
@@ -1969,28 +1969,28 @@ function metano_town.Tutor_Action(obj, activator)
   GROUND:CharSetAnim(partner, 'None', true)
   GROUND:CharSetAnim(hero, 'None', true)
   GROUND:CharSetAnim(chara, 'None', true)
-		
+
   GROUND:CharTurnToChar(hero, chara)
   local coro1 = TASK:BranchCoroutine(function() GROUND:CharTurnToCharAnimated(partner, chara, 4) end)
   UI:SetSpeaker(chara)
-  
+
 	while state > -1 do
 		if state == 0 then
 			local msg = STRINGS:Format(STRINGS.MapStrings['Tutor_Intro'])
 			if repeated == true then
 				msg = STRINGS:Format(STRINGS.MapStrings['Tutor_Intro_Return'])
 			end
-			
+
 			local tutor_choices = {RogueEssence.StringKey("MENU_RECALL_SKILL"):ToLocal(),
 			RogueEssence.StringKey("MENU_FORGET_SKILL"):ToLocal(),
 			STRINGS:FormatKey("MENU_INFO"),
 			STRINGS:FormatKey("MENU_EXIT")}
-			
+
 			--starting in chapter 6, slowpoke will be able to teach Egg moves for a fee.
-			if SV.ChapterProgression.Chapter >= 6 then 
+			if SV.ChapterProgression.Chapter >= 6 then
 				table.insert(tutor_choices, 3, STRINGS:Format(STRINGS.MapStrings['Tutor_Option_Tutor']))
-			end 
-			
+			end
+
 			UI:BeginChoiceMenu(msg, tutor_choices, 1, #tutor_choices)
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
@@ -2050,7 +2050,7 @@ function metano_town.Tutor_Action(obj, activator)
 				GAME:RemoveFromPlayerMoney(price)
 				GAME:LearnSkill(member, move)
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Remember_Begin']))
-				metano_town.Tutor_Sequence()	
+				metano_town.Tutor_Sequence()
 				SOUND:PlayBattleSE("DUN_Learn_Move")
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Remember_Success'], member:GetDisplayName(false), moveEntry:GetColoredName()))				state = 0
 			else
@@ -2063,7 +2063,7 @@ function metano_town.Tutor_Action(obj, activator)
 					GAME:RemoveFromPlayerMoney(price)
 					GAME:SetCharacterSkill(member, move, result)
 					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Remember_Begin']))
-					metano_town.Tutor_Sequence()	
+					metano_town.Tutor_Sequence()
 					SOUND:PlayBattleSE("DUN_Learn_Move")
 					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Remember_Success'], member:GetDisplayName(false), moveEntry:GetColoredName()))					state = 0
 				else
@@ -2110,8 +2110,8 @@ function metano_town.Tutor_Action(obj, activator)
 			if result > -1 then
 				member = GAME:GetPlayerPartyMember(result)
 				egg_moves = _DATA:GetMonster(member.BaseForm.Species).Forms[member.BaseForm.Form].SharedSkills
-				print(egg_moves.Count)	
-				
+				print(egg_moves.Count)
+
 				if egg_moves.Count <= 0 then
 					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_No_Egg_Moves'], member:GetDisplayName(false)))
 				else
@@ -2119,15 +2119,15 @@ function metano_town.Tutor_Action(obj, activator)
 					state = 7
 				end
 			else
-				state = 0		
+				state = 0
 			end
-		elseif state == 7 then 
+		elseif state == 7 then
 			--Determine pricings for egg moves based on status/non status, and power of the move.
 			--Pricing is: 4500 for status moves, 1500 + 50*BP for attacks, 5000 if move is variable power.
 			local move_list = {}
 			local chosen_move = ""
 			local egg_move_price = 0
-			for i = 0, egg_moves.Count - 1, 1 do 
+			for i = 0, egg_moves.Count - 1, 1 do
 				local skill = _DATA:GetSkill(egg_moves[i].Skill)
 				local power = skill.Data.SkillStates:Get(luanet.ctype(BasePowerType)).Power
 				print(power)
@@ -2136,14 +2136,14 @@ function metano_town.Tutor_Action(obj, activator)
 				else
 					if power == nil then
 						egg_move_price = 5000
-					else 
+					else
 						egg_move_price = 1500 + (50 * power)
-					end		
+					end
 				end
 				move_list[egg_moves[i].Skill] = {Cost = egg_move_price, Currency = ""}
 			end
 			local result = SkillTutorMenu.runTutorMenu(move_list, "")
-			if result ~= "" then 
+			if result ~= "" then
 				move = result
 				local moveEntry = RogueEssence.Data.DataManager.Instance:GetSkill(move)
 				egg_move_price = move_list[move][1]
@@ -2151,11 +2151,11 @@ function metano_town.Tutor_Action(obj, activator)
 				if egg_move_price > GAME:GetPlayerMoney() then
 					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_No_Money']))
 				elseif GAME:CanLearn(member) then
-					SOUND:PlayBattleSE("DUN_Money") 
+					SOUND:PlayBattleSE("DUN_Money")
 					GAME:RemoveFromPlayerMoney(egg_move_price)
 					GAME:LearnSkill(member, move)
 					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Learn_Begin']))
-					metano_town.Tutor_Sequence()	
+					metano_town.Tutor_Sequence()
 					SOUND:PlayBattleSE("DUN_Learn_Move")
 					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Learn_Success'], member:GetDisplayName(false), moveEntry:GetColoredName()))
 					state = 0
@@ -2169,7 +2169,7 @@ function metano_town.Tutor_Action(obj, activator)
 						GAME:RemoveFromPlayerMoney(egg_move_price)
 						GAME:SetCharacterSkill(member, move, result)
 						UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Learn_Begin']))
-						metano_town.Tutor_Sequence()	
+						metano_town.Tutor_Sequence()
 						SOUND:PlayBattleSE("DUN_Learn_Move")
 						UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Tutor_Learn_Success'], member:GetDisplayName(false), moveEntry:GetColoredName()))
 						state = 0
@@ -2186,7 +2186,7 @@ function metano_town.Tutor_Action(obj, activator)
 	TASK:JoinCoroutines({coro1})
 	partner.IsInteracting = false
 	chara.IsInteracting = false
-	
+
 	GROUND:CharEndAnim(partner)
 	GROUND:CharEndAnim(hero)
 	GROUND:CharEndAnim(chara)
@@ -2196,7 +2196,7 @@ end
 
 function metano_town.Appraisal_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  
+
   local state = 0
   local repeated = false
   local cart = {}
@@ -2210,7 +2210,7 @@ function metano_town.Appraisal_Action(obj, activator)
   GROUND:CharSetAnim(partner, 'None', true)
   GROUND:CharSetAnim(hero, 'None', true)
   GROUND:CharSetAnim(chara, 'None', true)
-		
+
   GROUND:CharTurnToChar(hero, chara)
   local coro1 = TASK:BranchCoroutine(function() GROUND:CharTurnToCharAnimated(partner, chara, 4) end)
   UI:SetSpeaker(chara)
@@ -2248,7 +2248,7 @@ function metano_town.Appraisal_Action(obj, activator)
 			UI:AppraiseMenu()
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
-			
+
 			if #result > 0 then
 				cart = result
 				state = 2
@@ -2257,7 +2257,7 @@ function metano_town.Appraisal_Action(obj, activator)
 			end
 		elseif state == 2 then
 			local total = #cart * price
-			
+
 			if total > GAME:GetPlayerMoney() then
 				UI:SetSpeakerEmotion("Determined")
 				UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_No_Money']))
@@ -2279,7 +2279,7 @@ function metano_town.Appraisal_Action(obj, activator)
 				UI:ChoiceMenuYesNo(msg, false)
 				UI:WaitForChoice()
 				result = UI:ChoiceResult()
-				
+
 				local treasure = {}
 				if result then
 					for ii = #cart, 1, -1 do
@@ -2292,14 +2292,14 @@ function metano_town.Appraisal_Action(obj, activator)
 							box = GAME:GetPlayerBagItem(cart[ii].Slot)
 							GAME:TakePlayerBagItem(cart[ii].Slot, true)
 						end
-						
+
 						local treasure_item = box.HiddenValue
 						--this is a safeguard to catch boxes without anything in them. Mostly useful for debugging.
 						if treasure_item == nil or treasure_item == '' then treasure_item = 'food_apple' end
 						local itemEntry = _DATA:GetItem(treasure_item)
 						local treasure_choice = { Box = box, Item = RogueEssence.Dungeon.InvItem(treasure_item,false,itemEntry.MaxStack)}
 						table.insert(treasure, treasure_choice)
-						
+
 						-- note high rarity items --this is PMDO vanilla code that unlocks family items in sableye's shop after you get it from a chest; not needed here (right now anyway).
 						--if itemEntry.Rarity > 0 then
 						--	SV.unlocked_trades[treasure_item] = true
@@ -2309,14 +2309,14 @@ function metano_town.Appraisal_Action(obj, activator)
 					GAME:RemoveFromPlayerMoney(total)
 					cart = {}
 					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_Start']))
-					
+
 					--Sneasel should ready herself, then scratch once for each box he has to open
 					GAME:WaitFrames(10)
 					GROUND:CharAnimateTurnTo(chara, Direction.Up, 4)
 					GAME:WaitFrames(10)
 					GROUND:CharSetAnim(chara, 'Charge', true)
 					GAME:WaitFrames(60)
-					
+
 					--Do a fury swipes for each box we gotta open
 					for i=1,(total / price),1
 					do
@@ -2325,21 +2325,21 @@ function metano_town.Appraisal_Action(obj, activator)
 					end
 					GROUND:CharSetAnim(chara, "None", true)
 					GAME:WaitFrames(20)
-					
+
 					GROUND:CharAnimateTurnTo(chara, Direction.Down, 4)
 					GAME:WaitFrames(10)
-					
+
 					SOUND:PlayFanfare("Fanfare/Treasure")
 					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Appraisal_End']))
 					UI:SpoilsMenu(treasure)
 					UI:WaitForChoice()
-					
+
 					for ii = 1, #treasure, 1 do
 						local item = treasure[ii].Item
-						
+
 						GAME:GivePlayerItem(item.ID, item.Amount, false, item.HiddenValue)
 					end
-					
+
 					state = 0
 				else
 					state = 1
@@ -2351,7 +2351,7 @@ function metano_town.Appraisal_Action(obj, activator)
 	TASK:JoinCoroutines({coro1})
 	partner.IsInteracting = false
 	chara.IsInteracting = false
-	
+
 	GROUND:CharEndAnim(partner)
 	GROUND:CharEndAnim(hero)
 	GROUND:CharEndAnim(chara)
@@ -2697,12 +2697,12 @@ function metano_town.Guild_Bridge_Sign_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:ResetSpeaker()
   UI:SetAutoFinish(true)
-  UI:SetCenter(true)  
+  UI:SetCenter(true)
   local hero = CH('PLAYER')
   local partner = CH('Teammate1')
   partner.IsInteracting = true
   GROUND:CharSetAnim(partner, 'None', true)
-  GROUND:CharSetAnim(hero, 'None', true)	
+  GROUND:CharSetAnim(hero, 'None', true)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sign_Guild_Bridge_1']))
   UI:SetAutoFinish(false)
   UI:SetCenter(false)
@@ -2716,12 +2716,12 @@ function metano_town.Crossroads_Sign_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:ResetSpeaker()
   UI:SetAutoFinish(true)
-  UI:SetCenter(true)  
+  UI:SetCenter(true)
   local hero = CH('PLAYER')
   local partner = CH('Teammate1')
   partner.IsInteracting = true
   GROUND:CharSetAnim(partner, 'None', true)
-  GROUND:CharSetAnim(hero, 'None', true)	
+  GROUND:CharSetAnim(hero, 'None', true)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sign_Crossroads_1']))
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sign_Crossroads_2']))
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sign_Crossroads_3']))
@@ -2736,12 +2736,12 @@ function metano_town.Dojo_Sign_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:ResetSpeaker()
   UI:SetAutoFinish(true)
-  UI:SetCenter(true)  
+  UI:SetCenter(true)
   local hero = CH('PLAYER')
   local partner = CH('Teammate1')
   partner.IsInteracting = true
   GROUND:CharSetAnim(partner, 'None', true)
-  GROUND:CharSetAnim(hero, 'None', true)	
+  GROUND:CharSetAnim(hero, 'None', true)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sign_Dojo_1']))
   UI:SetAutoFinish(false)
   UI:SetCenter(false)
@@ -2754,12 +2754,12 @@ function metano_town.To_Dungeons_Sign_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:ResetSpeaker()
   UI:SetAutoFinish(true)
-  UI:SetCenter(true)  
+  UI:SetCenter(true)
   local hero = CH('PLAYER')
   local partner = CH('Teammate1')
   partner.IsInteracting = true
   GROUND:CharSetAnim(partner, 'None', true)
-  GROUND:CharSetAnim(hero, 'None', true)	
+  GROUND:CharSetAnim(hero, 'None', true)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sign_To_Dungeons_1']))
   UI:SetAutoFinish(false)
   UI:SetCenter(false)
@@ -2772,12 +2772,12 @@ function metano_town.Wishing_Well_Sign_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:ResetSpeaker()
   UI:SetAutoFinish(true)
-  UI:SetCenter(true)  
+  UI:SetCenter(true)
   local hero = CH('PLAYER')
   local partner = CH('Teammate1')
   partner.IsInteracting = true
   GROUND:CharSetAnim(partner, 'None', true)
-  GROUND:CharSetAnim(hero, 'None', true)	
+  GROUND:CharSetAnim(hero, 'None', true)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sign_Wishing_Well_1']))
   UI:SetAutoFinish(false)
   UI:SetCenter(false)
@@ -2790,12 +2790,12 @@ function metano_town.To_Spring_Sign_Action(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   UI:ResetSpeaker()
   UI:SetAutoFinish(true)
-  UI:SetCenter(true)  
+  UI:SetCenter(true)
   local hero = CH('PLAYER')
   local partner = CH('Teammate1')
   partner.IsInteracting = true
   GROUND:CharSetAnim(partner, 'None', true)
-  GROUND:CharSetAnim(hero, 'None', true)	
+  GROUND:CharSetAnim(hero, 'None', true)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Sign_To_Spring_1']))
   UI:SetAutoFinish(false)
   UI:SetCenter(false)
@@ -2811,14 +2811,14 @@ function metano_town.Postboard_Action(obj, activator)
   local partner = CH('Teammate1')
   partner.IsInteracting = true
   GROUND:CharSetAnim(partner, 'None', true)
-  GROUND:CharSetAnim(hero, 'None', true)	
+  GROUND:CharSetAnim(hero, 'None', true)
   --[[This has been obsoleted by the main menu scripting changes. Down the road, this board can be used for something else instead, like rescues perhaps.
   if SV.Chapter3.DefeatedBoss then -- Only after unlocking missions should this board do anything. This board can be repurposed for something else once missions are added to the main esc menu.
      GROUND:CharAnimateTurnTo(hero, Direction.Up, 4)
      GROUND:CharAnimateTurnTo(partner, Direction.Up, 4)
 	  if SV.TakenBoard[1].Client == "" then --No missions taken! Don't display an empty taken board.
           UI:SetAutoFinish(true)
-		  UI:SetCenter(true)  
+		  UI:SetCenter(true)
 		  UI:WaitShowDialogue("You have no jobs currently!")
 		  UI:SetAutoFinish(false)
 		  UI:SetCenter(false)
@@ -2829,21 +2829,21 @@ function metano_town.Postboard_Action(obj, activator)
 	  end
   else
 	  UI:SetAutoFinish(true)
-	  UI:SetCenter(true)  
+	  UI:SetCenter(true)
 	  UI:WaitShowDialogue("There's nothing here right now.\nCome back again another time!")
 	  UI:SetAutoFinish(false)
 	  UI:SetCenter(false)
-  end 
+  end
   ]]--
   UI:SetAutoFinish(true)
-  UI:SetCenter(true)  
-  UI:WaitShowDialogue("There's nothing here right now.\nCome back again another time!")
+  UI:SetCenter(true)
+  UI:WaitShowDialogue("Il n'y a rien ici pour le moment.\nRevenez une autre fois !")
   UI:SetAutoFinish(false)
   UI:SetCenter(false)
 
   partner.IsInteracting = false
   GROUND:CharEndAnim(partner)
-  GROUND:CharEndAnim(hero)	
+  GROUND:CharEndAnim(hero)
 end
 
 --Change this to a little cutscene like how chimecho comes out to see you? Whoever ends up running the assmebly should come out to see you
@@ -2853,38 +2853,38 @@ function metano_town.Assembly_Action(obj, activator)
     partner.IsInteracting = true
 	AI:DisableCharacterAI(partner)
     GROUND:CharSetAnim(partner, 'None', true)
-    GROUND:CharSetAnim(hero, 'None', true)		
+    GROUND:CharSetAnim(hero, 'None', true)
     GeneralFunctions.TurnTowardsLocation(hero, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
     GeneralFunctions.TurnTowardsLocation(partner, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
-	
+
 	--A note prevents use of assembly during Chapter 5's prep
 	if SV.ChapterProgression.Chapter == 5 then
 		UI:ResetSpeaker(false)
 		UI:SetCenter(true)
-		UI:WaitShowDialogue("Oh?[pause=0] There's a note on the signpost...")
-		UI:WaitShowDialogue('"The assembly is closed while the Adventurer' .. "'s" .. ' Guild is away on an expedition!"')
-		UI:WaitShowDialogue('"Sorry for any inconvenience!"[pause=30]\n-' .. CharacterEssentials.GetCharacterName("Audino"))
+		UI:WaitShowDialogue("Oh ?[pause=0]Il y a une note sur le panneau...")
+		UI:WaitShowDialogue("\"L'assemblée est fermée pendant que la Guilde des Aventuriers est en expédition !\"")
+		UI:WaitShowDialogue("\"Désolé pour tout inconvénient!\"[pause=30]-" .. CharacterEssentials.GetCharacterName("Audino"))
 		UI:SetCenter(false)
-	
+
 	    partner.IsInteracting = false
 	    AI:EnableCharacterAI(partner)
 	    AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
 	    GROUND:CharEndAnim(partner)
 	    GROUND:CharEndAnim(hero)
-		
+
 		return
 	end
-	
-	
+
+
 	UI:ResetSpeaker()
 	UI:SetCenter(true)
 	UI:SetAutoFinish(true)
-	UI:ChoiceMenuYesNo("Ring the bell and summon " .. CharacterEssentials.GetCharacterName("Audino") .. "?")
+	UI:ChoiceMenuYesNo("Sonner la cloche et invoquer " .. CharacterEssentials.GetCharacterName("Audino") .. " ?")
 	UI:WaitForChoice()
 	local result = UI:ChoiceResult()
 	UI:SetCenter(false)
 	UI:SetAutoFinish(false)
-	
+
 	if result then
 		--Ring the bell and summon audino
 		SOUND:PlayBattleSE('EVT_Assembly_Bell')
@@ -2892,11 +2892,11 @@ function metano_town.Assembly_Action(obj, activator)
 		GAME:WaitFrames(24)
 		GROUND:ObjectSetAnim(obj, 10, 0, 3, Direction.Down, 1)
 		GROUND:ObjectSetDefaultAnim(obj, 'Assembly', 0, 0, 0, Direction.Down)
-		
+
 		--abuse the bell and it no longer works
-		if SV.TemporaryFlags.AudinoSummonCount >= 10 then 
+		if SV.TemporaryFlags.AudinoSummonCount >= 10 then
 			GAME:WaitFrames(60)
-			UI:WaitShowDialogue("...Nobody's coming.[pause=0] Perhaps you shouldn't have abused the bell...")
+			UI:WaitShowDialogue("...Personne ne vient.[pause=0]Vous n'auriez peut-être pas dû abuser de la cloche...")
 		else
 			GAME:FadeOut(false, 40)
 			GROUND:TeleportTo(hero, 1276, 608, Direction.Up)
@@ -2906,22 +2906,22 @@ function metano_town.Assembly_Action(obj, activator)
 			audino.IsInteracting = true
 			GAME:MoveCamera(1268, 600, 1, false)
 			GAME:FadeIn(40)
-			
+
 			UI:SetSpeaker(audino)
 			SV.TemporaryFlags.AudinoSummonCount = SV.TemporaryFlags.AudinoSummonCount + 1
 			if SV.TemporaryFlags.AudinoSummonCount == 3 then
-				UI:WaitShowDialogue("Phew![pause=0] You two sure need to use the assembly a lot today!")
+				UI:WaitShowDialogue("Ouf ![pause=0]Vous avez certainement besoin de beaucoup utiliser l'assemblage aujourd'hui !")
 			elseif SV.TemporaryFlags.AudinoSummonCount == 6 then
 				UI:SetSpeakerEmotion("Pain")
 				GROUND:CharSetEmote(audino, "sweating", 1)
-				UI:WaitShowDialogue("Huff...[pause=0] Puff...[pause=0] Y-you've certainly got me doing a lot of running around today,[pause=10] huh?")
+				UI:WaitShowDialogue("Huff...[pause=0]Puff...[pause=0]O-tu m'as certainement fait beaucoup courir aujourd'hui,[pause=10], hein ?")
 				GAME:WaitFrames(20)
 				GeneralFunctions.ShakeHead(audino)
 			elseif SV.TemporaryFlags.AudinoSummonCount == 9 then
 				UI:SetSpeakerEmotion("Dizzy")
 				GROUND:CharSetEmote(audino, "sweating", 1)
-				UI:WaitShowDialogue("Hurf...[pause=0] A-all this r-running around is t-too much...[pause=0]\nI'm e-exhausted...")
-				UI:WaitShowDialogue("P-please...[pause=0] D-don't abuse the b-bell...")
+				UI:WaitShowDialogue("Hurf...[pause=0]A-toutes ces r-courir, c'est trop...[pause=0]Je suis épuisé...")
+				UI:WaitShowDialogue("P-s'il vous plaît...[pause=0]D-n'abusez pas de la clochette...")
 				GAME:WaitFrames(40)
 				GeneralFunctions.ShakeHead(audino)
 			elseif SV.TemporaryFlags.AudinoSummonCount == 10 then
@@ -2932,20 +2932,20 @@ function metano_town.Assembly_Action(obj, activator)
 				GeneralFunctions.Hop(audino)
 				GROUND:CharSetAnim(audino, "None", true)
 				UI:SetSpeakerEmotion("Determined")
-				UI:WaitShowDialogue("I'm starting to t-think you two are d-doing this on purpose!")
-				UI:WaitShowDialogue("Well I'm not f-falling for it anymore![pause=0] If you want to use the assembly anymore today,[pause=10] you come to me!")
+				UI:WaitShowDialogue("Je commence à croire que vous faites ça exprès !")
+				UI:WaitShowDialogue("Eh bien, je ne craque plus ![pause=0]Si vous souhaitez continuer à utiliser l'assemblage aujourd'hui,[pause=10], venez me voir !")
 				GAME:WaitFrames(10)
 			else
-				UI:WaitShowDialogue(hero:GetDisplayName() .. "! " .. partner:GetDisplayName() .. "! You r-rang?")
+				UI:WaitShowDialogue(hero:GetDisplayName() .. "! " .. partner:GetDisplayName() .. "! Vous avez sonné ?")
 			end
-			
+
 			UI:SetSpeakerEmotion("Normal")
-			
+
 			--she won't service you if you make her angry
-			if SV.TemporaryFlags.AudinoSummonCount < 10 then 
+			if SV.TemporaryFlags.AudinoSummonCount < 10 then
 				GAME:WaitFrames(20)
 				AudinoAssembly.Assembly(audino)
-			end 
+			end
 			GAME:FadeOut(false, 40)
 			GAME:GetCurrentGround():RemoveTempChar(audino)
 			GAME:MoveCamera(0,0,1,true)
@@ -2958,7 +2958,7 @@ function metano_town.Assembly_Action(obj, activator)
    AI:EnableCharacterAI(partner)
    AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
    GROUND:CharEndAnim(partner)
-   GROUND:CharEndAnim(hero)	
+   GROUND:CharEndAnim(hero)
 
 end
 
@@ -2970,29 +2970,29 @@ function metano_town.Well_Action(obj, activator)
   local partner = CH('Teammate1')
   partner.IsInteracting = true
   GROUND:CharSetAnim(partner, 'None', true)
-  GROUND:CharSetAnim(hero, 'None', true)		
+  GROUND:CharSetAnim(hero, 'None', true)
   GeneralFunctions.TurnTowardsLocation(hero, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
   GeneralFunctions.TurnTowardsLocation(partner, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
-	
-  UI:ChoiceMenuYesNo("Would you like to throw a " .. STRINGS:Format("\\uE024") .. " in?")
+
+  UI:ChoiceMenuYesNo("Veux-tu lancer un " .. STRINGS:Format("\\uE024") .. " in?")
   UI:WaitForChoice()
   local result = UI:ChoiceResult()
-  if result then 
+  if result then
 	  local money = GAME:GetPlayerMoney()
-	  if money < 1 then 
-		UI:WaitShowDialogue("You don't have any money!")
-	  else 
+	  if money < 1 then
+		UI:WaitShowDialogue("Vous n'avez pas d'argent !")
+	  else
 		GAME:RemoveFromPlayerMoney(1)
 		SOUND:PlayBattleSE("_UNK_DUN_Water_Drop")
 		UI:WaitShowDialogue("You threw a " .. STRINGS:Format("\\uE024") .. " into the well!\nMay good luck come your way!")
 	  end
-   end 
+   end
    UI:SetCenter(false)
    partner.IsInteracting = false
    GROUND:CharEndAnim(partner)
-   GROUND:CharEndAnim(hero)	
-end   
-   
+   GROUND:CharEndAnim(hero)
+end
+
 function metano_town.RemoveMerchantNicknames()
 	local green_kec = CH('Shop_Owner')
 	local purp_kec = CH('TM_Owner')
@@ -3005,7 +3005,7 @@ function metano_town.RemoveMerchantNicknames()
 	local stunky = CH('Red_Merchant')
 	local farfetchd = CH('Green_Merchant')
 	local growlithe = CH('Growlithe')
-	
+
 	green_kec.Data.Nickname = 'Kecleon'
 	purp_kec.Data.Nickname = 'Kecleon'
 	kanga.Data.Nickname = 'Kangaskhan'
@@ -3018,7 +3018,7 @@ function metano_town.RemoveMerchantNicknames()
 	farfetchd.Data.Nickname = "Farfetch'd"
 	growlithe.Data.Nickname = 'Growlithe'
 
-end 
+end
 
 function metano_town.SetMerchantNicknames()
 	local green_kec = CH('Shop_Owner')
@@ -3032,7 +3032,7 @@ function metano_town.SetMerchantNicknames()
 	local stunky = CH('Red_Merchant')
 	local farfetchd = CH('Green_Merchant')
 	local growlithe = CH('Growlithe')
-	
+
 	green_kec.Data.Nickname = CharacterEssentials.GetCharacterName('Kecleon')
 	purp_kec.Data.Nickname = CharacterEssentials.GetCharacterName('Kecleon_Purple')
 	kanga.Data.Nickname = CharacterEssentials.GetCharacterName('Kangaskhan')

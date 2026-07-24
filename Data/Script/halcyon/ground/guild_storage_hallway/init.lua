@@ -27,7 +27,7 @@ local guild_storage_hallway = {}
 function guild_storage_hallway.Init(map)
 	DEBUG.EnableDbgCoro()
 	print('=>> Init_guild_storage_hallway<<=')
-	
+
 	COMMON.RespawnAllies()
 	PartnerEssentials.InitializePartnerSpawn()
 
@@ -68,7 +68,7 @@ function guild_storage_hallway.PlotScripting()
 	if SV.ChapterProgression.Chapter == 1 then
 		if not SV.Chapter1.MetAudino then --bump into audino for first time if you haven't yet
 			guild_storage_hallway_ch_1.MeetAudino()
-		else 
+		else
 			GAME:FadeIn(20)
 		end
 	else
@@ -121,9 +121,9 @@ function guild_storage_hallway.Left_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro()
   local partner = CH('Teammate1')
   local hero = CH('PLAYER')
-  GeneralFunctions.StartPartnerConversation("H-Hey,[pause=10] that's the way to the Guildmaster's room!", "Surprised")
+  GeneralFunctions.StartPartnerConversation("H-Hé,[pause=10], c'est le chemin vers la chambre du maître de guilde !", "Surprised")
   UI:SetSpeakerEmotion("Worried")
-  UI:WaitShowDialogue("We aren't allowed in there.[pause=0] Let's turn back before we get into any trouble.")
+  UI:WaitShowDialogue("Nous ne sommes pas autorisés à entrer là-bas.[pause=0]Faisons demi-tour avant d'avoir des ennuis.")
   GeneralFunctions.EndConversation(partner)
 end
 

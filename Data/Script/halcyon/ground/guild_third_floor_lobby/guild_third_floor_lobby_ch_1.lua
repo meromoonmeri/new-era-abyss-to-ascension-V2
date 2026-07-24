@@ -6,16 +6,16 @@ require 'halcyon.CharacterEssentials'
 guild_third_floor_lobby_ch_1 = {}
 
 function guild_third_floor_lobby_ch_1.SetupGround()
-	local door = RogueEssence.Ground.GroundObject(RogueEssence.Content.ObjAnimData("Closed_Guild_Door", 1, 0, 0), 
+	local door = RogueEssence.Ground.GroundObject(RogueEssence.Content.ObjAnimData("Closed_Guild_Door", 1, 0, 0),
 													RogueElements.Rect(424, 160, 48, 64),
-													RogueElements.Loc(8, -8), 
-													false, 
+													RogueElements.Loc(8, -8),
+													false,
 													"Event_Object_1")
 	door:ReloadEvents()
 	GAME:GetCurrentGround():AddTempObject(door)
-	
+
 	GROUND:Hide('Door_Exit')
-	GAME:FadeIn(20)	
+	GAME:FadeIn(20)
 end
 
 function guild_third_floor_lobby_ch_1.Event_Object_1_Action(obj, activator)
@@ -24,13 +24,13 @@ function guild_third_floor_lobby_ch_1.Event_Object_1_Action(obj, activator)
 	partner.IsInteracting = true
     GROUND:CharSetAnim(partner, 'None', true)
     GROUND:CharSetAnim(hero, 'None', true)
-	
+
 	UI:ResetSpeaker(false)
 	UI:SetCenter(true)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_001']))
 	UI:SetCenter(false)
-	
-	partner.IsInteracting = false	
+
+	partner.IsInteracting = false
 	GROUND:CharEndAnim(partner)
 	GROUND:CharEndAnim(hero)
 end
@@ -45,33 +45,33 @@ function guild_third_floor_lobby_ch_1.GoToGuildmasterRoom()
 	AI:DisableCharacterAI(partner)
 	UI:ResetSpeaker()
 	GAME:MoveCamera(600, 240, 1, false)
-	
-	
-	local door = RogueEssence.Ground.GroundObject(RogueEssence.Content.ObjAnimData("Closed_Guild_Door", 1, 0, 0), 
+
+
+	local door = RogueEssence.Ground.GroundObject(RogueEssence.Content.ObjAnimData("Closed_Guild_Door", 1, 0, 0),
 													RogueElements.Rect(416, 160, 64, 64),
-													RogueElements.Loc(0, -8), 
-													false, 
+													RogueElements.Loc(0, -8),
+													false,
 													"Closed_Door")
 	door:ReloadEvents()
 	GAME:GetCurrentGround():AddTempObject(door)
-		
-	local noctowl = 
+
+	local noctowl =
 		CharacterEssentials.MakeCharactersFromList({
 			{"Noctowl", 600, 240, Direction.Up}
 		})
-	
-	
+
+
 	GAME:FadeIn(40)
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(noctowl)
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_002']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_003']))
-	
+
 	GAME:WaitFrames(20)
 	GROUND:CharAnimateTurnTo(noctowl, Direction.Left, 4)
-	local coro1 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(noctowl, 440, 240, false, 1) 
+	local coro1 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(noctowl, 440, 240, false, 1)
 												  GROUND:CharAnimateTurnTo(noctowl, Direction.Right, 4) end)
 	local coro2 = TASK:BranchCoroutine(function() GAME:WaitFrames(15)
 												  GROUND:MoveToPosition(partner, 584, 240, false, 1)
@@ -82,13 +82,13 @@ function guild_third_floor_lobby_ch_1.GoToGuildmasterRoom()
 												  GeneralFunctions.EightWayMove(hero, 512, 240, false, 1)
 												  GeneralFunctions.EightWayMove(hero, 472, 272, false, 1)
 												  GROUND:CharTurnToChar(hero, noctowl) end)
-	local coro4 = TASK:BranchCoroutine(function() GAME:MoveCamera(466, 240, 136, false)	end)							
+	local coro4 = TASK:BranchCoroutine(function() GAME:MoveCamera(466, 240, 136, false)	end)
 	TASK:JoinCoroutines({coro1, coro2, coro3, coro4})
 
 	--wait there please.
 	GAME:WaitFrames(20)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_004']))
-	
+
 	--[[GeneralFunctions.DoubleHop(partner, 'None', 6, 6)
 	UI:SetSpeaker(partner)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_005']))
@@ -100,29 +100,29 @@ function guild_third_floor_lobby_ch_1.GoToGuildmasterRoom()
 	GAME:WaitFrames(20)
 	GROUND:CharAnimateTurnTo(noctowl, Direction.Up, 4)
 
-	
+
 	coro1 = TASK:BranchCoroutine(function() GROUND:MoveInDirection(noctowl, Direction.Up, 16, false, 1)
 											end)
 	coro2 = TASK:BranchCoroutine(function() GeneralFunctions.FaceMovingCharacter(hero, noctowl) end)
 	coro3 = TASK:BranchCoroutine(function() GeneralFunctions.FaceMovingCharacter(partner, noctowl) end)
 	TASK:JoinCoroutines({coro1, coro2, coro3})
-	
+
 	--open and close the door
 	GROUND:Hide(door.EntName)
 	SOUND:PlayBattleSE('EVT_Chest_Click')
 	GAME:WaitFrames(40)
 	GROUND:MoveInDirection(noctowl, Direction.Up, 8, false, 1)
-	GROUND:Hide(noctowl.EntName) 
+	GROUND:Hide(noctowl.EntName)
 	GAME:WaitFrames(20)
 	GROUND:Unhide(door.EntName)
 	SOUND:PlayBattleSE('EVT_Chest_Click')
 
-	
+
 	GAME:WaitFrames(60)
 	GROUND:CharTurnToCharAnimated(partner, hero, 4)
 	GROUND:CharTurnToCharAnimated(hero, partner, 4)
 	GeneralFunctions.DoubleHop(partner, nil, nil, nil, nil, true)
-	
+
 	--omg im so excited but also so scared
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Inspired")
@@ -141,14 +141,14 @@ function guild_third_floor_lobby_ch_1.GoToGuildmasterRoom()
 --[[ I think it's too early for serious emotional support between these two but im not deleting all this scripting
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_011']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_012']))
-	
+
 	GAME:WaitFrames(20)
 	GeneralFunctions.HeroDialogue(hero, "(It must be hard for " .. partner:GetDisplayName() .. " to relax in a situation like this...)", "Normal")
 	GeneralFunctions.HeroDialogue(hero, "(But if " .. GeneralFunctions.GetPronoun(partner, "they") .. " doesn't calm down,[pause=10] I don't think we have a shot at joining here.)", "Normal")
 	GAME:WaitFrames(20)
 	GeneralFunctions.HeroSpeak(hero, 60)
 	GAME:WaitFrames(20)
-	
+
 	--calm down partner!!
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Inspired")
@@ -159,13 +159,13 @@ function guild_third_floor_lobby_ch_1.GoToGuildmasterRoom()
 	GAME:WaitFrames(20)
 	GROUND:CharSetAnim(partner, "None", true)
 	GROUND:CharSetEmote(partner, "", 0)
-	
+
 	UI:SetSpeakerEmotion("Sigh")
 	coro1 = TASK:BranchCoroutine(function() UI:WaitShowTimedDialogue("In...[pause=40] Out...[pause=40] In...[pause=40] Out...", 40) end)
 	coro2 = TASK:BranchCoroutine(function() GeneralFunctions.DoAnimation(partner, 'DeepBreath')
 											GeneralFunctions.DoAnimation(partner, 'DeepBreath') end)
 	TASK:JoinCoroutines({coro1, coro2})
-	
+
 	GAME:WaitFrames(20)
 	--todo: two hops
 	UI:SetSpeakerEmotion("Sad")
@@ -173,7 +173,7 @@ function guild_third_floor_lobby_ch_1.GoToGuildmasterRoom()
 	GROUND:CharSetEmote(partner, "sweating", 1)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_017']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_018']))
-	
+
 	--the partner is great he just needs to believe in himself :3
 	--ty hero for the peptalk
 	GAME:WaitFrames(20)
@@ -201,14 +201,14 @@ function guild_third_floor_lobby_ch_1.GoToGuildmasterRoom()
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_022'], hero:GetDisplayName()))
 	GAME:WaitFrames(20)
 	GeneralFunctions.HeroDialogue(hero, "(I'm glad I was able to get through to " .. GeneralFunctions.GetPronoun(partner, "them") .. "!)", "Happy")
-]]--	
-	
+]]--
+
 	--GeneralFunctions.HeroDialogue(hero, "(" .. partner:GetDisplayName() .. " seems to be more at ease now.[pause=0] Perhaps some of " .. GeneralFunctions.GetPronoun(partner, "their") .. " anxiety has melted away...)", "Normal")
 	GAME:WaitFrames(20)
-	GeneralFunctions.HeroDialogue(hero, "(I don't know much about this Guildmaster...)", "Worried")
-	GeneralFunctions.HeroDialogue(hero, "(But " .. partner:GetDisplayName() .. " seems to have a high opinion of him.[pause=0] I'm interested to see what he's actually like.)", "Normal")
+	GeneralFunctions.HeroDialogue(hero, "(Je ne sais pas grand-chose de ce maître de guilde...)", "Worried")
+	GeneralFunctions.HeroDialogue(hero, "(Mais " .. partner:GetDisplayName() .. " semble avoir une haute opinion de lui.[pause=0]Je suis curieux de voir à quoi il ressemble réellement.)", "Normal")
 	GAME:WaitFrames(20)
-	
+
 	GROUND:CharSetEmote(partner, "", 0)
 	GROUND:CharSetAnim(partner, "None", true)
 	UI:SetSpeaker(partner)
@@ -219,28 +219,28 @@ function guild_third_floor_lobby_ch_1.GoToGuildmasterRoom()
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_024']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_025'], hero:GetDisplayName()))
 	GAME:WaitFrames(20)
-	
-	GeneralFunctions.HeroDialogue(hero, "(Truthfully,[pause=10] I don't know what's gonna happen once we step through that door...)", "Worried")
-	GeneralFunctions.HeroDialogue(hero, "(But given my amnesia and " .. partner:GetDisplayName() .. "'s nerves,[pause=10] our odds don't seem too great to me...)", "Worried")
+
+	GeneralFunctions.HeroDialogue(hero, "(En vérité,[pause=10], je ne sais pas ce qui va se passer une fois que nous aurons franchi cette porte...)", "Worried")
+	GeneralFunctions.HeroDialogue(hero, "(Mais vu mon amnésie et les nerfs de " .. partner:GetDisplayName() .. ",[pause=10]nos chances ne me semblent pas trop grandes...)", "Worried")
 	GAME:WaitFrames(20)
-	
-	GeneralFunctions.HeroDialogue(hero, "(Even so...[pause=0] I have this strong feeling that everything's going to work out.)", "Normal")
-	GeneralFunctions.HeroDialogue(hero, "(This feeling...[pause=0] It makes me certain we'll join the guild!)", "Normal")
+
+	GeneralFunctions.HeroDialogue(hero, "(Même ainsi...[pause=0], j'ai le fort sentiment que tout va s'arranger.)", "Normal")
+	GeneralFunctions.HeroDialogue(hero, "(Ce sentiment...[pause=0]Cela me rend certain que nous rejoindrons la guilde !)", "Normal")
 	GAME:WaitFrames(20)
-	
+
 	GeneralFunctions.HeroSpeak(hero, 60)
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_026']))
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_027']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_028']))
 	GAME:WaitFrames(60)
-	
+
 	GROUND:Hide(door.EntName)
 	SOUND:PlayBattleSE('EVT_Chest_Click')
 	--noctowl returns
@@ -270,7 +270,7 @@ function guild_third_floor_lobby_ch_1.GoToGuildmasterRoom()
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_029']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L1_030']))
-	
+
 	GAME:WaitFrames(20)
 	GROUND:CharAnimateTurnTo(noctowl, Direction.Up, 4)
 	coro1 = TASK:BranchCoroutine(function() GROUND:MoveInDirection(noctowl, Direction.Up, 24, false, 1)
@@ -279,22 +279,22 @@ function guild_third_floor_lobby_ch_1.GoToGuildmasterRoom()
 	coro3 = TASK:BranchCoroutine(function() GeneralFunctions.FaceMovingCharacter(partner, noctowl) end)
 	TASK:JoinCoroutines({coro1, coro2, coro3})
 	GAME:WaitFrames(40)
-	
+
 	--let's do it!
 	GROUND:CharTurnToCharAnimated(partner, hero, 4)
 	GROUND:CharTurnToCharAnimated(hero, partner, 4)
 	GAME:WaitFrames(20)
-	
+
 	coro1 = TASK:BranchCoroutine(function() GeneralFunctions.DoAnimation(hero, 'Nod') end)
 	coro2 = TASK:BranchCoroutine(function() GeneralFunctions.DoAnimation(partner, 'Nod') end)
-	TASK:JoinCoroutines({coro1, coro2})	
+	TASK:JoinCoroutines({coro1, coro2})
 	GAME:WaitFrames(20)
-	
+
 	GROUND:MoveToPosition(partner, 440, 240, false, 1)
-	
+
 	coro1 = TASK:BranchCoroutine(function() GeneralFunctions.EightWayMove(hero, 440, 216, false, 1) GROUND:Hide(hero.EntName) end)
 	coro2 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(partner, 440, 216, false, 1) GROUND:Hide(partner.EntName) end)
-	
+
 	TASK:JoinCoroutines({coro1, coro2})
 	GAME:FadeOut(false, 40)
 	GAME:CutsceneMode(false)

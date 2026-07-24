@@ -8,15 +8,15 @@ guild_third_floor_lobby_ch_2 = {}
 
 function guild_third_floor_lobby_ch_2.SetupGround()
 
-	--noctowl should not appear if this is the 2nd day, as he would be down on the 2nd floor 
-	if SV.Chapter2.EnteredRiver or not SV.Chapter2.FinishedFirstDay then 
+	--noctowl should not appear if this is the 2nd day, as he would be down on the 2nd floor
+	if SV.Chapter2.EnteredRiver or not SV.Chapter2.FinishedFirstDay then
 		local noctowl = CharacterEssentials.MakeCharactersFromList({
 			{'Noctowl', 'Noctowl'}
 		})
 		GROUND:CharSetAnim(noctowl, 'Idle', true)
 	end
-	
-	GAME:FadeIn(20)	
+
+	GAME:FadeIn(20)
 end
 
 
@@ -25,21 +25,21 @@ end
 --NPC Scripts
 ----------------
 function guild_third_floor_lobby_ch_2.Noctowl_Action(chara, activator)
-	if not SV.Chapter2.EnteredRiver then 
-		GeneralFunctions.StartConversation(chara, "Go to Ledian Dojo and take the basic lesson with Sensei " .. CharacterEssentials.GetCharacterName('Ledian') .. ".")
+	if not SV.Chapter2.EnteredRiver then
+		GeneralFunctions.StartConversation(chara, "Allez au Ledian Dojo et suivez la leçon de base avec Sensei " .. CharacterEssentials.GetCharacterName('Ledian') .. ".")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_001']))
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_002']))
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_003']))
 		GeneralFunctions.EndConversation(chara)
-	else 
+	else
 		local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("illuminant_riverbed")
-		GeneralFunctions.StartConversation(chara, zone:GetColoredName() .. " is located to the north of town.")
+		GeneralFunctions.StartConversation(chara, zone:GetColoredName() .. " est situé au nord de la ville.")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_004'], CharacterEssentials.GetCharacterName("Numel")))
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_005']))
 		GeneralFunctions.EndConversation(chara)
 	end
 end
-	
+
 
 
 ------------------------
@@ -55,7 +55,7 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 	AI:DisableCharacterAI(partner)
 	UI:ResetSpeaker()
 	--create characters
-	local tropius, noctowl, audino, snubbull, growlithe, zigzagoon, girafarig, breloom, mareep, cranidos = 
+	local tropius, noctowl, audino, snubbull, growlithe, zigzagoon, girafarig, breloom, mareep, cranidos =
 		CharacterEssentials.MakeCharactersFromList({
 			{'Tropius', 'Tropius'},
 			{'Noctowl', 'Noctowl'},
@@ -67,13 +67,13 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 			{'Breloom', 'Breloom'},
 			{'Mareep', 'Mareep'},
 			{'Cranidos', 'Cranidos'}})
-	
+
 	GeneralFunctions.CenterCamera({snubbull, tropius})
 	GROUND:TeleportTo(partner, 632, 336, Direction.Left)
 	GROUND:TeleportTo(hero, 680, 336, Direction.Left)
 	GAME:FadeIn(40)
 	GAME:WaitFrames(40)
-	
+
 	--hero and partner rush in
 	local coro1 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(partner, 400, 336, true, 3)
 												  GeneralFunctions.EightWayMove(partner, MRKR("Partner").X, MRKR("Partner").Y, true, 3)
@@ -82,9 +82,9 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 												  GeneralFunctions.EightWayMove(hero, MRKR("Hero").X, MRKR("Hero").Y, true, 3)
 												  GROUND:CharAnimateTurnTo(hero, MRKR("Hero").Direction, 4) end)
 	TASK:JoinCoroutines({coro1, coro2})
-	
+
 	GAME:WaitFrames(40)
-	
+
 	--tropius looks around, looks like everyone's here
 	GROUND:CharAnimateTurnTo(tropius, Direction.DownLeft, 8)
 	GAME:WaitFrames(40)
@@ -95,16 +95,16 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 	UI:SetSpeaker(tropius)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_006']))
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeakerEmotion("Happy")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_007']))
 	GAME:WaitFrames(20)
-	
+
 	GROUND:CharAnimateTurnTo(tropius, Direction.DownLeft, 4)
 	UI:SetSpeakerEmotion("Happy")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_008'], GAME:GetTeamName(), hero:GetDisplayName(), partner:GetDisplayName()))
 	GAME:WaitFrames(20)
-	
+
 	--everyone cheers!
 	SOUND:LoopBattleSE('EVT_Applause_Cheer')
 	UI:SetSpeaker('[color=#00FFFF]Everyone[color]', true, "", -1, "", RogueEssence.Data.Gender.Unknown)
@@ -119,7 +119,7 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 												  GROUND:CharSetAnim(zigzagoon, "Idle", true) end)
 	local coro5 = TASK:BranchCoroutine(function() GAME:WaitFrames(30)
 												  GROUND:CharAnimateTurnTo(cranidos, Direction.Left, 4) end)
-	local coro6 = TASK:BranchCoroutine(function() GROUND:CharAnimateTurnTo(mareep, Direction.Left, 4) 
+	local coro6 = TASK:BranchCoroutine(function() GROUND:CharAnimateTurnTo(mareep, Direction.Left, 4)
 												  GROUND:CharSetEmote(mareep, "happy", 0)
 												  GROUND:CharSetAnim(mareep, "Twirl", true) end)
 	local coro7 = TASK:BranchCoroutine(function() GAME:WaitFrames(10)
@@ -131,7 +131,7 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 												  GROUND:CharSetAnim(girafarig, "Idle", true) end)
 	local coro9 = TASK:BranchCoroutine(function() GAME:WaitFrames(10)
 											      GROUND:CharAnimateTurnTo(audino, Direction.Left, 4)
-												  GROUND:CharSetEmote(audino, "glowing", 0) 
+												  GROUND:CharSetEmote(audino, "glowing", 0)
 												  GROUND:CharSetAnim(audino, "Idle", true) end)
 	local coro10 = TASK:BranchCoroutine(function() GAME:WaitFrames(10)
 												   GROUND:CharAnimateTurnTo(snubbull, Direction.Left, 4) end)
@@ -142,7 +142,7 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 
 	TASK:JoinCoroutines({coro1, coro2, coro3, coro4, coro5, coro6, coro7, coro8, coro9, coro10, coro11, coro12, coro13})
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Joyous")
 	GROUND:CharSetEmote(partner, "happy", 0)
@@ -151,7 +151,7 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 	GAME:WaitFrames(40)
 	GROUND:CharEndAnim(partner)
 	SOUND:StopBattleSE('EVT_Applause_Cheer')
-	
+
 	--turn back towards guildmaster
 	coro1 = TASK:BranchCoroutine(function() GROUND:CharAnimateTurnTo(tropius, Direction.Down, 4) end)
 	coro2 = TASK:BranchCoroutine(function() GROUND:CharAnimateTurnTo(noctowl, Direction.Down, 4) end)
@@ -160,7 +160,7 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 											GROUND:CharAnimateTurnTo(growlithe, Direction.UpLeft, 4)
 	coro4 = TASK:BranchCoroutine(function() --GAME:WaitFrames(20)
 											GROUND:CharSetEmote(zigzagoon, "", 0)
-											GROUND:CharEndAnim(zigzagoon) 
+											GROUND:CharEndAnim(zigzagoon)
 											GROUND:CharAnimateTurnTo(zigzagoon, Direction.UpLeft, 4) end)
 	coro5 = TASK:BranchCoroutine(function() --GAME:WaitFrames(30)
 											GROUND:CharAnimateTurnTo(cranidos, Direction.Up, 4) end)
@@ -175,8 +175,8 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 											GROUND:CharEndAnim(girafarig)
 											GROUND:CharAnimateTurnTo(girafarig, Direction.Up, 4) end)
 	coro9 = TASK:BranchCoroutine(function() --GAME:WaitFrames(10)
-											GROUND:CharSetEmote(audino, "", 0) 
-											GROUND:CharEndAnim(audino) 
+											GROUND:CharSetEmote(audino, "", 0)
+											GROUND:CharEndAnim(audino)
 											GROUND:CharAnimateTurnTo(audino, Direction.Up, 4) end)
 	coro10 = TASK:BranchCoroutine(function() --GAME:WaitFrames(10)
 											 GROUND:CharAnimateTurnTo(snubbull, Direction.Up, 4) end)
@@ -186,14 +186,14 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 											 GROUND:CharAnimateTurnTo(partner, Direction.UpRight, 4) end)
 
 	TASK:JoinCoroutines({coro1, coro2, coro3, coro4, coro5, coro6, coro7, coro8, coro9, coro10, coro11, coro12})
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(tropius)
 	UI:SetSpeakerEmotion("Happy")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_010']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_011']))
 	GAME:WaitFrames(20)
-	
+
 	--morning cheer
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_012']))
@@ -201,7 +201,7 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 	GROUND:CharSetEmote(tropius, "happy", 0)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_014']))
 	GAME:WaitFrames(20)
-	
+
 
 	UI:SetSpeaker('[color=#00FFFF]Everyone[color]', true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	GROUND:CharSetEmote(tropius, "", 0)
@@ -211,7 +211,7 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 	GROUND:CharSetEmote(breloom, "happy", 0)
 	GROUND:CharSetEmote(audino, "happy", 0)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_015']))
-	
+
 	GAME:WaitFrames(20)
 	GROUND:CharSetEmote(growlithe, "", 0)
 	GROUND:CharSetEmote(zigzagoon, "", 0)
@@ -222,17 +222,17 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 	UI:SetSpeakerEmotion("Happy")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_016']))
 	GAME:WaitFrames(20)
-	
+
 	--HURRAH!
 	GROUND:CharSetEmote(growlithe, "happy", 0)
 	GROUND:CharSetEmote(zigzagoon, "happy", 0)
 	GROUND:CharSetEmote(mareep, "happy", 0)
 	GROUND:CharSetEmote(breloom, "happy", 0)
-	GROUND:CharSetEmote(audino, "happy", 0)	
+	GROUND:CharSetEmote(audino, "happy", 0)
 	--turn pokemon on the edges up so pose is appropriate
 	GROUND:EntTurn(growlithe, Direction.Up)
 	GROUND:EntTurn(zigzagoon, Direction.Up)
-	
+
 	GROUND:CharSetAction(growlithe, RogueEssence.Ground.PoseGroundAction(growlithe.Position, growlithe.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
 	GROUND:CharSetAction(zigzagoon, RogueEssence.Ground.PoseGroundAction(zigzagoon.Position, zigzagoon.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
 	GROUND:CharSetAction(breloom, RogueEssence.Ground.PoseGroundAction(breloom.Position, breloom.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
@@ -240,8 +240,8 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 	GROUND:CharSetAction(cranidos, RogueEssence.Ground.PoseGroundAction(cranidos.Position, cranidos.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
 	GROUND:CharSetAction(mareep, RogueEssence.Ground.PoseGroundAction(mareep.Position, mareep.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
 	GROUND:CharSetAction(audino, RogueEssence.Ground.PoseGroundAction(audino.Position, audino.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
-	GROUND:CharSetAction(snubbull, RogueEssence.Ground.PoseGroundAction(snubbull.Position, snubbull.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))	
-	UI:SetSpeaker('[color=#00FFFF]Everyone[color]', true, "", -1, "", RogueEssence.Data.Gender.Unknown)	
+	GROUND:CharSetAction(snubbull, RogueEssence.Ground.PoseGroundAction(snubbull.Position, snubbull.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
+	UI:SetSpeaker('[color=#00FFFF]Everyone[color]', true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_017']))
 	GAME:WaitFrames(20)
 	GROUND:CharSetEmote(growlithe, "", 0)
@@ -256,12 +256,12 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 	GROUND:CharEndAnim(cranidos)
 	GROUND:CharEndAnim(mareep)
 	GROUND:CharEndAnim(audino)
-	GROUND:CharEndAnim(snubbull)	
-	
+	GROUND:CharEndAnim(snubbull)
+
 	--everyone leaves
 	GAME:WaitFrames(40)
 	coro1 = TASK:BranchCoroutine(function() guild_third_floor_lobby_helper.ApprenticeLeave(growlithe) end)
-	coro2 = TASK:BranchCoroutine(function() --GAME:WaitFrames(6) 
+	coro2 = TASK:BranchCoroutine(function() --GAME:WaitFrames(6)
 											guild_third_floor_lobby_helper.ApprenticeLeaveBottom(zigzagoon) end)
 	coro3 = TASK:BranchCoroutine(function() --GAME:WaitFrames(10)
 											guild_third_floor_lobby_helper.ApprenticeLeave(mareep) end)
@@ -275,9 +275,9 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 											guild_third_floor_lobby_helper.ApprenticeLeave(breloom) end)
 	coro8 = TASK:BranchCoroutine(function() GAME:WaitFrames(10)
 											guild_third_floor_lobby_helper.ApprenticeLeaveBottom(girafarig) end)
-	coro9 = TASK:BranchCoroutine(function() GAME:WaitFrames(16) 
+	coro9 = TASK:BranchCoroutine(function() GAME:WaitFrames(16)
 											GROUND:CharAnimateTurnTo(partner, Direction.Right, 4) end)
-	coro10 = TASK:BranchCoroutine(function() GAME:WaitFrames(26) 
+	coro10 = TASK:BranchCoroutine(function() GAME:WaitFrames(26)
 											 GROUND:CharAnimateTurnTo(hero, Direction.Right, 4) end)
 
 	TASK:JoinCoroutines({coro1, coro2, coro3, coro4, coro5, coro6, coro7, coro8, coro9, coro10})
@@ -290,11 +290,11 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_018'], GAME:GetTeamName()))
 	GAME:WaitFrames(20)
-	
-	coro1 = TASK:BranchCoroutine(function() GeneralFunctions.EightWayMove(partner, 456, 272, false, 1) 
+
+	coro1 = TASK:BranchCoroutine(function() GeneralFunctions.EightWayMove(partner, 456, 272, false, 1)
 											GROUND:CharAnimateTurnTo(partner, Direction.Up, 4) end)
 	coro2 = TASK:BranchCoroutine(function() GAME:WaitFrames(30)
-											GeneralFunctions.EightWayMove(hero, 424, 272, false, 1) 
+											GeneralFunctions.EightWayMove(hero, 424, 272, false, 1)
 											GROUND:CharAnimateTurnTo(hero, Direction.Up, 4) end)
 	coro3 = TASK:BranchCoroutine(function() GeneralFunctions.FaceMovingCharacter(tropius, partner, 4, Direction.Down) end)
 	coro4 = TASK:BranchCoroutine(function() GeneralFunctions.FaceMovingCharacter(noctowl, partner, 4, Direction.DownRight) end)
@@ -304,18 +304,18 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 	--tropius's little intro and check-in
 	GAME:WaitFrames(20)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_019']))
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Happy")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_020']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_021']))
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(tropius)
 	UI:SetSpeakerEmotion("Happy")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_022']))
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_023']))
@@ -326,7 +326,7 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 	UI:SetSpeakerEmotion("Happy")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_028'], snubbull:GetDisplayName()))
 	UI:SetSpeakerEmotion("Normal")
-	
+
 	GAME:WaitFrames(20)
 	GROUND:CharTurnToCharAnimated(tropius, noctowl, 4)
 	GROUND:CharTurnToCharAnimated(noctowl, tropius, 4)
@@ -335,7 +335,7 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(noctowl)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_030']))
-	
+
 	--tropius takes his leave
 	GAME:WaitFrames(20)
 	coro1 = TASK:BranchCoroutine(function() GAME:WaitFrames(84)
@@ -349,14 +349,14 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 	GAME:WaitFrames(20)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_031']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_032'], CharacterEssentials.GetCharacterName('Ledian')))
-	
-	
+
+
 	GAME:WaitFrames(10)
 	GeneralFunctions.EmoteAndPause(partner, "Question", true)
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_033']))
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(noctowl)
 	UI:SetSpeakerEmotion("Normal")
@@ -365,7 +365,7 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_036']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_037']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_038']))
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Sad")
@@ -374,21 +374,21 @@ function guild_third_floor_lobby_ch_2.FirstMorningMeeting()
 	GAME:WaitFrames(20)
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_040'], noctowl:GetDisplayName()))
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(noctowl)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_041']))
 	GAME:WaitFrames(20)
-	
+
 	GeneralFunctions.PanCamera(448, 268)
 	SV.Chapter2.FirstMorningMeetingDone = true
 	AI:EnableCharacterAI(partner)
 	AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
 
 	GAME:CutsceneMode(false)
-		
-	
-	
+
+
+
 end
 
 
@@ -400,71 +400,71 @@ function guild_third_floor_lobby_ch_2.BeforeFirstDinner()
 	UI:ResetSpeaker()
 	--[[
 	--create characters
-	local snubbull, girafarig, breloom, tail = 
+	local snubbull, girafarig, breloom, tail =
 		CharacterEssentials.MakeCharactersFromList({
 			{'Snubbull', 'Snubbull'},
 			{'Girafarig', 'Girafarig'},
 			{'Breloom', 'Breloom'},
 			{'Tail'})
 
-			
+
 	GAME:MoveCamera(232, 288, 1, false)
 	GROUND:TeleportTo(partner, 632, 336, Direction.Left)
 	GROUND:TeleportTo(hero, 680, 336, Direction.Left)
 	GAME:FadeIn(40)
-	
-	UI:SetSpeaker(breloom) 
+
+	UI:SetSpeaker(breloom)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_042']))
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeaker(partner)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_043']))
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeaker(breloom)
 	UI:SetSpeakerEmotion("Happy")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_044']))
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Happy")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_045']))
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_046']))
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(breloom)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_047'], girafarig:GetDisplayName(), snubbull:GetDisplayName()))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_048'], snubbull:GetDisplayName()))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_049']))
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_050']))
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(girafarig)2
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_051'], snubbull:GetDisplayName()))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_052']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_053'], CharacterEssentials.GetCharacterName("Tail")))
-	
+
 	GAME:WaitFrames(20)
-	UI:SetSpeaker(tail) 
+	UI:SetSpeaker(tail)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_054']))
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(breloom)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_055']))
 	UI:SetSpeakerEmotion("Happy")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_056']))
 	]]--
-	
-	
+
+
 	--create characters
-	local snubbull, girafarig, breloom, zigzagoon, audino, tropius, noctowl, growlithe, cranidos, mareep = 
+	local snubbull, girafarig, breloom, zigzagoon, audino, tropius, noctowl, growlithe, cranidos, mareep =
 		CharacterEssentials.MakeCharactersFromList({
 			{'Snubbull', 32, 332, Direction.Right},
 			{'Girafarig', 248, 332, Direction.Left},
@@ -486,15 +486,15 @@ function guild_third_floor_lobby_ch_2.BeforeFirstDinner()
 	GROUND:CharSetAnim(breloom, "Idle", true)
 	GROUND:CharSetAnim(girafarig, "Idle", true)
 	GAME:FadeIn(20)
-	
+
 	local coro1 = TASK:BranchCoroutine(function() GAME:WaitFrames(10)
 												  GROUND:MoveToPosition(hero, 264, 264, false, 1)
 												  GROUND:CharAnimateTurnTo(hero, Direction.DownLeft) end)
-	local coro2 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(partner, 264, 296, false, 1) 
+	local coro2 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(partner, 264, 296, false, 1)
 												  GROUND:CharAnimateTurnTo(partner, Direction.DownLeft, 4) end)
 
 	TASK:JoinCoroutines({coro1, coro2})
-	
+
 	GAME:WaitFrames(10)
 	UI:SetSpeaker(partner)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_057']))
@@ -505,7 +505,7 @@ function guild_third_floor_lobby_ch_2.BeforeFirstDinner()
 	--put a sfx here
 	UI:SetSpeaker(snubbull)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_058']))
-	
+
 	GAME:WaitFrames(20)
 	SOUND:PlayBattleSE('EVT_Emote_Exclaim_2')
 	coro1 = TASK:BranchCoroutine(function() GROUND:CharSetEmote(partner, "exclaim", 1)
@@ -515,7 +515,7 @@ function guild_third_floor_lobby_ch_2.BeforeFirstDinner()
 											GROUND:CharTurnToCharAnimated(partner, snubbull, 4) end)
 	local coro3 = TASK:BranchCoroutine(function() GROUND:CharSetEmote(girafarig, "notice", 1)
 												  GROUND:CharEndAnim(girafarig)
-												  GROUND:CharTurnToCharAnimated(girafarig, snubbull, 4) end)	
+												  GROUND:CharTurnToCharAnimated(girafarig, snubbull, 4) end)
 	local coro4 = TASK:BranchCoroutine(function() GAME:WaitFrames(30)
 											GROUND:CharSetEmote(breloom, "exclaim", 1)
 											GROUND:CharEndAnim(breloom)
@@ -524,35 +524,35 @@ function guild_third_floor_lobby_ch_2.BeforeFirstDinner()
 											GROUND:CharSetEmote(zigzagoon, "exclaim", 1)
 											GROUND:CharEndAnim(zigzagoon)
 											GROUND:CharTurnToCharAnimated(zigzagoon, snubbull, 4) end)
-											
+
 	TASK:JoinCoroutines({coro1, coro2, coro3, coro4, coro5})
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeakerEmotion("Special0")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_059'], STRINGS:Format("\\u266A")))
-	
+
 	--partner and hero are confused
 	coro1 = TASK:BranchCoroutine(function() GeneralFunctions.DoubleHop(breloom) end)
 	coro2 = TASK:BranchCoroutine(function() GAME:WaitFrames(6)
 											GeneralFunctions.Hop(girafarig) end)
 	coro3 = TASK:BranchCoroutine(function() GAME:WaitFrames(20)
 											GeneralFunctions.DoubleHop(zigzagoon) end)
-	
+
 	TASK:JoinCoroutines({coro1, coro2, coro3})
 
 	GROUND:CharSetAnim(zigzagoon, "Idle", true)
 	GROUND:CharSetAnim(breloom, "Idle", true)
 	GROUND:CharSetAnim(girafarig, "Idle", true)
-	
+
 	GROUND:CharSetEmote(zigzagoon, "happy", 0)
 	GROUND:CharSetEmote(breloom, "happy", 0)
 	GROUND:CharSetEmote(girafarig, "glowing", 0)
-	
+
 	SOUND:LoopBattleSE('EVT_Applause_Cheer')
 	UI:SetSpeaker(breloom:GetDisplayName() .. ', ' .. girafarig:GetDisplayName() .. ', & ' .. zigzagoon:GetDisplayName(), false, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_060']))
 	SOUND:StopBattleSE('EVT_Applause_Cheer')
-	
+
 	GAME:WaitFrames(20)
 	GROUND:CharSetEmote(zigzagoon, "", 0)
 	GROUND:CharSetEmote(breloom, "", 0)
@@ -562,7 +562,7 @@ function guild_third_floor_lobby_ch_2.BeforeFirstDinner()
 	GROUND:CharEndAnim(zigzagoon)
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Worried")
-	
+
 	coro1 = TASK:BranchCoroutine(function() GeneralFunctions.EightWayMove(breloom, 0, 332, false, 2) end)
 	coro2 = TASK:BranchCoroutine(function() GAME:WaitFrames(10)
 											GeneralFunctions.EightWayMove(girafarig, 0, 332, false, 2) end)
@@ -572,20 +572,20 @@ function guild_third_floor_lobby_ch_2.BeforeFirstDinner()
 											GeneralFunctions.EightWayMove(snubbull, 0, 332, false, 2) end)
 	coro5 = TASK:BranchCoroutine(function() GAME:WaitFrames(20)
 											GeneralFunctions.EmoteAndPause(hero, "Question", false) end)
-	local coro6 = TASK:BranchCoroutine(function() 
+	local coro6 = TASK:BranchCoroutine(function()
 											GAME:WaitFrames(10)
 											SOUND:PlayBattleSE('EVT_Emote_Confused')
-											GROUND:CharSetEmote(partner, "question", 1) 
-											UI:WaitShowTimedDialogue("Huh?[pause=30] Work of art?[pause=30] What's going on?", 60) end)
+											GROUND:CharSetEmote(partner, "question", 1)
+											UI:WaitShowTimedDialogue("Hein ?[pause=30]Œuvre d'art ?[pause=30]Que se passe-t-il ?", 60) end)
 	local coro7 = TASK:BranchCoroutine(function() GeneralFunctions.EightWayMove(audino, 232, 332, false, 1) end)
-	
-	
-	TASK:JoinCoroutines({coro1, coro2, coro3, coro4, coro5, coro6, coro7})		
+
+
+	TASK:JoinCoroutines({coro1, coro2, coro3, coro4, coro5, coro6, coro7})
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeaker(audino)
 	UI:SetSpeakerEmotion("Happy")
-	coro1 = TASK:BranchCoroutine(function() GROUND:CharTurnToCharAnimated(audino, partner, 4) 
+	coro1 = TASK:BranchCoroutine(function() GROUND:CharTurnToCharAnimated(audino, partner, 4)
 											UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_061'], snubbull:GetDisplayName()))
 											UI:SetSpeakerEmotion("Normal")
 											UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_068'])) end)
@@ -593,23 +593,23 @@ function guild_third_floor_lobby_ch_2.BeforeFirstDinner()
 	coro3 = TASK:BranchCoroutine(function() GAME:WaitFrames(10)
 											GROUND:CharAnimateTurnTo(hero, Direction.DownLeft, 4) end)
 	TASK:JoinCoroutines({coro1, coro2, coro3})
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_062']))
-	
+
 
 	GROUND:CharTurnToCharAnimated(partner, hero, 4)
 	GROUND:CharTurnToCharAnimated(hero, partner, 4)
 	UI:SetSpeakerEmotion("Happy")
 	GROUND:CharSetEmote(partner, "glowing", 0)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_063']))
-	
+
 	GAME:WaitFrames(20)
 	GROUND:CharSetEmote(partner, "", 0)
 	GROUND:CharAnimateTurnTo(audino, Direction.Left, 4)
-	
+
 	--they walk off
 	coro1 = TASK:BranchCoroutine(function() GAME:WaitFrames(12)
 											GeneralFunctions.EightWayMove(audino, 0, 332, false, 1)
@@ -629,7 +629,7 @@ function guild_third_floor_lobby_ch_2.BeforeFirstDinner()
 											GROUND:MoveInDirection(mareep, Direction.Left, 200, false, 1) end)
 	local coro8 = TASK:BranchCoroutine(function() GAME:WaitFrames(130)
 											GROUND:MoveInDirection(cranidos, Direction.Left, 200, false, 1) end)
-	TASK:JoinCoroutines({coro1, coro2, coro3, coro4, coro5, coro6, coro7, coro8})		
+	TASK:JoinCoroutines({coro1, coro2, coro3, coro4, coro5, coro6, coro7, coro8})
 
 	GAME:WaitFrames(20)
 	SV.TemporaryFlags.Dinnertime = true
@@ -648,28 +648,28 @@ function guild_third_floor_lobby_ch_2.PostSecondMorningAddress()
 	UI:SetSpeaker(noctowl)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_064'], GAME:GetTeamName()))
 	GAME:WaitFrames(20)
-	
+
 	GROUND:CharTurnToCharAnimated(partner, noctowl, 4)
 	GROUND:CharAnimateTurnTo(hero, Direction.UpRight, 4)
-	
-	
+
+
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_065']))
 	GAME:WaitFrames(20)
-	
-	local coro1 = TASK:BranchCoroutine(function() GROUND:CharAnimateTurnTo(noctowl, Direction.Right, 4) 
-											GROUND:MoveInDirection(noctowl, Direction.Right, 200, false, 1) end)	
+
+	local coro1 = TASK:BranchCoroutine(function() GROUND:CharAnimateTurnTo(noctowl, Direction.Right, 4)
+											GROUND:MoveInDirection(noctowl, Direction.Right, 200, false, 1) end)
 	local coro2 = TASK:BranchCoroutine(function() GAME:WaitFrames(30)
-											GROUND:CharAnimateTurnTo(partner, Direction.Right, 4) 
-											GROUND:MoveInDirection(partner, Direction.Right, 180, false, 1) end)	
+											GROUND:CharAnimateTurnTo(partner, Direction.Right, 4)
+											GROUND:MoveInDirection(partner, Direction.Right, 180, false, 1) end)
 	local coro3 = TASK:BranchCoroutine(function() GAME:WaitFrames(40)
-											GROUND:CharAnimateTurnTo(hero, Direction.Right, 4) 
-											GROUND:MoveInDirection(hero, Direction.Right, 180, false, 1)  end) 
+											GROUND:CharAnimateTurnTo(hero, Direction.Right, 4)
+											GROUND:MoveInDirection(hero, Direction.Right, 180, false, 1)  end)
 	local coro4 = TASK:BranchCoroutine(function() GAME:WaitFrames(140)
-												  SOUND:FadeOutBGM()		
+												  SOUND:FadeOutBGM()
 												  GAME:FadeOut(false, 40) end)
-											
+
 	TASK:JoinCoroutines({coro1, coro2, coro3, coro4})
-	
+
 	GAME:WaitFrames(20)
 	GAME:CutsceneMode(false)
 	SV.partner.Spawn = 'Default'
@@ -684,11 +684,11 @@ function guild_third_floor_lobby_ch_2.FailedRiver()
 	local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("illuminant_riverbed")
 	GROUND:CharTurnToCharAnimated(partner, hero, 4)
 	GROUND:CharTurnToCharAnimated(hero, partner, 4)
-	
+
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Determined")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G3L2_066'], hero:GetDisplayName(), zone:GetColoredName(), CharacterEssentials.GetCharacterName("Numel")))
-	
+
 	GeneralFunctions.PanCamera()
 	GAME:CutsceneMode(false)
 	AI:EnableCharacterAI(partner)

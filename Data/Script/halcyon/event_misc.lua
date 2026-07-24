@@ -5,7 +5,7 @@ require 'halcyon.GeneralFunctions'
 
 
 function MAP_STATUS_SCRIPT.ShopGreeting(owner, ownerChar, character, status, msg, args)
-  
+
   if status ~= owner or character ~= nil then
     return
   end
@@ -17,7 +17,7 @@ function MAP_STATUS_SCRIPT.ShopGreeting(owner, ownerChar, character, status, msg
     --Halcyon tweak: If you talk to kec or enter his shop after stealing, he'll aggro you
     if SV.adventure.Thief then
 	  COMMON.ThiefReturn()
-    else  
+    else
 	  UI:WaitShowDialogue(RogueEssence.StringKey(string.format("TALK_SHOP_START_%04d", found_shopkeep.Discriminator)):ToLocal())
 	  GAME:WaitFrames(10)
     end
@@ -38,12 +38,12 @@ function ITEM_SCRIPT.MissionItemPickup(owner, ownerChar, context, args)
     SV.TemporaryFlags.MissionCompleted = true
     GAME:WaitFrames(70)
 	UI:ResetSpeaker()
-    UI:WaitShowDialogue("Yes! You found " .. _DATA:GetMonster(mission.Client):GetColoredName() .. "'s " .. context.Item:GetDungeonName() .. "!")
+    UI:WaitShowDialogue("Oui ! Tu as trouvé " .. _DATA:GetMonster(mission.Client):GetColoredName() .. "'s " .. context.Item:GetDungeonName() .. "!")
 	  --Clear but remember minimap state
     SV.TemporaryFlags.PriorMapSetting = _DUNGEON.ShowMap
     _DUNGEON.ShowMap = _DUNGEON.MinimapState.None
-    
-    --Slight pause before asking to warp out 
+
+    --Slight pause before asking to warp out
     GAME:WaitFrames(20)
     GeneralFunctions.AskMissionWarpOut()
   end
@@ -72,7 +72,7 @@ function GROUND_ITEM_EVENT_SCRIPT.GroundGummiEvent(context, args)
   else
     sound = args.Sound
   end
-  
+
   --what type boosts what stat.
   local gummi_stat = {
 	water = RogueEssence.Data.Stat.HP,
@@ -90,7 +90,7 @@ function GROUND_ITEM_EVENT_SCRIPT.GroundGummiEvent(context, args)
 	psychic = RogueEssence.Data.Stat.MAtk,
 	ghost = RogueEssence.Data.Stat.MAtk,
 	fire = RogueEssence.Data.Stat.MAtk,
-	
+
 	poison = RogueEssence.Data.Stat.Defense,
 	steel = RogueEssence.Data.Stat.Defense,
 	rock = RogueEssence.Data.Stat.Defense,
@@ -105,7 +105,7 @@ function GROUND_ITEM_EVENT_SCRIPT.GroundGummiEvent(context, args)
   -- print("Type matchup: " .. tostring(type_matchup) .. " with " .. target_element)
   local heal = 5
   local boosted = false
-  
+
   UI:ResetSpeaker()
   SOUND:PlayBattleSE(sound)
   if target_element == _DATA.DefaultElement or context.User.Element1 == target_element or context.User.Element2 == target_element then
@@ -127,16 +127,16 @@ function GROUND_ITEM_EVENT_SCRIPT.GroundGummiEvent(context, args)
 	local spatk_boost = 1
 	local spdef_boost = 1
 	local speed_boost = 1
-	
+
 	if gummi_stat[args.TargetElement] == RogueEssence.Data.Stat.HP then hp_boost = 2 end
 	if gummi_stat[args.TargetElement] == RogueEssence.Data.Stat.Attack then atk_boost = 2 end
 	if gummi_stat[args.TargetElement] == RogueEssence.Data.Stat.Defense then def_boost = 2 end
 	if gummi_stat[args.TargetElement] == RogueEssence.Data.Stat.MAtk then spatk_boost = 2 end
 	if gummi_stat[args.TargetElement] == RogueEssence.Data.Stat.MDef then spdef_boost = 2 end
 	if gummi_stat[args.TargetElement] == RogueEssence.Data.Stat.Speed then speed_boost = 2 end
-	
+
 	--print(tostring(hp_boost) .. tostring(atk_boost) .. tostring(def_boost) .. tostring(spatk_boost) .. tostring(spdef_boost) .. tostring(speed_boost))
-	
+
     boosted = BoostStat(RogueEssence.Data.Stat.HP, hp_boost, context.User) or boosted
     boosted = BoostStat(RogueEssence.Data.Stat.Attack, atk_boost, context.User) or boosted
     boosted = BoostStat(RogueEssence.Data.Stat.Defense, def_boost, context.User) or boosted
@@ -147,8 +147,8 @@ function GROUND_ITEM_EVENT_SCRIPT.GroundGummiEvent(context, args)
   --neutral
     heal = 10
     boosted = BoostStat(gummi_stat[args.TargetElement], 2, context.User) or boosted
-  elseif type_matchup > PMDC.Dungeon.PreTypeEvent.N_E_2 then 
-  --Not very effective 
+  elseif type_matchup > PMDC.Dungeon.PreTypeEvent.N_E_2 then
+  --Not very effective
     heal = 5
     boosted = BoostStat(gummi_stat[args.TargetElement], 1, context.User) or boosted
   else
@@ -173,7 +173,7 @@ function GROUND_ITEM_EVENT_SCRIPT.GroundGummiEvent(context, args)
     context.User.Fullness = context.User.MaxFullness
     context.User.FullnessRemainder = 0
   end
-  
+
   	--print("HP Stat EXP = " .. tostring(context.User.MaxHPBonus))
 	--print("Attack Stat EXP = " .. tostring(context.User.AtkBonus))
 	--print("Defense Stat EXP = " .. tostring(context.User.DefBonus))
@@ -289,7 +289,7 @@ function GROUND_ITEM_EVENT_SCRIPT.GroundVitaminEvent(context, args)
   if not boosted then
     UI:WaitShowDialogue(RogueEssence.Text.FormatGrammar(RogueEssence.StringKey("MSG_NOTHING_HAPPENED"):ToLocal()))
   end
-  
+
     --print("HP Stat EXP = " .. tostring(context.User.MaxHPBonus))
 	--print("Attack Stat EXP = " .. tostring(context.User.AtkBonus))
 	--print("Defense Stat EXP = " .. tostring(context.User.DefBonus))
@@ -368,7 +368,7 @@ function BoostStat(stat, change, target)
   else
     return false
   end
- 
+
 end
 
 

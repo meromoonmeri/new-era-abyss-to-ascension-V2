@@ -12,13 +12,13 @@ function guild_bottom_right_bedroom_ch_3.SetupGround()
 			{'Zigzagoon', 88, 256, Direction.Down}
 		})
 	end
-	
+
 	GAME:FadeIn(20)
 
 end
 
 function guild_bottom_right_bedroom_ch_3.Zigzagoon_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Hey,[pause=10] Team " .. GAME:GetTeamName() .. ",[pause=10] what's up!")
+	GeneralFunctions.StartConversation(chara, "Hé, l'équipe[pause=10]" .. GAME:GetTeamName() .. ",[pause=10]quoi de neuf !")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBR3_001']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBR3_002']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBR3_003']))

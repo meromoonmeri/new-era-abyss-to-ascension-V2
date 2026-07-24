@@ -25,7 +25,7 @@ local searing_tunnel_midpoint = {}
 function searing_tunnel_midpoint.Init(map)
   DEBUG.EnableDbgCoro()
   print('=>> Init_searing_tunnel_midpoint <<=')
-  
+
   COMMON.RespawnAllies(true)
   GROUND:AddMapStatus("steam")
   PartnerEssentials.InitializePartnerSpawn()
@@ -73,15 +73,15 @@ function searing_tunnel_midpoint.PlotScripting()
   if SV.ChapterProgression.Chapter == 5 then
 	if not SV.Chapter5.PlayedMidpointIntro then
 	  searing_tunnel_midpoint_ch_5.FirstArrival()
-	elseif SV.SearingTunnel.DiedPastCheckpoint then 
+	elseif SV.SearingTunnel.DiedPastCheckpoint then
 		searing_tunnel_midpoint_ch_5.WipedCutscene()
-	else 
+	else
 		searing_tunnel_midpoint_ch_5.SetupGround()
 	end
-  else 
+  else
     GAME:FadeIn(20)
   end
-end 
+end
 
 
 -------------------------------
@@ -95,13 +95,13 @@ function searing_tunnel_midpoint.North_Exit_Touch(obj, activator)
   local partner = CH('Teammate1')
   partner.IsInteracting = true
   GROUND:CharSetAnim(partner, 'None', true)
-  GROUND:CharSetAnim(hero, 'None', true)		
-  UI:ChoiceMenuYesNo("Would you like to continue?", true)
+  GROUND:CharSetAnim(hero, 'None', true)
+  UI:ChoiceMenuYesNo("Souhaitez-vous continuer ?", true)
   UI:WaitForChoice()
   local yesnoResult = UI:ChoiceResult()
   UI:SetCenter(false)
-  if yesnoResult then 
-	if SV.ChapterProgression.Chapter == 5 then 
+  if yesnoResult then
+	if SV.ChapterProgression.Chapter == 5 then
 		searing_tunnel_midpoint_ch_5.ContinueScene()
 	else
 		--GROUND:Hide('North_Exit')
@@ -113,13 +113,13 @@ function searing_tunnel_midpoint.North_Exit_Touch(obj, activator)
 		GAME:FadeOut(false, 60)
 		partner.IsInteracting = false
 		GROUND:CharEndAnim(partner)
-		GROUND:CharEndAnim(hero)	
+		GROUND:CharEndAnim(hero)
 		GAME:EnterDungeon("searing_tunnel", 1, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
 	end
   end
   partner.IsInteracting = false
   GROUND:CharEndAnim(partner)
-  GROUND:CharEndAnim(hero)	
+  GROUND:CharEndAnim(hero)
 end
 
 
@@ -133,45 +133,45 @@ function searing_tunnel_midpoint.South_Exit_Touch(chara, activator)
   partner.IsInteracting = true
   GROUND:CharSetAnim(partner, 'None', true)
   GROUND:CharSetAnim(hero, 'None', true)
-  
-	
+
+
   local exit_ground = ''
   --During Chapter 5, return to the dungeon entrance instead.
   if SV.ChapterProgression.Chapter == 5 then
 	exit_ground = 'searing_tunnel_entrance'
-	UI:ChoiceMenuYesNo("Would you like to return\nto " .. zone:GetColoredName() .. "'s entrance?", true)
+	UI:ChoiceMenuYesNo("Souhaitez-vous revenir\nà l'entrée de " .. zone:GetColoredName() .. " ?", true)
   else
 	exit_ground = 'guild_dining_room'
-	if SV.TemporaryFlags.MissionCompleted then exit_ground = 'guild_second_floor' end 
-	UI:ChoiceMenuYesNo("Would you like to return\nto Metano Town?", true)
+	if SV.TemporaryFlags.MissionCompleted then exit_ground = 'guild_second_floor' end
+	UI:ChoiceMenuYesNo("Souhaitez-vous revenir\nà la ville de Metano ?", true)
   end
   UI:WaitForChoice()
   local yesnoResult = UI:ChoiceResult()
   UI:SetCenter(false)
-  if yesnoResult then 
-	--Clear thief flag when leaving the dungeon.		
+  if yesnoResult then
+	--Clear thief flag when leaving the dungeon.
 	SV.adventure.Thief = false
 	SOUND:FadeOutBGM(60)
 	GAME:FadeOut(false, 60)
 	partner.IsInteracting = false
 	GROUND:CharEndAnim(partner)
-	GROUND:CharEndAnim(hero)	
+	GROUND:CharEndAnim(hero)
 	GAME:WaitFrames(60)
-	if SV.ChapterProgression.Chapter == 5 then 
+	if SV.ChapterProgression.Chapter == 5 then
 		SV.Chapter5.PlayTempTunnelScene = true
 		SV.Chapter5.TunnelLastExitReason = 'Retreated'
 		SV.Chapter5.TunnelMidpointState = 'RepeatArrival'
-	else 
-		SV.TemporaryFlags.Dinnertime = true 
+	else
+		SV.TemporaryFlags.Dinnertime = true
 		SV.TemporaryFlags.Bedtime = true
-		SV.TemporaryFlags.MorningWakeup = true 
-		SV.TemporaryFlags.MorningAddress = true 
+		SV.TemporaryFlags.MorningWakeup = true
+		SV.TemporaryFlags.MorningAddress = true
 	end
 	GAME:EnterGroundMap(exit_ground, "Main_Entrance_Marker")
   end
   partner.IsInteracting = false
   GROUND:CharEndAnim(partner)
-  GROUND:CharEndAnim(hero)	
+  GROUND:CharEndAnim(hero)
 end
 
 function searing_tunnel_midpoint.Kangaskhan_Rock_Action(obj, activator)

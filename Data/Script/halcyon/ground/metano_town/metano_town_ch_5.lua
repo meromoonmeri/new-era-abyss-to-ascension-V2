@@ -8,30 +8,30 @@ metano_town_ch_5 = {}
 function metano_town_ch_5.SetupGround()
 	GROUND:Hide('Swap_Owner')
 	GROUND:Hide('Swap')
-	
-	--block player from leaving town north or east 
-	local northBlock = RogueEssence.Ground.GroundObject(RogueEssence.Content.ObjAnimData("", 1), 
+
+	--block player from leaving town north or east
+	local northBlock = RogueEssence.Ground.GroundObject(RogueEssence.Content.ObjAnimData("", 1),
 									RogueElements.Rect(232, 8, 40, 8),
-									RogueElements.Loc(0, 0), 
-									true, 
+									RogueElements.Loc(0, 0),
+									true,
 									"Event_Trigger_1")
-									
-	local eastBlock = RogueEssence.Ground.GroundObject(RogueEssence.Content.ObjAnimData("", 1), 
+
+	local eastBlock = RogueEssence.Ground.GroundObject(RogueEssence.Content.ObjAnimData("", 1),
 									RogueElements.Rect(1496, 592, 8, 144),
-									RogueElements.Loc(0, 0), 
-									true, 
-									"Event_Trigger_2")	
-										
+									RogueElements.Loc(0, 0),
+									true,
+									"Event_Trigger_2")
+
 	northBlock:ReloadEvents()
 	eastBlock:ReloadEvents()
 
 	GAME:GetCurrentGround():AddTempObject(northBlock)
 	GAME:GetCurrentGround():AddTempObject(eastBlock)
-	
-	
-	
+
+
+
 	local growlithe = CH('Growlithe')
-	
+
 	if not SV.Chapter5.TalkedToSnubbull then
 		local snubbull =
 			CharacterEssentials.MakeCharactersFromList({
@@ -41,11 +41,11 @@ function metano_town_ch_5.SetupGround()
 
 	--Move Growlithe from his desk. If you saw Almotz say goodbye to his family, then he'll be at storage with Hyko.
 	if SV.Chapter5.SawZigzagoonFamilyCutscene then
-		local zigzagoon = 
+		local zigzagoon =
 			CharacterEssentials.MakeCharactersFromList({
 				{'Zigzagoon', 1236, 888, Direction.UpLeft}
 			})
-		
+
 		GROUND:TeleportTo(growlithe, 1260, 912, Direction.UpLeft)
 	else
 		GROUND:TeleportTo(growlithe, 1216, 916, Direction.DownLeft)
@@ -53,10 +53,10 @@ function metano_town_ch_5.SetupGround()
 	end
 
 
-	
+
 	local cranidos, mareep, gloom, nidorina, electrike, audino, numel, wooper_girl, wooper_boy,
-		  meditite, medicham, machamp, oddish, azumarill, metapod, silcoon, marill, jigglypuff, 
-		  spheal = 
+		  meditite, medicham, machamp, oddish, azumarill, metapod, silcoon, marill, jigglypuff,
+		  spheal =
 		CharacterEssentials.MakeCharactersFromList({
 			{'Cranidos', 1180, 1304, Direction.UpLeft},
 			{'Mareep', 1204, 1304, Direction.Left},
@@ -68,7 +68,7 @@ function metano_town_ch_5.SetupGround()
 			{'Wooper_Girl', 328, 1000, Direction.DownLeft},
 			{'Wooper_Boy', 328, 1040, Direction.UpLeft},
 			{'Meditite', 296, 1020, Direction.Right},
-			{'Medicham', 888, 240, Direction.UpRight},			
+			{'Medicham', 888, 240, Direction.UpRight},
 			{'Machamp', 464, 464, Direction.Left},
 			{'Oddish', 864, 600, Direction.Up},
 			{'Azumarill', 888, 712, Direction.Down},
@@ -78,18 +78,18 @@ function metano_town_ch_5.SetupGround()
 			{'Jigglypuff', 1224, 1144, Direction.DownLeft},
 			{'Spheal', 1204, 1176, Direction.Up}
 		})
-	
+
 	AI:SetCharacterAI(machamp, "halcyon.ai.ground_default", RogueElements.Loc(machamp.Position.X-16, machamp.Position.Y-16), RogueElements.Loc(32, 32), 1, 16, 32, 40, 180)
 	AI:SetCharacterAI(oddish, "halcyon.ai.ground_default", RogueElements.Loc(oddish.Position.X-16, oddish.Position.Y-16), RogueElements.Loc(32, 32), 1, 16, 32, 40, 180)
-	
+
 	AI:SetCharacterAI(jigglypuff, "halcyon.ai.ground_talking", true, 240, 60, 50, false, 'Default', {marill, spheal})
 	AI:SetCharacterAI(marill, "halcyon.ai.ground_talking", true, 240, 60, 130, false, 'Default', {jigglypuff, spheal})
 	AI:SetCharacterAI(spheal, "halcyon.ai.ground_talking", true, 240, 60, 0, false, 'Default', {jigglypuff, marill})
 
 
-	
+
 	GAME:FadeIn(20)
-	
+
 end
 
 
@@ -97,15 +97,15 @@ end
 --to her to get her out of the way
 function metano_town_ch_5.Snubbull_Action(chara, activator)
 
-end 
+end
 
 function metano_town_ch_5.Snubbull_Kecleon_Cutscene()
 	--[[
-	
-	
-	
+
+
+
 	]]--
-	
+
 end
 
 
@@ -155,7 +155,7 @@ function metano_town_ch_5.Mawile_Action(chara, activator)
 end
 
 function metano_town_ch_5.Electrike_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, CharacterEssentials.GetCharacterName("Wooper_Boy") .. " et " .. CharacterEssentials.GetCharacterName("Wooper_Girl") .. " jouent encore avec cet autre Pokémon,[pause=10] hein ?...", "Sad")
+	GeneralFunctions.StartConversation(chara, CharacterEssentials.GetCharacterName("Wooper_Boy") .. " et " .. CharacterEssentials.GetCharacterName("Wooper_Girl") .. " jouent encore avec cet autre Pokémon,[pause=10]hein ?...", "Sad")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_007']))
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_008']))
@@ -187,14 +187,14 @@ function metano_town_ch_5.Doduo_Action(chara, activator)
 	UI:SetSpeakerEmotion("Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_013']))
 	GeneralFunctions.EndConversation(chara)
-end 
+end
 
 function metano_town_ch_5.Bagon_Action(chara, activator)
 	GeneralFunctions.StartConversation(chara, "This drink " .. CharacterEssentials.GetCharacterName("Shuckle") .. " doesn't taste very good...", "Sad")
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_014']))
 	GeneralFunctions.EndConversation(chara)
-end 
+end
 ]]--
 
 function metano_town_ch_5.Metapod_Action(chara, activator)
@@ -213,7 +213,7 @@ end
 --Mountain - the cold turned her back or was too much for her?
 --Cave - ironic, given her current living situation? The lack of sun got to her and she now submits herself to it willingly as a weird self punishment?
 function metano_town_ch_5.Oddish_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Cette dame étrange m'a raconté une histoire géniale sur une aventure qu'elle a vécue dans une grotte il y a longtemps !", "Inspired")
+	GeneralFunctions.StartConversation(chara, "Cette dame étrange m'a raconté une histoire géniale sur une aventure qu'elle a vécue a dans une grotte il y a longtemps !", "Inspired")
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_017']))
 	GROUND:CharSetAnim(chara, "Idle", true)
@@ -256,12 +256,12 @@ function metano_town_ch_5.Spheal_Action(chara, activator)
 	UI:SetSpeakerEmotion("Inspired")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_023']))
 	GeneralFunctions.EndConversation(chara)
-end 
+end
 
 function metano_town_ch_5.Marill_Action(chara, activator)
 	GeneralFunctions.StartConversation(chara, "Bonne chance pour l'expédition ![pause=0] J'espère que vous ferez une grande découverte !", "Happy")
 	GeneralFunctions.EndConversation(chara)
-end 
+end
 
 function metano_town_ch_5.Jigglypuff_Action(chara, activator)
 	GeneralFunctions.StartConversation(chara, "Prenez soin de vous pendant l'expédition.[pause=0] Pour un voyage pareil, vous serez longtemps sur les routes,[pause=10] alors emportez beaucoup de provisions.")
@@ -283,21 +283,21 @@ function metano_town_ch_5.Nidorina_Gloom_Dialogue(chara, activator)
 	local gloom = CH('Gloom')
 	local hero = CH('PLAYER')
 	local partner = CH('Teammate1')
-	
+
 	partner.IsInteracting = true
 	GROUND:CharSetAnim(gloom, 'None', true)
 	GROUND:CharSetAnim(nidorina, 'None', true)
 	GROUND:CharSetAnim(hero, 'None', true)
 	GROUND:CharSetAnim(partner, 'None', true)
-	
+
 	UI:SetSpeaker(gloom)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_026']))
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeaker(nidorina)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_027']))
 	GAME:WaitFrames(20)
-	
+
 	GROUND:CharSetAnim(gloom, "Idle", true)
 	UI:SetSpeaker(gloom)
 	UI:SetSpeakerEmotion("Inspired")
@@ -305,18 +305,18 @@ function metano_town_ch_5.Nidorina_Gloom_Dialogue(chara, activator)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_029']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_030']))
 	GAME:WaitFrames(20)
-	
+
 	GROUND:CharSetAnim(gloom, "None", true)
 	UI:SetSpeaker(nidorina)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_031']))
 	GAME:WaitFrames(20)
-	
+
 	GROUND:CharSetEmote(gloom, "sweating", 1)
 	UI:SetSpeaker(gloom)
 	UI:SetSpeakerEmotion("Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MT5_032']))
-	
-	
+
+
 	GROUND:CharEndAnim(gloom)
 	GROUND:CharEndAnim(nidorina)
 	GROUND:CharEndAnim(partner)

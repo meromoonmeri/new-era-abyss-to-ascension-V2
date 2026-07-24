@@ -29,14 +29,14 @@ local guild_second_floor = {}
 function guild_second_floor.Init(map)
 	DEBUG.EnableDbgCoro()
 	print('=>> Init_guild_second_floor<<=')
-	
+
 	COMMON.RespawnAllies()
 	PartnerEssentials.InitializePartnerSpawn()
 
 	--Remove nicknames from characters if the nickname mod is enabled.
 	if CONFIG.UseNicknames() then
 		CH('Assembly_Owner').Data.Nickname = CharacterEssentials.GetCharacterName('Audino')
-	else 
+	else
 		CH('Assembly_Owner').Data.Nickname = 'Audino'
 	end
 
@@ -80,17 +80,17 @@ end
 function guild_second_floor.PlotScripting()
 	--plot scripting
 	--if a mission is to be turned in, prioritize that.
-	if SV.TemporaryFlags.MissionCompleted then 
+	if SV.TemporaryFlags.MissionCompleted then
 		guild_second_floor.Hand_In_Missions()
 	else
 		if SV.ChapterProgression.Chapter == 1 then
-			if SV.Chapter1.TeamCompletedForest and not SV.Chapter1.TeamJoinedGuild then 
+			if SV.Chapter1.TeamCompletedForest and not SV.Chapter1.TeamJoinedGuild then
 				guild_second_floor_ch_1.MeetNoctowl()
 			else
 				guild_second_floor_ch_1.SetupGround()
 			end
 		elseif SV.ChapterProgression.Chapter == 2 then
-			if SV.Chapter2.FinishedFirstDay and not SV.Chapter2.FinishedCameruptRequestScene then 
+			if SV.Chapter2.FinishedFirstDay and not SV.Chapter2.FinishedCameruptRequestScene then
 				guild_second_floor_ch_2.CameruptRequestCutscene()
 			elseif SV.Chapter2.FinishedRiver then
 				guild_second_floor_ch_2.RescuedNumelCutscene()
@@ -124,19 +124,19 @@ end
 --[[
 Markers used for generic NPC spawning (i.e. where flavor NPCs should be going)
 
-Teams gathered around the left message board 
-Left_Trio_1, 2, 3 
+Teams gathered around the left message board
+Left_Trio_1, 2, 3
 Left_Duo_1, 2
 Left_Solo
 
 Teams gathered around the right message board
-Right_Trio_1, 2, 3 
+Right_Trio_1, 2, 3
 Right_Duo_1, 2
 Right_Solo
 
 Teams having a conversation:
 Generic_Spawn_Duo_1, 2, 3 ,4
-TODO: Add a couple sets of trio spawn markers 
+TODO: Add a couple sets of trio spawn markers
 
 Generic Spawns:
 Generic_Spawn_1, 2, 3, 4, 5, 6, 7, 8
@@ -180,31 +180,31 @@ end
 function guild_second_floor.Mission_Board_Action(obj, activator)
 	local partner = CH('Teammate1')
 	local hero = CH('PLAYER')
-	if SV.ChapterProgression.Chapter < 3 and not SV.Chapter2.FinishedFirstDay then 
-		GeneralFunctions.StartPartnerConversation("Hmm...[pause=0] I don't think we should being taking jobs from the board right now...", "Worried")
+	if SV.ChapterProgression.Chapter < 3 and not SV.Chapter2.FinishedFirstDay then
+		GeneralFunctions.StartPartnerConversation("Hmm...[pause=0]Je ne pense pas que nous devrions supprimer des postes au conseil d'administration pour le moment...", "Worried")
 		UI:SetSpeakerEmotion("Normal")
-		UI:WaitShowDialogue("We only just joined after all.[pause=0] Let's come back another time!")
+		UI:WaitShowDialogue("Après tout, nous venons tout juste de nous rejoindre.[pause=0]Revenons une autre fois !")
 		GeneralFunctions.EndConversation(partner)
-	elseif SV.ChapterProgression.Chapter < 3 and SV.Chapter2.FinishedFirstDay then 
+	elseif SV.ChapterProgression.Chapter < 3 and SV.Chapter2.FinishedFirstDay then
 		local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("illuminant_riverbed")
-		GeneralFunctions.StartPartnerConversation(hero:GetDisplayName() .. "![pause=0] We already have a mission to do!")
-		UI:WaitShowDialogue("We have to get over to " .. zone:GetColoredName() .. " and find " .. CharacterEssentials.GetCharacterName("Numel") .. ".[pause=0] Let's go!")
+		GeneralFunctions.StartPartnerConversation(hero:GetDisplayName() .. "![pause=0]Nous avons déjà une mission à accomplir !")
+		UI:WaitShowDialogue("Nous devons nous rendre à " .. zone:GetColoredName() .. " et trouver " .. CharacterEssentials.GetCharacterName("Numel") .. ".[pause=0]C'est parti !")
 		GeneralFunctions.EndConversation(partner)
 	elseif SV.ChapterProgression.Chapter == 3 and not SV.Chapter3.EncounteredBoss then
 		local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("crooked_cavern")
-		GeneralFunctions.StartPartnerConversation(hero:GetDisplayName() .. "![pause=0] We already have a mission to do!")
-		UI:WaitShowDialogue("We have to get over to " .. zone:GetColoredName() .. " and capture the outlaw " .. CharacterEssentials.GetCharacterName("Sandile") .. ".[pause=0] Let's go!")
+		GeneralFunctions.StartPartnerConversation(hero:GetDisplayName() .. "![pause=0]Nous avons déjà une mission à accomplir !")
+		UI:WaitShowDialogue("Nous devons nous rendre à " .. zone:GetColoredName() .. " et capturer le hors-la-loi " .. CharacterEssentials.GetCharacterName("Sandile") .. ".[pause=0]C'est parti !")
 		GeneralFunctions.EndConversation(partner)
 	elseif SV.ChapterProgression.Chapter == 3 and SV.Chapter3.EncounteredBoss and not SV.Chapter3.DefeatedBoss then
 		local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("crooked_cavern")
-		GeneralFunctions.StartPartnerConversation(hero:GetDisplayName() .. "![pause=0] We already have a mission to do!")
-		UI:WaitShowDialogue("We have to get over to " .. zone:GetColoredName() .. " and help " .. CharacterEssentials.GetCharacterName("Sandile") .. " get away from Team [color=#FFA5FF]Style[color].[pause=0] Let's get a move on!")
+		GeneralFunctions.StartPartnerConversation(hero:GetDisplayName() .. "![pause=0]Nous avons déjà une mission à accomplir !")
+		UI:WaitShowDialogue("Nous devons rejoindre " .. zone:GetColoredName() .. " et aider " .. CharacterEssentials.GetCharacterName("Sandile") .. " à s'éloigner de l'équipe[color=#FFA5FF]Style[color].[pause=0]Passons à autre chose !")
 		GeneralFunctions.EndConversation(partner)
 	elseif SV.ChapterProgression.Chapter == 5 then--right before expedition
-		GeneralFunctions.StartPartnerConversation("Hmm...[pause=0] I don't think we should take any jobs right now.", "Worried")
+		GeneralFunctions.StartPartnerConversation("Hmm...[pause=0]Je ne pense pas que nous devrions accepter un emploi pour le moment.", "Worried")
 		UI:SetSpeakerEmotion("Normal")
-		UI:WaitShowDialogue("Let's focus on preparing for the expedition instead.")
-		UI:WaitShowDialogue("We can leave the posted jobs to the other adventuring teams while we're gone!")
+		UI:WaitShowDialogue("Concentrons-nous plutôt sur la préparation de l'expédition.")
+		UI:WaitShowDialogue("Nous pouvons laisser les emplois affichés aux autres équipes d'aventuriers pendant notre absence !")
 		GeneralFunctions.EndConversation(partner)
 	else
 	  --Mission Board
@@ -213,45 +213,45 @@ function guild_second_floor.Mission_Board_Action(obj, activator)
 	  GROUND:CharSetAnim(hero, 'None', true)
 	  GeneralFunctions.TurnTowardsLocation(hero, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
 	  GeneralFunctions.TurnTowardsLocation(partner, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
-	  
+
 	  local menu = BoardSelectionMenu:new(COMMON.MISSION_BOARD_MISSION)
 	  UI:SetCustomMenu(menu.menu)
 	  UI:WaitForChoice()
-	
+
 	  partner.IsInteracting = false
 	  GROUND:CharEndAnim(partner)
-	  GROUND:CharEndAnim(hero)	
+	  GROUND:CharEndAnim(hero)
 	end
 end
 
 function guild_second_floor.Outlaw_Board_Action(obj, activator)
 	local partner = CH('Teammate1')
 	local hero = CH('PLAYER')
-	if SV.ChapterProgression.Chapter < 3 and not SV.Chapter2.FinishedFirstDay then 
-		GeneralFunctions.StartPartnerConversation("Hmm...[pause=0] I don't think we should being taking jobs from the board right now...", "Worried")
+	if SV.ChapterProgression.Chapter < 3 and not SV.Chapter2.FinishedFirstDay then
+		GeneralFunctions.StartPartnerConversation("Hmm...[pause=0]Je ne pense pas que nous devrions supprimer des postes au conseil d'administration pour le moment...", "Worried")
 		UI:SetSpeakerEmotion("Normal")
-		UI:WaitShowDialogue("We only just joined after all.[pause=0] Let's come back another time!")
+		UI:WaitShowDialogue("Après tout, nous venons tout juste de nous rejoindre.[pause=0]Revenons une autre fois !")
 		GeneralFunctions.EndConversation(partner)
-	elseif SV.ChapterProgression.Chapter < 3 and SV.Chapter2.FinishedFirstDay then 
+	elseif SV.ChapterProgression.Chapter < 3 and SV.Chapter2.FinishedFirstDay then
 		local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("illuminant_riverbed")
-		GeneralFunctions.StartPartnerConversation(hero:GetDisplayName() .. "![pause=0] We already have a mission to do!")
-		UI:WaitShowDialogue("We have to get over to " .. zone:GetColoredName() .. " and find " .. CharacterEssentials.GetCharacterName("Numel") .. ".[pause=0] Let's go!")
+		GeneralFunctions.StartPartnerConversation(hero:GetDisplayName() .. "![pause=0]Nous avons déjà une mission à accomplir !")
+		UI:WaitShowDialogue("Nous devons nous rendre à " .. zone:GetColoredName() .. " et trouver " .. CharacterEssentials.GetCharacterName("Numel") .. ".[pause=0]C'est parti !")
 		GeneralFunctions.EndConversation(partner)
 	elseif SV.ChapterProgression.Chapter == 3 and not SV.Chapter3.EncounteredBoss then
 		local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("crooked_cavern")
-		GeneralFunctions.StartPartnerConversation(hero:GetDisplayName() .. "![pause=0] We already have a mission to do!")
-		UI:WaitShowDialogue("We have to get over to " .. zone:GetColoredName() .. " and capture the outlaw " .. CharacterEssentials.GetCharacterName("Sandile") .. ".[pause=0] Let's go!")
+		GeneralFunctions.StartPartnerConversation(hero:GetDisplayName() .. "![pause=0]Nous avons déjà une mission à accomplir !")
+		UI:WaitShowDialogue("Nous devons nous rendre à " .. zone:GetColoredName() .. " et capturer le hors-la-loi " .. CharacterEssentials.GetCharacterName("Sandile") .. ".[pause=0]C'est parti !")
 		GeneralFunctions.EndConversation(partner)
 	elseif SV.ChapterProgression.Chapter == 3 and SV.Chapter3.EncounteredBoss and not SV.Chapter3.DefeatedBoss then
 		local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("crooked_cavern")
-		GeneralFunctions.StartPartnerConversation(hero:GetDisplayName() .. "![pause=0] We already have a mission to do!")
-		UI:WaitShowDialogue("We have to get over to " .. zone:GetColoredName() .. " and help " .. CharacterEssentials.GetCharacterName("Sandile") .. " get away from Team [color=#FFA5FF]Style[color].[pause=0] Let's get a move on!")
+		GeneralFunctions.StartPartnerConversation(hero:GetDisplayName() .. "![pause=0]Nous avons déjà une mission à accomplir !")
+		UI:WaitShowDialogue("Nous devons rejoindre " .. zone:GetColoredName() .. " et aider " .. CharacterEssentials.GetCharacterName("Sandile") .. " à s'éloigner de l'équipe[color=#FFA5FF]Style[color].[pause=0]Passons à autre chose !")
 		GeneralFunctions.EndConversation(partner)
 	elseif SV.ChapterProgression.Chapter == 5 then--right before expedition
-		GeneralFunctions.StartPartnerConversation("Hmm...[pause=0] I don't think we should take any jobs right now.", "Worried")
+		GeneralFunctions.StartPartnerConversation("Hmm...[pause=0]Je ne pense pas que nous devrions accepter un emploi pour le moment.", "Worried")
 		UI:SetSpeakerEmotion("Normal")
-		UI:WaitShowDialogue("Let's focus on preparing for the expedition instead.")
-		UI:WaitShowDialogue("We can leave the posted jobs to the other adventuring teams while we're gone!")
+		UI:WaitShowDialogue("Concentrons-nous plutôt sur la préparation de l'expédition.")
+		UI:WaitShowDialogue("Nous pouvons laisser les emplois affichés aux autres équipes d'aventuriers pendant notre absence !")
 		GeneralFunctions.EndConversation(partner)
 	else
 	  --Outlaw Board
@@ -260,15 +260,15 @@ function guild_second_floor.Outlaw_Board_Action(obj, activator)
 	  GROUND:CharSetAnim(hero, 'None', true)
 	  GeneralFunctions.TurnTowardsLocation(hero, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
 	  GeneralFunctions.TurnTowardsLocation(partner, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
-	  	 
+
 
 	  local menu = BoardSelectionMenu:new(COMMON.MISSION_BOARD_OUTLAW)
 	  UI:SetCustomMenu(menu.menu)
 	  UI:WaitForChoice()
-	  
+
 	  partner.IsInteracting = false
 	  GROUND:CharEndAnim(partner)
-	  GROUND:CharEndAnim(hero)	
+	  GROUND:CharEndAnim(hero)
 	end
 end
 
@@ -276,7 +276,7 @@ end
 function guild_second_floor.Hand_In_Missions()
 	for i = 1, 8, 1 do
 		if SV.TakenBoard[i].Client ~= "" and SV.TakenBoard[i].Completion == MISSION_GEN.COMPLETE then
-			if SV.TakenBoard[i].Type == COMMON.MISSION_TYPE_OUTLAW or SV.TakenBoard[i].Type == COMMON.MISSION_TYPE_OUTLAW_ITEM 
+			if SV.TakenBoard[i].Type == COMMON.MISSION_TYPE_OUTLAW or SV.TakenBoard[i].Type == COMMON.MISSION_TYPE_OUTLAW_ITEM
 					or SV.TakenBoard[i].Type == COMMON.MISSION_TYPE_OUTLAW_FLEE or SV.TakenBoard[i].Type == COMMON.MISSION_TYPE_OUTLAW_MONSTER_HOUSE then
 				guild_second_floor.Outlaw_Job_Clear(SV.TakenBoard[i])
 			else
@@ -284,7 +284,7 @@ function guild_second_floor.Hand_In_Missions()
 			end
 			--short pause between fadeins
 			GAME:WaitFrames(20)
-			
+
 			--clear the job
 			SV.TakenBoard[i] = 	{
 									Client = "",
@@ -307,18 +307,18 @@ function guild_second_floor.Hand_In_Missions()
 									BackReference = -1
 								}
 		end
-	end 
+	end
 	--reset this flag
 	SV.TemporaryFlags.MissionCompleted = false
 
 	--sort taken jobs now that we're removed completed ones
 	MISSION_GEN.SortTaken()
-	
+
 	--if dinnertime is set, then go to the dining room. This should happen pretty much all the time unless story dictates some other ground for some reason.
 	--otherwise go to the place dictated by SV.TemporaryFlags.PostJobsGround
 	if SV.TemporaryFlags.Dinnertime then
 		GAME:EnterGroundMap('guild_dining_room', 'Main_Entrance_Marker')
-	else 
+	else
 		if SV.TemporaryFlags.PostJobsGround == '' then --just in case, if theres no postjobsground defined, just go to your bed room. This shouldn't happen though.
 			GAME:EnterGroundMap('guild_heros_room', 'Main_Entrance_Marker')
 		else
@@ -334,11 +334,11 @@ function guild_second_floor.Outlaw_Job_Clear(job)
 	GAME:CutsceneMode(true)
 	AI:DisableCharacterAI(partner)
 	UI:ResetSpeaker()
-	
+
 	GROUND:TeleportTo(partner, 376, 272, Direction.Up)
 	GROUND:TeleportTo(hero, 408, 272, Direction.Up)
 	GAME:MoveCamera(400, 240, 1, false)
-	
+
 	SOUND:StopBGM()
 
 	local money = false
@@ -347,19 +347,19 @@ function guild_second_floor.Outlaw_Job_Clear(job)
 	--client is zhayn, he and the pawniards take the outlaw away
 	if job.Client == 'zhayn' then
 
-		local pawniard_boy, pawniard_girl, bisharp = 
+		local pawniard_boy, pawniard_girl, bisharp =
 			CharacterEssentials.MakeCharactersFromList({
 				--{'Sandile', 392, 224, Direction.Down},
 				{'Pawniard_Boy', 368, 224, Direction.Down},
 				{'Pawniard_Girl', 416, 224, Direction.Down},
 				{'Bisharp', 392, 248, Direction.Down}
 			})
-		
+
 		local outlaw_gender = job.TargetGender
 		outlaw_gender = GeneralFunctions.NumToGender(outlaw_gender)
-				
+
 		local outlaw_monster = RogueEssence.Dungeon.MonsterID(job.Target, 0, "normal", outlaw_gender)
-		
+
 		local outlaw = RogueEssence.Ground.GroundChar(outlaw_monster, RogueElements.Loc(392, 224), Direction.Down, outlaw_monster.Species, 'Outlaw')
 		outlaw:ReloadEvents()
 		GAME:GetCurrentGround():AddTempChar(outlaw)
@@ -367,37 +367,37 @@ function guild_second_floor.Outlaw_Job_Clear(job)
 		GAME:FadeIn(40)
 		SOUND:PlayBGM("Job Clear!.ogg", true)
 		UI:SetSpeaker(bisharp)
-		
-		UI:WaitShowDialogue("You bagged the outlaw " .. _DATA:GetMonster(outlaw.CurrentForm.Species):GetColoredName() .. "!")
-		
+
+		UI:WaitShowDialogue("Vous avez arrêté le hors-la-loi " .. _DATA:GetMonster(outlaw.CurrentForm.Species):GetColoredName() .. " !")
+
 		GAME:WaitFrames(20)
-		UI:WaitShowDialogue("Please take this here bounty as a reward.")
+		UI:WaitShowDialogue("S'il vous plaît, prenez cette prime ici comme récompense.")
 		GAME:WaitFrames(20)
 
-		--reward the item 
+		--reward the item
 		if money then
 			GeneralFunctions.RewardItem(MISSION_GEN.DIFF_TO_MONEY[job.Difficulty], true)
 		else
 			GeneralFunctions.RewardItem(job.Reward)
 		end
-		
-		
-		if job.BonusReward ~= '' then 
+
+
+		if job.BonusReward ~= '' then
 			UI:SetSpeaker(bisharp)
 			GAME:WaitFrames(20)
-			UI:WaitShowDialogue("Please take this here item as well.")
+			UI:WaitShowDialogue("Veuillez également prendre cet article ici.")
 			GAME:WaitFrames(20)
 			GeneralFunctions.RewardItem(job.BonusReward)
-		end 
-		
+		end
+
 		GAME:WaitFrames(20)
 		GeneralFunctions.RewardPoints(MISSION_GEN.DIFFICULTY[job.Difficulty])
-		
+
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(bisharp)
-		UI:WaitShowDialogue("Thank ya as always for lendin' a hand.")
-	
+		UI:WaitShowDialogue("Merci comme toujours de m'avoir donné un coup de main.")
+
 		GROUND:CharSetEmote(pawniard_boy, "happy", 0)
 		GROUND:CharSetEmote(pawniard_girl, "happy", 0)
 		local coro1 = TASK:BranchCoroutine(function() GROUND:CharSetAction(bisharp, RogueEssence.Ground.PoseGroundAction(bisharp.Position, bisharp.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose"))) end)
@@ -407,14 +407,14 @@ function guild_second_floor.Outlaw_Job_Clear(job)
 
 		TASK:JoinCoroutines({coro1, coro2, coro3, coro4})
 		GAME:WaitFrames(60)
-		
+
 		GROUND:CharEndAnim(bisharp)
 		GROUND:CharEndAnim(pawniard_boy)
 		GROUND:CharEndAnim(pawniard_girl)
 		GROUND:CharSetEmote(pawniard_boy, "", 0)
 		GROUND:CharSetEmote(pawniard_girl, "", 0)
 		GAME:WaitFrames(20)
-		
+
 		--fade out and clean up any temporary characters
 		SOUND:FadeOutBGM(40)
 		GAME:FadeOut(false, 40)
@@ -423,14 +423,14 @@ function guild_second_floor.Outlaw_Job_Clear(job)
 		GAME:GetCurrentGround():RemoveTempChar(pawniard_girl)
 		GAME:GetCurrentGround():RemoveTempChar(outlaw)
 
-	
+
 	else--client is some random mon
 		local client_gender = job.ClientGender
 		client_gender = GeneralFunctions.NumToGender(client_gender)
 		client_gender = client_gender
 
 		local client_monster = RogueEssence.Dungeon.MonsterID(job.Client, 0, "normal", client_gender)
-		
+
 		local client = RogueEssence.Ground.GroundChar(client_monster, RogueElements.Loc(392, 240), Direction.Down, job.Client:gsub("^%l", string.upper), client_monster.Species)
 		client:ReloadEvents()
 		GAME:GetCurrentGround():AddTempChar(client)
@@ -438,34 +438,34 @@ function guild_second_floor.Outlaw_Job_Clear(job)
 		GAME:FadeIn(40)
 		SOUND:PlayBGM("Job Clear!.ogg", true)
 		UI:SetSpeaker(client)
-		
-		
+
+
 		local item = RogueEssence.Dungeon.InvItem(job.Item)
-		UI:WaitShowDialogue("Thank you for getting my " .. item:GetDisplayName() .. " back!")
+		UI:WaitShowDialogue("Merci d'avoir récupéré mon " .. item:GetDisplayName() .. " !")
 		GAME:WaitFrames(20)
-		UI:WaitShowDialogue("Please take this as my thanks!")
+		UI:WaitShowDialogue("S'il vous plaît, prenez ceci comme mon remerciement !")
 		GAME:WaitFrames(20)
 
-		--reward the item 
+		--reward the item
 		if money then
 			GeneralFunctions.RewardItem(MISSION_GEN.DIFF_TO_MONEY[job.Difficulty], true)
 		else
 			GeneralFunctions.RewardItem(job.Reward)
 		end
-		
-		if job.BonusReward ~= '' then 
+
+		if job.BonusReward ~= '' then
 			UI:SetSpeaker(client)
 			GAME:WaitFrames(20)
-			UI:WaitShowDialogue("Please take this as well!")
+			UI:WaitShowDialogue("S'il vous plaît, prenez ceci aussi !")
 			GAME:WaitFrames(20)
 			GeneralFunctions.RewardItem(job.BonusReward)
-		end 
-		
+		end
+
 		GAME:WaitFrames(20)
 		GeneralFunctions.RewardPoints(MISSION_GEN.DIFFICULTY[job.Difficulty])
 		GAME:WaitFrames(20)
-		
-		
+
+
 		--fade out and clean up any temporary characters
 		SOUND:FadeOutBGM(40)
 		GAME:FadeOut(false, 40)
@@ -480,7 +480,7 @@ function guild_second_floor.Mission_Job_Clear(job)
 	GAME:CutsceneMode(true)
 	AI:DisableCharacterAI(partner)
 	UI:ResetSpeaker()
-	
+
 	GROUND:TeleportTo(partner, 88, 272, Direction.Up)
 	GROUND:TeleportTo(hero, 120, 272, Direction.Up)
 	GAME:MoveCamera(112, 240, 1, false)
@@ -494,7 +494,7 @@ function guild_second_floor.Mission_Job_Clear(job)
 		local client_gender = job.ClientGender
 		client_gender = GeneralFunctions.NumToGender(client_gender)
 
-		local client_monster = RogueEssence.Dungeon.MonsterID(job.Client, 0, "normal", client_gender)		
+		local client_monster = RogueEssence.Dungeon.MonsterID(job.Client, 0, "normal", client_gender)
 		local client = RogueEssence.Ground.GroundChar(client_monster, RogueElements.Loc(104, 240), Direction.Down, job.Client:gsub("^%l", string.upper), client_monster.Species)
 		client:ReloadEvents()
 		GAME:GetCurrentGround():AddTempChar(client)
@@ -502,114 +502,114 @@ function guild_second_floor.Mission_Job_Clear(job)
 		GAME:FadeIn(40)
 		SOUND:PlayBGM("Job Clear!.ogg", true)
 		UI:SetSpeaker(client)
-		
+
 		--different thank you message depending on the job type
 		if job.Type == COMMON.MISSION_TYPE_RESCUE then
-			UI:WaitShowDialogue("Thank you for rescuing me!")
-		elseif job.Type == COMMON.MISSION_TYPE_EXPLORATION then 
+			UI:WaitShowDialogue("Merci de m'avoir sauvé !")
+		elseif job.Type == COMMON.MISSION_TYPE_EXPLORATION then
 			local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(job.Zone)
-			UI:WaitShowDialogue("Thank you for taking me on an adventure in " .. zone:GetColoredName() .. "!")
+			UI:WaitShowDialogue("Merci de m'avoir emmené dans une aventure dans " .. zone:GetColoredName() .. " !")
 		elseif job.Type == COMMON.MISSION_TYPE_LOST_ITEM then
 			local item = RogueEssence.Dungeon.InvItem(job.Item)
-			UI:WaitShowDialogue("Thank you for finding my " .. item:GetDisplayName() .. "!")
-		else--delivery 
+			UI:WaitShowDialogue("Merci d'avoir trouvé mon " .. item:GetDisplayName() .. " !")
+		else--delivery
 			local item = RogueEssence.Dungeon.InvItem(job.Item)
-			UI:WaitShowDialogue("Thank you for delivering the " .. item:GetDisplayName() .. " to me!")
+			UI:WaitShowDialogue("Merci de m'avoir livré le " .. item:GetDisplayName() .. " !")
 		end
-		
+
 		GAME:WaitFrames(20)
-		UI:WaitShowDialogue("Please take this as my thanks!")
+		UI:WaitShowDialogue("S'il vous plaît, prenez ceci comme mon remerciement !")
 		GAME:WaitFrames(20)
 
-		--reward the item 
+		--reward the item
 		if money then
 			GeneralFunctions.RewardItem(MISSION_GEN.DIFF_TO_MONEY[job.Difficulty], true)
 		else
 			GeneralFunctions.RewardItem(job.Reward)
 		end
-		
-		if job.BonusReward ~= '' then 
+
+		if job.BonusReward ~= '' then
 			UI:SetSpeaker(client)
 			GAME:WaitFrames(20)
-			UI:WaitShowDialogue("Please take this as well!")
+			UI:WaitShowDialogue("S'il vous plaît, prenez ceci aussi !")
 			GAME:WaitFrames(20)
 			GeneralFunctions.RewardItem(job.BonusReward)
-		end 
-		
+		end
+
 		GAME:WaitFrames(20)
 		GeneralFunctions.RewardPoints(MISSION_GEN.DIFFICULTY[job.Difficulty])
 		GAME:WaitFrames(20)
-		
-		
+
+
 		--fade out and clean up any temporary characters
 		SOUND:FadeOutBGM(40)
 		GAME:FadeOut(false, 40)
 		GAME:GetCurrentGround():RemoveTempChar(client)
 
-	
+
 	else--client not the target
 		local client_gender = job.ClientGender
 		client_gender = GeneralFunctions.NumToGender(client_gender)
-		
-		
+
+
 		local client_monster = RogueEssence.Dungeon.MonsterID(job.Client, 0, "normal", client_gender)
-		
+
 		local client = RogueEssence.Ground.GroundChar(client_monster, RogueElements.Loc(88, 240), Direction.Down, job.Client:gsub("^%l", string.upper), client_monster.Species)
 		client:ReloadEvents()
 		GAME:GetCurrentGround():AddTempChar(client)
 
 		local target_gender = job.TargetGender
 		target_gender = GeneralFunctions.NumToGender(target_gender)
-				
+
 		local target_monster = RogueEssence.Dungeon.MonsterID(job.Target, 0, "normal", target_gender)
 		target_monster.Gender = _DATA:GetMonster(job.Target).Forms[0]:RollGender(_ZONE.CurrentGround.Rand)
-		
+
 		local target = RogueEssence.Ground.GroundChar(target_monster, RogueElements.Loc(120, 240), Direction.Down, job.Target:gsub("^%l", string.upper), target_monster.Species)
 		target:ReloadEvents()
 		GAME:GetCurrentGround():AddTempChar(target)
-		
-		
+
+
 		GAME:FadeIn(40)
 		SOUND:PlayBGM("Job Clear!.ogg", true)
 		UI:SetSpeaker(client)
-		
+
 		if job.Type == COMMON.MISSION_TYPE_ESCORT then
-			UI:WaitShowDialogue("Thank you for escorting me to my friend!")
-		else 
+			UI:WaitShowDialogue("Merci de m'avoir accompagné jusqu'à mon ami !")
+		else
 			if job.Special == MISSION_GEN.SPECIAL_CLIENT_LOVER then
-				UI:WaitShowDialogue("Thank you for rescuing my love!")
+				UI:WaitShowDialogue("Merci d'avoir sauvé mon amour !")
 			elseif job.Special == MISSION_GEN.SPECIAL_CLIENT_RIVAL then
-				UI:WaitShowDialogue("Thank you for rescuing my rival!")
+				UI:WaitShowDialogue("Merci d'avoir sauvé mon rival !")
 			elseif job.Special == MISSION_GEN.SPECIAL_CLIENT_CHILD then
-				UI:WaitShowDialogue("Thank you for rescuing my child!")
+				UI:WaitShowDialogue("Merci d'avoir sauvé mon enfant !")
 			else
-				UI:WaitShowDialogue("Thank you for rescuing my friend!")
+				UI:WaitShowDialogue("Merci d'avoir sauvé mon ami !")
 			end
 		end
 		GAME:WaitFrames(20)
-		UI:WaitShowDialogue("Please take this as my thanks!")
+		UI:WaitShowDialogue("S'il vous plaît, prenez ceci comme mon remerciement !")
 		GAME:WaitFrames(20)
 
-		--reward the item 
+		--reward the item
 		if money then
 			GeneralFunctions.RewardItem(MISSION_GEN.DIFF_TO_MONEY[job.Difficulty], true)
 		else
 			GeneralFunctions.RewardItem(job.Reward)
 		end
-		
-		if job.BonusReward ~= '' then 
+
+		if job.BonusReward ~= '' then
 			UI:SetSpeaker(client)
 			GAME:WaitFrames(20)
-			UI:WaitShowDialogue("Please take this as well!")
+			UI:WaitShowDialogue("S'il vous plaît, prenez ceci aussi !")
 			GAME:WaitFrames(20)
 			GeneralFunctions.RewardItem(job.BonusReward)
-		end 
-		
+		end
+
 		GAME:WaitFrames(20)
 		GeneralFunctions.RewardPoints(MISSION_GEN.DIFFICULTY[job.Difficulty])
 		GAME:WaitFrames(20)
-		
-		
+
+
 		--fade out and clean up any temporary characters
 		SOUND:FadeOutBGM(40)
 		GAME:FadeOut(false, 40)
@@ -759,7 +759,7 @@ function guild_second_floor.Assembly_Action(obj, activator)
 	TASK:JoinCoroutines({coro1})
 	partner.IsInteracting = false
 	audino.IsInteracting = false
-	
+
 	GROUND:CharEndAnim(partner)
 	GROUND:CharEndAnim(hero)
 	GROUND:CharEndAnim(audino)

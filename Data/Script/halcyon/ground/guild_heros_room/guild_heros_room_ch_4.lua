@@ -21,7 +21,7 @@ function guild_heros_room_ch_4.ShowTitleCard()
 												  GAME:WaitFrames(180)
 												  UI:WaitHideBG(20) end)
 	TASK:JoinCoroutines({coro1, coro2})
-	
+
 	GAME:WaitFrames(120)
 	SV.Chapter4.ShowedTitleCard = true
 	guild_heros_room_helper.Morning(true)
@@ -34,7 +34,7 @@ function guild_heros_room_ch_4.PostGroveBedtalk()
 	guild_heros_room_helper.Bedtime(false)
 	UI:ResetSpeaker()
 	GAME:FadeIn(40)
-	
+
 	local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("relic_forest")
 
 	--partner is excited about the day.
@@ -77,18 +77,18 @@ Thinks about when he feels strange besides the times he told the partner, they m
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_004']))
 
 	GAME:WaitFrames(20)
-	GeneralFunctions.HeroDialogue(hero, "(Things have been exciting lately.[pause=0] It seems that excitement has helped " .. partner:GetDisplayName() .. " get " .. GeneralFunctions.GetPronoun(partner, "their") .. " mind off of " .. CharacterEssentials.GetCharacterName("Sandile") .. ",[pause=10] too.)", "Normal")
-	GeneralFunctions.HeroDialogue(hero, "(It's been a lot of fun adventuring with " .. partner:GetDisplayName() .. "!)", "Normal")
-	GeneralFunctions.HeroDialogue(hero, "(Life in the guild has been a blast so far...[pause=0] I'd like to keep going on adventures with " .. partner:GetDisplayName() .. "!)", "Happy")
-	
+	GeneralFunctions.HeroDialogue(hero, "(Les choses ont été passionnantes ces derniers temps.[pause=0]Il semble que l'enthousiasme ait aidé " .. partner:GetDisplayName() .. " à oublier " .. GeneralFunctions.GetPronoun(partner, "their") .. " et " .. CharacterEssentials.GetCharacterName("Sandile") .. ",[pause=10]également.)", "Normal")
+	GeneralFunctions.HeroDialogue(hero, "(Cela a été très amusant de partir à l'aventure avec " .. partner:GetDisplayName() .. " !)", "Normal")
+	GeneralFunctions.HeroDialogue(hero, "(La vie dans la guilde a été géniale jusqu'à présent...[pause=0]J'aimerais continuer à vivre des aventures avec " .. partner:GetDisplayName() .. " !)", "Happy")
+
 	GAME:WaitFrames(20)
 	GeneralFunctions.DoAnimation(hero, "Nod")
 	GAME:WaitFrames(10)
-	
+
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Happy")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_005'], hero:GetDisplayName()))
-	
+
 	GROUND:CharSetEmote(partner, "glowing", 0)
 	GAME:WaitFrames(40)
 	GROUND:CharSetEmote(hero, "glowing", 0)
@@ -109,51 +109,51 @@ Thinks about when he feels strange besides the times he told the partner, they m
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_008']))
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_009']), {function() return GeneralFunctions.Hop(partner) end})
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeakerEmotion("Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_010']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_011'], hero:GetDisplayName(), zone:GetColoredName()))
 	GAME:WaitFrames(20)
-	
-	GeneralFunctions.HeroDialogue(hero, "(Hmm...[pause=0] I haven't given it any thought,[pause=10] actually.)", "Worried")
-	GeneralFunctions.HeroDialogue(hero, "(I'd been so caught up in doing guild work with " .. partner:GetDisplayName() .. " that it slipped my mind entirely!)", "Worried")
+
+	GeneralFunctions.HeroDialogue(hero, "(Hmm...[pause=0], je n'y ai pas réfléchi,[pause=10]en fait.)", "Worried")
+	GeneralFunctions.HeroDialogue(hero, "(J'étais tellement occupé à travailler en guilde avec " .. partner:GetDisplayName() .. " que cela m'est complètement sorti de l'esprit !)", "Worried")
 	GAME:WaitFrames(20)
-	GeneralFunctions.HeroDialogue(hero, "(But,[pause=10] now that I stop and think about it...[pause=0] I still haven't remembered anything.)", "Sad")
+	GeneralFunctions.HeroDialogue(hero, "(Mais,[pause=10]maintenant que j'arrête et y réfléchis...[pause=0], je ne me souviens toujours de rien.)", "Sad")
 	GAME:WaitFrames(20)
 	GeneralFunctions.ShakeHead(hero)
 	GAME:WaitFrames(10)
-	
+
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Sad")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_012']))
 	GAME:WaitFrames(20)
 	UI:SetSpeakerEmotion("Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_013']))
-	
+
 	GAME:WaitFrames(20)
-	GeneralFunctions.HeroDialogue(hero, "(I haven't felt sick like I did at Luminous Spring since we were there.[pause=0] I still don't know why I felt that way.)", "Worried")
-	GeneralFunctions.HeroDialogue(hero, "(There was also how I felt touching the obelisk in " .. zone:GetColoredName() .. ",[pause=10] but I don't know anything about that either...)", "Worried")
+	GeneralFunctions.HeroDialogue(hero, "(Je ne me suis pas senti malade comme à Luminous Spring depuis que nous y étions.[pause=0]Je ne sais toujours pas pourquoi je me suis senti ainsi.)", "Worried")
+	GeneralFunctions.HeroDialogue(hero, "(Il y avait aussi ce que j'avais ressenti en touchant l'obélisque dans " .. zone:GetColoredName() .. ",[pause=10]mais je n'en sais rien non plus...)", "Worried")
 	GeneralFunctions.HeroDialogue(hero, "(Hmm...)", "Worried")
-	
+
 	GAME:WaitFrames(60)
 	SOUND:PlayBattleSE('EVT_Emote_Exclaim_Idea')
 	GeneralFunctions.EmoteAndPause(hero, "Exclaim", false)
-	
+
 	SOUND:PlayBGM('I Saw Something Again....ogg', false)
-	GeneralFunctions.HeroDialogue(hero, "(Wait![pause=0] Those aren't the only times I've felt that way![pause=0] I've gotten a strange feeling a few other times!)", "Surprised")
+	GeneralFunctions.HeroDialogue(hero, "(Attendez ![pause=0]Ce ne sont pas les seules fois où j'ai ressenti cela ![pause=0]J'ai eu une sensation étrange à plusieurs autres reprises !)", "Surprised")
 	GAME:WaitFrames(20)
-	GeneralFunctions.HeroDialogue(hero, "(I felt strange when I came to the guild for the first time,[pause=10] when I heard about the expedition earlier,[pause=10] and...)", "Normal")
+	GeneralFunctions.HeroDialogue(hero, "(Je me suis senti étrange quand je suis arrivé dans la guilde pour la première fois,[pause=10]quand j'ai entendu parler de l'expédition plus tôt,[pause=10]et...)", "Normal")
 	GAME:WaitFrames(40)
-	GeneralFunctions.HeroDialogue(hero, "(...And when I met " .. partner:GetDisplayName() .. ".)", "Worried")
+	GeneralFunctions.HeroDialogue(hero, "(...Et quand j'ai rencontré " .. partner:GetDisplayName() .. ".)", "Worried")
 	GAME:WaitFrames(20)
-	
-	GeneralFunctions.HeroDialogue(hero, "(The tension I felt those times wasn't as strong as with the obelisk and Luminous Spring,[pause=10] but the feeling was similar.)", "Normal")
-	
+
+	GeneralFunctions.HeroDialogue(hero, "(La tension que j'ai ressentie à cette époque n'était pas aussi forte qu'avec l'obélisque et le Printemps lumineux,[pause=10], mais la sensation était similaire.)", "Normal")
+
 	GAME:WaitFrames(20)
 	GeneralFunctions.HeroSpeak(hero, 60)
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_014']))
@@ -161,16 +161,16 @@ Thinks about when he feels strange besides the times he told the partner, they m
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_015']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_016']))
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeakerEmotion("Sad")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_017']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_018']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_019']))
 	GAME:WaitFrames(20)
-	
+
 	GeneralFunctions.HeroDialogue(hero, "(.........)", "Sad")
 	GAME:WaitFrames(20)
-	
+
 	SOUND:FadeOutBGM(120)
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Normal")
@@ -180,18 +180,18 @@ Thinks about when he feels strange besides the times he told the partner, they m
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_023']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_024'], hero:GetDisplayName()))
 	GAME:WaitFrames(20)
-	
-	GeneralFunctions.HeroDialogue(hero, "(It's frustrating we won't be able to make any progress on this soon...)", "Worried")
-	GeneralFunctions.HeroDialogue(hero, "(But with the expedition approaching,[pause=10] it makes sense to focus on that for now.)", "Normal")
+
+	GeneralFunctions.HeroDialogue(hero, "(C'est frustrant, nous ne pourrons pas faire de progrès dans ce domaine bientôt...)", "Worried")
+	GeneralFunctions.HeroDialogue(hero, "(Mais à l'approche de l'expédition,[pause=10], il est logique de se concentrer là-dessus pour le moment.)", "Normal")
 	GAME:WaitFrames(20)
 	GeneralFunctions.DoAnimation(hero, "Nod")
 	GAME:WaitFrames(40)
-	
+
 	SOUND:PlayBGM('Goodnight.ogg', true)
 	UI:SetSpeaker(partner)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_025']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR4_026']))
-	
+
 	GAME:WaitFrames(40)
 	GROUND:CharSetAnim(partner, "Laying", true)
 	GAME:WaitFrames(60)
@@ -205,8 +205,8 @@ Thinks about when he feels strange besides the times he told the partner, they m
 	GROUND:CharSetAnim(hero, "EventSleep", true)
 	GAME:WaitFrames(180)
 	SOUND:FadeOutBGM(120)
-	GAME:FadeOut(false, 120)	
-	
+	GAME:FadeOut(false, 120)
+
 	SV.Chapter4.FinishedBedtimeCutscene = true
 	SV.ChapterProgression.CurrentStoryDungeon = ''--Clear the current story dungeon flag
 	SV.TemporaryFlags.MorningAddress = true
@@ -217,6 +217,6 @@ Thinks about when he feels strange besides the times he told the partner, they m
 	GAME:CutsceneMode(false)
 	GAME:EnterGroundMap('guild_heros_room', 'Main_Entrance_Marker')
 
-	
+
 
 end

@@ -5,7 +5,7 @@ beginner_lesson_evt = {}
 --ledian is the 3rd party member
 function beginner_lesson_evt.FindLedian()
 --this check is needed as Ledian joins the team for floor 4 to allow team mode to work
-	if GAME:GetPlayerGuestCount() == 0 then 
+	if GAME:GetPlayerGuestCount() == 0 then
 		return GAME:GetPlayerPartyMember(1)
 	else
 		return GAME:GetPlayerGuestMember(0)
@@ -21,21 +21,21 @@ function beginner_lesson_evt.Floor_1_Intro(owner, ownerChar, character, args)
 	--progression flag is the number of speeches given by ledian. the functions in this document follow the order they're given in the dungeon
 	local chara = beginner_lesson_evt.FindLedian()
 	UI:SetSpeaker(chara)
-	UI:WaitShowDialogue("Hwacha![pause=0] Welcome to the dojo's learning area![pause=0] It is time for your first lesson!")
-	UI:WaitShowDialogue("Hoiyah![pause=0] On this floor you will learn much about the basics of dungeon crawling!")
-	UI:WaitShowDialogue("Volunteers ahead will either demonstrate learning topics,[pause=10] or pose as obstacles to conquer!")
-	UI:WaitShowDialogue("Be sure to read the signs left by my star pupil![pause=0] They contain vital knowledge essential to dungeon crawling!")
-	UI:WaitShowDialogue("You can speak to me at any time to reset the floor if you find yourself stuck![pause=0] Don't be shy,[pause=10] my student!")
-	UI:WaitShowDialogue("Onwards![pause=0] There is much learning to do,[pause=10] kya!")
+	UI:WaitShowDialogue("Hwacha![pause=0]Bienvenue dans la zone d'apprentissage du dojo ![pause=0]C'est l'heure de votre première leçon !")
+	UI:WaitShowDialogue("Hoiyah![pause=0]À cet étage, vous en apprendrez beaucoup sur les bases de l'exploration des donjons !")
+	UI:WaitShowDialogue("Les bénévoles à venir présenteront des sujets d'apprentissage ou constitueront des obstacles à surmonter !")
+	UI:WaitShowDialogue("Assurez-vous de lire les signes laissés par mon élève vedette ![pause=0]Ils contiennent des connaissances vitales essentielles à l'exploration des donjons !")
+	UI:WaitShowDialogue("Vous pouvez me parler à tout moment pour réinitialiser le parquet si vous vous retrouvez coincé ![pause=0]Ne soyez pas timide,[pause=10]mon élève !")
+	UI:WaitShowDialogue("En avant ![pause=0]Il y a beaucoup à apprendre,[pause=10]kya !")
 	SV.Tutorial.Progression = 1
 end
 
 function beginner_lesson_evt.Floor_2_Intro(owner, ownerChar, character, args)
 	local chara = beginner_lesson_evt.FindLedian()
 	UI:SetSpeaker(chara)
-	UI:WaitShowDialogue("Hwacha![pause=0] On this floor you will learn about different status effects you will encounter on your journeys!")
-	UI:WaitShowDialogue("Status effects are buffs or debuffs that affect a Pokémon's ability to battle!")
-	UI:WaitShowDialogue("The volunteers ahead will demonstrate moves that apply status moves![pause=0] Attack them and they'll use their move!")
+	UI:WaitShowDialogue("Hwacha![pause=0]À cet étage, vous découvrirez les différents effets de statut que vous rencontrerez au cours de vos voyages !")
+	UI:WaitShowDialogue("Les effets de statut sont des buffs ou des débuffs qui affectent la capacité d'un Pokémon à se battre !")
+	UI:WaitShowDialogue("Les volontaires devant vous démontreront les mouvements qui appliquent les mouvements de statut ![pause=0]Attaquez-les et ils utiliseront leur mouvement !")
 	SV.Tutorial.Progression = 2
 end
 
@@ -47,14 +47,14 @@ function beginner_lesson_evt.Floor_3_Intro(owner, ownerChar, character, args)
 		hero.HP = hero.MaxHP / 2
 		hero.Fullness = 0
 	end
-	
+
 	local chara = beginner_lesson_evt.FindLedian()
-	if SV.Tutorial.Progression == 2 then 
+	if SV.Tutorial.Progression == 2 then
 		chara.CharDir = Direction.Up
 	end
 	UI:SetSpeaker(chara)
-	UI:WaitShowDialogue("Hwacha![pause=0] This floor will teach you about wise and proper item use!")
-	UI:WaitShowDialogue("Wahtah![pause=0] Your first trial begins here!")
+	UI:WaitShowDialogue("Hwacha![pause=0]Cet étage vous apprendra à utiliser les objets de manière judicieuse et appropriée !")
+	UI:WaitShowDialogue("Wahtah![pause=0]Votre premier essai commence ici !")
 	--ledian assaults you, but only on entering the floor
 	if SV.Tutorial.Progression == 2 then
 		--todo: tidy up when Audino adds calls for dungeon animations
@@ -80,9 +80,9 @@ function beginner_lesson_evt.Floor_3_Intro(owner, ownerChar, character, args)
 		TASK:WaitTask(hero:StartAnim(heroAction))
 		GAME:WaitFrames(20)
 	end
-	
-	UI:WaitShowDialogue("I've cut your health to half and your belly is completely empty!")
-	UI:WaitShowDialogue("Use the food and berries in this room to regain your strength so you may continue on!")
+
+	UI:WaitShowDialogue("J'ai réduit ta santé de moitié et ton ventre est complètement vide !")
+	UI:WaitShowDialogue("Utilisez la nourriture et les baies dans cette pièce pour reprendre des forces afin de pouvoir continuer !")
 	SV.Tutorial.Progression = 3
 end
 
@@ -90,12 +90,12 @@ function beginner_lesson_evt.Floor_3_Wand_Speech(owner, ownerChar, character, ar
 	local chara = beginner_lesson_evt.FindLedian()
 	local item = RogueEssence.Dungeon.InvItem('orb_cleanse')
 	UI:SetSpeaker(chara)
-	UI:WaitShowDialogue("Hwacha![pause=0] Now it is time to learn about wands and orbs!")
-	UI:WaitShowDialogue("They are versatile items that can manipulate enemies or serve utility![pause=0] Useful against foes you wish not to fight.")
-	UI:WaitShowDialogue("Hoiyah![pause=0] The volunteer blocking the path ahead is very strong! You cannot fight him directly!")
-	UI:WaitShowDialogue("You must use a wand to move him out of the way instead![pause=0] The wand is sticky however!")
-	UI:WaitShowDialogue("Sticky items cannot be used![pause=0] You must use a " .. item:GetDisplayName() .. " to clean them off!")
-	UI:WaitShowDialogue("Oohcha![pause=0] Your next trial begins now!")
+	UI:WaitShowDialogue("Hwacha![pause=0]Il est maintenant temps d'en apprendre davantage sur les baguettes et les orbes !")
+	UI:WaitShowDialogue("Ce sont des objets polyvalents qui peuvent manipuler les ennemis ou être utiles ![pause=0]Utile contre les ennemis que vous ne souhaitez pas combattre.")
+	UI:WaitShowDialogue("Hoiyah![pause=0]Le volontaire qui bloque le chemin est très fort ! Vous ne pouvez pas le combattre directement !")
+	UI:WaitShowDialogue("Vous devez plutôt utiliser une baguette pour l'écarter ![pause=0]La baguette est cependant collante !")
+	UI:WaitShowDialogue("Les objets collants ne peuvent pas être utilisés ![pause=0]Vous devez utiliser un " .. item:GetDisplayName() .. " pour les nettoyer !")
+	UI:WaitShowDialogue("Oohcha ![pause=0]Votre prochain essai commence maintenant !")
 	SV.Tutorial.Progression = 4
 end
 
@@ -103,13 +103,13 @@ function beginner_lesson_evt.Floor_3_HeldItem_Speech(owner, ownerChar, character
 	local chara = beginner_lesson_evt.FindLedian()
 	local item = RogueEssence.Dungeon.InvItem('held_band_of_passage')
 	UI:SetSpeaker(chara)
-	UI:WaitShowDialogue("Hwacha![pause=0] Great work so far my student![pause=0] It is now time to learn about held items!")
-	UI:WaitShowDialogue("Wahtah![pause=0] Items such as bands and scarves may be given to a Pokémon to gain useful effects!")
+	UI:WaitShowDialogue("Hwacha ![pause=0]Excellent travail jusqu'à présent, mon élève ![pause=0]Il est maintenant temps d'en apprendre davantage sur les objets retenus !")
+	UI:WaitShowDialogue("Wahtah![pause=0]Des objets tels que des bracelets et des écharpes peuvent être donnés à un Pokémon pour obtenir des effets utiles !")
 	UI:WaitShowDialogue("Some items boost stats while others prevent certain status afflications!")
-	UI:WaitShowDialogue("Hoiyah![pause=0] For this trial,[pause=10] you must equip yourself with a " .. item:GetDisplayName() .. " and continue forward!")
-	UI:WaitShowDialogue("You won't be allowed to continue on without equipping the band!")
+	UI:WaitShowDialogue("Hoiyah![pause=0]Pour cet essai,[pause=10]vous devez vous équiper d'un " .. item:GetDisplayName() .. " et continuer à avancer !")
+	UI:WaitShowDialogue("Vous ne pourrez pas continuer sans équiper le groupe !")
 	SV.Tutorial.Progression = 5
-end 
+end
 
 function beginner_lesson_evt.Floor_3_ThrownReviver_Speech(owner, ownerChar, character, args)
 	local chara = beginner_lesson_evt.FindLedian()
@@ -118,19 +118,19 @@ function beginner_lesson_evt.Floor_3_ThrownReviver_Speech(owner, ownerChar, char
 	local stick = STRINGS:Format('\\uE0A1')..'[color=#FFCEFF]Stick[color]'
 	local rock = STRINGS:Format('\\uE0A0')..'[color=#FFCEFF]Gravelerock[color]'
 	local seed = STRINGS:Format('\\uE0A4')..'[color=#FFCEFF]Reviver Seeds[color]'
-	UI:WaitShowDialogue("Hwacha![pause=0] Some items such as " .. sticks .. " and " .. rock .. " can be thrown at foes to deal damage!")
-	UI:WaitShowDialogue("They are useful for damaging enemies that are far away from you![pause=0] Be sure not to throw them at teammates!")
-	UI:WaitShowDialogue("Hoiyah![pause=0] I also want to tell you about " .. seed .. "!")
-	UI:WaitShowDialogue("They are rare,[pause=10] but allow you to revive a teammate who has just fainted!")
-	UI:WaitShowDialogue("They are invaluable on difficult journeys![pause=0] Be sure to use them wisely!")
-	UI:WaitShowDialogue("Wahtah![pause=0] For this trial,[pause=10] you must throw a " .. stick .. " at the volunteer ahead!")
-	UI:WaitShowDialogue("After,[pause=10] you must use " .. seed .. " to revive us from the volunteer's powerful counterattack!")
-	UI:WaitShowDialogue("Oohcha![pause=0] It may be scary,[pause=10] but you must show no fear in the face of danger,[pause=10] my student!") 
+	UI:WaitShowDialogue("Hwacha![pause=0]Certains objets tels que " .. sticks .. " et " .. rock .. " peuvent être lancés sur les ennemis pour infliger des dégâts !")
+	UI:WaitShowDialogue("Ils sont utiles pour endommager les ennemis éloignés de vous ![pause=0]Assurez-vous de ne pas les lancer sur vos coéquipiers !")
+	UI:WaitShowDialogue("Hoiyah ![pause=0]Je veux aussi vous parler de " .. seed .. " !")
+	UI:WaitShowDialogue("Ils sont rares,[pause=10]mais permettent de réanimer un coéquipier qui vient de s'évanouir !")
+	UI:WaitShowDialogue("Ils sont inestimables lors des voyages difficiles ![pause=0]Assurez-vous de les utiliser à bon escient !")
+	UI:WaitShowDialogue("Wahtah![pause=0]Pour cet essai,[pause=10], vous devez lancer un " .. stick .. " sur le volontaire devant vous !")
+	UI:WaitShowDialogue("Après[pause=10], vous devez utiliser " .. seed .. " pour nous ranimer de la puissante contre-attaque du volontaire !")
+	UI:WaitShowDialogue("Oohcha ![pause=0]Cela peut faire peur,[pause=10]mais tu ne dois montrer aucune peur face au danger,[pause=10]mon élève !")
 	SV.Tutorial.Progression = 6
-end 
+end
 
 function beginner_lesson_evt.Floor_4_Intro(owner, ownerChar, character, args)
-	--move ledian into the actual team for the team mode section 
+	--move ledian into the actual team for the team mode section
 	if SV.Tutorial.Progression < 7 then
 		p = GAME:GetPlayerGuestMember(0)
 		GAME:RemovePlayerGuest(0)
@@ -139,24 +139,24 @@ function beginner_lesson_evt.Floor_4_Intro(owner, ownerChar, character, args)
 		--todo: update this when audino adds an update
 		_DUNGEON:RegenerateTurnMap()
 	end
-	
+
 	local chara = beginner_lesson_evt.FindLedian()
 	UI:SetSpeaker(chara)
-	UI:WaitShowDialogue("Hwacha![pause=0] This floor will teach you about terrain types you will encounter in dungeons!")
-	UI:WaitShowDialogue("Terrain includes obstacles such as water, lava, and walls!")
-	UI:WaitShowDialogue("Hoiyah![pause=0] You must learn how terrain affects dungeon navigation to be successful adventurers!")
+	UI:WaitShowDialogue("Hwacha![pause=0]Cet étage vous apprendra les types de terrain que vous rencontrerez dans les donjons !")
+	UI:WaitShowDialogue("Le terrain comprend des obstacles tels que de l'eau, de la lave et des murs !")
+	UI:WaitShowDialogue("Hoiyah![pause=0]Vous devez apprendre comment le terrain affecte la navigation dans les donjons pour réussir en aventurier !")
 	SV.Tutorial.Progression = 7
 end
 
 function beginner_lesson_evt.Floor_4_Key_Speech(owner, ownerChar, character, args)
 	local chara = beginner_lesson_evt.FindLedian()
 	UI:SetSpeaker(chara)
-	UI:WaitShowDialogue("Hwacha![pause=0] Time for this floor's trial![pause=0] I have joined your party for this one!")
-	UI:WaitShowDialogue("There are keys across different types of terrains in this next room!")
-	UI:WaitShowDialogue("You must use Team Mode to direct me across the terrains to pick up the keys so you may progress!")
-	UI:WaitShowDialogue("Hoiyah![pause=0] Press " .. STRINGS:LocalKeyString(7)  .. " to toggle Team Mode![pause=0] I await your directions,[pause=10] my student!")
+	UI:WaitShowDialogue("Hwacha ![pause=0]C'est l'heure de l'essai de cet étage ![pause=0]J'ai rejoint votre groupe pour celui-ci !")
+	UI:WaitShowDialogue("Il y a des clés sur différents types de terrains dans cette pièce suivante !")
+	UI:WaitShowDialogue("Vous devez utiliser le mode équipe pour me diriger à travers les terrains afin de récupérer les clés afin que vous puissiez progresser !")
+	UI:WaitShowDialogue("Hoiyah ![pause=0]Appuyez sur " .. STRINGS:LocalKeyString(7) .. " pour basculer en mode équipe ![pause=0]J'attends vos instructions,[pause=10]mon élève !")
 	SV.Tutorial.Progression = 8
-end 
+end
 
 function beginner_lesson_evt.Floor_5_Intro(owner, ownerChar, character, args)
 	--move Ledian back to the guest table
@@ -168,12 +168,12 @@ function beginner_lesson_evt.Floor_5_Intro(owner, ownerChar, character, args)
 		--todo: update this when audino adds an update
 		_DUNGEON:RegenerateTurnMap()
 	end
-	
+
 	local chara = beginner_lesson_evt.FindLedian()
 	UI:SetSpeaker(chara)
-	UI:WaitShowDialogue("Hwacha![pause=0] This is the last floor![pause=0] Your final trial lies ahead!")
-	UI:WaitShowDialogue("Use the Apricorns to recruit the correct volunteer,[pause=10] and have him bust open the path to the stairs!")
-	UI:WaitShowDialogue("You can do it,[pause=10] my student![pause=0] Use all that you've learned so far and you will succeed![pause=0] Hoiyah!")
+	UI:WaitShowDialogue("Hwacha ![pause=0]C'est le dernier étage ![pause=0]Votre épreuve finale vous attend !")
+	UI:WaitShowDialogue("Utilisez les Apricorns pour recruter le bon volontaire,[pause=10]et demandez-lui d'ouvrir le chemin vers les escaliers !")
+	UI:WaitShowDialogue("Vous pouvez le faire,[pause=10]mon élève ![pause=0]Utilisez tout ce que vous avez appris jusqu'à présent et vous réussirez ![pause=0]Hoiyah !")
 	SV.Tutorial.Progression = 9
 end
 
@@ -183,6 +183,6 @@ end
 
 --be sure to check function BATTLE_SCRIPT.SenseiInteract(owner, ownerChar, context, args)
 --in the event lua for ledian's interact script
-	
-	
-	
+
+
+

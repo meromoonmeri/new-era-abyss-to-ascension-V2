@@ -31,7 +31,7 @@ local guild_heros_room = {}
 function guild_heros_room.Init(map)
 	DEBUG.EnableDbgCoro()
 	print('=>> Init_guild_heros_room<<=')
-	
+
 	COMMON.RespawnAllies()
 	PartnerEssentials.InitializePartnerSpawn()
 
@@ -69,14 +69,14 @@ end
 
 --Check if a new story event needs to be triggered for a generic day end
 function guild_heros_room.CheckTriggerEvent()
-	
+
 	--once bronze rank is obtained in chapter 3, flag chapter 4 to start.
 	if SV.ChapterProgression.Chapter == 3 and SV.Chapter3.DefeatedBoss and _DATA.Save.ActiveTeam.Rank ~= "normal" and not SV.TemporaryFlags.Bedtime then
 		SV.ChapterProgression.Chapter = 4
 		SV.ChapterProgression.UnlockedAssembly = true
-		SV.TemporaryFlags.MorningAddress = false--unflag the generic address so the special one can play 
+		SV.TemporaryFlags.MorningAddress = false--unflag the generic address so the special one can play
 		SV.TemporaryFlags.MorningWakeup = false--unflag the generic wakeup so the card can play out properly
-		SV.ChapterProgression.CurrentStoryDungeon = "apricorn_grove" 
+		SV.ChapterProgression.CurrentStoryDungeon = "apricorn_grove"
 		SV.Dojo.NewMazeUnlocked = true
 		SV.metano_cafe.NewDrinkUnlocked = true
 		GAME:UnlockDungeon("apricorn_grove")
@@ -85,11 +85,11 @@ function guild_heros_room.CheckTriggerEvent()
 		GAME:WaitFrames(60)
 		GeneralFunctions.PromptChapterSaveAndQuit("guild_heros_room", "Main_Entrance_Marker", 2)
 	end
-	
+
 	--Start Chapter 5 a few in game days after beating Apricorn Grove.
 	if SV.ChapterProgression.Chapter == 4 and SV.Chapter4.FinishedGrove and SV.ChapterProgression.DaysPassed >= SV.ChapterProgression.DaysToReach then
 		SV.ChapterProgression.Chapter = 5
-		SV.TemporaryFlags.MorningAddress = false--unflag the generic address so the special one can play 
+		SV.TemporaryFlags.MorningAddress = false--unflag the generic address so the special one can play
 		SV.TemporaryFlags.MorningWakeup = false--unflag the generic wakeup so the card can play out properly
 		SV.ChapterProgression.CurrentStoryDungeon = ""--clear this; it won't be needed for the expedition
 		SV.Dojo.NewMazeUnlocked = true
@@ -100,17 +100,17 @@ function guild_heros_room.CheckTriggerEvent()
 		GAME:WaitFrames(60)
 		GeneralFunctions.PromptChapterSaveAndQuit("guild_heros_room", "Main_Entrance_Marker", 2)
 	end
-		
+
 end
 
 function guild_heros_room.PlotScripting()
 	--if generic morning is flagged, prioritize that.
-	if SV.TemporaryFlags.MorningWakeup or SV.TemporaryFlags.Bedtime then 
+	if SV.TemporaryFlags.MorningWakeup or SV.TemporaryFlags.Bedtime then
 		if SV.TemporaryFlags.Bedtime then guild_heros_room_helper.Bedtime(true) end
-	
+
 		--Does a new story event need to be triggered?
 		guild_heros_room.CheckTriggerEvent()
-	
+
 		if SV.TemporaryFlags.MorningWakeup then guild_heros_room_helper.Morning(true) end
 	else
 		--plot scripting
@@ -119,9 +119,9 @@ function guild_heros_room.PlotScripting()
 				guild_heros_room_ch_1.RoomIntro()
 			else
 				GAME:FadeIn(20)
-			end		
+			end
 		elseif SV.ChapterProgression.Chapter == 2 then
-			if not SV.Chapter2.FinishedFirstWakeup then 
+			if not SV.Chapter2.FinishedFirstWakeup then
 				guild_heros_room_ch_2.FirstMorning()
 			elseif SV.Chapter2.FinishedNumelTantrum and not SV.Chapter2.FinishedFirstDay then
 				guild_heros_room_ch_2.FirstNightBedtalk()
@@ -130,8 +130,8 @@ function guild_heros_room.PlotScripting()
 			else
 				GAME:FadeIn(20)
 			end
-		elseif SV.ChapterProgression.Chapter == 3 then 
-			if not SV.Chapter3.ShowedTitleCard then 
+		elseif SV.ChapterProgression.Chapter == 3 then
+			if not SV.Chapter3.ShowedTitleCard then
 				guild_heros_room_ch_3.FirstMorning()
 			elseif SV.Chapter3.DefeatedBoss and not SV.Chapter3.RootSceneTransition then
 				guild_heros_room_ch_3.PostOutlawBedtalkFirstHalf()
@@ -141,19 +141,19 @@ function guild_heros_room.PlotScripting()
 				GAME:FadeIn(20)
 			end
 		elseif SV.ChapterProgression.Chapter == 4 then
-			if not SV.Chapter4.ShowedTitleCard then 
+			if not SV.Chapter4.ShowedTitleCard then
 				guild_heros_room_ch_4.ShowTitleCard()
 			elseif SV.Chapter4.FinishedGrove and not SV.Chapter4.FinishedBedtimeCutscene then
-				guild_heros_room_ch_4.PostGroveBedtalk()	
+				guild_heros_room_ch_4.PostGroveBedtalk()
 			else
 				GAME:FadeIn(20)
 			end
-		elseif SV.ChapterProgression.Chapter == 5 then 
+		elseif SV.ChapterProgression.Chapter == 5 then
 			if not SV.Chapter5.ShowedTitleCard then
 				guild_heros_room_ch_5.ShowTitleCard()
 			else
 				GAME:FadeIn(20)
-			end			
+			end
 		else
 			GAME:FadeIn(20)
 		end
@@ -170,34 +170,34 @@ function guild_heros_room.Book_Action(obj, activator)
 	local partner_ground = CH('Teammate1')
 	partner_ground.IsInteracting = true
 	GROUND:CharSetAnim(partner_ground, 'None', true)
-	GROUND:CharSetAnim(hero_ground, 'None', true)		
+	GROUND:CharSetAnim(hero_ground, 'None', true)
     GeneralFunctions.TurnTowardsLocation(hero_ground, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
     GeneralFunctions.TurnTowardsLocation(partner_ground, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
-	
+
 	--Change where the choice menu goes; put it on the left because of placement of book in the map.
 	--UI:SetChoiceLoc(8, 102)
-	
+
 	local choices = {"Change scarves", "Change nicknames", "Change team name", "Check rank", "Nothing"}
-	UI:BeginChoiceMenu("What would you like to do?", choices, 1, #choices)
+	UI:BeginChoiceMenu("Qu'aimeriez-vous faire ?", choices, 1, #choices)
 	UI:WaitForChoice()
 	local choice_result = UI:ChoiceResult()
-	
+
 	if choice_result ~= #choices then
-		GROUND:ObjectSetDefaultAnim(obj, 'Diary_Red_Opening', 0, 0, 0, Direction.Left)	  
+		GROUND:ObjectSetDefaultAnim(obj, 'Diary_Red_Opening', 0, 0, 0, Direction.Left)
 	    GROUND:ObjectSetAnim(obj, 6, 0, 3, Direction.Left, 1)
 		GROUND:ObjectSetDefaultAnim(obj, 'Diary_Red_Opening', 0, 3, 3, Direction.Left)
 		GAME:WaitFrames(40)
 	end
-	
+
 	if choice_result == 1 then
 		local state = 1
 		while state > 0 do
-			UI:BeginChoiceMenu("Whose scarf would you like to change?", {hero_ground:GetDisplayName(), partner_ground:GetDisplayName(), "Neither"}, 1, 3)
+			UI:BeginChoiceMenu("De quelle écharpe aimeriez-vous changer ?", {hero_ground:GetDisplayName(), partner_ground:GetDisplayName(), "Neither"}, 1, 3)
 			UI:WaitForChoice()
 			local chara_choice = UI:ChoiceResult()
 			local chara
-			
-			if chara_choice == 1 then 
+
+			if chara_choice == 1 then
 				chara = hero_ground
 			elseif chara_choice == 2 then
 				chara = partner_ground
@@ -205,13 +205,13 @@ function guild_heros_room.Book_Action(obj, activator)
 				state = -1
 				break
 			end
-			
+
 			--check if sprites exist for that pokemon
 			--Current form updates from base form when a new ground/map is entered. Need to change both so the base form is updated proper, and current form needs to change to visually show it without reloading map.
 			local monId = RogueEssence.Dungeon.MonsterID(chara.CurrentForm.Species, chara.CurrentForm.Form, 'normal_black', chara.CurrentForm.Gender)
 			local fallback = RogueEssence.Content.GraphicsManager.GetFallbackForm(RogueEssence.Content.GraphicsManager.CharaIndex, monId:ToCharID())
-			if fallback.Skin == monId:ToCharID().Skin then			
-				UI:BeginChoiceMenu("Which color would you like?", {"Black", "Blue", "Cyan", "Green", "Magenta", "Orange", "Pink", "Purple", "Red", "White", "Yellow", "No scarf"}, 1, 12)
+			if fallback.Skin == monId:ToCharID().Skin then
+				UI:BeginChoiceMenu("Quelle couleur souhaiteriez-vous ?", {"Black", "Blue", "Cyan", "Green", "Magenta", "Orange", "Pink", "Purple", "Red", "White", "Yellow", "No scarf"}, 1, 12)
 				UI:WaitForChoice()
 				local scarf_choice = UI:ChoiceResult()
 				local current_skin = chara.CurrentForm.Skin
@@ -240,11 +240,11 @@ function guild_heros_room.Book_Action(obj, activator)
 					new_skin = "normal_yellow"
 				elseif scarf_choice == 12 then
 					new_skin = "normal"
-				else 
+				else
 					new_skin = current_skin
 				end
-			
-				if new_skin ~= current_skin then 
+
+				if new_skin ~= current_skin then
 					GAME:FadeOut(false, 20)
 					chara.Data.BaseForm = RogueEssence.Dungeon.MonsterID(chara.CurrentForm.Species, chara.CurrentForm.Form, new_skin, chara.CurrentForm.Gender)
 					chara.Data.CurrentForm = RogueEssence.Dungeon.MonsterID(chara.CurrentForm.Species, chara.CurrentForm.Form, new_skin, chara.CurrentForm.Gender)
@@ -252,102 +252,102 @@ function guild_heros_room.Book_Action(obj, activator)
 					SOUND:PlayBattleSE('_UNK_EVT_023')
 					GAME:WaitFrames(40)
 					GAME:FadeIn(20)
-					
+
 					GAME:WaitFrames(40)
 					if chara_choice == 1 then
-						GeneralFunctions.HeroDialogue(chara, "(Looking good!)", "Normal")
+						GeneralFunctions.HeroDialogue(chara, "(Ça a l'air bien !)", "Normal")
 					else
 						UI:SetSpeaker(chara)
-						UI:WaitShowDialogue("Looking good!")
+						UI:WaitShowDialogue("Ça a l'air bien !")
 					end
 					GAME:WaitFrames(20)
 				end
-				
+
 				state = -1
 			else
-				UI:WaitShowDialogue("There aren't scarf sprites made yet for this Pokémon.[pause=0] Check back later!")
+				UI:WaitShowDialogue("Aucun sprite écharpe n'a encore été créé pour ce Pokémon.[pause=0]Revenez plus tard !")
 				state = -1
 			end
 
-		end 
-	
+		end
+
 	elseif choice_result == 2 then
-		UI:BeginChoiceMenu("Whose name would you like to change?", {hero_ground:GetDisplayName(), partner_ground:GetDisplayName(), "Neither"}, 1, 3)
+		UI:BeginChoiceMenu("Quel nom souhaiteriez-vous changer ?", {hero_ground:GetDisplayName(), partner_ground:GetDisplayName(), "Neither"}, 1, 3)
 		UI:WaitForChoice()
 		local name_result = UI:ChoiceResult()
 
 		if name_result == 1 then
 			local name = hero.Nickname
-			UI:NameMenu("What is your name?", "Press [ESC] to keep the old nickname.", 60)
+			UI:NameMenu("Quel est ton nom?", "Appuie sur [ESC] pour conserver l'ancien surnom.", 60)
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
 			--if no name given, set name to previous name
 			if result == "" then result = name end
 			GAME:SetCharacterNickname(hero, result)
-			UI:WaitShowDialogue("Your name is now " .. hero_ground:GetDisplayName() .. "!")
+			UI:WaitShowDialogue("Votre nom est désormais " .. hero_ground:GetDisplayName() .. " !")
 		elseif name_result == 2 then
 			local name = partner.Nickname
-			UI:NameMenu("What is your partner's name?", "Press [ESC] to keep the old nickname.", 60)
+			UI:NameMenu("Quel est le nom de votre partenaire ?", "Appuie sur [ESC] pour conserver l'ancien surnom.", 60)
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
 			--if no name given, set name to previous name
 			if result == "" then result = name end
 			GAME:SetCharacterNickname(partner, result)
-			UI:WaitShowDialogue("Your partner's name is now " .. partner_ground:GetDisplayName() .. "!")
+			UI:WaitShowDialogue("Le nom de votre partenaire est désormais " .. partner_ground:GetDisplayName() .. " !")
 		end
-		
+
 	elseif choice_result == 3 then
 		local name = _DATA.Save.ActiveTeam.Name
-		UI:NameMenu("What is your team's name?", "Press [ESC] to keep the old team name.", 60)
+		UI:NameMenu("Quel est le nom de votre équipe ?", "Press [ESC] to keep the old team name.", 60)
 		UI:WaitForChoice()
 		local result = UI:ChoiceResult()
 		--if no name given, set name to previous name
 		if result == "" then result = name end
 		GAME:SetTeamName(result)
-		UI:WaitShowDialogue("Your team's name is now Team " .. GAME:GetTeamName() .. "!")
+		UI:WaitShowDialogue("Le nom de votre équipe est désormais Team " .. GAME:GetTeamName() .. " !")
 	elseif choice_result == 4 then
 		local current_rank = _DATA.Save.ActiveTeam.Rank
 		local next_rank = _DATA:GetRank(current_rank).Next
-		local to_go = _DATA:GetRank(current_rank).FameToNext - _DATA.Save.ActiveTeam.Fame 
+		local to_go = _DATA:GetRank(current_rank).FameToNext - _DATA.Save.ActiveTeam.Fame
 
-		UI:WaitShowDialogue("Your team is currently [color=#FFA5FF]" .. current_rank:gsub("^%l", string.upper) .. " Rank[color].")
-		UI:WaitShowDialogue("You need [color=#00FFFF]" .. to_go .. "[color] Adventurer Rank Points to become [color=#FFA5FF]" .. next_rank:gsub("^%l", string.upper) .. " Rank[color].")
+		UI:WaitShowDialogue("Votre équipe est actuellement[color=#FFA5FF]" .. current_rank:gsub("^%l", string.upper) .. " Rank[color].")
+		UI:WaitShowDialogue("Vous avez besoin de points de rang d'aventurier[color=#00FFFF]" .. to_go .. "[color]pour devenir[color=#FFA5FF]" .. next_rank:gsub("^%l", string.upper) .. " Rank[color].")
 	end
 
 	if choice_result ~= #choices then
 		GROUND:ObjectSetDefaultAnim(obj, 'Diary_Red_Closing', 0, 0, 0, Direction.Left)
 		GROUND:ObjectSetAnim(obj, 6, 0, 3, Direction.Left, 1)
-		GROUND:ObjectSetDefaultAnim(obj, 'Diary_Red_Closing', 0, 3, 3, Direction.Left)	
-		GAME:WaitFrames(40)		
+		GROUND:ObjectSetDefaultAnim(obj, 'Diary_Red_Closing', 0, 3, 3, Direction.Left)
+		GAME:WaitFrames(40)
 	end
-	
+
 	--UI:ResetChoiceLoc()
 	partner_ground.IsInteracting = false
 	GROUND:CharEndAnim(partner_ground)
 	GROUND:CharEndAnim(hero_ground)
-	
+
 end
 
 
 
 function guild_heros_room.DemoThankYou()
 	UI:ResetSpeaker()
-	UI:WaitShowDialogue("That's the end of the demo! Thank you so much for playing!")
-	UI:WaitShowDialogue("I hope you enjoyed playing the New Era : Abyss to Ascension demo! More chapters to come in the future!")
-	UI:WaitShowDialogue("Special thanks to Audino for all his help with the Origins engine.")
-	UI:WaitShowDialogue("Without his help, New Era : Abyss to Ascension could not have been made!")
-	UI:WaitShowDialogue("I'd also like to thank Trio- for helping with mission generation scripts and other scripting odds and ends.")
-	UI:WaitShowDialogue("He saved me a lot of time and grief with all the help he provided.")
-	UI:WaitShowDialogue("Please check the readme for the full list of credits!")
-	UI:WaitShowDialogue("Everyone who helped out did a great job, and I appreciate all that they've done!")
-	UI:WaitShowDialogue("If you have any feedback you would like to share, please do so in the relevant New Era : Abyss to Ascension discord channel!")
-	UI:WaitShowDialogue("I'm interested to hear what people think about the game or if they have any suggestions or thoughts!")
-	UI:WaitShowDialogue("If you're interested in contributing to New Era : Abyss to Ascension as well, please let Palika know!")
-	UI:WaitShowDialogue("I would need sprite artists and musicians to help with custom assets now and then...")
-	UI:WaitShowDialogue("So if that's up your alley and you're interested, please let me know!")
-	UI:WaitShowDialogue("Anyways, you can keep playing New Era : Abyss to Ascension to complete the randomly generated missions if you feel like.")
-	UI:WaitShowDialogue("Nothing can progress the game any further right now, as I need to develop more of the story.")
-	UI:WaitShowDialogue("Thank you again for playing! Returning back to normal gameplay... now!")
+	UI:WaitShowDialogue("C'est la fin de la démo ! Merci beaucoup d'avoir joué !")
+	UI:WaitShowDialogue("J'espère que vous avez apprécié jouer à la démo de New Era : Abyss to Ascension ! D'autres chapitres à venir dans le futur !")
+	UI:WaitShowDialogue("Un merci spécial à Audino pour toute son aide avec le moteur Origins.")
+	UI:WaitShowDialogue("Sans son aide, New Era : Abyss to Ascension n'aurait pas pu voir le jour !")
+	UI:WaitShowDialogue("J'aimerais également remercier Trio- pour son aide avec les scripts de génération de missions et autres bric-à-brac de script.")
+	UI:WaitShowDialogue("Il m'a épargné beaucoup de temps et de chagrin grâce à toute l'aide qu'il m'a apportée.")
+	UI:WaitShowDialogue("Veuillez consulter le fichier Lisez-moi pour la liste complète des crédits !")
+	UI:WaitShowDialogue("Tous ceux qui ont aidé ont fait un excellent travail et j'apprécie tout ce qu'ils ont fait !")
+	UI:WaitShowDialogue("Si vous avez des commentaires que vous aimeriez partager, veuillez le faire sur le canal discord New Era : Abyss to Ascension correspondant !")
+	UI:WaitShowDialogue("Je suis curieux de savoir ce que les gens pensent du jeu ou s'ils ont des suggestions ou des idées !")
+	UI:WaitShowDialogue("Si vous souhaitez également contribuer à New Era : Abyss to Ascension, veuillez le faire savoir à Palika !")
+	UI:WaitShowDialogue("J'aurais besoin d'artistes sprites et de musiciens pour m'aider avec des ressources personnalisées de temps en temps...")
+	UI:WaitShowDialogue("Alors si cela vous tente et que vous êtes intéressé, n'hésitez pas à me le faire savoir !")
+	UI:WaitShowDialogue("Quoi qu'il en soit, vous pouvez continuer à jouer à New Era : Abyss to Ascension pour terminer les missions générées aléatoirement si vous en avez envie.")
+	UI:WaitShowDialogue("Rien ne peut faire progresser le jeu davantage pour le moment, car je dois développer davantage l'histoire.")
+	UI:WaitShowDialogue("Merci encore d'avoir joué ! Retour au jeu normal... maintenant !")
 	SV.Chapter4.DemoThankYou = true
 end
 
@@ -396,7 +396,7 @@ end
 ---------------------------
 function guild_heros_room.Bedroom_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
-  if SV.TemporaryFlags.JustWokeUp then --skip the hallway if we just woke up and queue up the morning 
+  if SV.TemporaryFlags.JustWokeUp then --skip the hallway if we just woke up and queue up the morning
 	GAME:FadeOut(false, 40)--longer fade out because we're about to go into a cutscene
 	SV.TemporaryFlags.JustWokeUp = false
 	--SV.TemporaryFlags.MorningAddress = true

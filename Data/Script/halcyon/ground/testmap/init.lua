@@ -27,9 +27,9 @@ local testmap = {}
 --Engine callback function
 function testmap.Init(map, time)
 
-  --This will fill the localized strings table automatically based on the locale the game is 
+  --This will fill the localized strings table automatically based on the locale the game is
   -- currently in. You can use the MapStrings table after this line!
-	
+
 	COMMON.RespawnAllies()
 	PartnerEssentials.InitializePartnerSpawn()
 
@@ -88,7 +88,7 @@ end
 function testmap.FadingTextTest_Action(chara, activator)
 	GAME:FadeOut(false, 20)
 	GAME:WaitFrames(20)
-	
+
 	GeneralFunctions.DeathFadeOutDialogue(CH('Teammate1'), "We couldn't[pause=0] hack it...", "Pain")
 
 	GAME:FadeIn(20)
@@ -96,7 +96,7 @@ function testmap.FadingTextTest_Action(chara, activator)
 end
 
 function testmap.Make_Missions_Action(chara, activator)
-	print("Running mission generation!")  
+	print("Running mission generation!")
 	MISSION_GEN.ResetBoards()
 	MISSION_GEN.RemoveMissionBackReference()
 	MISSION_GEN.GenerateBoard(COMMON.MISSION_BOARD_MISSION)
@@ -111,7 +111,7 @@ function testmap.See_Taken_Action(chara, activator)
 	for i = 1, 8, 1 do
 		UI:WaitShowDialogue("Job " .. tostring(i) .. ": Client: " .. SV.TakenBoard[i].Client .. " Target: " .. SV.TakenBoard[i].Target ..
 			" Zone: " .. SV.TakenBoard[i].Zone .. " Reward: " .. SV.TakenBoard[i].Reward .. " Floor: " .. SV.TakenBoard[i].Floor .. " Type: "
-			.. SV.TakenBoard[i].Type .. " Completion: " .. SV.TakenBoard[i].Completion .. " Taken: " .. tostring(SV.TakenBoard[i].Taken) .. " Difficulty: " .. SV.TakenBoard[i].Difficulty .. " Item: " .. SV.TakenBoard[i].Item)			
+			.. SV.TakenBoard[i].Type .. " Completion: " .. SV.TakenBoard[i].Completion .. " Taken: " .. tostring(SV.TakenBoard[i].Taken) .. " Difficulty: " .. SV.TakenBoard[i].Difficulty .. " Item: " .. SV.TakenBoard[i].Item)
 	end
 	UI:SetAutoFinish(false)
 end
@@ -123,7 +123,7 @@ function testmap.See_Mission_Action(chara, activator)
 	for i = 1, 8, 1 do
 		UI:WaitShowDialogue("Job " .. tostring(i) .. ": Client: " .. SV.MissionBoard[i].Client .. " Target: " .. SV.MissionBoard[i].Target ..
 			" Zone: " .. SV.MissionBoard[i].Zone .. " Reward: " .. SV.MissionBoard[i].Reward .. " Floor: " .. SV.MissionBoard[i].Floor .. " Type: "
-			.. SV.MissionBoard[i].Type .. " Completion: " .. SV.MissionBoard[i].Completion .. " Taken: " .. tostring(SV.MissionBoard[i].Taken) .. " Difficulty: " .. SV.MissionBoard[i].Difficulty .. " Item: " .. SV.MissionBoard[i].Item)			
+			.. SV.MissionBoard[i].Type .. " Completion: " .. SV.MissionBoard[i].Completion .. " Taken: " .. tostring(SV.MissionBoard[i].Taken) .. " Difficulty: " .. SV.MissionBoard[i].Difficulty .. " Item: " .. SV.MissionBoard[i].Item)
 	end
 	UI:SetAutoFinish(false)
 end
@@ -134,7 +134,7 @@ function testmap.See_Outlaw_Action(chara, activator)
 	for i = 1, 8, 1 do
 		UI:WaitShowDialogue("Job " .. tostring(i) .. ": Client: " .. SV.OutlawBoard[i].Client .. " Target: " .. SV.OutlawBoard[i].Target ..
 			" Zone: " .. SV.OutlawBoard[i].Zone .. " Reward: " .. SV.OutlawBoard[i].Reward .. " Floor: " .. SV.OutlawBoard[i].Floor .. " Type: "
-			.. SV.OutlawBoard[i].Type .. " Completion: " .. SV.OutlawBoard[i].Completion .. " Taken: " .. tostring(SV.OutlawBoard[i].Taken) .. " Difficulty: " .. SV.OutlawBoard[i].Difficulty ..  " Item: " .. SV.OutlawBoard[i].Item)			
+			.. SV.OutlawBoard[i].Type .. " Completion: " .. SV.OutlawBoard[i].Completion .. " Taken: " .. tostring(SV.OutlawBoard[i].Taken) .. " Difficulty: " .. SV.OutlawBoard[i].Difficulty ..  " Item: " .. SV.OutlawBoard[i].Item)
 	end
 	UI:SetAutoFinish(false)
 end
@@ -176,27 +176,27 @@ end
 
 function testmap.CompleteTakens_Action()
 	if SV.TakenBoard[1].Client ~= '' then
-		for i =1, 8, 1 do 
+		for i =1, 8, 1 do
 			if SV.TakenBoard[i].Client ~= '' then
 				SV.TakenBoard[i].Completion = MISSION_GEN.COMPLETE
-			else 
+			else
 				break
-			end 
-		end 
-	end 
+			end
+		end
+	end
 	SV.TemporaryFlags.MissionCompleted = true
 	SV.TemporaryFlags.Dinnertime = true
 	UI:WaitShowDialogue("Taken missions completed!")
-end 
+end
 
 --skip to having entered the guild but not talking to anyone yet
 function testmap.Chapter1_2_Action(chara, activator)
 	SV.ChapterProgression.Chapter = 1
-	
+
 	GAME:UnlockDungeon('relic_forest')
 	_DATA.Save.ActiveTeam:SetRank("normal")
-	
-	SV.Chapter1 = 
+
+	SV.Chapter1 =
 	{
 		PlayedIntroCutscene = true,
 		PartnerEnteredForest = true,--Did partner go into the forest yet?
@@ -211,14 +211,14 @@ function testmap.Chapter1_2_Action(chara, activator)
 		MetCranidosMareep = false,
 		MetBreloomGirafarig = false,
 		MetAudino = false,
-		
+
 		--partner dialogue flag on second floor
 		PartnerSecondFloorDialogue = 0,
 		TutorialProgression = 10
 	}
-	
+
 	UI:ResetSpeaker()
-	UI:WaitShowDialogue("Chapter progression set: Chapter 1 before talking to guild mates!")
+	UI:WaitShowDialogue("Ensemble de progression de chapitre : Chapitre 1 avant de parler aux compagnons de guilde !")
 
 end
 
@@ -226,12 +226,12 @@ end
 --skip to having just started chapter 2
 function testmap.Chapter2_1_Action(chara, activator)
 	SV.ChapterProgression.Chapter = 2
-	
+
 	GAME:UnlockDungeon('relic_forest')
 	GAME:UnlockDungeon('illuminant_riverbed')
 	_DATA.Save.ActiveTeam:SetRank("normal")
-	
-	SV.Chapter1 = 
+
+	SV.Chapter1 =
 	{
 		PlayedIntroCutscene = true,
 		PartnerEnteredForest = true,--Did partner go into the forest yet?
@@ -246,27 +246,27 @@ function testmap.Chapter2_1_Action(chara, activator)
 		MetCranidosMareep = true,
 		MetBreloomGirafarig = true,
 		MetAudino = true,
-		
+
 		--partner dialogue flag on second floor
 		PartnerSecondFloorDialogue = 0,
 		TutorialProgression = 10
 	}
-	
+
 	UI:ResetSpeaker()
-	UI:WaitShowDialogue("Chapter progression set: Chapter 2 before doing anything!")
+	UI:WaitShowDialogue("Ensemble de progression de chapitre : Chapitre 2 avant de faire quoi que ce soit !")
 
 end
 
 function testmap.Chapter2_2_Action(chara, activator)
 	SV.ChapterProgression.Chapter = 2
-	
+
 	GAME:UnlockDungeon('relic_forest')
 	GAME:UnlockDungeon('illuminant_riverbed')
 	GAME:UnlockDungeon('beginner_lesson')
 	GAME:UnlockDungeon('normal_maze')
 	_DATA.Save.ActiveTeam:SetRank("normal")
-	
-	SV.Chapter1 = 
+
+	SV.Chapter1 =
 	{
 		PlayedIntroCutscene = true,
 		PartnerEnteredForest = true,--Did partner go into the forest yet?
@@ -281,13 +281,13 @@ function testmap.Chapter2_2_Action(chara, activator)
 		MetCranidosMareep = true,
 		MetBreloomGirafarig = true,
 		MetAudino = true,
-		
+
 		--partner dialogue flag on second floor
 		PartnerSecondFloorDialogue = 0,
 		TutorialProgression = 10
 	}
-	
-	SV.Chapter2 = 
+
+	SV.Chapter2 =
 	{
 		FirstMorningMeetingDone = true,--completed the first morning cutscene with the guild?
 		StartedTraining = true,--started the training at ledian dojo?
@@ -298,25 +298,25 @@ function testmap.Chapter2_2_Action(chara, activator)
 		FinishedNumelTantrum = true,--watched numel's tantrum?
 		FinishedFirstDay = true,--finished first day of chapter 2?
 		FinishedCameruptRequestScene = true,--finished second morning address cutscene with the guild? (this only plays once, even if you die on the second day)
-		
+
 		EnteredRiver = false,--has player and partner attempted the dungeon of the chapter yet? used for a few npcs to mark that a day has passed since the initial request (i.e. you failed at least once)
 		FinishedRiver = false,--player and partner have finished the dungeon and made it to Numel?
-		
+
 		TropiusGaveReviver = false,--did tropius give the free one off reviver seed?
 		WooperIntro = true--talked to the wooper siblings? if not play their little cutscene
 	}
-	
+
 	UI:ResetSpeaker()
-	UI:WaitShowDialogue("Chapter progression set: Chapter 2 day 2!")
-	
-	
+	UI:WaitShowDialogue("Ensemble de progression de chapitre : Chapitre 2, jour 2 !")
+
+
 
 end
 
 
 function testmap.Chapter3_1_Action(chara, activator)
 	SV.ChapterProgression.Chapter = 3
-	
+
 	GAME:UnlockDungeon('relic_forest')
 	GAME:UnlockDungeon('illuminant_riverbed')
 	GAME:UnlockDungeon('crooked_cavern')
@@ -327,8 +327,8 @@ function testmap.Chapter3_1_Action(chara, activator)
 	GAME:UnlockDungeon('grass_maze')
 	SV.ChapterProgression.CurrentStoryDungeon = 'crooked_cavern'
 	_DATA.Save.ActiveTeam:SetRank("normal")
-	
-	SV.Chapter1 = 
+
+	SV.Chapter1 =
 	{
 		PlayedIntroCutscene = true,
 		PartnerEnteredForest = true,--Did partner go into the forest yet?
@@ -343,13 +343,13 @@ function testmap.Chapter3_1_Action(chara, activator)
 		MetCranidosMareep = true,
 		MetBreloomGirafarig = true,
 		MetAudino = true,
-		
+
 		--partner dialogue flag on second floor
 		PartnerSecondFloorDialogue = 0,
 		TutorialProgression = 10
 	}
-	
-	SV.Chapter2 = 
+
+	SV.Chapter2 =
 	{
 		FirstMorningMeetingDone = true,--completed the first morning cutscene with the guild?
 		StartedTraining = true,--started the training at ledian dojo?
@@ -360,23 +360,23 @@ function testmap.Chapter3_1_Action(chara, activator)
 		FinishedNumelTantrum = true,--watched numel's tantrum?
 		FinishedFirstDay = true,--finished first day of chapter 2?
 		FinishedCameruptRequestScene = true,--finished second morning address cutscene with the guild? (this only plays once, even if you die on the second day)
-		
+
 		EnteredRiver = true,--has player and partner attempted the dungeon of the chapter yet? used for a few npcs to mark that a day has passed since the initial request (i.e. you failed at least once)
 		FinishedRiver = true,--player and partner have finished the dungeon and made it to Numel?
-		
+
 		TropiusGaveReviver = true,--did tropius give the free one off reviver seed?
 		WooperIntro = true--talked to the wooper siblings? if not play their little cutscene
 	}
-		
+
 	UI:ResetSpeaker()
-	UI:WaitShowDialogue("Chapter progression set: Chapter 3 day 1!")
+	UI:WaitShowDialogue("Ensemble de progression de chapitre : Chapitre 3, jour 1 !")
 
 end
 
 
 function testmap.Chapter3_2_Action(chara, activator)
 	SV.ChapterProgression.Chapter = 3
-	
+
 	GAME:UnlockDungeon('relic_forest')
 	GAME:UnlockDungeon('illuminant_riverbed')
 	GAME:UnlockDungeon('crooked_cavern')
@@ -388,7 +388,7 @@ function testmap.Chapter3_2_Action(chara, activator)
 	SV.ChapterProgression.CurrentStoryDungeon = ''
 	_DATA.Save.ActiveTeam:SetRank("normal")
 
-	SV.Chapter1 = 
+	SV.Chapter1 =
 	{
 		PlayedIntroCutscene = true,
 		PartnerEnteredForest = true,--Did partner go into the forest yet?
@@ -403,13 +403,13 @@ function testmap.Chapter3_2_Action(chara, activator)
 		MetCranidosMareep = true,
 		MetBreloomGirafarig = true,
 		MetAudino = true,
-		
+
 		--partner dialogue flag on second floor
 		PartnerSecondFloorDialogue = 0,
 		TutorialProgression = 10
 	}
-	
-	SV.Chapter2 = 
+
+	SV.Chapter2 =
 	{
 		FirstMorningMeetingDone = true,--completed the first morning cutscene with the guild?
 		StartedTraining = true,--started the training at ledian dojo?
@@ -420,15 +420,15 @@ function testmap.Chapter3_2_Action(chara, activator)
 		FinishedNumelTantrum = true,--watched numel's tantrum?
 		FinishedFirstDay = true,--finished first day of chapter 2?
 		FinishedCameruptRequestScene = true,--finished second morning address cutscene with the guild? (this only plays once, even if you die on the second day)
-		
+
 		EnteredRiver = true,--has player and partner attempted the dungeon of the chapter yet? used for a few npcs to mark that a day has passed since the initial request (i.e. you failed at least once)
 		FinishedRiver = true,--player and partner have finished the dungeon and made it to Numel?
-		
+
 		TropiusGaveReviver = true,--did tropius give the free one off reviver seed?
 		WooperIntro = true--talked to the wooper siblings? if not play their little cutscene
 	}
-		
-	SV.Chapter3 = 
+
+	SV.Chapter3 =
 	{
 		ShowedTitleCard = true,--Did the generic wakeup for the first day? Need a variable for this due to chapter 3 title card.
 		FinishedOutlawIntro = true,--did shuca and ganlon teach you about outlaws?
@@ -440,7 +440,7 @@ function testmap.Chapter3_2_Action(chara, activator)
 		LostToBoss = false,--did duo die to boss?
 		EscapedBoss = false,--due team use an escape orb to escape boss?
 		DefeatedBoss = true, --did duo defeat team style?
-		RootSceneTransition = true, --Used to remember where in the root scene we are after transitioning away to show the root 
+		RootSceneTransition = true, --Used to remember where in the root scene we are after transitioning away to show the root
 		FinishedRootScene = true, --Showed root scene? This is used to mark the first half of chapter 3 (the non filler portion) as having been completed or not
 		FinishedMerchantIntro = false, --Did merchant intro cutscene?
 		--DemoThankYou = false,--Showed demo thank you? Not needed for future versions.
@@ -449,16 +449,16 @@ function testmap.Chapter3_2_Action(chara, activator)
 		BreloomGirafarigConvo = true, --talked to breloom/girafarig about their expedition?
 		PostBossSpokeToCranidos = false -- Talked to cranidos in town after beating boss? Used to flag the partner to mention not being able to impress cranidos.
 	}
-	
+
 	UI:ResetSpeaker()
-	UI:WaitShowDialogue("Chapter progression set: Chapter 3 day 2!")
+	UI:WaitShowDialogue("Ensemble de progression de chapitre : Chapitre 3, jour 2 !")
 
 end
 
 
 function testmap.Chapter4_1_Action(chara, activator)
 	SV.ChapterProgression.Chapter = 4
-	
+
 	GAME:UnlockDungeon('relic_forest')
 	GAME:UnlockDungeon('illuminant_riverbed')
 	GAME:UnlockDungeon('crooked_cavern')
@@ -473,8 +473,8 @@ function testmap.Chapter4_1_Action(chara, activator)
 	SV.ChapterProgression.CurrentStoryDungeon = 'apricorn_grove'
 	_DATA.Save.ActiveTeam:SetRank("bronze")
 	SV.ChapterProgression.UnlockedAssembly = true
-	
-	SV.Chapter1 = 
+
+	SV.Chapter1 =
 	{
 		PlayedIntroCutscene = true,
 		PartnerEnteredForest = true,--Did partner go into the forest yet?
@@ -489,13 +489,13 @@ function testmap.Chapter4_1_Action(chara, activator)
 		MetCranidosMareep = true,
 		MetBreloomGirafarig = true,
 		MetAudino = true,
-		
+
 		--partner dialogue flag on second floor
 		PartnerSecondFloorDialogue = 0,
 		TutorialProgression = 10
 	}
-	
-	SV.Chapter2 = 
+
+	SV.Chapter2 =
 	{
 		FirstMorningMeetingDone = true,--completed the first morning cutscene with the guild?
 		StartedTraining = true,--started the training at ledian dojo?
@@ -506,15 +506,15 @@ function testmap.Chapter4_1_Action(chara, activator)
 		FinishedNumelTantrum = true,--watched numel's tantrum?
 		FinishedFirstDay = true,--finished first day of chapter 2?
 		FinishedCameruptRequestScene = true,--finished second morning address cutscene with the guild? (this only plays once, even if you die on the second day)
-		
+
 		EnteredRiver = true,--has player and partner attempted the dungeon of the chapter yet? used for a few npcs to mark that a day has passed since the initial request (i.e. you failed at least once)
 		FinishedRiver = true,--player and partner have finished the dungeon and made it to Numel?
-		
+
 		TropiusGaveReviver = true,--did tropius give the free one off reviver seed?
 		WooperIntro = true--talked to the wooper siblings? if not play their little cutscene
 	}
-		
-	SV.Chapter3 = 
+
+	SV.Chapter3 =
 	{
 		ShowedTitleCard = true,--Did the generic wakeup for the first day? Need a variable for this due to chapter 3 title card.
 		FinishedOutlawIntro = true,--did shuca and ganlon teach you about outlaws?
@@ -526,7 +526,7 @@ function testmap.Chapter4_1_Action(chara, activator)
 		LostToBoss = false,--did duo die to boss?
 		EscapedBoss = false,--due team use an escape orb to escape boss?
 		DefeatedBoss = true, --did duo defeat team style?
-		RootSceneTransition = true, --Used to remember where in the root scene we are after transitioning away to show the root 
+		RootSceneTransition = true, --Used to remember where in the root scene we are after transitioning away to show the root
 		FinishedRootScene = true, --Showed root scene? This is used to mark the first half of chapter 3 (the non filler portion) as having been completed or not
 		FinishedMerchantIntro = true, --Did merchant intro cutscene?
 		--DemoThankYou = false,--Showed demo thank you? Not needed for future versions.
@@ -535,15 +535,15 @@ function testmap.Chapter4_1_Action(chara, activator)
 		BreloomGirafarigConvo = true, --talked to breloom/girafarig about their expedition?
 		PostBossSpokeToCranidos = true -- Talked to cranidos in town after beating boss? Used to flag the partner to mention not being able to impress cranidos.
 	}
-	
+
 	UI:ResetSpeaker()
-	UI:WaitShowDialogue("Chapter progression set: Chapter 4 day 1!")
+	UI:WaitShowDialogue("Ensemble de progression de chapitre : Chapitre 4, jour 1 !")
 
 end
 
 function testmap.Chapter4_2_Action(chara, activator)
 	SV.ChapterProgression.Chapter = 4
-	
+
 	GAME:UnlockDungeon('relic_forest')
 	GAME:UnlockDungeon('illuminant_riverbed')
 	GAME:UnlockDungeon('crooked_cavern')
@@ -558,8 +558,8 @@ function testmap.Chapter4_2_Action(chara, activator)
 	SV.ChapterProgression.CurrentStoryDungeon = ''
 	_DATA.Save.ActiveTeam:SetRank("bronze")
 	SV.ChapterProgression.UnlockedAssembly = true
-	
-	SV.Chapter1 = 
+
+	SV.Chapter1 =
 	{
 		PlayedIntroCutscene = true,
 		PartnerEnteredForest = true,--Did partner go into the forest yet?
@@ -574,13 +574,13 @@ function testmap.Chapter4_2_Action(chara, activator)
 		MetCranidosMareep = true,
 		MetBreloomGirafarig = true,
 		MetAudino = true,
-		
+
 		--partner dialogue flag on second floor
 		PartnerSecondFloorDialogue = 0,
 		TutorialProgression = 10
 	}
-	
-	SV.Chapter2 = 
+
+	SV.Chapter2 =
 	{
 		FirstMorningMeetingDone = true,--completed the first morning cutscene with the guild?
 		StartedTraining = true,--started the training at ledian dojo?
@@ -591,15 +591,15 @@ function testmap.Chapter4_2_Action(chara, activator)
 		FinishedNumelTantrum = true,--watched numel's tantrum?
 		FinishedFirstDay = true,--finished first day of chapter 2?
 		FinishedCameruptRequestScene = true,--finished second morning address cutscene with the guild? (this only plays once, even if you die on the second day)
-		
+
 		EnteredRiver = true,--has player and partner attempted the dungeon of the chapter yet? used for a few npcs to mark that a day has passed since the initial request (i.e. you failed at least once)
 		FinishedRiver = true,--player and partner have finished the dungeon and made it to Numel?
-		
+
 		TropiusGaveReviver = true,--did tropius give the free one off reviver seed?
 		WooperIntro = true--talked to the wooper siblings? if not play their little cutscene
 	}
-		
-	SV.Chapter3 = 
+
+	SV.Chapter3 =
 	{
 		ShowedTitleCard = true,--Did the generic wakeup for the first day? Need a variable for this due to chapter 3 title card.
 		FinishedOutlawIntro = true,--did shuca and ganlon teach you about outlaws?
@@ -611,7 +611,7 @@ function testmap.Chapter4_2_Action(chara, activator)
 		LostToBoss = false,--did duo die to boss?
 		EscapedBoss = false,--due team use an escape orb to escape boss?
 		DefeatedBoss = true, --did duo defeat team style?
-		RootSceneTransition = true, --Used to remember where in the root scene we are after transitioning away to show the root 
+		RootSceneTransition = true, --Used to remember where in the root scene we are after transitioning away to show the root
 		FinishedRootScene = true, --Showed root scene? This is used to mark the first half of chapter 3 (the non filler portion) as having been completed or not
 		FinishedMerchantIntro = true, --Did merchant intro cutscene?
 		--DemoThankYou = false,--Showed demo thank you? Not needed for future versions.
@@ -620,8 +620,8 @@ function testmap.Chapter4_2_Action(chara, activator)
 		BreloomGirafarigConvo = true, --talked to breloom/girafarig about their expedition?
 		PostBossSpokeToCranidos = true -- Talked to cranidos in town after beating boss? Used to flag the partner to mention not being able to impress cranidos.
 	}
-	
-	SV.Chapter4 = 
+
+	SV.Chapter4 =
 	{
 		ShowedTitleCard = true,--Did the generic wakeup for the first day? Need a variable for this due to chapter 4 title card.
 		FinishedFirstAddress = true,--Did you get the address regarding your mission for the chapter and the expedition?
@@ -632,7 +632,7 @@ function testmap.Chapter4_2_Action(chara, activator)
 		ReachedGlade = true, --has player reached the glade yet?
 		FinishedGrove = true,--has player finished the grove for good?
 		FinishedBedtimeCutscene = true,--has player watched the bedtime cutscene? this is the last cutscene of this chapter
-		
+
 		TropiusGaveAdvice = true,--did you speak with Tropius day one?
 		SpokeToRelicanthDayOne = true,--did you speak with relicanth day one?
 		HeardRelicanthStory = false,--did you hear with relicanth's story? (TO BE USED ONCE STORY IS CREATED)
@@ -644,7 +644,7 @@ function testmap.Chapter4_2_Action(chara, activator)
 	}
 
 	UI:ResetSpeaker()
-	UI:WaitShowDialogue("Chapter progression set: Chapter 4 day 2!")
+	UI:WaitShowDialogue("Ensemble de progression de chapitre : Chapitre 4, jour 2 !")
 
 end
 
@@ -656,7 +656,7 @@ end
 
 function testmap.Chapter_5_Setup()
 	SV.ChapterProgression.Chapter = 5
-	
+
 	GAME:UnlockDungeon('relic_forest')
 	GAME:UnlockDungeon('illuminant_riverbed')
 	GAME:UnlockDungeon('crooked_cavern')
@@ -667,14 +667,14 @@ function testmap.Chapter_5_Setup()
 	GAME:UnlockDungeon('grass_maze')
 	GAME:UnlockDungeon('apricorn_grove')
 	GAME:UnlockDungeon('flying_maze')
-	GAME:UnlockDungeon('rock_maze')	
+	GAME:UnlockDungeon('rock_maze')
 	GAME:UnlockDungeon('bug_maze')
 	GAME:UnlockDungeon('electric_maze')
 	SV.ChapterProgression.CurrentStoryDungeon = ''
 	_DATA.Save.ActiveTeam:SetRank("bronze")
 	SV.ChapterProgression.UnlockedAssembly = true
-	
-	SV.Chapter1 = 
+
+	SV.Chapter1 =
 	{
 		PlayedIntroCutscene = true,
 		PartnerEnteredForest = true,--Did partner go into the forest yet?
@@ -689,13 +689,13 @@ function testmap.Chapter_5_Setup()
 		MetCranidosMareep = true,
 		MetBreloomGirafarig = true,
 		MetAudino = true,
-		
+
 		--partner dialogue flag on second floor
 		PartnerSecondFloorDialogue = 0,
 		TutorialProgression = 10
 	}
-	
-	SV.Chapter2 = 
+
+	SV.Chapter2 =
 	{
 		FirstMorningMeetingDone = true,--completed the first morning cutscene with the guild?
 		StartedTraining = true,--started the training at ledian dojo?
@@ -706,15 +706,15 @@ function testmap.Chapter_5_Setup()
 		FinishedNumelTantrum = true,--watched numel's tantrum?
 		FinishedFirstDay = true,--finished first day of chapter 2?
 		FinishedCameruptRequestScene = true,--finished second morning address cutscene with the guild? (this only plays once, even if you die on the second day)
-		
+
 		EnteredRiver = true,--has player and partner attempted the dungeon of the chapter yet? used for a few npcs to mark that a day has passed since the initial request (i.e. you failed at least once)
 		FinishedRiver = true,--player and partner have finished the dungeon and made it to Numel?
-		
+
 		TropiusGaveReviver = true,--did tropius give the free one off reviver seed?
 		WooperIntro = true--talked to the wooper siblings? if not play their little cutscene
 	}
-		
-	SV.Chapter3 = 
+
+	SV.Chapter3 =
 	{
 		ShowedTitleCard = true,--Did the generic wakeup for the first day? Need a variable for this due to chapter 3 title card.
 		FinishedOutlawIntro = true,--did shuca and ganlon teach you about outlaws?
@@ -726,7 +726,7 @@ function testmap.Chapter_5_Setup()
 		LostToBoss = false,--did duo die to boss?
 		EscapedBoss = false,--due team use an escape orb to escape boss?
 		DefeatedBoss = true, --did duo defeat team style?
-		RootSceneTransition = true, --Used to remember where in the root scene we are after transitioning away to show the root 
+		RootSceneTransition = true, --Used to remember where in the root scene we are after transitioning away to show the root
 		FinishedRootScene = true, --Showed root scene? This is used to mark the first half of chapter 3 (the non filler portion) as having been completed or not
 		FinishedMerchantIntro = true, --Did merchant intro cutscene?
 		--DemoThankYou = false,--Showed demo thank you? Not needed for future versions.
@@ -735,8 +735,8 @@ function testmap.Chapter_5_Setup()
 		BreloomGirafarigConvo = true, --talked to breloom/girafarig about their expedition?
 		PostBossSpokeToCranidos = true -- Talked to cranidos in town after beating boss? Used to flag the partner to mention not being able to impress cranidos.
 	}
-	
-	SV.Chapter4 = 
+
+	SV.Chapter4 =
 	{
 		ShowedTitleCard = true,--Did the generic wakeup for the first day? Need a variable for this due to chapter 4 title card.
 		FinishedFirstAddress = true,--Did you get the address regarding your mission for the chapter and the expedition?
@@ -747,7 +747,7 @@ function testmap.Chapter_5_Setup()
 		ReachedGlade = true, --has player reached the glade yet?
 		FinishedGrove = true,--has player finished the grove for good?
 		FinishedBedtimeCutscene = true,--has player watched the bedtime cutscene? this is the last cutscene of this chapter
-		
+
 		TropiusGaveAdvice = true,--did you speak with Tropius day one?
 		SpokeToRelicanthDayOne = true,--did you speak with relicanth day one?
 		HeardRelicanthStory = false,--did you hear with relicanth's story? (TO BE USED ONCE STORY IS CREATED)
@@ -764,13 +764,13 @@ function testmap.Chapter5_1_Action(chara, activator)
 	testmap.Chapter_5_Setup()
 
 	UI:ResetSpeaker()
-	UI:WaitShowDialogue("Chapter progression set: Chapter 5 before expedition leave!")
+	UI:WaitShowDialogue("Ensemble de progression de chapitre : Chapitre 5 avant le départ de l'expédition !")
 end
 
 
 function testmap.Chapter5_2_Action(chara, activator)
 	testmap.Chapter_5_Setup()
-	
+
 	SV.Chapter5 = {
 		ShowedTitleCard = true,--Did the generic wakeup for the first day? Need a variable for this due to chapter 5 title card.
 		TalkedToSnubbull = false,--Did player talk to Snubbull at the Kec Shop?
@@ -778,14 +778,14 @@ function testmap.Chapter5_2_Action(chara, activator)
 		GotFreeCafeItem = false,--Did Dion give you the free cafe drink?
 		FinishedExpeditionAddress = true,--Did the address about the expedition starting today?
 		ReadyForExpedition = true,--Talked to Penticus to ready up for the expedition?
-		
+
 		FinishedSteppeIntro = true,--Did the player see the intro cutscene for Vast Steppe?
 		EnteredSteppe = false,--did player enter the steppe?
 		LostSteppe = false,--did player die in steppe?
 		EscapedSteppe = false,--Do we need to play the escaped from dungeon scene when loading this map?
 		DiedSteppe = false,--Do we need to play the died in dungeon scene when loading this map?
 		SpokeToTropiusSteppe = false,--Did you talk to tropius outside the steppe and get his foreshadowing/deferral?
-		
+
 		FinishedTunnelIntro = false,--Did the player see the nighttime+intro cutscene for Searing Tunnel?
 		EnteredTunnel = false,--did player enter the tunnel?
 		LostTunnel = false,--did player die in the tunnel or to the boss?
@@ -800,17 +800,17 @@ function testmap.Chapter5_2_Action(chara, activator)
 		SpokeToNoctowlTunnel = false,--Did you get some extra info about Hyko and Penticus's relation from Phileas?
 		SpokeToCranidosTunnel = false,--Did you get to see Ganlon trying to be protective of Shuca?
 		GrowlitheTropiusBossInterrupt = false,--did Hyko stop you from telling Penticus about the boss?
-		
+
 		FinishedMountWindsweptIntro = false,--Did the player see the intro cutscene for Mt. Windswept?
 		EnteredMountain = false,--did player enter Mt. Windswept?
 		LostMountain = false,--did player die in Mt. Windswept?
 		DiedToWind = false,--did player's last run die to the time limit?
 		EscapedMountain = false,--Do we need to play the escaped from dungeon scene when loading this map?
 		DiedMountain = false,--Do we need to play the died in dungeon scene when loading this map?
-		
+
 		NeedGiveSupplies = false--does penticus/phileas need to give supplies out?
 	}
-	
+
 	--Default the party DESTRUCTIVELY to delete extra mons.
 	GeneralFunctions.DefaultParty(false, true)
 	--reinitialize the hero and partner variables after respawning the party.
@@ -818,7 +818,7 @@ function testmap.Chapter5_2_Action(chara, activator)
 	hero = CH('PLAYER')
 	partner = CH('Teammate1')
 	partner.CollisionDisabled = true
-	
+
 	--Setup Coco and Rin.
 	local snubbull_id = RogueEssence.Dungeon.MonsterID("snubbull", 0, "normal", Gender.Female)
 	local snubbull_monster = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, snubbull_id, SV.GuildSidequests.SnubbullLevel, "run_away", 0)
@@ -827,16 +827,16 @@ function testmap.Chapter5_2_Action(chara, activator)
 	snubbull_monster.MetAt = "Adventurer's Guild"
 	snubbull_monster.IsPartner = true
 	snubbull_monster.IsFounder = true
-	
+
 	--snubbull's stats are kinda dookie in comparison to audino, so boost her up a bit.
 	snubbull_monster.MaxHPBonus = 1
 	snubbull_monster.SpeedBonus = 5
-	
+
 	snubbull_monster:ReplaceSkill("bite", 0, true)
 	snubbull_monster:ReplaceSkill("lick", 1, true)
 	snubbull_monster:ReplaceSkill("smelling_salts", 2, true)
 	snubbull_monster:ReplaceSkill("charm", 3, false)
-		
+
 	GAME:AddPlayerTeam(snubbull_monster)
 	snubbull_monster:FullRestore()
 	local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("GuildmateInteract")
@@ -850,31 +850,31 @@ function testmap.Chapter5_2_Action(chara, activator)
 	audino_monster.MetAt = "Adventurer's Guild"
 	audino_monster.IsPartner = true
 	audino_monster.IsFounder = true
-	
+
 	audino_monster:ReplaceSkill("double_slap", 0, true)
 	audino_monster:ReplaceSkill("heal_bell", 1, true)
 	audino_monster:ReplaceSkill("disarming_voice", 2, true)
 	audino_monster:ReplaceSkill("helping_hand", 3, false)
-	
-		
+
+
 	GAME:AddPlayerTeam(audino_monster)
 	audino_monster:FullRestore()
 	local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("GuildmateInteract")
     audino_monster.ActionEvents:Add(talk_evt)
 	audino_monster:RefreshTraits()
-	
+
 	--prevent heal bell from being unlearned.
 	GAME:LockSkill(GAME:GetPlayerPartyMember(3), 1)
 
 	--Assign importances to identify who they are. Do this instead of just checking species just in case randomizers down the road or something.
 	local sTbl = LTBL(GAME:GetPlayerPartyMember(2))
 	local aTbl = LTBL(GAME:GetPlayerPartyMember(3))
-	
+
 	sTbl.Importance = "Snubbull"
 	aTbl.Importance = "Audino"
-		
+
 	UI:ResetSpeaker()
-	UI:WaitShowDialogue("Chapter progression set: Chapter 5 right before Vast Steppe!")
+	UI:WaitShowDialogue("Ensemble de progression de chapitre : Chapitre 5 juste avant Vast Steppe !")
 end
 
 
@@ -882,7 +882,7 @@ end
 
 function testmap.Chapter5_3_Action(chara, activator)
 	testmap.Chapter_5_Setup()
-	
+
 	SV.Chapter5 = {
 		ShowedTitleCard = true,--Did the generic wakeup for the first day? Need a variable for this due to chapter 5 title card.
 		TalkedToSnubbull = false,--Did player talk to Snubbull at the Kec Shop?
@@ -890,14 +890,14 @@ function testmap.Chapter5_3_Action(chara, activator)
 		GotFreeCafeItem = false,--Did Dion give you the free cafe drink?
 		FinishedExpeditionAddress = true,--Did the address about the expedition starting today?
 		ReadyForExpedition = true,--Talked to Penticus to ready up for the expedition?
-		
+
 		FinishedSteppeIntro = true,--Did the player see the intro cutscene for Vast Steppe?
 		EnteredSteppe = true,--did player enter the steppe?
 		LostSteppe = false,--did player die in steppe?
 		EscapedSteppe = false,--Do we need to play the escaped from dungeon scene when loading this map?
 		DiedSteppe = false,--Do we need to play the died in dungeon scene when loading this map?
 		SpokeToTropiusSteppe = false,--Did you talk to tropius outside the steppe and get his foreshadowing/deferral?
-		
+
 		FinishedTunnelIntro = true,--Did the player see the nighttime+intro cutscene for Searing Tunnel?
 		EnteredTunnel = false,--did player enter the tunnel?
 		LostTunnel = false,--did player die in the tunnel or to the boss?
@@ -912,17 +912,17 @@ function testmap.Chapter5_3_Action(chara, activator)
 		SpokeToNoctowlTunnel = false,--Did you get some extra info about Hyko and Penticus's relation from Phileas?
 		SpokeToCranidosTunnel = false,--Did you get to see Ganlon trying to be protective of Shuca?
 		GrowlitheTropiusBossInterrupt = false,--did Hyko stop you from telling Penticus about the boss?
-		
+
 		FinishedMountWindsweptIntro = false,--Did the player see the intro cutscene for Mt. Windswept?
 		EnteredMountain = false,--did player enter Mt. Windswept?
 		LostMountain = false,--did player die in Mt. Windswept?
 		DiedToWind = false,--did player's last run die to the time limit?
 		EscapedMountain = false,--Do we need to play the escaped from dungeon scene when loading this map?
 		DiedMountain = false,--Do we need to play the died in dungeon scene when loading this map?
-		
+
 		NeedGiveSupplies = false--does penticus/phileas need to give supplies out?
 	}
-	
+
 	--Setup Hyko and Almotz.
 	--Default the party DESTRUCTIVELY to delete extra mons.
 	GeneralFunctions.DefaultParty(false, true)
@@ -931,7 +931,7 @@ function testmap.Chapter5_3_Action(chara, activator)
 	hero = CH('PLAYER')
 	partner = CH('Teammate1')
 	partner.CollisionDisabled = true
-	
+
 	local growlithe_id = RogueEssence.Dungeon.MonsterID("growlithe", 0, "normal", Gender.Male)
 	local growlithe_monster = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, growlithe_id, SV.GuildSidequests.GrowlitheLevel, "flash_fire", 0)
 	growlithe_monster.Discriminator = _DATA.Save.Rand:Next()--tbh idk what this is lol
@@ -939,12 +939,12 @@ function testmap.Chapter5_3_Action(chara, activator)
 	growlithe_monster.MetAt = "Adventurer's Guild"
 	growlithe_monster.IsPartner = true
 	growlithe_monster.IsFounder = true
-	
+
 	growlithe_monster:ReplaceSkill("flame_wheel", 0, true)
 	growlithe_monster:ReplaceSkill("bite", 1, true)
 	growlithe_monster:ReplaceSkill("close_combat", 2, true)
 	growlithe_monster:ReplaceSkill("roar", 3, false)
-		
+
 	GAME:AddPlayerTeam(growlithe_monster)
 	growlithe_monster:FullRestore()
 	local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("GuildmateInteract")
@@ -958,27 +958,27 @@ function testmap.Chapter5_3_Action(chara, activator)
 	zigzagoon_monster.MetAt = "Adventurer's Guild"
 	zigzagoon_monster.IsPartner = true
 	zigzagoon_monster.IsFounder = true
-	
+
 	zigzagoon_monster:ReplaceSkill("headbutt", 0, true)
 	zigzagoon_monster:ReplaceSkill("helping_hand", 1, false)
 	zigzagoon_monster:ReplaceSkill("pin_missile", 2, true)
 	zigzagoon_monster:ReplaceSkill("odor_sleuth", 3, false)
-		
+
 	GAME:AddPlayerTeam(zigzagoon_monster)
 	zigzagoon_monster:FullRestore()
 	local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("GuildmateInteract")
     zigzagoon_monster.ActionEvents:Add(talk_evt)
 	zigzagoon_monster:RefreshTraits()
-	
+
 	--Assign importances to identify who they are. Do this instead of just checking species just in case randomizers down the road or something.
 	local gTbl = LTBL(GAME:GetPlayerPartyMember(2))
 	local zTbl = LTBL(GAME:GetPlayerPartyMember(3))
-	
+
 	gTbl.Importance = "Growlithe"
 	zTbl.Importance = "Zigzagoon"
-		
+
 	UI:ResetSpeaker()
-	UI:WaitShowDialogue("Chapter progression set: Chapter 5 right before Searing Tunnel!")
+	UI:WaitShowDialogue("Ensemble de progression de chapitre : Chapitre 5 juste avant le tunnel brûlant !")
 end
 
 
@@ -986,7 +986,7 @@ end
 
 function testmap.Chapter5_4_Action(chara, activator)
 	testmap.Chapter_5_Setup()
-	
+
 	SV.Chapter5 = {
 		ShowedTitleCard = true,--Did the generic wakeup for the first day? Need a variable for this due to chapter 5 title card.
 		TalkedToSnubbull = false,--Did player talk to Snubbull at the Kec Shop?
@@ -994,14 +994,14 @@ function testmap.Chapter5_4_Action(chara, activator)
 		GotFreeCafeItem = false,--Did Dion give you the free cafe drink?
 		FinishedExpeditionAddress = true,--Did the address about the expedition starting today?
 		ReadyForExpedition = true,--Talked to Penticus to ready up for the expedition?
-		
+
 		FinishedSteppeIntro = true,--Did the player see the intro cutscene for Vast Steppe?
 		EnteredSteppe = true,--did player enter the steppe?
 		LostSteppe = false,--did player die in steppe?
 		EscapedSteppe = false,--Do we need to play the escaped from dungeon scene when loading this map?
 		DiedSteppe = false,--Do we need to play the died in dungeon scene when loading this map?
 		SpokeToTropiusSteppe = false,--Did you talk to tropius outside the steppe and get his foreshadowing/deferral?
-		
+
 		FinishedTunnelIntro = true,--Did the player see the nighttime+intro cutscene for Searing Tunnel?
 		EnteredTunnel = true,--did player enter the tunnel?
 		LostTunnel = false,--did player die in the tunnel or to the boss?
@@ -1016,17 +1016,17 @@ function testmap.Chapter5_4_Action(chara, activator)
 		SpokeToNoctowlTunnel = false,--Did you get some extra info about Hyko and Penticus's relation from Phileas?
 		SpokeToCranidosTunnel = false,--Did you get to see Ganlon trying to be protective of Shuca?
 		GrowlitheTropiusBossInterrupt = false,--did Hyko stop you from telling Penticus about the boss?
-		
+
 		FinishedMountWindsweptIntro = false,--Did the player see the intro cutscene for Mt. Windswept?
 		EnteredMountain = false,--did player enter Mt. Windswept?
 		LostMountain = false,--did player die in Mt. Windswept?
 		DiedToWind = false,--did player's last run die to the time limit?
 		EscapedMountain = false,--Do we need to play the escaped from dungeon scene when loading this map?
 		DiedMountain = false,--Do we need to play the died in dungeon scene when loading this map?
-		
+
 		NeedGiveSupplies = false--does penticus/phileas need to give supplies out?
 	}
-	
+
 	--Setup Ganlon and Shuca.
 	--Default the party DESTRUCTIVELY to delete Hyko and Almotz.
 	GeneralFunctions.DefaultParty(false, true)
@@ -1035,7 +1035,7 @@ function testmap.Chapter5_4_Action(chara, activator)
 	hero = CH('PLAYER')
 	partner = CH('Teammate1')
 	partner.CollisionDisabled = true
-	
+
 	--Setup Ganlon and Shuca.
 	local cranidos_id = RogueEssence.Dungeon.MonsterID("cranidos", 0, "normal", Gender.Male)
 	local cranidos_monster = _DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, cranidos_id, SV.GuildSidequests.CranidosLevel, "mold_breaker", 0)
@@ -1044,12 +1044,12 @@ function testmap.Chapter5_4_Action(chara, activator)
 	cranidos_monster.MetAt = "Adventurer's Guild"
 	cranidos_monster.IsPartner = true
 	cranidos_monster.IsFounder = true
-	
+
 	cranidos_monster:ReplaceSkill("headbutt", 0, true)
 	cranidos_monster:ReplaceSkill("pursuit", 1, false)
 	cranidos_monster:ReplaceSkill("iron_head", 2, true)
 	cranidos_monster:ReplaceSkill("smack_down", 3, true)
-		
+
 	GAME:AddPlayerTeam(cranidos_monster)
 	cranidos_monster:FullRestore()
 	local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("GuildmateInteract")
@@ -1063,28 +1063,28 @@ function testmap.Chapter5_4_Action(chara, activator)
 	mareep_monster.MetAt = "Adventurer's Guild"
 	mareep_monster.IsPartner = true
 	mareep_monster.IsFounder = true
-	
+
 	mareep_monster:ReplaceSkill("thunder_shock", 0, true)
 	mareep_monster:ReplaceSkill("thunder_wave", 1, false)
 	mareep_monster:ReplaceSkill("take_down", 2, true)
 	mareep_monster:ReplaceSkill("flatter", 3, false)
-		
+
 	GAME:AddPlayerTeam(mareep_monster)
 	mareep_monster:FullRestore()
 	local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("GuildmateInteract")
     mareep_monster.ActionEvents:Add(talk_evt)
 	mareep_monster:RefreshTraits()
-	
-	
+
+
 	--Assign importances to identify who they are. Do this instead of just checking species just in case randomizers down the road or something.
 	local cTbl = LTBL(GAME:GetPlayerPartyMember(2))
 	local mTbl = LTBL(GAME:GetPlayerPartyMember(3))
-	
+
 	cTbl.Importance = "Cranidos"
 	mTbl.Importance = "Mareep"
-		
+
 	UI:ResetSpeaker()
-	UI:WaitShowDialogue("Chapter progression set: Chapter 5 right before Mt. Windswept!")
+	UI:WaitShowDialogue("Ensemble de progression de chapitre : Chapitre 5 juste avant le mont. Windswept !")
 end
 
 
@@ -1098,15 +1098,15 @@ function testmap.Get_Released_Mons_Action()
 	--local mons = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Monster]:GetOrderedKeys(false)
 	--for i = 1, 906, 1 do
 	--	if _DATA:GetMonster(mons[i]).Released then
-	--		print(mons[i]) 
+	--		print(mons[i])
 	--	 end
 	--end
-	
+
 	--mons is a list of all species index strings
 	local mons = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Item]:GetOrderedKeys(false)
 	for i = 1, 2000, 1 do
 		if _DATA:GetItem(mons[i]).ItemData.UsageType == _DATA:GetItem("tm_acrobatics").ItemData.UsageType then
-			print(mons[i]) 
+			print(mons[i])
 		 end
 	end
 end
@@ -1122,27 +1122,27 @@ _UNK_EVT_079 (TIME GEAR TAKE DOWN)
 function testmap.Test_Core_Deactivation_Action(chara, activator)
 	GAME:CutsceneMode(true)
 	SOUND:StopBGM()
-	
+
 	GAME:MoveCamera(688, 936, 1, false)
-	
+
 	local root = RogueEssence.Ground.GroundObject(RogueEssence.Content.ObjAnimData("Anima_Root", 1), --anim data. Don't set that number to 0 for valid anims
 								 				 RogueElements.Rect(600, 864, 16, 16),--xy coords, then size
 								  				 RogueElements.Loc(0, 0), --offset
-												 true, 
-												 "Anima_Root")--object entity name	
-												 
+												 true,
+												 "Anima_Root")--object entity name
+
 	root:ReloadEvents()
 	GAME:GetCurrentGround():AddTempObject(root)
-	
+
 	local core = RogueEssence.Ground.GroundObject(RogueEssence.Content.ObjAnimData("Anima_Core", 1), --anim data. Don't set that number to 0 for valid anims
 								 				 RogueElements.Rect(600, 865, 16, 16),--xy coords, then size
 								  				 RogueElements.Loc(0, -1), --offset
-												 true, 
-												 "Anima_Core")--object entity name	
-				
+												 true,
+												 "Anima_Core")--object entity name
+
 	core:ReloadEvents()
 	GAME:GetCurrentGround():AddTempObject(core)
-	
+
 	--setup darkness
 	--It'll fade in for 200 frames, last 0 frames, and fade out in 0 frames. It'll transition to the darkness map status though at 200 frames.
 	local overlay = RogueEssence.Content.FiniteOverlayEmitter()
@@ -1152,7 +1152,7 @@ function testmap.Test_Core_Deactivation_Action(chara, activator)
 	overlay.Layer = DrawLayer.Top;
 	overlay.Anim = RogueEssence.Content.BGAnimData("White", 0)
 	overlay.Color = Color(0, 0, 0, 76/255)
-	
+
 	GROUND:ObjectSetDefaultAnim(root, 'Anima_Root', 10, 0, 15, Direction.Down)
 	GROUND:ObjectSetDefaultAnim(core, 'Anima_Core', 10, 0, 31, Direction.Down)
 
@@ -1163,31 +1163,31 @@ function testmap.Test_Core_Deactivation_Action(chara, activator)
 	SOUND:FadeOutBattleSE('_UNK_EVT_106', 60)
 	GROUND:ObjectWaitAnimFrame(core, 0)
 	print("Shart")
-	
+
 	SOUND:PlayBattleSE('EVT_EP_Nightmare_Break')
 	GROUND:ObjectSetDefaultAnim(core, 'Core_Deactivation', 0, 0, 0, Direction.Down)
 
 	GROUND:ObjectSetAnim(core, 10, 0, 11, Direction.Down, 1)
 	GROUND:ObjectSetDefaultAnim(core, 'Core_Deactivation', 0, 11, 11, Direction.Down)
-	
+
 	GROUND:ObjectWaitAnimFrame(core, 11)
 	GAME:WaitFrames(40)
-	
+
 	--move core slowly down after deactivating
 	for i = 1, 10, 1 do
 		GROUND:MoveObjectToPosition(core, core.Position.X, core.Position.Y + 1, 1)
 		GAME:WaitFrames(8)
 	end
-	
+
 	GROUND:ObjectWaitAnimFrame(root, 0)
-	
+
 	GROUND:PlayVFX(overlay, CH('PLAYER').Position.X, CH('PLAYER').Position.Y)
 	SOUND:PlayBattleSE("_UNK_EVT_079")
 	GROUND:ObjectSetDefaultAnim(root, 'Anima_Root_Turnoff', 0, 0, 0, Direction.Down)
 
 	GROUND:ObjectSetAnim(root, 40, 0, 5, Direction.Down, 1)
 	GROUND:ObjectSetDefaultAnim(root, 'Anima_Root_Turnoff', 0, 5, 5, Direction.Down)
-	
+
 	GAME:WaitFrames(200)
 	GROUND:AddMapStatus("darkness")
 	GAME:WaitFrames(180)
@@ -1199,9 +1199,9 @@ function testmap.Test_Core_Deactivation_Action(chara, activator)
 	GROUND:RemoveMapStatus("darkness")
 	GAME:GetCurrentGround():RemoveTempObject(groundObj)
 end
-	
-	
-											 
+
+
+
 
 return testmap
 

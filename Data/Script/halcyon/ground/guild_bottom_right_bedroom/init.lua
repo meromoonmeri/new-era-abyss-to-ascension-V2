@@ -27,7 +27,7 @@ local guild_bottom_right_bedroom = {}
 function guild_bottom_right_bedroom.Init(map)
 	DEBUG.EnableDbgCoro()
 	print('=>> Init_guild_bottom_right_bedroom<<=')
-	
+
 	COMMON.RespawnAllies()
 	PartnerEssentials.InitializePartnerSpawn()
 
@@ -63,9 +63,9 @@ function guild_bottom_right_bedroom.GameSave(map)
 end
 
 function guild_bottom_right_bedroom.PlotScripting()
-	if SV.ChapterProgression.Chapter == 3 then 
-		guild_bottom_right_bedroom_ch_3.SetupGround()	
-	elseif SV.ChapterProgression.Chapter == 4 then 
+	if SV.ChapterProgression.Chapter == 3 then
+		guild_bottom_right_bedroom_ch_3.SetupGround()
+	elseif SV.ChapterProgression.Chapter == 4 then
 		guild_bottom_right_bedroom_ch_4.SetupGround()
 	else
 		GAME:FadeIn(20)
@@ -109,7 +109,7 @@ function AlmanacMenu:initialize(items)
   self.menu = RogueEssence.Menu.ScriptableMenu(24, 24, 196, 128, function(input) self:Update(input) end)
   self.cursor = RogueEssence.Menu.MenuCursor(self.menu)
   self.menu.Elements:Add(self.cursor)
-  for i = 1, #items, 1 do 
+  for i = 1, #items, 1 do
 	self.menu.Elements:Add(RogueEssence.Menu.MenuText(items[i], RogueElements.Loc(16, 8 + 14 * (i-1))))
   end
   self.total_items = #items
@@ -140,7 +140,7 @@ function AlmanacMenu:Update(input)
       self.cursor.Loc = RogueElements.Loc(8, 8 + 14 * self.current_item)
     end
   end
-end 
+end
 
 --]]
 
@@ -155,28 +155,28 @@ function guild_bottom_right_bedroom.Team_Almanac_Action(obj, activator)
 	local partner = CH('Teammate1')
 	partner.IsInteracting = true
 	GROUND:CharSetAnim(partner, 'None', true)
-	GROUND:CharSetAnim(hero, 'None', true)		
+	GROUND:CharSetAnim(hero, 'None', true)
     GeneralFunctions.TurnTowardsLocation(hero, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
     GeneralFunctions.TurnTowardsLocation(partner, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
-	
+
 	local zig_name = CharacterEssentials.GetCharacterName("Zigzagoon")
 	local choices = {'Round', 'Cadence', 'Starlight', 'Rivals', 'Flutter', 'Flight'}
-	
+
 	--local team_name_length = string.len(GAME:GetTeamName())
 	--local player_team_name = string.sub(GAME:GetTeamName(), 16, team_name_length - 7)
 
-	--add player's team and team style in chapter 2	
-	if SV.ChapterProgression.Chapter >= 2 then 
+	--add player's team and team style in chapter 2
+	if SV.ChapterProgression.Chapter >= 2 then
 		table.insert(choices, #choices + 1, 'Style')
-		table.insert(choices, #choices + 1, GAME:GetTeamName()) 
+		table.insert(choices, #choices + 1, GAME:GetTeamName())
 	end
-	
+
 	--cancel goes at end of choice list always
 	table.insert(choices, #choices + 1, 'Never Mind')
-	
+
 	--Don't read his books until he tells you you can.
 	if not SV.Chapter1.MetZigzagoon then
-		UI:WaitShowDialogue("This appears to be someone else's book.\nBest not read it without their permission.")
+		UI:WaitShowDialogue("Cela semble être le livre de quelqu'un d'autre.\nMieux vaut ne pas le lire sans leur autorisation.")
 		UI:SetCenter(false)
 		UI:SetAutoFinish(false)
 		partner.IsInteracting = false
@@ -184,119 +184,119 @@ function guild_bottom_right_bedroom.Team_Almanac_Action(obj, activator)
 		GROUND:CharEndAnim(hero)
 		return
 	end
-	
-	UI:ChoiceMenuYesNo("This is one of " .. zig_name .. "'s almanacs.\nIt's entitled " .. '"Adventuring Teams". Read it?')
+
+	UI:ChoiceMenuYesNo("C'est l'un des almanachs de " .. zig_name .. ".\nIl s'intitule « Équipes d'aventure ». Le lire ?")
 	UI:WaitForChoice()
 	local result = UI:ChoiceResult()
 	UI:SetAutoFinish(false)
-	if result then 
-		  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Red_Opening', 0, 0, 0, Direction.Right)	  
+	if result then
+		  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Red_Opening', 0, 0, 0, Direction.Right)
 	      GROUND:ObjectSetAnim(obj, 6, 0, 3, Direction.Right, 1)
 		  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Red_Opening', 0, 3, 3, Direction.Right)
 		  GAME:WaitFrames(40)
-		  UI:BeginMultiPageMenu(24, 24, 196, "Team Almanac", choices, 8, 1, #choices)		  
+		  UI:BeginMultiPageMenu(24, 24, 196, "Almanach de l'équipe", choices, 8, 1, #choices)
 		  UI:WaitForChoice()
-		  
+
 		  local entry = choices[UI:ChoiceResult()]
-		  
+
 		  if entry == 'Round' then
 			local marill_species = _DATA:GetMonster('marill'):GetColoredName()
 			local puff_species = _DATA:GetMonster('jigglypuff'):GetColoredName()
 			local spheal_species = _DATA:GetMonster('spheal'):GetColoredName()
 			local move = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Skill]:Get("round")--
 
-			UI:WaitShowDialogue(zig_name .. "'s Almanac\nTeam Entry: [color=#FFA5FF]Round[color]")
+			UI:WaitShowDialogue("Almanach de " .. zig_name .. "\nInscription par équipe :[color=#FFA5FF]Round[color]")
 			UI:SetCenter(false)
-			UI:WaitShowDialogue("Team [color=#FFA5FF]Round[color] is a local team that usually takes work from the Job Bulletin Board and consists of three members.")
-			UI:WaitShowDialogue("First,[pause=10] there's " .. CharacterEssentials.GetCharacterName("Jigglypuff") .. ".[pause=0] She's a " .. puff_species .. "![pause=0] She's very kind and tries to be helpful to any Pokémon she meets.")
-			UI:WaitShowDialogue("Then there's the " .. spheal_species .. " named " .. CharacterEssentials.GetCharacterName("Spheal") .. ".[pause=0] I get the feeling he thinks with his stomach more than with his brain...")
-			UI:WaitShowDialogue("Lastly,[pause=10] there's " .. CharacterEssentials.GetCharacterName("Marill") .. ",[pause=10] who's a " .. marill_species .. ".[pause=0] He's the leader of the team and is a pleasant and optimistic Pokémon!")
-			UI:WaitShowDialogue("He's also the one who came up with the name for their team.")
-			UI:WaitShowDialogue("He claims that it's because they're adept at using the move " .. move:GetColoredName() .. " together,[pause=10] which is true,[pause=10] but...")
-			UI:WaitShowDialogue("Um...[pause=0] Most Pokémon think their team name has more to do with their body types than anything else...")
-			UI:WaitShowDialogue("...I guess it's hard to blame them.[pause=0] I thought the same thing at first,[pause=10] too.")
-			UI:WaitShowDialogue("Anyways,[pause=10] they're one of the nicer and more easy-going teams.[pause=0] I wish more teams were like them!")
-		  
+			UI:WaitShowDialogue("L'équipe[color=#FFA5FF]Round[color]est une équipe locale qui prend généralement le travail du Job Bulletin Board et se compose de trois membres.")
+			UI:WaitShowDialogue("Tout d'abord,[pause=10]il y a " .. CharacterEssentials.GetCharacterName("Jigglypuff") .. ".[pause=0]C'est une " .. puff_species .. "![pause=0]Elle est très gentille et essaie d'être utile à tous les Pokémon qu'elle rencontre.")
+			UI:WaitShowDialogue("Et puis il y a le " .. spheal_species .. " nommé " .. CharacterEssentials.GetCharacterName("Spheal") .. ".[pause=0]. J'ai l'impression qu'il pense plus avec son ventre qu'avec son cerveau...")
+			UI:WaitShowDialogue("Enfin,[pause=10]il y a " .. CharacterEssentials.GetCharacterName("Marill") .. ",[pause=10]qui est un " .. marill_species .. ".[pause=0]C'est le leader de l'équipe et c'est un Pokémon agréable et optimiste !")
+			UI:WaitShowDialogue("C'est aussi lui qui a trouvé le nom de leur équipe.")
+			UI:WaitShowDialogue("Il prétend que c'est parce qu'ils savent utiliser le mouvement " .. move:GetColoredName() .. " ensemble,[pause=10]ce qui est vrai,[pause=10]mais...")
+			UI:WaitShowDialogue("Euh...[pause=0]La plupart des Pokémon pensent que le nom de leur équipe a plus à voir avec leur type de corps qu'autre chose...")
+			UI:WaitShowDialogue("...Je suppose que c'est difficile de leur en vouloir.[pause=0]Au début, je pensais la même chose,[pause=10]aussi.")
+			UI:WaitShowDialogue("Quoi qu'il en soit,[pause=10], c'est l'une des équipes les plus sympathiques et les plus faciles à vivre.[pause=0]J'aimerais que plus d'équipes soient comme elles !")
+
 		  elseif entry == 'Cadence' then
 		    local ludicolo_species = _DATA:GetMonster('ludicolo'):GetColoredName()
 			local roselia_species = _DATA:GetMonster('roselia'):GetColoredName()
 			local spinda_species = _DATA:GetMonster('spinda'):GetColoredName()
 
-			UI:WaitShowDialogue(zig_name .. "'s Almanac\nTeam Entry: [color=#FFA5FF]Cadence[color]")
+			UI:WaitShowDialogue("Almanach de " .. zig_name .. "\nEntrée par équipe :[color=#FFA5FF]Cadence[color]")
 			UI:SetCenter(false)
-			UI:WaitShowDialogue("Team [color=#FFA5FF]Cadence[color] has three members,[pause=10] usually all found dancing somewhere in town.")
-			UI:WaitShowDialogue("Their members include a " .. ludicolo_species .. " named " .. CharacterEssentials.GetCharacterName("Ludicolo") .. ",[pause=10] a " .. spinda_species .. " named " .. CharacterEssentials.GetCharacterName("Spinda") .. ",[pause=10] and their leader,[pause=10] " .. CharacterEssentials.GetCharacterName("Roselia") .. " the " .. roselia_species .. ".")
-			UI:WaitShowDialogue("They all have cheery dispositions and are skilled adventurers![pause=0] They often egg others on to dance with them.")
-			UI:WaitShowDialogue("I know they are a proficient adventuring team,[pause=10] but...[pause=0] It seems to me they dance more than they adventure.")
-			UI:WaitShowDialogue("They're very good at both though![pause=0] They use all sorts of dancing attacks and techniques on their adventures.")
-			UI:WaitShowDialogue("It must take a lot of coordination and skill to use dancing effectively on adventures!")
-			UI:WaitShowDialogue("It would be cool to come along on one of their adventures just to observe how they do it!")
+			UI:WaitShowDialogue("L'équipe[color=#FFA5FF]Cadence[color]compte trois membres,[pause=10]qui dansent généralement tous quelque part en ville.")
+			UI:WaitShowDialogue("Leurs membres comprennent un " .. ludicolo_species .. " nommé " .. CharacterEssentials.GetCharacterName("Ludicolo") .. ",[pause=10]et un " .. spinda_species .. " nommé " .. CharacterEssentials.GetCharacterName("Spinda") .. ",[pause=10]et leur chef,[pause=10]" .. CharacterEssentials.GetCharacterName("Roselia") .. " le " .. roselia_species .. ".")
+			UI:WaitShowDialogue("Ils ont tous un caractère joyeux et sont des aventuriers talentueux ![pause=0]Ils incitent souvent les autres à danser avec eux.")
+			UI:WaitShowDialogue("Je sais qu'ils forment une équipe d'aventuriers compétente,[pause=10]mais...[pause=0]Il me semble qu'ils dansent plus qu'ils n'aventurent.")
+			UI:WaitShowDialogue("Mais ils sont très bons dans les deux cas ![pause=0]Ils utilisent toutes sortes d'attaques et de techniques de danse au cours de leurs aventures.")
+			UI:WaitShowDialogue("Il faut beaucoup de coordination et d'habileté pour utiliser la danse efficacement lors d'aventures !")
+			UI:WaitShowDialogue("Ce serait sympa de les accompagner dans une de leurs aventures juste pour observer comment ils font !")
 
-			
+
 		  elseif entry == 'Flutter' then
 		    local caterpie_species = _DATA:GetMonster('caterpie'):GetColoredName()
 			local wurmple_species = _DATA:GetMonster('wurmple'):GetColoredName()
 			local silcoon_species = _DATA:GetMonster('silcoon'):GetColoredName()
 			local metapod_species = _DATA:GetMonster('metapod'):GetColoredName()
 
-			UI:WaitShowDialogue(zig_name .. "'s Almanac\nTeam Entry: [color=#FFA5FF]Flutter[color]")
+			UI:WaitShowDialogue("Almanach de " .. zig_name .. "\nEntrée par équipe :[color=#FFA5FF]Flutter[color]")
 			UI:SetCenter(false)
-			UI:WaitShowDialogue("Team [color=#FFA5FF]Flutter[color] does a lot of the low level jobs that come into the guild.")
-			UI:WaitShowDialogue("The team has two members: " .. CharacterEssentials.GetCharacterName("Silcoon") .. " the " .. silcoon_species .. " and " ..CharacterEssentials.GetCharacterName("Metapod") .. " the " .. metapod_species .. ".")
-			UI:WaitShowDialogue("For the longest time these two were actually a " .. wurmple_species .. " and a " .. caterpie_species .. ",[pause=10] but they recently decided to evolve.")
-			UI:WaitShowDialogue("They've told me they're planning on evolving again soon too.")
-			UI:WaitShowDialogue("I asked them why,[pause=10] and they told me they wanted to finally live up to their team name.")
-			UI:WaitShowDialogue("They also wanted to start doing higher level jobs,[pause=10] and evolving would help with that too.")
-			UI:WaitShowDialogue("Hmm.[pause=0] Evolving twice in such a short time is wild to me,[pause=10] but I imagine their current forms are hard to move around as.")
-			UI:WaitShowDialogue("I wouldn't want to be stuck as a cocoon for long either if I was them!")
-		  
+			UI:WaitShowDialogue("L'équipe[color=#FFA5FF]Flutter[color]effectue la plupart des tâches de bas niveau qui entrent dans la guilde.")
+			UI:WaitShowDialogue("L'équipe compte deux membres : " .. CharacterEssentials.GetCharacterName("Silcoon") .. " le " .. silcoon_species .. " et " .. CharacterEssentials.GetCharacterName("Metapod") .. " le " .. metapod_species .. ".")
+			UI:WaitShowDialogue("Pendant longtemps, ces deux-là étaient en fait un " .. wurmple_species .. " et un " .. caterpie_species .. ",[pause=10], mais ils ont récemment décidé d'évoluer.")
+			UI:WaitShowDialogue("Ils m'ont dit qu'ils prévoyaient également d'évoluer à nouveau bientôt.")
+			UI:WaitShowDialogue("Je leur ai demandé pourquoi,[pause=10]et ils m'ont dit qu'ils voulaient enfin être à la hauteur du nom de leur équipe.")
+			UI:WaitShowDialogue("Ils voulaient également commencer à occuper des emplois de niveau supérieur,[pause=10]et évoluer les aiderait également.")
+			UI:WaitShowDialogue("Hmm.[pause=0]Évoluer deux fois en si peu de temps est fou pour moi,[pause=10]mais j'imagine que leurs formes actuelles sont difficiles à déplacer.")
+			UI:WaitShowDialogue("Je ne voudrais pas non plus rester coincée dans un cocon longtemps si j'étais eux !")
+
 		  elseif entry == 'Starlight' then
 			local aggron_species = _DATA:GetMonster('aggron'):GetColoredName()
 			local cleffa_species = _DATA:GetMonster('cleffa'):GetColoredName()
-			UI:WaitShowDialogue(zig_name .. "'s Almanac\nTeam Entry: [color=#FFA5FF]Starlight[color]")
+			UI:WaitShowDialogue("Almanach de " .. zig_name .. "\nEntrée par équipe :[color=#FFA5FF]Starlight[color]")
 			UI:SetCenter(false)
-			UI:WaitShowDialogue("Team [color=#FFA5FF]Starlight[color] consists of two members.[pause=0] They're a bit of an odd duo,[pause=10] though...")
-			UI:WaitShowDialogue("The leader is a " .. cleffa_species .. " named " .. CharacterEssentials.GetCharacterName("Cleffa") .. ",[pause=10] but she isn't very nice and she has a large ego for someone so small.")
-			UI:WaitShowDialogue("The other member is an " .. aggron_species .. " who goes by " .. CharacterEssentials.GetCharacterName("Aggron") .. ".[pause=0] He's really timid and takes a lot of lip from " .. CharacterEssentials.GetCharacterName("Cleffa") .. ".")
-			UI:WaitShowDialogue("It's a bit strange seeing a large Pokémon like that being bossed around by a tiny little " .. cleffa_species .. ",[pause=10] I must admit.")
-			UI:WaitShowDialogue("They take all sorts of different jobs,[pause=10] but it seems like they don't have much success.")
-			UI:WaitShowDialogue("Hmm.[pause=0] I bet they'd do a lot better if " .. CharacterEssentials.GetCharacterName("Cleffa") .. " learned to work with her partner better...")
-         
+			UI:WaitShowDialogue("L'équipe[color=#FFA5FF]Starlight[color]est composée de deux membres.[pause=0]Ils forment un duo un peu étrange, mais[pause=10]...")
+			UI:WaitShowDialogue("Le leader est une " .. cleffa_species .. " nommée " .. CharacterEssentials.GetCharacterName("Cleffa") .. ",[pause=10]mais elle n'est pas très gentille et elle a un grand ego pour quelqu'un d'aussi petit.")
+			UI:WaitShowDialogue("L'autre membre est un " .. aggron_species .. " qui s'appelle " .. CharacterEssentials.GetCharacterName("Aggron") .. ".[pause=0]. Il est vraiment timide et prend beaucoup de lèvres de " .. CharacterEssentials.GetCharacterName("Cleffa") .. ".")
+			UI:WaitShowDialogue("C'est un peu étrange de voir un gros Pokémon comme celui-là être dirigé par un tout petit " .. cleffa_species .. ",[pause=10], je dois l'admettre.")
+			UI:WaitShowDialogue("Ils acceptent toutes sortes de travaux différents,[pause=10], mais il semble qu'ils n'aient pas beaucoup de succès.")
+			UI:WaitShowDialogue("Hmm.[pause=0]Je parie qu'ils feraient beaucoup mieux si " .. CharacterEssentials.GetCharacterName("Cleffa") .. " apprenait à mieux travailler avec son partenaire...")
+
 		   elseif entry == 'Rivals' then
 			local zangoose_species = _DATA:GetMonster('zangoose'):GetColoredName()
 			local seviper_species = _DATA:GetMonster('seviper'):GetColoredName()
-			UI:WaitShowDialogue(zig_name .. "'s Almanac\nTeam Entry: [color=#FFA5FF]Rivals[color]")
+			UI:WaitShowDialogue("Almanach de " .. zig_name .. "\nInscription par équipe :[color=#FFA5FF]Rivals[color]")
 			UI:SetCenter(false)
-			UI:WaitShowDialogue("Team [color=#FFA5FF]Rivals[color] has two members that are,[pause=10] unsurprising given the name,[pause=10] fierce rivals with each other.")
-			UI:WaitShowDialogue("The team is made up of a " .. zangoose_species .. " named " .. CharacterEssentials.GetCharacterName("Zangoose") .. " and a " .. seviper_species .. " named " .. CharacterEssentials.GetCharacterName("Seviper") .. ".")
-			UI:WaitShowDialogue("When I asked them who the leader was,[pause=10] they both insisted it was themself and not their partner.")
-			UI:WaitShowDialogue("They started bickering with each other after that and I couldn't ask any other questions...")
-			UI:WaitShowDialogue("However,[pause=10] one time I noticed they were leaning on each other for support after coming back from a tough mission.")
-			UI:WaitShowDialogue("They both were concerned for each others' well-being more than anything else,[pause=10] though they tried to act coy about it.")
-			UI:WaitShowDialogue("Despite their rivalry, it seems they do care for each other,[pause=10] even if they don't like to show it!")
-		
+			UI:WaitShowDialogue("L'équipe[color=#FFA5FF]Rivals[color]compte deux membres qui, sans surprise étant donné leur nom,[pause=10], sont de féroces rivaux l'un avec l'autre.")
+			UI:WaitShowDialogue("L'équipe est composée d'un " .. zangoose_species .. " nommé " .. CharacterEssentials.GetCharacterName("Zangoose") .. " et d'un " .. seviper_species .. " nommé " .. CharacterEssentials.GetCharacterName("Seviper") .. ".")
+			UI:WaitShowDialogue("Quand je leur ai demandé qui était le leader,[pause=10], ils ont tous deux insisté sur le fait que c'était eux-mêmes et non leur partenaire.")
+			UI:WaitShowDialogue("Ils ont commencé à se chamailler après ça et je n'ai pas pu poser d'autres questions...")
+			UI:WaitShowDialogue("Cependant,[pause=10], un jour, j'ai remarqué qu'ils s'appuyaient l'un sur l'autre pour se soutenir après leur retour d'une mission difficile.")
+			UI:WaitShowDialogue("Ils étaient tous les deux préoccupés par le bien-être de chacun plus que toute autre chose, bien qu'ils essayaient d'agir timidement à ce sujet.")
+			UI:WaitShowDialogue("Malgré leur rivalité, il semble qu'ils se soucient l'un de l'autre,[pause=10]même s'ils n'aiment pas le montrer !")
+
 		  elseif entry == 'Flight' then
 			local doduo_species = _DATA:GetMonster('doduo'):GetColoredName()
 			local bagon_species = _DATA:GetMonster('bagon'):GetColoredName()
 
-			UI:WaitShowDialogue(zig_name .. "'s Almanac\nTeam Entry: [color=#FFA5FF]Flight[color]")
+			UI:WaitShowDialogue("Almanach de " .. zig_name .. "\nInscription par équipe :[color=#FFA5FF]Flight[color]")
 			UI:SetCenter(false)
-			UI:WaitShowDialogue("Team [color=#FFA5FF]Flight[color] has got two members on the team.[pause=0] A " .. doduo_species .. " named " .. CharacterEssentials.GetCharacterName("Doduo") .. " and a " .. bagon_species .. " named " .. CharacterEssentials.GetCharacterName("Bagon") .. ".")
-			UI:WaitShowDialogue(CharacterEssentials.GetCharacterName("Bagon") .. " is spunky and optimistic,[pause=10] but " .. CharacterEssentials.GetCharacterName("Doduo") .. " comes off as dodgy and nervous to me.[pause=0] He's a bit strange...")
-			UI:WaitShowDialogue("What's stranger though is their name,[pause=10] given that neither of them should be able to fly...")
-			UI:WaitShowDialogue(CharacterEssentials.GetCharacterName("Doduo") .. " claims to be able to fly,[pause=10] but I've never seen him do it.[pause=0] He's convinced " .. CharacterEssentials.GetCharacterName("Bagon") .. " that he's able to fly,[pause=10] though.")
-			UI:WaitShowDialogue("I'd sure like to see at least one of them fly one day,[pause=10] anyway.")
-			
-		  elseif entry == 'Style' then 
+			UI:WaitShowDialogue("L'équipe[color=#FFA5FF]Flight[color]compte deux membres dans l'équipe.[pause=0]Un " .. doduo_species .. " nommé " .. CharacterEssentials.GetCharacterName("Doduo") .. " et un " .. bagon_species .. " nommé " .. CharacterEssentials.GetCharacterName("Bagon") .. ".")
+			UI:WaitShowDialogue(CharacterEssentials.GetCharacterName("Bagon") .. " est courageux et optimiste,[pause=10]mais " .. CharacterEssentials.GetCharacterName("Doduo") .. " me semble douteux et nerveux.[pause=0]Il est un peu étrange...")
+			UI:WaitShowDialogue("Ce qui est plus étrange, c'est leur nom,[pause=10]étant donné qu'aucun d'eux ne devrait être capable de voler...")
+			UI:WaitShowDialogue(CharacterEssentials.GetCharacterName("Doduo") .. " prétend être capable de voler,[pause=10]mais je ne l'ai jamais vu le faire.[pause=0]Il est convaincu " .. CharacterEssentials.GetCharacterName("Bagon") .. " qu'il est capable de voler, cependant,[pause=10].")
+			UI:WaitShowDialogue("J'aimerais bien voir au moins un d'entre eux voler un jour,[pause=10]en tout cas.")
+
+		  elseif entry == 'Style' then
 			local luxio_species = _DATA:GetMonster('luxio'):GetColoredName()
 			local glameow_species = _DATA:GetMonster('glameow'):GetColoredName()
 			local cacnea_species = _DATA:GetMonster('cacnea'):GetColoredName()
 
-			UI:WaitShowDialogue(zig_name .. "'s Almanac\nTeam Entry: [color=#FFA5FF]Style[color]")
+			UI:WaitShowDialogue("Almanach de " .. zig_name .. "\nEntrée de l'équipe :[color=#FFA5FF]Style[color]")
 			UI:SetCenter(false)
-			UI:WaitShowDialogue("I don't know much about Team [color=#FFA5FF]Style[color].[pause=0] Maybe they're a new team?")
-			UI:WaitShowDialogue("All I do know is that the team consists of a " .. luxio_species .. ",[pause=10] a " .. glameow_species .. ",[pause=10] and a " .. cacnea_species .. ".")
-			UI:WaitShowDialogue("Once I learn more about them,[pause=10] I'd like to write a more detailed entry here![pause=0] They could be a really cool team!")
+			UI:WaitShowDialogue("Je ne connais pas grand chose à l'équipe[color=#FFA5FF]Style[color].[pause=0]C'est peut-être une nouvelle équipe ?")
+			UI:WaitShowDialogue("Tout ce que je sais, c'est que l'équipe est composée d'un " .. luxio_species .. ", d'un[pause=10], d'un " .. glameow_species .. ", d'un[pause=10]et d'un " .. cacnea_species .. ".")
+			UI:WaitShowDialogue("Une fois que j'en aurai appris davantage sur eux,[pause=10], j'aimerais écrire un article plus détaillé ici ![pause=0]Ils pourraient former une équipe vraiment cool !")
 
           elseif entry == GAME:GetTeamName() then
 		  	local hero = CH('PLAYER')
@@ -304,24 +304,24 @@ function guild_bottom_right_bedroom.Team_Almanac_Action(obj, activator)
 			local hero_species = _DATA:GetMonster(hero.CurrentForm.Species):GetColoredName()
 			local partner_species = _DATA:GetMonster(partner.CurrentForm.Species):GetColoredName()
 
-			
-			
-			UI:WaitShowDialogue(zig_name .. "'s Almanac\nTeam Entry: " .. GAME:GetTeamName())
+
+
+			UI:WaitShowDialogue("Almanach de " .. zig_name .. "\nInscription par équipe : " .. GAME:GetTeamName())
 			UI:SetCenter(false)
-			UI:WaitShowDialogue("Team " .. GAME:GetTeamName() .. " are the newest members of the guild![pause=0] They're also a pretty new team.")
-			UI:WaitShowDialogue("The team consists of " .. hero:GetDisplayName() .. " the " .. hero_species .. " and " .. partner:GetDisplayName() .. " the " .. partner_species .. ".")
-			UI:WaitShowDialogue("Because they're so new,[pause=10] they haven't done a lot of adventuring yet...")
-			UI:WaitShowDialogue("But I'm excited to see what kind of team they turn out to be!")
-			UI:WaitShowDialogue("Team " .. GAME:GetTeamName() .. ",[pause=10] if you're reading this,[pause=10] know that I'm rooting for you all the way!")
+			UI:WaitShowDialogue("L'équipe " .. GAME:GetTeamName() .. " est le nouveau membre de la guilde ![pause=0]C'est aussi une toute nouvelle équipe.")
+			UI:WaitShowDialogue("L'équipe est composée de " .. hero:GetDisplayName() .. ", du " .. hero_species .. " et de " .. partner:GetDisplayName() .. ", du " .. partner_species .. ".")
+			UI:WaitShowDialogue("Parce qu'ils sont si nouveaux,[pause=10], ils n'ont pas encore fait beaucoup d'aventures...")
+			UI:WaitShowDialogue("Mais j'ai hâte de voir quel genre d'équipe ils vont former !")
+			UI:WaitShowDialogue("Équipe " .. GAME:GetTeamName() .. ",[pause=10]si vous lisez ceci,[pause=10]sachez que je vous soutiens jusqu'au bout !")
 		 end
 		GROUND:ObjectSetDefaultAnim(obj, 'Diary_Red_Closing', 0, 0, 0, Direction.Right)
 		GROUND:ObjectSetAnim(obj, 6, 0, 3, Direction.Right, 1)
-		GROUND:ObjectSetDefaultAnim(obj, 'Diary_Red_Closing', 0, 3, 3, Direction.Right)	  
+		GROUND:ObjectSetDefaultAnim(obj, 'Diary_Red_Closing', 0, 3, 3, Direction.Right)
     end
 	UI:SetCenter(false)
 	partner.IsInteracting = false
 	GROUND:CharEndAnim(partner)
-	GROUND:CharEndAnim(hero)	
+	GROUND:CharEndAnim(hero)
 end
 
 
@@ -333,16 +333,16 @@ function guild_bottom_right_bedroom.Tips_Almanac_Action(obj, activator)
 	local partner = CH('Teammate1')
 	partner.IsInteracting = true
 	GROUND:CharSetAnim(partner, 'None', true)
-	GROUND:CharSetAnim(hero, 'None', true)		
+	GROUND:CharSetAnim(hero, 'None', true)
     GeneralFunctions.TurnTowardsLocation(hero, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
     GeneralFunctions.TurnTowardsLocation(partner, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
-	
+
 	local zig_name = CharacterEssentials.GetCharacterName("Zigzagoon")
 	local choices = {'Using Attacks to Move', 'Tough Opponents', 'Basic Attacks', 'Never Mind'}
-		
+
 	--Don't read his books until he tells you you can.
 	if not SV.Chapter1.MetZigzagoon then
-		UI:WaitShowDialogue("This appears to be someone else's book.\nBest not read it without their permission.")
+		UI:WaitShowDialogue("Cela semble être le livre de quelqu'un d'autre.\nMieux vaut ne pas le lire sans leur autorisation.")
 		UI:SetCenter(false)
 		UI:SetAutoFinish(false)
 		partner.IsInteracting = false
@@ -350,94 +350,94 @@ function guild_bottom_right_bedroom.Tips_Almanac_Action(obj, activator)
 		GROUND:CharEndAnim(hero)
 		return
 	end
-	
+
 	--todo: Different mons use different AI types
-	UI:ChoiceMenuYesNo("This is one of " .. zig_name .. "'s almanacs.\nIt's entitled " .. '"Adventuring Tips". Read it?')
+	UI:ChoiceMenuYesNo("C'est l'un des almanachs de " .. zig_name .. ".\nIl s'intitule \"Conseils d'aventure\". Le lire ?")
 	UI:WaitForChoice()
 	local result = UI:ChoiceResult()
 	UI:SetAutoFinish(false)
-	if result then 
-		  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Blue_Opening', 0, 0, 0, Direction.Right)	  
+	if result then
+		  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Blue_Opening', 0, 0, 0, Direction.Right)
 	      GROUND:ObjectSetAnim(obj, 6, 0, 3, Direction.Right, 1)
 		  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Blue_Opening', 0, 3, 3, Direction.Right)
 		  GAME:WaitFrames(40)
-		  UI:BeginMultiPageMenu(24, 24, 196, "Tips Almanac", choices, 8, 1, #choices)		  
+		  UI:BeginMultiPageMenu(24, 24, 196, "Almanach des conseils", choices, 8, 1, #choices)
 		  UI:WaitForChoice()
-		  
+
 		  local entry = choices[UI:ChoiceResult()]
-		  
+
 		  if entry == 'Using Attacks to Move' then
 			local quick_attack = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Skill]:Get("quick_attack")
 			local headbutt = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Skill]:Get("headbutt")
-			UI:WaitShowDialogue(zig_name .. "'s Almanac\nTips Entry: Using Attacks to Move")
+			UI:WaitShowDialogue("Almanach de " .. zig_name .. "\nEntrée de conseils : Utiliser des attaques pour se déplacer")
 			UI:SetCenter(false)
-			UI:WaitShowDialogue("Some attacks cause the user to move when used.[pause=0] Sometimes more than they normally could in a single turn!")
-			UI:WaitShowDialogue("This is useful for closing the gaps on opponents,[pause=10] but there are other applications too!")
-			UI:WaitShowDialogue("Depending on the distance an attack moves the user,[pause=10] using it to reposition can be more effective than walking.")
-			UI:WaitShowDialogue("You can even hop over terrain you'd normally be unable to stay on top of like water or lava!")
-			UI:WaitShowDialogue(quick_attack:GetColoredName() .. " is a common move that comes to mind for this purpose,[pause=10] but other moves should work too!")
-			UI:WaitShowDialogue("For me,[pause=10] " .. headbutt:GetColoredName() .. " would work,[pause=10] though it doesn't go quite as far as " .. quick_attack:GetColoredName() .. ".")
+			UI:WaitShowDialogue("Certaines attaques font bouger l'utilisateur lorsqu'elles sont utilisées.[pause=0]Parfois plus qu'il ne le ferait normalement en un seul tour !")
+			UI:WaitShowDialogue("C'est utile pour combler les écarts sur les adversaires,[pause=10]mais il existe aussi d'autres applications !")
+			UI:WaitShowDialogue("En fonction de la distance à laquelle une attaque déplace l'utilisateur,[pause=10]l'utiliser pour se repositionner peut être plus efficace que la marche.")
+			UI:WaitShowDialogue("Vous pouvez même sauter par-dessus un terrain sur lequel vous ne pourriez normalement pas rester au-dessus, comme de l'eau ou de la lave !")
+			UI:WaitShowDialogue(quick_attack:GetColoredName() .. " est un mouvement courant qui me vient à l'esprit à cet effet,[pause=10]mais d'autres mouvements devraient également fonctionner !")
+			UI:WaitShowDialogue("Pour moi,[pause=10]" .. headbutt:GetColoredName() .. " fonctionnerait,[pause=10]même si cela ne va pas aussi loin que " .. quick_attack:GetColoredName() .. ".")
 		  elseif entry == 'Tough Opponents' then
-		    UI:WaitShowDialogue(zig_name .. "'s Almanac\nTips Entry: Tough Opponents")
+		    UI:WaitShowDialogue("Almanach de " .. zig_name .. "\nEntrée des astuces : adversaires coriaces")
 			UI:SetCenter(false)
-			UI:WaitShowDialogue("Now and then in my adventures,[pause=10] I've come across enemies that were just too strong for me to deal with directly.")
-			UI:WaitShowDialogue("This could be because I was worn down,[pause=10] or that opponent was simply stronger than I was...")
-			UI:WaitShowDialogue("Anyway,[pause=10] even if I'm weaker than my opponent,[pause=10] there are strategies I've learned to help me come out on top.")
-			UI:WaitShowDialogue("One is to use items like Orbs and Wands to disable the opponent so they can't attack me as effectively or at all.")
-			UI:WaitShowDialogue("It doesn't matter if they're stronger if they can't fight back that well!")
-			UI:WaitShowDialogue("Another strategy is to simply just run away.[pause=0] You don't have to beat every opponent you find after all!")
-			UI:WaitShowDialogue("If they have moves that help them chase you down though,[pause=10] this probably won't work very well.")
-			UI:WaitShowDialogue("One last strategy I've come up with is to have " .. CharacterEssentials.GetCharacterName("Growlithe") .. " fight the enemy with me.")
-			UI:WaitShowDialogue("We're a team after all![pause=0] We should work together whenever possible to make things easier.")
-		    UI:WaitShowDialogue("Of course,[pause=10] I don't need his help for every opponent.")
-			UI:WaitShowDialogue("But there are times where a team needs to work together to overcome obstacles!")
-			UI:WaitShowDialogue("As for which strategy the situation calls for...")
-			UI:WaitShowDialogue("Well,[pause=10] that depends on the opponent,[pause=10] what items we have,[pause=10] " .. CharacterEssentials.GetCharacterName("Growlithe") .. " and I's condition,[pause=10] and so many other factors...")
-			UI:WaitShowDialogue("I guess knowing which option to choose in a tough spot is part of what it takes to be a great adventurer,[pause=10] hmm.")
-			UI:WaitShowDialogue("Either way,[pause=10] it's good to know what my options are before I have to choose one while out on an adventure!")
+			UI:WaitShowDialogue("De temps en temps, au cours de mes aventures,[pause=10], j'ai rencontré des ennemis trop puissants pour que je puisse les affronter directement.")
+			UI:WaitShowDialogue("Cela pourrait être dû au fait que j'étais épuisé,[pause=10]ou que cet adversaire était simplement plus fort que moi...")
+			UI:WaitShowDialogue("Quoi qu'il en soit,[pause=10], même si je suis plus faible que mon adversaire,[pause=10], il y a des stratégies que j'ai apprises pour m'aider à sortir vainqueur.")
+			UI:WaitShowDialogue("La première consiste à utiliser des objets comme des orbes et des baguettes pour désactiver l'adversaire afin qu'il ne puisse pas m'attaquer aussi efficacement, voire pas du tout.")
+			UI:WaitShowDialogue("Peu importe s'ils sont plus forts s'ils ne peuvent pas riposter aussi bien !")
+			UI:WaitShowDialogue("Une autre stratégie consiste simplement à fuir.[pause=0]Vous n'êtes pas obligé de battre tous les adversaires que vous trouvez après tout !")
+			UI:WaitShowDialogue("S'ils ont des mouvements qui les aident à vous poursuivre,[pause=10], cela ne fonctionnera probablement pas très bien.")
+			UI:WaitShowDialogue("Une dernière stratégie que j'ai proposée consiste à demander à " .. CharacterEssentials.GetCharacterName("Growlithe") .. " de combattre l'ennemi avec moi.")
+			UI:WaitShowDialogue("Nous sommes une équipe après tout ![pause=0]Nous devrions travailler ensemble autant que possible pour rendre les choses plus faciles.")
+		    UI:WaitShowDialogue("Bien sûr,[pause=10], je n'ai pas besoin de son aide pour chaque adversaire.")
+			UI:WaitShowDialogue("Mais il y a des moments où une équipe doit travailler ensemble pour surmonter les obstacles !")
+			UI:WaitShowDialogue("Quant à la stratégie que la situation appelle...")
+			UI:WaitShowDialogue("Eh bien,[pause=10]cela dépend de l'adversaire,[pause=10]des objets que nous avons,[pause=10]" .. CharacterEssentials.GetCharacterName("Growlithe") .. " et de mon état,[pause=10]et bien d'autres facteurs...")
+			UI:WaitShowDialogue("Je suppose que savoir quelle option choisir dans une situation difficile fait partie de ce qu'il faut pour être un grand aventurier,[pause=10]hmm.")
+			UI:WaitShowDialogue("Quoi qu'il en soit,[pause=10], il est bon de savoir quelles sont mes options avant de devoir en choisir une lors d'une aventure !")
 		  elseif entry == 'Basic Attacks' then
 			local headbutt = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Skill]:Get("headbutt")
 			local aron_species = _DATA:GetMonster('aron'):GetColoredName()
-			UI:WaitShowDialogue(zig_name .. "'s Almanac\nTips Entry: Basic Attacks")
+			UI:WaitShowDialogue("Almanach de " .. zig_name .. "\nEntrée des astuces : attaques de base")
 			UI:SetCenter(false)
-			UI:WaitShowDialogue("Basic attacks are something all Pokémon can perform,[pause=10] regardless of what moves they know!")
-			UI:WaitShowDialogue("They're weak compared to most moves,[pause=10] and you won't get any EXP if you only use basic attacks to defeat an enemy...")
-			UI:WaitShowDialogue("But you don't need energy to perform them,[pause=10] so even when you've exhausted your moves,[pause=10] you still have basic attacks!")
-			UI:WaitShowDialogue("This makes them perfect for conserving energy you need to perform regular moves!")
-			UI:WaitShowDialogue("For example,[pause=10] if my " .. headbutt:GetColoredName() .. " barely misses the mark of knocking out my opponent...")
-			UI:WaitShowDialogue("I can use a basic attack to finish them off instead of wasting more energy performing another " .. headbutt:GetColoredName() .. "!")
-			UI:WaitShowDialogue("Something else that's great about basic attacks is they're typeless![pause=0] That means no type is weak to or resists them!")
-			UI:WaitShowDialogue("So sometimes,[pause=10] if your opponent resists all of your moves,[pause=10] basic attacks can be the strongest option you have!")
-			UI:WaitShowDialogue("My " .. headbutt:GetColoredName() .. " for example would barely scratch an " .. aron_species .. ",[pause=10] since Steel and Rock resist Normal...")
-			UI:WaitShowDialogue("But a basic attack would do more damage than " .. headbutt:GetColoredName() .. " since basic attacks can't be resisted!")
-			UI:WaitShowDialogue("A lot of Pokémon think that basic attacks aren't worth using,[pause=10] but that's not true!")
-			UI:WaitShowDialogue("They're just something you need to know when to use to get the most out of them!")
+			UI:WaitShowDialogue("Les attaques de base sont quelque chose que tous les Pokémon peuvent effectuer,[pause=10], quels que soient les mouvements qu'ils connaissent !")
+			UI:WaitShowDialogue("Ils sont faibles par rapport à la plupart des mouvements,[pause=10]et vous n'obtiendrez aucun EXP si vous n'utilisez que des attaques de base pour vaincre un ennemi...")
+			UI:WaitShowDialogue("Mais vous n'avez pas besoin d'énergie pour les exécuter,[pause=10]donc même lorsque vous avez épuisé vos mouvements,[pause=10]vous disposez toujours d'attaques de base !")
+			UI:WaitShowDialogue("Cela les rend parfaits pour économiser l’énergie dont vous avez besoin pour effectuer des mouvements réguliers !")
+			UI:WaitShowDialogue("Par exemple,[pause=10]si mon " .. headbutt:GetColoredName() .. " manque de peu la cible en mettant KO mon adversaire...")
+			UI:WaitShowDialogue("Je peux utiliser une attaque de base pour les achever au lieu de gaspiller plus d'énergie en effectuant un autre " .. headbutt:GetColoredName() .. " !")
+			UI:WaitShowDialogue("Un autre avantage des attaques de base est qu'elles sont sans type ![pause=0]Cela signifie qu'aucun type n'est faible ou n'y résiste !")
+			UI:WaitShowDialogue("Alors parfois,[pause=10], si votre adversaire résiste à tous vos mouvements, les attaques de base[pause=10]peuvent être l'option la plus puissante dont vous disposez !")
+			UI:WaitShowDialogue("Mon " .. headbutt:GetColoredName() .. " par exemple rayerait à peine un " .. aron_species .. ",[pause=10]puisque l'acier et la roche résistent à la normale...")
+			UI:WaitShowDialogue("Mais une attaque de base ferait plus de dégâts que " .. headbutt:GetColoredName() .. " puisqu'on ne peut pas résister aux attaques de base !")
+			UI:WaitShowDialogue("Beaucoup de Pokémon pensent que les attaques de base ne valent pas la peine d'être utilisées,[pause=10]mais ce n'est pas vrai !")
+			UI:WaitShowDialogue("C'est juste quelque chose que vous devez savoir quand les utiliser pour en tirer le meilleur parti !")
 
 		  end
-		  
-		  
-			 
-			 
+
+
+
+
 		GROUND:ObjectSetDefaultAnim(obj, 'Diary_Blue_Closing', 0, 0, 0, Direction.Right)
 		GROUND:ObjectSetAnim(obj, 6, 0, 3, Direction.Right, 1)
-		GROUND:ObjectSetDefaultAnim(obj, 'Diary_Blue_Closing', 0, 3, 3, Direction.Right)	  
+		GROUND:ObjectSetDefaultAnim(obj, 'Diary_Blue_Closing', 0, 3, 3, Direction.Right)
     end
 	UI:SetCenter(false)
 	partner.IsInteracting = false
 	GROUND:CharEndAnim(partner)
-	GROUND:CharEndAnim(hero)	
+	GROUND:CharEndAnim(hero)
 end
 
 function guild_bottom_right_bedroom.Data_Almanac_Action(obj, activator)
 	UI:ResetSpeaker(false)
 	UI:SetCenter(true)
 	UI:SetAutoFinish(true)
-	
+
 	local hero = CH('PLAYER')
 	local partner = CH('Teammate1')
 	partner.IsInteracting = true
 	GROUND:CharSetAnim(partner, 'None', true)
-	GROUND:CharSetAnim(hero, 'None', true)		
+	GROUND:CharSetAnim(hero, 'None', true)
     GeneralFunctions.TurnTowardsLocation(hero, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
     GeneralFunctions.TurnTowardsLocation(partner, obj.Position.X + obj.Width // 2, obj.Position.Y + obj.Height // 2)
 
@@ -445,10 +445,10 @@ function guild_bottom_right_bedroom.Data_Almanac_Action(obj, activator)
 	local zig_name = CharacterEssentials.GetCharacterName("Zigzagoon")
 	local choices = {'Gummi Stats', "Same Type Attack Bonus", "Type Matchups", "Stat Changes", "Never Mind"}
 	--todos: Critical hit mechanics, belly mechanics and specifics
-		
+
 	--Don't read his books until he tells you you can.
 	if not SV.Chapter1.MetZigzagoon then
-		UI:WaitShowDialogue("This appears to be someone else's book.\nBest not read it without their permission.")
+		UI:WaitShowDialogue("Cela semble être le livre de quelqu'un d'autre.\nMieux vaut ne pas le lire sans leur autorisation.")
 		UI:SetCenter(false)
 		UI:SetAutoFinish(false)
 		partner.IsInteracting = false
@@ -456,127 +456,127 @@ function guild_bottom_right_bedroom.Data_Almanac_Action(obj, activator)
 		GROUND:CharEndAnim(hero)
 		return
 	end
-	
-	UI:ChoiceMenuYesNo("This is one of " .. zig_name .. "'s almanacs.\nIt's entitled " .. '"Measurements and Calculations". Read it?')
+
+	UI:ChoiceMenuYesNo("C'est l'un des almanachs de " .. zig_name .. ".\nIl s'intitule \"Mesures et calculs\". Le lire ?")
 	UI:WaitForChoice()
 	local result = UI:ChoiceResult()
 	UI:SetAutoFinish(false)
-	if result then 
-		  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Blue_Opening', 0, 0, 0, Direction.Left)	  
+	if result then
+		  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Blue_Opening', 0, 0, 0, Direction.Left)
 	      GROUND:ObjectSetAnim(obj, 6, 0, 3, Direction.Left, 1)
 		  GROUND:ObjectSetDefaultAnim(obj, 'Diary_Blue_Opening', 0, 3, 3, Direction.Left)
 		  GAME:WaitFrames(40)
-		  UI:BeginMultiPageMenu(24, 24, 196, "Data Almanac", choices, 8, 1, #choices)		  
+		  UI:BeginMultiPageMenu(24, 24, 196, "Almanach des données", choices, 8, 1, #choices)
 		  UI:WaitForChoice()
-		  
+
 		  local entry = choices[UI:ChoiceResult()]
-		  
+
 		  if entry == 'Gummi Stats' then
 			local white_gummi = RogueEssence.Dungeon.InvItem("gummi_white")
 			local orange_gummi = RogueEssence.Dungeon.InvItem("gummi_orange")
-			UI:WaitShowDialogue(zig_name .. "'s Almanac\nData Entry: Gummi Stats")
+			UI:WaitShowDialogue("Almanach de " .. zig_name .. "\nSaisie de données : statistiques Gummi")
 			UI:SetCenter(false)
-			UI:WaitShowDialogue("Gummis are colored,[pause=10] tasty treats![pause=0] They're a bit hard to get,[pause=10] but they're worth the search!")
-			UI:WaitShowDialogue("There's 18 types of Gummis,[pause=10] one for every Pokémon type.[pause=0] They even permanently raise your stats when eaten!")
-			UI:WaitShowDialogue("What stats they raise depends on the type of Gummi.[pause=0]\nA " .. white_gummi:GetDisplayName() .. " raises HP for example!")
-			UI:WaitShowDialogue("Additionally,[pause=10] the Gummi's type relative to the type of the eater further affects the stats gained!")
-			UI:WaitShowDialogue("If the Gummi's type has no effect on the eater,[pause=10] they won't gain any stats whatsoever!")
-			UI:WaitShowDialogue("If the Gummi's type is not very effective on the eater,[pause=10] then the Gummi won't boost the stat as much.")
-			UI:WaitShowDialogue("If the Gummi's type is neutral on the eater,[pause=10] then the Gummi gives its regular boost to the stat.")
-			UI:WaitShowDialogue("If the Gummi's type is super effective on the eater,[pause=10] then the Gummi will also slightly boost all other stats!")
-			UI:WaitShowDialogue("Lastly,[pause=10] if the Gummi's type matches one of the types of the eater,[pause=10] then all their stats increase!")
-			UI:WaitShowDialogue("In short,[pause=10] Gummis give better boosts the weaker you are to its type,[pause=10] or if you match its type!")
-			UI:WaitShowDialogue("Hmm.[pause=0] I guess I should share Gummis I find with others so the most benefit can be had.")
-			UI:WaitShowDialogue("Hopefully they'll do the same and give me any " .. white_gummi:GetDisplayName() .. " or " .. orange_gummi:GetDisplayName() .. " they find!")
+			UI:WaitShowDialogue("Les gummis sont colorés, des friandises savoureuses[pause=10]![pause=0]Ils sont un peu difficiles à obtenir,[pause=10]mais ils valent la peine d'être recherchés !")
+			UI:WaitShowDialogue("Il existe 18 types de Gummis,[pause=10], un pour chaque type de Pokémon.[pause=0]Ils augmentent même de manière permanente vos statistiques lorsqu'ils sont mangés !")
+			UI:WaitShowDialogue("Les statistiques qu'ils génèrent dépendent du type de Gummi.[pause=0]Un " .. white_gummi:GetDisplayName() .. " fait monter les HP par exemple !")
+			UI:WaitShowDialogue("De plus, le type de Gummi par rapport au type du mangeur affecte davantage les statistiques gagnées !")
+			UI:WaitShowDialogue("Si le type de Gummi n'a aucun effet sur le mangeur,[pause=10], il ne gagnera aucune statistique !")
+			UI:WaitShowDialogue("Si le type de Gummi n'est pas très efficace sur le mangeur,[pause=10]alors le Gummi n'augmentera pas autant la statistique.")
+			UI:WaitShowDialogue("Si le type du Gummi est neutre sur le mangeur,[pause=10]alors le Gummi donne son boost régulier à la statistique.")
+			UI:WaitShowDialogue("Si le type de Gummi est super efficace sur le mangeur,[pause=10]alors le Gummi augmentera également légèrement toutes les autres statistiques !")
+			UI:WaitShowDialogue("Enfin,[pause=10]si le type du Gummi correspond à l'un des types du mangeur,[pause=10]alors toutes ses statistiques augmentent !")
+			UI:WaitShowDialogue("En bref, les gommes[pause=10]donnent de meilleurs boosts plus vous êtes faible par rapport à son type,[pause=10]ou si vous correspondez à son type !")
+			UI:WaitShowDialogue("Hmm.[pause=0]Je suppose que je devrais partager les Gummis que je trouve avec d'autres afin d'en tirer le meilleur parti.")
+			UI:WaitShowDialogue("J'espère qu'ils feront de même et me donneront tous les " .. white_gummi:GetDisplayName() .. " ou " .. orange_gummi:GetDisplayName() .. " qu'ils trouveront !")
 		  elseif entry == 'Same Type Attack Bonus' then
 			local headbutt = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Skill]:Get("headbutt")
 			local hydro_pump = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Skill]:Get("hydro_pump")
-			UI:WaitShowDialogue(zig_name .. "'s Almanac\nData Entry: Same Type Attack Bonus")
+			UI:WaitShowDialogue("Almanach de " .. zig_name .. "\nSaisie de données : bonus d'attaque de même type")
 			UI:SetCenter(false)
-			UI:WaitShowDialogue("Many Pokémon forget that moves that are the same type as the user are more powerful than moves of other types!")
-			UI:WaitShowDialogue("That means if a Water-type uses " .. hydro_pump:GetColoredName() .. ",[pause=10] it would be stronger than if a Dragon-type used it!")
-			UI:WaitShowDialogue("At the dojo they call it Same Type Attack Bonus,[pause=10] but I like to to shorten it to STAB.")
-			UI:WaitShowDialogue("After many hours testing with Sensei " .. CharacterEssentials.GetCharacterName("Ledian") .. ",[pause=10] I think I figured out just how much stronger moves are with STAB.")
-			UI:WaitShowDialogue("Seems like moves do four-thirds (4/3) more damage if the user has STAB.")
-			UI:WaitShowDialogue("For me,[pause=10] that means my " .. headbutt:GetColoredName() .. " is four-thirds stronger than other Pokémon that aren't Normal-type like me!")
-			UI:WaitShowDialogue("Hopefully this knowledge will help me know which move is best to use against any enemies I encounter on adventures!")
+			UI:WaitShowDialogue("De nombreux Pokémon oublient que les capacités du même type que celui de l'utilisateur sont plus puissantes que les capacités d'autres types !")
+			UI:WaitShowDialogue("Cela signifie que si un type Eau utilise " .. hydro_pump:GetColoredName() .. ",[pause=10], il serait plus fort que si un type Dragon l'utilisait !")
+			UI:WaitShowDialogue("Au dojo, ils l'appellent Same Type Attack Bonus,[pause=10]mais j'aime le raccourcir en STAB.")
+			UI:WaitShowDialogue("Après de nombreuses heures de tests avec Sensei " .. CharacterEssentials.GetCharacterName("Ledian") .. ",[pause=10], je pense avoir compris à quel point les mouvements sont plus forts avec STAB.")
+			UI:WaitShowDialogue("On dirait que les mouvements font quatre tiers (4/3) de dégâts supplémentaires si l'utilisateur a STAB.")
+			UI:WaitShowDialogue("Pour moi,[pause=10], cela signifie que mon " .. headbutt:GetColoredName() .. " est quatre tiers plus fort que les autres Pokémon qui ne sont pas de type Normal comme moi !")
+			UI:WaitShowDialogue("J'espère que ces connaissances m'aideront à savoir quel mouvement est le meilleur à utiliser contre les ennemis que je rencontrerai au cours de mes aventures !")
 
-		  
+
 		  elseif entry == 'Type Matchups' then
-			UI:WaitShowDialogue(zig_name .. "'s Almanac\nData Entry: Type Matchups")
+			UI:WaitShowDialogue("Almanach de " .. zig_name .. "\nSaisie de données : correspondances de types")
 			UI:SetCenter(false)
-			UI:WaitShowDialogue("As everyone's aware,[pause=10] different types of moves are stronger against different types of Pokémon.")
-			UI:WaitShowDialogue("But what I bet not many Pokémon know is just how much more effective or ineffective those types of moves are!")
-			UI:WaitShowDialogue("After tons of testing at Ledian Dojo,[pause=10] I've figured out how much type matchups affect a move's strength!")
-			UI:WaitShowDialogue("If one of the defender's types is immune to the attack's type,[pause=10] then the move will have no effect at all!")
-			UI:WaitShowDialogue("A Fighting move on a Steel/Ghost Pokémon deals no damage,[pause=10] as Ghost is immune to Fighting despite Steel's weakness!")
-			UI:WaitShowDialogue("If the attacking move's type isn't effective on both of the defender's types,[pause=10] then the move deals 0.25x damage.")
-			UI:WaitShowDialogue("A Normal move on a Steel/Rock Pokémon only deals one-fourth damage,[pause=10] as both Rock and Steel resist Normal!")
-		  	UI:WaitShowDialogue("If the attacking move's type is not very effective on one of the defender's types,[pause=10] then the move deals 0.5x damage.")
-			UI:WaitShowDialogue("A Grass move on a Fire/Dark Pokémon only deals half damage,[pause=10] as Fire resists Grass but Dark is neutral to Grass.")
-		  	UI:WaitShowDialogue("If the attacking move's type is overall neutral to the defender's types,[pause=10] then the move will deal regular damage.")
-			UI:WaitShowDialogue("A Water move on a Rock/Grass Pokémon will deal regular damage,[pause=10] as Rock is weak to Water but Grass resists it.")
-			UI:WaitShowDialogue("If the attacking move's type is super effective on one of the defender's types,[pause=10] the move deals 1.5x damage.")
-			UI:WaitShowDialogue("A Fire move on a Ice/Dark Pokémon deals three-halves damage,[pause=10] as Ice is weak to Fire and Dark is neutral to Fire.")
-		    UI:WaitShowDialogue("If the attacking move's type is super effective on both of the defender's types,[pause=10] then the move deals 2.25x damage.")
-			UI:WaitShowDialogue("An Ice move deals nine-fourths damage to a Dragon/Ground Pokémon,[pause=10] as both Dragon and Ground are weak to Ice!")
-			UI:WaitShowDialogue("Things get a bit more complicated when Abilities get involved...[pause=0] But this is a good guideline to work off of!")
-			UI:WaitShowDialogue("It's a lot to remember,[pause=10] but knowing damage bonuses and the type-matchup chart will help me on my adventures!")
-		  
+			UI:WaitShowDialogue("Comme tout le monde le sait, les différents types de mouvements[pause=10]sont plus forts contre différents types de Pokémon.")
+			UI:WaitShowDialogue("Mais ce que je parie que peu de Pokémon savent, c'est à quel point ces types de mouvements sont plus efficaces ou inefficaces !")
+			UI:WaitShowDialogue("Après des tonnes de tests au Ledian Dojo,[pause=10], j'ai compris à quel point les correspondances de types affectent la force d'un mouvement !")
+			UI:WaitShowDialogue("Si l'un des types du défenseur est immunisé contre le type d'attaque,[pause=10], alors le mouvement n'aura aucun effet !")
+			UI:WaitShowDialogue("Une attaque de Combat sur un Pokémon Acier/Fantôme n'inflige aucun dégât,[pause=10]car Ghost est immunisé contre les combats malgré la faiblesse de l'Acier !")
+			UI:WaitShowDialogue("Si le type du mouvement attaquant n'est pas efficace sur les deux types du défenseur,[pause=10], alors le mouvement inflige 0,25x dégâts.")
+			UI:WaitShowDialogue("Une attaque normale sur un Pokémon Acier/Rocher n'inflige qu'un quart de dégâts,[pause=10]car Roche et Acier résistent à la Normale !")
+		  	UI:WaitShowDialogue("Si le type du mouvement attaquant n'est pas très efficace sur l'un des types du défenseur,[pause=10]alors le mouvement inflige 0,5x dégâts.")
+			UI:WaitShowDialogue("Un mouvement Herbe sur un Pokémon Feu/Ténèbres n'inflige que la moitié des dégâts,[pause=10]car le Feu résiste à l'Herbe mais l'Obscurité est neutre envers l'Herbe.")
+		  	UI:WaitShowDialogue("Si le type du mouvement attaquant est globalement neutre par rapport aux types du défenseur,[pause=10], alors le mouvement infligera des dégâts réguliers.")
+			UI:WaitShowDialogue("Une attaque Eau sur un Pokémon Roche/Herbe infligera des dégâts réguliers,[pause=10]car la Roche est faible face à l'Eau mais l'Herbe y résiste.")
+			UI:WaitShowDialogue("Si le type du mouvement attaquant est super efficace sur l'un des types du défenseur,[pause=10], le mouvement inflige 1,5x dégâts.")
+			UI:WaitShowDialogue("Une attaque de Feu sur un Pokémon Glace/Ténèbres inflige trois moitiés de dégâts,[pause=10]car la Glace est faible face au Feu et les Ténèbres sont neutres face au Feu.")
+		    UI:WaitShowDialogue("Si le type du mouvement attaquant est super efficace sur les deux types du défenseur,[pause=10], alors le mouvement inflige 2,25x dégâts.")
+			UI:WaitShowDialogue("Une attaque Glace inflige neuf quarts de dégâts à un Pokémon Dragon/Sol,[pause=10], car Dragon et Sol sont tous deux faibles face à la Glace !")
+			UI:WaitShowDialogue("Les choses deviennent un peu plus compliquées lorsque les capacités entrent en jeu...[pause=0]Mais c'est une bonne ligne directrice sur laquelle travailler !")
+			UI:WaitShowDialogue("C'est beaucoup de choses à retenir,[pause=10], mais connaître les bonus de dégâts et le tableau de correspondance des types m'aidera dans mes aventures !")
+
 		  elseif entry == 'Stat Changes' then
 		 	local belly_drum = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Skill]:Get("belly_drum")
 			local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("beginner_lesson")
-			UI:WaitShowDialogue(zig_name .. "'s Almanac\nData Entry: Stat Changes")
+			UI:WaitShowDialogue("Almanach de " .. zig_name .. "\nSaisie de données : modifications des statistiques")
 			UI:SetCenter(false)
-			UI:WaitShowDialogue("There are all sorts of moves that can temporarily change a Pokémon's stats.")
-			UI:WaitShowDialogue("These include moves that can raise a user's stats or lower an enemy's stats.")
-			UI:WaitShowDialogue("Some moves even take so much power that they actually lower the user's stats!")
-			UI:WaitShowDialogue("But to what extent do these stat changes affect a Pokémon's stats?")
-			UI:WaitShowDialogue("I wanted to know so I could make better decisions on adventures.")
-			UI:WaitShowDialogue("So,[pause=10] I went to Ledian Dojo to test things out,[pause=10] and I learned a lot about how stat changes work!")
-			UI:WaitShowDialogue("Hmm.[pause=0] Things might get a bit mathy here,[pause=10] so hopefully this will all makes sense!")
-			UI:WaitShowDialogue("For all stats that can be temporarily modified,[pause=10] they can be changed in degrees called stages.")
-			UI:WaitShowDialogue("These stages can be either negative or positive,[pause=10] but a stat can only go in one direction up to 6 times.")
-			UI:WaitShowDialogue('So if a stat was lowered to the minimum,[pause=10] it would be at\n"-6" and would not be able to go any lower than that!')
-			UI:WaitShowDialogue('On the flip,[pause=10] at the absolute maximum a stat would be at "+6" and would not be able to go any higher!')
-			UI:WaitShowDialogue("When a stat gets changed,[pause=10] it usually gets changed by 1,[pause=10] 2,[pause=10] or 3 stages at a time.")
-			UI:WaitShowDialogue("If it changes slightly,[pause=10] it goes up or down 1 stage.")
-			UI:WaitShowDialogue("If it changes sharply or harshly,[pause=10] it goes up or down 2 stages.")
-			UI:WaitShowDialogue("If it changes drastically,[pause=10] it goes up or down 3 stages.")
-			UI:WaitShowDialogue("There are some moves like " .. belly_drum:GetColoredName() .. " that can change stats by more than 3 stages,[pause=10] but they're exceptions.")
-			UI:WaitShowDialogue("Once you know how many stages a stat's been modified,[pause=10] you need to figure out the amount that the stat changes!")
-			UI:WaitShowDialogue("To do this...[pause=0] Erm,[pause=10] it's a bit complicated,[pause=10] so bear with me...")
-			UI:WaitShowDialogue("Start with the fraction 4/4.[pause=0] Then,[pause=10] if your stat stage is positive,[pause=10] add the number of stages to the top number.")
-			UI:WaitShowDialogue("So if you're at " .. '"+6" Attack,[pause=10] that ratio would be (4+6)/4 which is 10/4.')
-			UI:WaitShowDialogue("If the stat stage is negative,[pause=10] then you add the number of stages to the number on the bottom.")
-			UI:WaitShowDialogue("So if I'm at " .. '"-3" Defense,[pause=10] then my ratio would be 4/(4+3) which is 4/7.')
-			UI:WaitShowDialogue("Of course,[pause=10] if you have no stat change in a stat,[pause=10] this ratio should just stay at 4/4.")
-			UI:WaitShowDialogue("Anyways,[pause=10] once you get that ratio,[pause=10] you multiply your stat with that ratio to get your new effective stat!")
-			UI:WaitShowDialogue("So a Pokémon at +6 Attack hits two-and-a-half times as hard!")
-			UI:WaitShowDialogue('And a Pokémon at -6 Defense would get hurt two-and-a-half times as hard!')
-			UI:WaitShowDialogue("This all applies to Attack,[pause=10] Defense,[pause=10] Special Attack,[pause=10] and Special Defense.")
-			UI:WaitShowDialogue("Accuracy and Evasion are a bit different.[pause=0] Start with 2/2 as the base ratio,[pause=10] but otherwise do the rest the same.")
-			UI:WaitShowDialogue("So a Pokémon with +6 Evasion would have the ratio be (2+6)/2,[pause=10] which is 8/2.")
-			UI:WaitShowDialogue("With that ratio,[pause=10] they'd only get hit one-fourth of the time they normally would!")
-		    UI:WaitShowDialogue("On the other side,[pause=10] a Pokémon with -3 Accuracy would have the ratio 2/(2+3) which is 2/5.")
-			UI:WaitShowDialogue("With a ratio of 2/5,[pause=10] they would only hit 40 percent of the normal rate!")
-			UI:WaitShowDialogue("Though,[pause=10] I don't think I've ever seen a Pokémon miss two attacks in a row,[pause=10] so keep that in mind.")
-			UI:WaitShowDialogue("Lastly,[pause=10] Speed doesn't get changed like other stats do,[pause=10] so I think I'll leave that for a different entry.")
-			UI:WaitShowDialogue("I think Ledian Dojo's " .. zone:GetColoredName() .. " has the information on how that works anyway...")
-			UI:WaitShowDialogue("...And I think that covers it.[pause=0] My paw and my brain hurts a bit after writing all this...")
-			UI:WaitShowDialogue("Still,[pause=10] it's good that I write this all down,[pause=10] especially after I did all that work to figure it all out!")
-			UI:WaitShowDialogue("After all,[pause=10] who knows when this sort of information could come in handy!")
+			UI:WaitShowDialogue("Il existe toutes sortes de mouvements qui peuvent modifier temporairement les statistiques d'un Pokémon.")
+			UI:WaitShowDialogue("Ceux-ci incluent des mouvements qui peuvent augmenter les statistiques d'un utilisateur ou réduire les statistiques d'un ennemi.")
+			UI:WaitShowDialogue("Certains mouvements nécessitent même tellement de puissance qu'ils diminuent les statistiques de l'utilisateur !")
+			UI:WaitShowDialogue("Mais dans quelle mesure ces changements de statistiques affectent-ils les statistiques d'un Pokémon ?")
+			UI:WaitShowDialogue("Je voulais savoir pour pouvoir prendre de meilleures décisions concernant les aventures.")
+			UI:WaitShowDialogue("Donc,[pause=10], je suis allé au Ledian Dojo pour tester des choses,[pause=10]et j'ai beaucoup appris sur le fonctionnement des changements de statistiques !")
+			UI:WaitShowDialogue("Hmm.[pause=0]Les choses pourraient devenir un peu mathématiques ici,[pause=10], alors j'espère que tout cela aura du sens !")
+			UI:WaitShowDialogue("Pour toutes les statistiques pouvant être temporairement modifiées,[pause=10], elles peuvent être modifiées par degrés appelés étapes.")
+			UI:WaitShowDialogue("Ces étapes peuvent être négatives ou positives,[pause=10]mais une statistique ne peut aller que dans une seule direction jusqu'à 6 fois.")
+			UI:WaitShowDialogue("Donc si une statistique était abaissée au minimum,[pause=10]elle serait à\n\"-6\" et je ne pourrais pas descendre plus bas que ça !")
+			UI:WaitShowDialogue("A l'inverse,[pause=10]au maximum absolu, une statistique serait à \"+6\" et ne pourrait pas aller plus haut !")
+			UI:WaitShowDialogue("Lorsqu'une statistique est modifiée,[pause=10], elle est généralement modifiée de 1,[pause=10]2,[pause=10]ou 3 étapes à la fois.")
+			UI:WaitShowDialogue("S'il change légèrement,[pause=10]il monte ou descend d'un étage.")
+			UI:WaitShowDialogue("S'il change brusquement ou durement,[pause=10]il monte ou descend de 2 étapes.")
+			UI:WaitShowDialogue("Si cela change radicalement,[pause=10], cela monte ou descend de 3 étapes.")
+			UI:WaitShowDialogue("Certains mouvements comme " .. belly_drum:GetColoredName() .. " peuvent modifier les statistiques de plus de 3 étapes,[pause=10], mais ce sont des exceptions.")
+			UI:WaitShowDialogue("Une fois que vous savez combien d'étapes une statistique a été modifiée,[pause=10], vous devez déterminer le montant de la modification de la statistique !")
+			UI:WaitShowDialogue("Pour faire ça...[pause=0]Euh,[pause=10]c'est un peu compliqué,[pause=10]alors soyez indulgents avec moi...")
+			UI:WaitShowDialogue("Commencez par la fraction 4/4.[pause=0]Ensuite,[pause=10]si votre étape statistique est positive,[pause=10]ajoutez le nombre d'étapes au nombre supérieur.")
+			UI:WaitShowDialogue("Donc, si vous êtes à l'attaque \"+6\",[pause=10], ce rapport serait (4+6)/4, soit 10/4.")
+			UI:WaitShowDialogue("Si l'étape statistique est négative,[pause=10], vous ajoutez le nombre d'étapes au nombre en bas.")
+			UI:WaitShowDialogue("Donc si je suis à \"-3\" Défense,[pause=10]alors mon ratio serait de 4/(4+3), soit 4/7.")
+			UI:WaitShowDialogue("Bien sûr,[pause=10], si vous n'avez aucun changement de statistique dans une statistique,[pause=10], ce ratio devrait simplement rester à 4/4.")
+			UI:WaitShowDialogue("Quoi qu'il en soit,[pause=10]une fois que vous obtenez ce ratio,[pause=10]vous multipliez votre statistique avec ce ratio pour obtenir votre nouvelle statistique efficace !")
+			UI:WaitShowDialogue("Ainsi, un Pokémon à +6 en Attaque frappe deux fois et demie plus fort !")
+			UI:WaitShowDialogue("Et un Pokémon à -6 en Défense serait blessé deux fois et demie plus durement !")
+			UI:WaitShowDialogue("Tout cela s'applique à l'attaque, à la défense[pause=10], à l'attaque spéciale[pause=10], à la défense spéciale[pause=10].")
+			UI:WaitShowDialogue("La précision et l'évasion sont un peu différentes.[pause=0]Commencez avec 2/2 comme ratio de base,[pause=10]mais sinon faites le reste de la même manière.")
+			UI:WaitShowDialogue("Ainsi, un Pokémon avec +6 Évasion aurait le ratio (2+6)/2,[pause=10], soit 8/2.")
+			UI:WaitShowDialogue("Avec ce ratio,[pause=10], ils ne seraient touchés qu'un quart du temps qu'ils le feraient normalement !")
+		    UI:WaitShowDialogue("De l'autre côté,[pause=10]un Pokémon avec -3 Précision aurait le ratio 2/(2+3) qui est de 2/5.")
+			UI:WaitShowDialogue("Avec un ratio de 2/5,[pause=10], ils n'atteindraient que 40 % du taux normal !")
+			UI:WaitShowDialogue("Cependant,[pause=10], je ne pense pas avoir jamais vu un Pokémon rater deux attaques d'affilée,[pause=10], alors gardez cela à l'esprit.")
+			UI:WaitShowDialogue("Enfin, la vitesse[pause=10]ne change pas comme le font les autres statistiques,[pause=10], donc je pense que je vais laisser cela pour une entrée différente.")
+			UI:WaitShowDialogue("Je pense que " .. zone:GetColoredName() .. " de Ledian Dojo a de toute façon des informations sur la façon dont cela fonctionne...")
+			UI:WaitShowDialogue("...Et je pense que cela couvre tout.[pause=0]Ma patte et mon cerveau me font un peu mal après avoir écrit tout ça...")
+			UI:WaitShowDialogue("Pourtant,[pause=10], c'est bien que j'écrive tout cela,[pause=10]surtout après avoir fait tout ce travail pour tout comprendre !")
+			UI:WaitShowDialogue("Après tout,[pause=10], qui sait quand ce genre d’informations pourrait s’avérer utile !")
 		  end
-			
-			 
+
+
 		GROUND:ObjectSetDefaultAnim(obj, 'Diary_Blue_Closing', 0, 0, 0, Direction.Left)
 		GROUND:ObjectSetAnim(obj, 6, 0, 3, Direction.Left, 1)
-		GROUND:ObjectSetDefaultAnim(obj, 'Diary_Blue_Closing', 0, 3, 3, Direction.Left)	  
+		GROUND:ObjectSetDefaultAnim(obj, 'Diary_Blue_Closing', 0, 3, 3, Direction.Left)
     end
 	UI:SetCenter(false)
 	partner.IsInteracting = false
 	GROUND:CharEndAnim(partner)
-	GROUND:CharEndAnim(hero)		
+	GROUND:CharEndAnim(hero)
 
 end
 

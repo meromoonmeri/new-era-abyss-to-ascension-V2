@@ -20,20 +20,20 @@ end
 function guild_bottom_left_bedroom_ch_1.Girafarig_Action(chara, activator)
 	if not SV.Chapter1.MetBreloomGirafarig then
 		guild_bottom_left_bedroom_ch_1.Breloom_Action(chara, activator)
-	else 
+	else
 		local girafarig = CH('Girafarig')
 		local tail = CH('Tail')
 		local hero = CH('PLAYER')
-		GeneralFunctions.StartConversation(chara, "We're the most senior appetizers here,[pause=10] so come to us if you need advice or help!", "Happy")
+		GeneralFunctions.StartConversation(chara, "Nous sommes les apéritifs les plus expérimentés ici,[pause=10]alors venez nous voir si vous avez besoin de conseils ou d'aide !", "Happy")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_001'], tail:GetDisplayName()))
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(tail)
 		UI:SetSpeakerEmotion('Special0')
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_002']))
-		
+
 		GeneralFunctions.EndConversation(chara)
-		
+
 	end
 end
 
@@ -44,8 +44,8 @@ function guild_bottom_left_bedroom_ch_1.Breloom_Action(chara, activator)
 	local tail = CH('Tail')
 	local hero = CH('PLAYER')
 	local partner = CH('Teammate1')
-	
-	if not SV.Chapter1.MetBreloomGirafarig then 
+
+	if not SV.Chapter1.MetBreloomGirafarig then
 		GAME:FadeOut(false, 40)
 		GROUND:TeleportTo(partner, 188, 178, Direction.Down)
 		GROUND:TeleportTo(hero, 156, 178, Direction.Down)
@@ -63,21 +63,21 @@ function guild_bottom_left_bedroom_ch_1.Breloom_Action(chara, activator)
 		UI:SetSpeakerEmotion("Normal")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_003']))
 		GAME:WaitFrames(20)
-		
+
 		--GROUND:CharTurnToChar(partner, girafarig)
 		--GROUND:CharTurnToChar(hero, girafarig)
 		UI:SetSpeaker(STRINGS:Format("\\uE040"), true, girafarig.CurrentForm.Species, girafarig.CurrentForm.Form, girafarig.CurrentForm.Skin, girafarig.CurrentForm.Gender)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_004']))
 		GAME:WaitFrames(20)
-		
-		
+
+
 		--GROUND:CharTurnToChar(partner, breloom)
-		--GROUND:CharTurnToChar(hero, breloom)		
+		--GROUND:CharTurnToChar(hero, breloom)
 		UI:SetSpeaker(STRINGS:Format("\\uE040"), true, breloom.CurrentForm.Species, breloom.CurrentForm.Form, breloom.CurrentForm.Skin, breloom.CurrentForm.Gender)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_005']))
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_006']))
 		GAME:WaitFrames(20)
-		
+
 		--GROUND:CharTurnToChar(partner, girafarig)
 		--GROUND:CharTurnToChar(hero, girafarig)
 		UI:SetSpeaker(STRINGS:Format("\\uE040"), true, girafarig.CurrentForm.Species, girafarig.CurrentForm.Form, girafarig.CurrentForm.Skin, girafarig.CurrentForm.Gender)
@@ -85,11 +85,11 @@ function guild_bottom_left_bedroom_ch_1.Breloom_Action(chara, activator)
 		GAME:WaitFrames(20)
 
 		--GROUND:CharTurnToChar(partner, breloom)
-		--GROUND:CharTurnToChar(hero, breloom)		
+		--GROUND:CharTurnToChar(hero, breloom)
 		UI:SetSpeaker(STRINGS:Format("\\uE040"), true, breloom.CurrentForm.Species, breloom.CurrentForm.Form, breloom.CurrentForm.Skin, breloom.CurrentForm.Gender)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_008']))
 		GAME:WaitFrames(20)
-		
+
 		--GROUND:CharTurnToChar(partner, girafarig)
 		--GROUND:CharTurnToChar(hero, girafarig)
 		UI:SetSpeaker(STRINGS:Format("\\uE040"), true, girafarig.CurrentForm.Species, girafarig.CurrentForm.Form, girafarig.CurrentForm.Skin, girafarig.CurrentForm.Gender)
@@ -98,14 +98,14 @@ function guild_bottom_left_bedroom_ch_1.Breloom_Action(chara, activator)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_055'], tail:GetDisplayName()))--change the reason crum is a pain in the tail? maybe something better
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_010']))
 		GAME:WaitFrames(20)
-		
+
 		--UI:SetSpeaker(tail)
 		--UI:SetSpeakerEmotion('Special0')
 		--UI:WaitShowDialogue(".........")
 		--GAME:WaitFrames(20)
 
 		--GROUND:CharTurnToChar(partner, breloom)
-		--GROUND:CharTurnToChar(hero, breloom)		
+		--GROUND:CharTurnToChar(hero, breloom)
 		UI:SetSpeaker(STRINGS:Format("\\uE040"), true, breloom.CurrentForm.Species, breloom.CurrentForm.Form, breloom.CurrentForm.Skin, breloom.CurrentForm.Gender)
 		UI:SetSpeakerEmotion("Normal")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_011'], tail:GetDisplayName()))
@@ -115,14 +115,14 @@ function guild_bottom_left_bedroom_ch_1.Breloom_Action(chara, activator)
 		--GROUND:CharTurnToChar(hero, girafarig)
 		UI:SetSpeaker(STRINGS:Format("\\uE040"), true, girafarig.CurrentForm.Species, girafarig.CurrentForm.Form, girafarig.CurrentForm.Skin, girafarig.CurrentForm.Gender)
 		UI:SetSpeakerEmotion("Sad")
-		UI:WaitShowTimedDialogue("Yeah,[pause=10] he's just been so rumpy la-", 40)
+		UI:WaitShowTimedDialogue("Oui,[pause=10] il est simplement si gro-", 40)
 		GeneralFunctions.EmoteAndPause(girafarig, "Exclaim", true)
 		UI:SetSpeakerEmotion("Determined")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_012']))
 		GAME:WaitFrames(10)
 
 		--GROUND:CharTurnToChar(partner, breloom)
-		--GROUND:CharTurnToChar(hero, breloom)		
+		--GROUND:CharTurnToChar(hero, breloom)
 		UI:SetSpeaker(STRINGS:Format("\\uE040"), true, breloom.CurrentForm.Species, breloom.CurrentForm.Form, breloom.CurrentForm.Skin, breloom.CurrentForm.Gender)
 		UI:SetSpeakerEmotion("Joyous")
 		GROUND:CharSetEmote(breloom, "glowing", 0)
@@ -133,7 +133,7 @@ function guild_bottom_left_bedroom_ch_1.Breloom_Action(chara, activator)
 		GROUND:CharSetEmote(breloom, "", 0)
 
 		--GROUND:CharTurnToChar(partner, breloom)
-		--GROUND:CharTurnToChar(hero, breloom)		
+		--GROUND:CharTurnToChar(hero, breloom)
 		UI:SetSpeakerEmotion("Normal")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_014']))
 		GAME:WaitFrames(20)
@@ -141,47 +141,47 @@ function guild_bottom_left_bedroom_ch_1.Breloom_Action(chara, activator)
 		--GAME:WaitFrames(20)
 		GROUND:CharTurnToCharAnimated(breloom, partner, 4)
 		GAME:WaitFrames(20)
-		
+
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_015']))
 		GROUND:CharTurnToCharAnimated(girafarig, partner, 4)
 		GROUND:CharTurnToCharAnimated(hero, breloom, 4)
 		GAME:WaitFrames(12)
-		
+
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_016']))
 		GAME:WaitFrames(10)
-		
+
 		GROUND:CharSetEmote(hero, "exclaim", 1)
 		GeneralFunctions.Recoil(partner)
 		UI:SetSpeaker(partner)
 		UI:SetSpeakerEmotion("Surprised")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_017']))
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(STRINGS:Format("\\uE040"), true, breloom.CurrentForm.Species, breloom.CurrentForm.Form, breloom.CurrentForm.Skin, breloom.CurrentForm.Gender)
 		UI:SetSpeakerEmotion("Normal")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_018']))
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_019']))
 		GAME:WaitFrames(10)
-		
+
 		UI:SetSpeaker(partner)
 		UI:SetSpeakerEmotion("Sad")
 		--GROUND:CharSetEmote(hero, "sweating", 1)
 		GeneralFunctions.EmoteAndPause(partner, 'Sweating', true)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_020']))
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(STRINGS:Format("\\uE040"), true, breloom.CurrentForm.Species, breloom.CurrentForm.Form, breloom.CurrentForm.Skin, breloom.CurrentForm.Gender)
 		UI:SetSpeakerEmotion("Happy")
 		GROUND:CharSetEmote(breloom, "glowing", 0)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_021']))
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_022']))
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(partner)
 		UI:SetSpeakerEmotion("Worried")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_023']))
 		GAME:WaitFrames(20)
-		
+
 		GROUND:CharTurnToCharAnimated(girafarig, breloom, 4)
 		UI:SetSpeaker(STRINGS:Format("\\uE040"), true, girafarig.CurrentForm.Species, girafarig.CurrentForm.Form, girafarig.CurrentForm.Skin, girafarig.CurrentForm.Gender)
 		UI:SetSpeakerEmotion("Normal")
@@ -191,25 +191,25 @@ function guild_bottom_left_bedroom_ch_1.Breloom_Action(chara, activator)
 													  GROUND:CharTurnToCharAnimated(hero, girafarig, 4) end)
 		TASK:JoinCoroutines({coro1, coro2})
 		GAME:WaitFrames(20)
-		
+
 		GROUND:CharSetEmote(breloom, "", 0)
 		GROUND:CharTurnToCharAnimated(breloom, girafarig, 4)
 		UI:SetSpeaker(STRINGS:Format("\\uE040"), true, breloom.CurrentForm.Species, breloom.CurrentForm.Form, breloom.CurrentForm.Skin, breloom.CurrentForm.Gender)
 		UI:SetSpeakerEmotion("Normal")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_024']))
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(STRINGS:Format("\\uE040"), true, girafarig.CurrentForm.Species, girafarig.CurrentForm.Form, girafarig.CurrentForm.Skin, girafarig.CurrentForm.Gender)
 		UI:SetSpeakerEmotion("Sigh")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_025']))
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(STRINGS:Format("\\uE040"), true, breloom.CurrentForm.Species, breloom.CurrentForm.Form, breloom.CurrentForm.Skin, breloom.CurrentForm.Gender)
 		UI:SetSpeakerEmotion("Worried")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_026']))
 		GAME:WaitFrames(20)
 
-		
+
 		UI:SetSpeaker(STRINGS:Format("\\uE040"), true, girafarig.CurrentForm.Species, girafarig.CurrentForm.Form, girafarig.CurrentForm.Skin, girafarig.CurrentForm.Gender)
 		UI:SetSpeakerEmotion("Normal")
 		GROUND:CharTurnToChar(girafarig, partner)
@@ -218,13 +218,13 @@ function guild_bottom_left_bedroom_ch_1.Breloom_Action(chara, activator)
 		UI:SetSpeakerEmotion("Happy")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_028'], girafarig:GetDisplayName()))
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(partner)
 		UI:SetSpeakerEmotion("Normal")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_029']))
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_030'], partner:GetDisplayName(), hero:GetDisplayName()))
 		GAME:WaitFrames(20)
-		
+
 		--GROUND:CharTurnToChar(partner, breloom)
 		--GROUND:CharTurnToChar(hero, breloom)
 		UI:SetSpeaker(breloom)
@@ -242,36 +242,36 @@ function guild_bottom_left_bedroom_ch_1.Breloom_Action(chara, activator)
 		UI:SetSpeakerEmotion("Surprised")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_031']))
 		GAME:WaitFrames(20)
-					
+
 		GROUND:CharTurnToCharAnimated(partner, girafarig, 4)
 		GROUND:CharTurnToCharAnimated(hero, girafarig, 4)
 		GROUND:CharAnimateTurnTo(girafarig, partner.Direction, 4)
 		UI:SetSpeakerEmotion("Normal")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_032'], tail:GetDisplayName()))
 		GAME:WaitFrames(20)
-		
+
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_033'], tail:GetDisplayName()))
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(tail)
 		UI:SetSpeakerEmotion('Special0')
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_034']))
 		GAME:WaitFrames(20)
-		
+
 		GROUND:CharSetEmote(partner, "sweatdrop", 1)
 		GeneralFunctions.EmoteAndPause(hero, 'Sweatdrop', true)
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(partner)
 		UI:SetSpeakerEmotion("Stunned")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_035']))
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(breloom)
 		UI:SetSpeakerEmotion("Pain")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_036']))
 		GAME:WaitFrames(20)
-		
+
 		GROUND:CharTurnToCharAnimated(partner, breloom, 4)
 		GROUND:CharTurnToCharAnimated(hero, breloom, 4)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_037'], girafarig:GetDisplayName()))
@@ -279,22 +279,22 @@ function guild_bottom_left_bedroom_ch_1.Breloom_Action(chara, activator)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_039']))
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_040']))
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(partner)
 		UI:SetSpeakerEmotion("Worried")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_041']))
 		GAME:WaitFrames(20)
-		
+
 		GROUND:CharTurnToCharAnimated(partner, girafarig, 4)
 		GROUND:CharTurnToCharAnimated(hero, girafarig, 4)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_042'], tail:GetDisplayName()))
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(tail)
 		UI:SetSpeakerEmotion('Special0')
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_043']))
 		GAME:WaitFrames(20)
-		
+
 		GROUND:CharTurnToCharAnimated(girafarig, partner, 4)
 		UI:SetSpeaker(girafarig)
 		UI:SetSpeakerEmotion("Happy")
@@ -304,24 +304,24 @@ function guild_bottom_left_bedroom_ch_1.Breloom_Action(chara, activator)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_045']))
 		GAME:WaitFrames(20)
 		GROUND:CharSetEmote(girafarig, "", 0)
-		
+
 		UI:SetSpeaker(partner)
 		UI:SetSpeakerEmotion("Happy")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_046']))
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(breloom)
 		UI:SetSpeakerEmotion("Happy")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_047'], tail:GetDisplayName()))
 		GAME:WaitFrames(20)
-		
+
 		GROUND:CharTurnToCharAnimated(partner, breloom, 4)
 		GROUND:CharTurnToCharAnimated(hero, breloom, 4)
 		--too long with no nicknames
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_048'], girafarig:GetDisplayName()))
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_049']))
 		GAME:WaitFrames(20)
-		
+
 		--GROUND:CharTurnToChar(partner, girafarig)
 		--GROUND:CharTurnToChar(hero, girafarig)
 		UI:SetSpeaker(girafarig)
@@ -333,13 +333,13 @@ function guild_bottom_left_bedroom_ch_1.Breloom_Action(chara, activator)
 											    GROUND:CharTurnToCharAnimated(hero, girafarig, 4) end)
 		TASK:JoinCoroutines({coro1, coro2})
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(tail)
 		UI:SetSpeakerEmotion('Special0')
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_050']))
 		GAME:WaitFrames(20)
 
-		GeneralFunctions.PanCamera(180, 188)		
+		GeneralFunctions.PanCamera(180, 188)
 		GROUND:CharTurnToChar(girafarig, breloom)
 		GROUND:CharTurnToCharAnimated(breloom, girafarig)
 		GROUND:CharSetAnim(breloom, "Idle", true)
@@ -360,8 +360,8 @@ function guild_bottom_left_bedroom_ch_1.Breloom_Action(chara, activator)
 		AI:EnableCharacterAI(partner)
 		AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
 		GAME:CutsceneMode(false)
-	else 
-		GeneralFunctions.StartConversation(chara, "By the way,[pause=10] if you gatecrashers ever need help with anything,[pause=10] especially exploring,[pause=10] come see me or " .. girafarig:GetDisplayName() .. "!", "Happy")
+	else
+		GeneralFunctions.StartConversation(chara, "Au fait,[pause=10], si jamais vous avez besoin d'aide pour quoi que ce soit,[pause=10]en particulier pour l'exploration,[pause=10]venez me voir ou " .. girafarig:GetDisplayName() .. " !", "Happy")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GBL1_054']))
 		GeneralFunctions.EndConversation(chara)
 	end

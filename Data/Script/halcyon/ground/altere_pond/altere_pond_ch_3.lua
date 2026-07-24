@@ -13,27 +13,27 @@ function altere_pond_ch_3.Relicanth_Action(chara, activator)
 	if not SV.Chapter3.DefeatedBoss then
 
 
-		GeneralFunctions.StartConversation(chara, "Who's there?", "Normal", true, false)
-		
+		GeneralFunctions.StartConversation(chara, "Qui est là ?", "Normal", true, false)
+
 		GAME:WaitFrames(20)
 		UI:SetSpeaker(partner)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['AP3_001'], chara:GetDisplayName(), partner:GetDisplayName()))
 		GAME:WaitFrames(20)
-		
+
 		UI:SetSpeaker(chara)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['AP3_002'], partner:GetDisplayName()))
 		GAME:WaitFrames(20)
-			
+
 		UI:SetSpeaker(partner)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['AP3_003'], hero:GetDisplayName()))
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['AP3_004']))
-		
+
 		GAME:WaitFrames(20)
 		UI:SetSpeaker(chara)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['AP3_005']))
 	else
-		GeneralFunctions.StartConversation(chara, partner:GetDisplayName() .. ".[pause=0] I hope you and your friend there continue to keep out of trouble.", "Normal", true, false)
+		GeneralFunctions.StartConversation(chara, partner:GetDisplayName() .. ".[pause=0]J'espère que vous et votre ami continuez à éviter les ennuis.", "Normal", true, false)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['AP3_006']))
 	end
 	GeneralFunctions.EndConversation(chara, false)
-end 
+end

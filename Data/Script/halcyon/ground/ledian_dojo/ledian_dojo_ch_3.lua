@@ -13,11 +13,11 @@ end
 
 
 function ledian_dojo_ch_3.Gible_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "The training mazes at the dojo are great for getting more fighting experience!")
+	GeneralFunctions.StartConversation(chara, "Les labyrinthes d'entraînement du dojo sont parfaits pour acquérir plus d'expérience de combat !")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['LD3_001'], CharacterEssentials.GetCharacterName("Ledian")))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['LD3_002']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['LD3_003'], CharacterEssentials.GetCharacterName("Ledian")))
 	GeneralFunctions.EndConversation(chara)
 end
 
-	
+

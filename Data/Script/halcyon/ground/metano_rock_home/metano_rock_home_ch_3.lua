@@ -7,7 +7,7 @@ metano_rock_home_ch_3 = {}
 
 function metano_rock_home_ch_3.SetupGround()
 	if not SV.Chapter3.DefeatedBoss then
-		local machamp  = 
+		local machamp  =
 			CharacterEssentials.MakeCharactersFromList({
 				{'Machamp', 98, 128, Direction.Down}
 
@@ -18,7 +18,7 @@ function metano_rock_home_ch_3.SetupGround()
 end
 
 function metano_rock_home_ch_3.Machamp_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "It's so great that wee " .. CharacterEssentials.GetCharacterName("Numel") .. " was found![pause=0] His mum mus' be so relieved.")
+	GeneralFunctions.StartConversation(chara, "C'est tellement génial que le petit " .. CharacterEssentials.GetCharacterName("Numel") .. " ait été retrouvé ![pause=0]Sa mère doit être si soulagée.")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MRH3_001']))
 	GeneralFunctions.EndConversation(chara)
-end 
+end

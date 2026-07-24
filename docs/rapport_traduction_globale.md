@@ -95,3 +95,14 @@ La prochaine passe doit être faite par blocs fonctionnels :
 - 43 cartes de terrain présentes.
 
 La validation en jeu PMDO reste nécessaire après chaque bloc de traduction.
+
+## Passe procédurale globale — 24 juillet 2026
+
+Une passe structurée a été appliquée aux appels de dialogue, de voix off, de menus et de conversations des scripts Lua :
+
+- 94 fichiers Lua traités ;
+- 1 299 appels de texte traduits ou normalisés ;
+- guilde, almanach, PartnerEssentials, Metano, missions, bureau de poste et événements inclus ;
+- validation syntaxique : 178 Lua, 0 erreur.
+
+Les textes de diagnostic et les scripts de test restent séparés du contenu joueur. Une vérification en jeu est encore recommandée pour les textes construits dynamiquement.

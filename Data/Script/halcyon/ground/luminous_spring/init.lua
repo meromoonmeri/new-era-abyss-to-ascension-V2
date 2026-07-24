@@ -20,7 +20,7 @@ function luminous_spring.Init(map, time)
 
 	DEBUG.EnableDbgCoro()
 	print('=>> Init_luminous_spring <<=')
-	
+
 	COMMON.RespawnAllies(true)
 	PartnerEssentials.InitializePartnerSpawn()
 end
@@ -58,10 +58,10 @@ end
 
 
 function luminous_spring.PlotScripting()
-	if SV.ChapterProgression.Chapter == 2 then 
+	if SV.ChapterProgression.Chapter == 2 then
 		luminous_spring_ch_2.FindNumelCutscene()
 	else
-		--generic ending 
+		--generic ending
 		luminous_spring.GenericEnding()
 	end
 end
@@ -86,7 +86,7 @@ function luminous_spring.GenericEnding()
 	AI:DisableCharacterAI(partner)
 	SOUND:StopBGM()
 	GAME:WaitFrames(20)
-	
+
 	GROUND:TeleportTo(hero, 276, 400, Direction.Up)
 	GROUND:TeleportTo(partner, 308, 400, Direction.Up)
 	if team2 ~= nil then
@@ -95,39 +95,39 @@ function luminous_spring.GenericEnding()
 	if team3 ~= nil then
 		GROUND:TeleportTo(team3, 260, 432, Direction.Up)
 	end
-	
+
 	GAME:MoveCamera(300, 264, 1, false)
-		
+
 	GAME:CutsceneMode(true)
 	UI:ResetSpeaker()
 	UI:WaitShowTitle(GAME:GetCurrentGround().Name:ToLocal(), 20)
 	GAME:WaitFrames(60)
 	UI:WaitHideTitle(20)
 	GAME:FadeIn(40)
-	
+
 	SOUND:PlayBGM('In The Depths of the Pit.ogg', true)
-	
+
 	local coro1 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(partner, 308, 288, false, 1) end)
 	local coro2 = TASK:BranchCoroutine(function() GAME:WaitFrames(10)
 												  GROUND:MoveToPosition(hero, 276, 288, false, 1) end)
 	local coro3 = TASK:BranchCoroutine(function() if team2 ~= nil then GAME:WaitFrames(14) GROUND:MoveToPosition(team2, 292, 320, false, 1) end end)
 	local coro4 = TASK:BranchCoroutine(function() if team3 ~= nil then GAME:WaitFrames(18) GROUND:MoveToPosition(team3, 260, 320, false, 1) end end)
-	
+
 	TASK:JoinCoroutines({coro1, coro2, coro3, coro4})
-	GAME:WaitFrames(10)	
-	
+	GAME:WaitFrames(10)
+
 	coro1 = TASK:BranchCoroutine(function() GeneralFunctions.LookAround(partner, 3, 4, false, false, true, Direction.Up) end)
 	coro2 = TASK:BranchCoroutine(function() GAME:WaitFrames(10)
 											GeneralFunctions.LookAround(hero, 3, 4, false, false, true, Direction.Up) end)
-	coro3 = TASK:BranchCoroutine(function() if team2 ~= nil then GAME:WaitFrames(14) GeneralFunctions.LookAround(team2, 3, 4, false, false, true, Direction.Right) end end)										  
-	coro4 = TASK:BranchCoroutine(function() if team3 ~= nil then GAME:WaitFrames(18) GeneralFunctions.LookAround(team3, 3, 4, false, false, true, Direction.Left) end end)										  
+	coro3 = TASK:BranchCoroutine(function() if team2 ~= nil then GAME:WaitFrames(14) GeneralFunctions.LookAround(team2, 3, 4, false, false, true, Direction.Right) end end)
+	coro4 = TASK:BranchCoroutine(function() if team3 ~= nil then GAME:WaitFrames(18) GeneralFunctions.LookAround(team3, 3, 4, false, false, true, Direction.Left) end end)
 	TASK:JoinCoroutines({coro1, coro2, coro3, coro4})
-	
+
 	--temporary flags are set by the zone script rather than here.
 	GAME:WaitFrames(20)
 	UI:SetCenter(true)
-	UI:WaitShowDialogue("There doesn't appear to be anything of interest here.")
-	UI:WaitShowDialogue("It's impossible to go any further.[pause=0]\nIt's time to go back.")
+	UI:WaitShowDialogue("Il ne semble y avoir rien d'intéressant ici.")
+	UI:WaitShowDialogue("Impossible d'aller plus loin.[pause=0]Il est temps de rentrer.")
 	UI:SetCenter(false)
 	SOUND:FadeOutBGM(60)
 	GAME:FadeOut(false, 60)
@@ -138,15 +138,15 @@ function luminous_spring.GenericEnding()
 		GeneralFunctions.EndDungeonRun(RogueEssence.Data.GameProgress.ResultType.Cleared, "master_zone", -1, 22, 0, true, true)
 	else
 		GeneralFunctions.EndDungeonRun(RogueEssence.Data.GameProgress.ResultType.Cleared, "master_zone", -1, 6, 0, true, true)
-	end	
-	
+	end
+
 end
 --------------------------------------------------
 -- Objects Callbacks
 --------------------------------------------------
 
 --[[
-Base Game functionality, commented out 
+Base Game functionality, commented out
 function luminous_spring.South_Exit_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
   GAME:FadeOut(false, 40)
@@ -156,17 +156,17 @@ end
 function luminous_spring.Spring_Touch(obj, activator)
   DEBUG.EnableDbgCoro() --Enable debugging this coroutine
 	UI:ResetSpeaker()
-	
+
 	local state = 0
 	local repeated = false
 	local member = nil
 	local evo = nil
 	local player = CH('PLAYER')
-	
+
 	GAME:CutsceneMode(true)
 	GAME:MoveCamera(300, 152, 90, false)
 	GROUND:TeleportTo(player, 292, 312, Direction.Down)
-	
+
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Intro_1']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Intro_2']))
 	while state > -1 do
@@ -262,43 +262,43 @@ function luminous_spring.Spring_Touch(obj, activator)
 		elseif state == 3 then
 			--execute evolution
 			local mon = RogueEssence.Data.DataManager.Instance:GetMonster(evo.Result)
-			
+
 			GROUND:SpawnerSetSpawn("EVO_SUBJECT",member)
 			local subject = GROUND:SpawnerDoSpawn("EVO_SUBJECT")
-			
+
 			GROUND:MoveInDirection(subject, Direction.Up, 60)
 			GROUND:EntTurn(subject, Direction.Down)
-			
+
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Begin']))
-			
+
 			SOUND:PlayBattleSE("EVT_Evolution_Start")
 			GAME:FadeOut(true, 20)
-			
+
 			GAME:PromoteCharacter(member, evo, 349)
 			COMMON.RespawnAllies()
 			GROUND:RemoveCharacter("EvoSubject")
 			--GROUND:SpawnerSetSpawn("EVO_SUBJECT",member)
 			subject = GROUND:SpawnerDoSpawn("EVO_SUBJECT")
 			GROUND:TeleportTo(subject, 292, 192, Direction.Down)
-			
+
 			GAME:WaitFrames(30)
-			
+
 			SOUND:PlayBattleSE("EVT_Title_Intro")
 			GAME:FadeIn(40)
 			SOUND:PlayFanfare("Fanfare/Promotion")
-			
-			
+
+
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Evo_Complete'], member.BaseName, mon.Name:ToLocal()))
-			
-			
+
+
 			GROUND:MoveInDirection(subject, Direction.Down, 60)
-			
+
 			GROUND:RemoveCharacter("EvoSubject")
-			
+
 			state = 0
 		end
 	end
-	
+
 	GAME:MoveCamera(0, 0, 90, true)
 	GAME:CutsceneMode(false)
 end

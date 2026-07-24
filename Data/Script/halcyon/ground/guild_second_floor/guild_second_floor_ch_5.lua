@@ -10,15 +10,15 @@ function guild_second_floor_ch_5.SetupGround()
 	GROUND:Hide('Assembly_Owner')
 	GROUND:Hide('Assembly')
 
-	local assembly_note = RogueEssence.Ground.GroundObject(RogueEssence.Content.ObjAnimData("Paper_1", 1, 0, 0), 
+	local assembly_note = RogueEssence.Ground.GroundObject(RogueEssence.Content.ObjAnimData("Paper_1", 1, 0, 0),
 												RogueElements.Rect(560, 200, 32, 16),
-												RogueElements.Loc(-8, 4), 
-												false, 
+												RogueElements.Loc(-8, 4),
+												false,
 												"Event_Object_1")
 	assembly_note:ReloadEvents()
 	GAME:GetCurrentGround():AddTempObject(assembly_note)
 
-	local roselia, ludicolo, spinda, seviper, zangoose = 
+	local roselia, ludicolo, spinda, seviper, zangoose =
 			CharacterEssentials.MakeCharactersFromList({
 				{'Roselia', 'Left_Trio_2'},
 				{'Ludicolo', 'Left_Trio_3'},
@@ -26,15 +26,15 @@ function guild_second_floor_ch_5.SetupGround()
 				{'Seviper', 'Right_Duo_2'},
 				{'Zangoose', 'Right_Duo_1'}
 			})
-			
+
 	AI:SetCharacterAI(roselia, "halcyon.ai.ground_talking", false, 240, 60, 0, false, 'Default', {ludicolo, spinda})
 	AI:SetCharacterAI(ludicolo, "halcyon.ai.ground_talking", false, 240, 60, 60, false, 'Default', {roselia, spinda})
 	AI:SetCharacterAI(spinda, "halcyon.ai.ground_talking", false, 240, 60, 120, false, 'Default', {ludicolo, roselia})
 
-	
+
 	GAME:FadeIn(20)
 
-end 
+end
 
 
 function guild_second_floor_ch_5.Event_Object_1_Action(chara, activator)
@@ -43,14 +43,14 @@ function guild_second_floor_ch_5.Event_Object_1_Action(chara, activator)
 	partner.IsInteracting = true
     GROUND:CharSetAnim(partner, 'None', true)
     GROUND:CharSetAnim(hero, 'None', true)
-	
+
 	UI:ResetSpeaker(false)
 	UI:SetCenter(true)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G2F5_001'], CharacterEssentials.GetCharacterName("Audino")))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G2F5_002']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G2F5_003']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G2F5_004'], CharacterEssentials.GetCharacterName("Audino")))
-	
+
 	if GAME:GetPlayerPartyCount() > 2 then
 		GAME:WaitFrames(20)
 		UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['G2F5_005']))
@@ -63,10 +63,10 @@ function guild_second_floor_ch_5.Event_Object_1_Action(chara, activator)
 			AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
 		end
 	end
-	
+
 	UI:SetCenter(false)
 
-	partner.IsInteracting = false	
+	partner.IsInteracting = false
 	GROUND:CharEndAnim(partner)
 	GROUND:CharEndAnim(hero)
 
@@ -79,7 +79,7 @@ function guild_second_floor_ch_5.Roselia_Action(chara, activator)
 end
 
 function guild_second_floor_ch_5.Ludicolo_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "Ouais ![pause=0] Nous ferons la fête avec les Pokémon que nous secourrons !", "Normal", true, false)
+	GeneralFunctions.StartConversation(chara, "Ouais ![pause=0]Nous ferons la fête avec les Pokémon que nous secourrons !", "Normal", true, false)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['G2F5_007']))
 	GeneralFunctions.EndConversation(chara)
 

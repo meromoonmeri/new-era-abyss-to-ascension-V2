@@ -11,7 +11,7 @@ end
 
 function metano_cave_ch_3.Sunflora_Action(chara, activator)
 	if not SV.Chapter3.DefeatedBoss then
-		GeneralFunctions.StartConversation(chara, "...That child that went missing.[pause=0] Has he been rescued yet?", "Worried", true, false)
+		GeneralFunctions.StartConversation(chara, "...Cet enfant qui a disparu.[pause=0]A-t-il déjà été sauvé ?", "Worried", true, false)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MC3_001']))
 	else
 		GeneralFunctions.StartConversation(chara, "...Outlaws,[pause=10] huh?", "Worried", true, false)
@@ -19,4 +19,4 @@ function metano_cave_ch_3.Sunflora_Action(chara, activator)
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MC3_002']))
 	end
 	GeneralFunctions.EndConversation(chara, false)
-end 
+end

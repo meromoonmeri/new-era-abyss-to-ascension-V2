@@ -19,7 +19,7 @@ function guild_heros_room_ch_1.Save_Bed_Dialogue(obj, activator)
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Normal")
 	if SV.Chapter1.MetSnubbull and SV.Chapter1.MetZigzagoon and SV.Chapter1.MetCranidosMareep and SV.Chapter1.MetBreloomGirafarig and SV.Chapter1.MetAudino then
-		GeneralFunctions.StartPartnerConversation("It's getting late...[pause=0] And I think we've looked around the guild enough...")
+		GeneralFunctions.StartPartnerConversation("Il se fait tard...[pause=0]Et je pense que nous avons assez regardé autour de la guilde...")
 		UI:ChoiceMenuYesNo(STRINGS:Format(STRINGS.MapStrings['GHR1_001']))
 		UI:WaitForChoice()
 		local result = UI:ChoiceResult()
@@ -40,7 +40,7 @@ function guild_heros_room_ch_1.Save_Bed_Dialogue(obj, activator)
 			GeneralFunctions.EndConversation(partner)
 		end
 	else
-		GeneralFunctions.StartPartnerConversation("It's not that late yet...[pause=0] Let's look around the guild and try to meet all of the other guild members!")
+		GeneralFunctions.StartPartnerConversation("Il n'est pas encore si tard...[pause=0]Regardons autour de la guilde et essayons de rencontrer tous les autres membres de la guilde !")
 		GAME:WaitFrames(20)
 		GeneralFunctions.PromptSaveAndQuit()
 		GeneralFunctions.EndConversation(partner)
@@ -49,7 +49,7 @@ end
 
 
 function guild_heros_room_ch_1.Bedtalk()
-	
+
 	--Set nighttime, put duo in beds asleep
 
 	GROUND:Hide("Save_Point")
@@ -63,24 +63,24 @@ function guild_heros_room_ch_1.Bedtalk()
 	GROUND:CharSetAnim(hero, 'Laying', true)
 	GROUND:CharSetAnim(partner, 'Laying', true)
 	GAME:FadeIn(40)
-	
+
 	SOUND:PlayBGM("Goodnight.ogg", true)
 	GAME:WaitFrames(60)
 	UI:SetSpeaker(partner:GetDisplayName(), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_007']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_008'], hero:GetDisplayName()))
 	GAME:WaitFrames(20)
-	
+
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_009']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_010']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_011']))
 	GAME:WaitFrames(20)
-	
+
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_012']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_013']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_014']))
 	GAME:WaitFrames(20)
-	
+
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_015']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_016']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_017']))
@@ -89,17 +89,17 @@ function guild_heros_room_ch_1.Bedtalk()
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_020'], hero:GetDisplayName()))
 	--UI:WaitShowDialogue("Once we're great adventurers,[pause=10] I'm sure we'll be able to solve the mystery of your amnesia.[pause=0] I promise.")
 	GAME:WaitFrames(20)
-	
+
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_021']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_022']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_023']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_024'], hero:GetDisplayName()))
 	GAME:WaitFrames(20)
-	
+
 	GROUND:CharSetAnim(partner, "EventSleep", true)
 	SOUND:FadeOutBGM(60)
 	GAME:WaitFrames(60)
-	
+
 	UI:SetSpeaker('', false, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	--man im excited but why do i feel so at ease and maybe a bit of deja vu? why am i a picklemanster?
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_025']))
@@ -109,25 +109,25 @@ function guild_heros_room_ch_1.Bedtalk()
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_029'], partner:GetDisplayName()))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_030']))
 	GAME:WaitFrames(20)
-	
+
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_031']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_032']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_033']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_034']))
 	GAME:WaitFrames(60)
-	
+
 	--not thematically appropriate on second thought. Hero hasn't necessarily played explorers. Strange feelings felt elsewhere that tip off to "playing explorers" can instead be interpreted as the hero is progressing along the path he wants to / should progress on and is progressing the plot as he should.
 	--UI:WaitShowDialogue("(Even more troubling...)")
 	--UI:WaitShowDialogue("(Why do I have this weird feeling of déjà vu?)")
 	--GAME:WaitFrames(60)
-	
+
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_035']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_036']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_037']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_038'], partner:GetDisplayName()))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_039'], partner:GetDisplayName()))
 	GAME:WaitFrames(20)
-	
+
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_061']))--doesn't really care if he finds out or not since hero can just enjoy life as a pokemon regardless of solving the mystery
 	GAME:WaitFrames(40)
 	GROUND:CharSetAnim(hero, "EventSleep", true)
@@ -136,7 +136,7 @@ function guild_heros_room_ch_1.Bedtalk()
 	GAME:FadeOut(false, 120)
 	SV.ChapterProgression.Chapter = 2
 	GeneralFunctions.EndOfDay()--reset daily flags and increment day counter by 1
-	
+
 	GAME:WaitFrames(120)
 	UI:ResetSpeaker()
 	--UI:WaitShowDialogue("That's the end of Chapter 1![pause=0] Thanks for playing!")
@@ -150,7 +150,7 @@ function guild_heros_room_ch_1.Bedtalk()
 	--UI:WaitShowDialogue("I already have some plans to modify some things around the town...")
 	--UI:WaitShowDialogue("Also be sure to check the discord for updates and notes on known bugs/issues, chapter 2 progress, etc.")
 	--UI:WaitShowDialogue("Alright.[pause=0] I'm enabling free roam now...[pause=0] Thanks again for playing!")
-	
+
 	--GAME:CutsceneMode(false)
 	GROUND:RemoveMapStatus("darkness")--Remove map status before saving the game, as saving with a map status saves it for the next load.
 	GeneralFunctions.PromptChapterSaveAndQuit("guild_heros_room", "Main_Entrance_Marker", 2)
@@ -165,7 +165,7 @@ function guild_heros_room_ch_1.Bedtalk()
 	GAME:FadeIn(40)
 	AI:EnableCharacterAI(partner)
 	AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)]]--
-		
+
 end
 
 
@@ -180,7 +180,7 @@ function guild_heros_room_ch_1.RoomIntro()
 	SOUND:PlayBGM("Wigglytuff's Guild Remix.ogg", true)
 	GROUND:Hide('Bedroom_Exit')--disable map transition object
 	GROUND:Hide("Save_Point")--disable bed saving
-	
+
 	local noctowl =
 		CharacterEssentials.MakeCharactersFromList({
 			{"Noctowl", 0, 204, Direction.Right},
@@ -194,22 +194,22 @@ function guild_heros_room_ch_1.RoomIntro()
 
 	local coro1 = TASK:BranchCoroutine(function() GAME:WaitFrames(8)
 												  GROUND:MoveToPosition(partner, 172, 192, false, 1)
-												  GAME:WaitFrames(10)												  
-												  GeneralFunctions.EmoteAndPause(partner, "Exclaim", true) 
+												  GAME:WaitFrames(10)
+												  GeneralFunctions.EmoteAndPause(partner, "Exclaim", true)
 												  end)
-	local coro2 = TASK:BranchCoroutine(function() GAME:WaitFrames(16) 
+	local coro2 = TASK:BranchCoroutine(function() GAME:WaitFrames(16)
 												  GROUND:MoveToPosition(hero, 172, 216, false, 1)
 												  GAME:WaitFrames(10)
 												  GeneralFunctions.EmoteAndPause(hero, "Exclaim", false)
 												  end)
-	local coro3 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(noctowl, 200, 204, false, 1) 
+	local coro3 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(noctowl, 200, 204, false, 1)
 											      GROUND:CharAnimateTurnTo(noctowl, Direction.Left, 4)
 												  end)
-												
-	TASK:JoinCoroutines({coro1, coro2, coro3})
-	
 
-	
+	TASK:JoinCoroutines({coro1, coro2, coro3})
+
+
+
 	UI:SetSpeaker(noctowl)
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_040']))
@@ -224,13 +224,13 @@ function guild_heros_room_ch_1.RoomIntro()
 	GROUND:CharSetEmote(partner, "glowing", 0)
 	GROUND:CharSetAnim(partner, "Idle", true)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_042'], noctowl:GetDisplayName()))
-	
+
 	GAME:WaitFrames(20)
 	GROUND:CharSetEmote(partner, "", 0)
 	GROUND:CharSetAnim(partner, "None", true)
 	local bed1 = MRKR("Hero_Bed")
 	local bed2 = MRKR("Partner_Bed")
-	
+
 	coro1 = TASK:BranchCoroutine(function() GeneralFunctions.EightWayMove(partner, bed1.Position.X, bed1.Position.Y, false, 1)
 											GROUND:CharTurnToCharAnimated(partner, hero, 4) end)
 	coro2 = TASK:BranchCoroutine(function() GeneralFunctions.FaceMovingCharacter(hero, partner, 4) end)
@@ -243,27 +243,27 @@ function guild_heros_room_ch_1.RoomIntro()
 	GeneralFunctions.Hop(partner)
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_043'], hero:GetDisplayName()))
-	
+
 	GAME:WaitFrames(20)
-	
-	coro1 = TASK:BranchCoroutine(function() GeneralFunctions.EightWayMove(hero, bed1.Position.X, bed1.Position.Y, false, 1) 
+
+	coro1 = TASK:BranchCoroutine(function() GeneralFunctions.EightWayMove(hero, bed1.Position.X, bed1.Position.Y, false, 1)
 											GROUND:CharAnimateTurnTo(hero, Direction.Down, 4) end)
-	coro1 = TASK:BranchCoroutine(function() GeneralFunctions.EightWayMove(partner, bed2.Position.X, bed2.Position.Y, false, 1) 
+	coro1 = TASK:BranchCoroutine(function() GeneralFunctions.EightWayMove(partner, bed2.Position.X, bed2.Position.Y, false, 1)
 											GROUND:CharAnimateTurnTo(partner, Direction.Left, 4) end)
 	TASK:JoinCoroutines({coro1, coro2})
 	GAME:WaitFrames(30)
-	GeneralFunctions.HeroDialogue(hero, "(For a pile of straws,[pause=10] this bed is actually quite comfy!)", "Normal")
-	
-	
+	GeneralFunctions.HeroDialogue(hero, "(Pour un tas de pailles,[pause=10], ce lit est en fait assez confortable !)", "Normal")
+
+
 	--is this what's it's like to want to wag your tail?
 	GAME:WaitFrames(20)
-	GeneralFunctions.HeroDialogue(hero, "(I may have lost my memory and turned into a Pokémon,[pause=10] but...)", "Normal")
-	GeneralFunctions.HeroDialogue(hero, "(After meeting " .. partner:GetDisplayName() .. " and joining this guild...)", "Normal")
+	GeneralFunctions.HeroDialogue(hero, "(J'ai peut-être perdu la mémoire et me suis transformé en Pokémon,[pause=10]mais...)", "Normal")
+	GeneralFunctions.HeroDialogue(hero, "(Après avoir rencontré " .. partner:GetDisplayName() .. " et rejoint cette guilde...)", "Normal")
 	GAME:WaitFrames(20)
-	GeneralFunctions.HeroDialogue(hero, "(...I can't help but feel excited.)", "Inspired")
-	GeneralFunctions.HeroDialogue(hero, "(I've transformed into a Pokémon...[pause=0] And yet I'm happy!)", "Inspired")
-	GeneralFunctions.HeroDialogue(hero, "(I can't really describe it,[pause=10] but I feel right at home!)", "Inspired")
-	
+	GeneralFunctions.HeroDialogue(hero, "(...Je ne peux m'empêcher de me sentir excité.)", "Inspired")
+	GeneralFunctions.HeroDialogue(hero, "(Je me suis transformé en Pokémon...[pause=0]Et pourtant je suis content !)", "Inspired")
+	GeneralFunctions.HeroDialogue(hero, "(Je ne peux pas vraiment le décrire,[pause=10]mais je me sens comme chez moi !)", "Inspired")
+
 	GAME:WaitFrames(20)
 
 	UI:SetSpeaker(partner)
@@ -274,22 +274,22 @@ function guild_heros_room_ch_1.RoomIntro()
 	GROUND:CharTurnToCharAnimated(hero, partner, 4)
 	GAME:WaitFrames(20)
 	GROUND:CharSetEmote(hero, "glowing", 0)
-	
+
 	GAME:WaitFrames(60)
 	UI:SetSpeaker(noctowl)
 	UI:SetSpeakerEmotion("Normal")
 	--GROUND:CharSetEmote(noctowl, "glowing", 0)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_045']))
 	--GROUND:CharSetEmote(noctowl, "", 0)
-	
-	
+
+
 	--why not go meet your compatriots?
 	GAME:WaitFrames(20)
 	GROUND:CharSetEmote(partner, "", 0)
 	GROUND:CharSetEmote(hero, "", 0)
 	GROUND:CharTurnToCharAnimated(partner, noctowl, 4)
 	GROUND:CharTurnToCharAnimated(hero, noctowl, 4)
-	
+
 	GAME:WaitFrames(12)
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_046']))
@@ -300,28 +300,28 @@ function guild_heros_room_ch_1.RoomIntro()
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_049']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_050']))
 	GAME:WaitFrames(20)
-	
+
 	--we should go meet our guildmembers
 	GeneralFunctions.Hop(partner)
 	UI:SetSpeaker(partner)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_051']))
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeaker(noctowl)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_052']))
 	GAME:WaitFrames(20)
-	
+
 	GROUND:CharAnimateTurnTo(noctowl, Direction.Left, 4)
 	coro1 = TASK:BranchCoroutine(function() GROUND:MoveToPosition(noctowl, 0, 204, false, 1) end)
 	coro2 = TASK:BranchCoroutine(function() GeneralFunctions.FaceMovingCharacter(hero, noctowl, 4, Direction.DownLeft) end)
 	coro3 = TASK:BranchCoroutine(function() GeneralFunctions.FaceMovingCharacter(partner, noctowl, 4, Direction.DownLeft) end)
 	TASK:JoinCoroutines({coro1, coro2, coro3})
 	GAME:GetCurrentGround():RemoveTempChar(noctowl)
-	
+
 	GROUND:CharTurnToCharAnimated(partner, hero, 4)
 	GROUND:CharTurnToCharAnimated(hero, partner, 4)
 	GAME:WaitFrames(12)
-	
+
 	--wow, can you believe how amazing this all is? welp, let's go explore!
 	--we can hit the hay when we've felt we looked around enough
 	UI:SetSpeaker(partner)
@@ -329,16 +329,16 @@ function guild_heros_room_ch_1.RoomIntro()
 	GROUND:CharSetAnim(partner, "Idle", true)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_053'], hero:GetDisplayName()))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_054']))
-	
+
 	GAME:WaitFrames(20)
-	
-	GeneralFunctions.HeroDialogue(hero, "(Being here in this guild is the least surreal thing to happen to me today...)", "Worried")
+
+	GeneralFunctions.HeroDialogue(hero, "(Être ici dans cette guilde est la chose la moins surréaliste qui me soit arrivée aujourd'hui...)", "Worried")
 	GAME:WaitFrames(20)
 	GROUND:CharSetAnim(hero, "Idle", true)
-	GeneralFunctions.HeroDialogue(hero, "(Still...[pause=0] It's fantastic that we managed to join up with the guild.)", "Happy")
-	GeneralFunctions.HeroDialogue(hero, "(I'm pretty excited about it![pause=0] I think I'm going to have a lot of fun adventuring with " .. partner:GetDisplayName() .. "!)", "Happy")
-	
-	
+	GeneralFunctions.HeroDialogue(hero, "(Toujours...[pause=0]C'est fantastique que nous ayons réussi à rejoindre la guilde.)", "Happy")
+	GeneralFunctions.HeroDialogue(hero, "(J'en suis plutôt excité ![pause=0]Je pense que je vais m'amuser beaucoup à l'aventure avec " .. partner:GetDisplayName() .. " !)", "Happy")
+
+
 	--let's go meet our guildmates!!
 	GAME:WaitFrames(10)
 	GROUND:CharEndAnim(hero)
@@ -349,12 +349,12 @@ function guild_heros_room_ch_1.RoomIntro()
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR1_055']))
 	GAME:WaitFrames(20)
 	SOUND:FadeOutBGM()
-	
+
 	GeneralFunctions.PanCamera(192, 176)
 	GAME:WaitFrames(40)
-	
+
 	SOUND:PlayFanfare("Fanfare/Note")
-	
+
 	--adventurer's tip (how to save the game)
 	UI:ResetSpeaker(false)
 	UI:SetCenter(true)
@@ -375,7 +375,7 @@ function guild_heros_room_ch_1.RoomIntro()
 
 	GAME:CutsceneMode(false)
 
-											
+
 end
 
 

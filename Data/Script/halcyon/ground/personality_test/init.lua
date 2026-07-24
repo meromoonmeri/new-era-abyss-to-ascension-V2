@@ -24,9 +24,9 @@ local personality_test = {}
 --Engine callback function
 function personality_test.Init(map)
 
-  --This will fill the localized strings table automatically based on the locale the game is 
+  --This will fill the localized strings table automatically based on the locale the game is
   -- currently in. You can use the MapStrings table after this line!
-  
+
 
 end
 
@@ -69,7 +69,7 @@ end
 
 
 function personality_test.PlotScripting()
-  if not SV.Chapter1.PlayedIntroCutscene then 
+  if not SV.Chapter1.PlayedIntroCutscene then
 	personality_test.CharacterSelect()
   else
 	GROUND:EnterGroundMap('metano_town', 'Main_Entrance_Marker') --fail safe. If player somehow gets to the personality test after seeing the first intro cutscene, warp them to metano town.
@@ -86,15 +86,15 @@ function personality_test.CharacterSelect()
 	GAME:CutsceneMode(true)
 	UI:ResetSpeaker()
 	SOUND:FadeOutBGM()
---move camera to arbitrary position. Partner and hero will spawn in at 0,0 when they're created, so this is done to hide that without extra hassle.	
-	GAME:MoveCamera(300, 300, 1, false) 
-	
+--move camera to arbitrary position. Partner and hero will spawn in at 0,0 when they're created, so this is done to hide that without extra hassle.
+	GAME:MoveCamera(300, 300, 1, false)
+
 	--initialize some save data
 	_DATA.Save.ActiveTeam:SetRank("unranked")
 	_DATA.Save.ActiveTeam.Money = 0
 	_DATA.Save.ActiveTeam.Bank = 0
 	_DATA.Save.NoSwitching = true--switching is not allowed
-	
+
 	--remove any team members that may exist by default for some reason
 	local party_count = _DATA.Save.ActiveTeam.Players.Count
 	for ii = 1, party_count, 1 do
@@ -137,7 +137,7 @@ function personality_test.CharacterSelect()
 	UI:WaitShowVoiceOver("Réfléchis bien avant de choisir !", -1)
 	UI:WaitShowVoiceOver("À présent, fais tes choix !", -1)
 	GAME:WaitFrames(40)
-	
+
 	SOUND:PlayBGM("Welcome to the World of Pokémon!.ogg", true)
 	GAME:FadeIn(40)
 	GAME:WaitFrames(20)
@@ -148,14 +148,14 @@ function personality_test.CharacterSelect()
 	if CONFIG.RegularStarters() then
 		--Hero data
 		local msg = "Ton héros."
-		--[[local choices = {'Bulbasaur', 'Charmander', 'Squirtle', 'Pikachu', 'Vulpix', 'Vulpix-A', 'Meowth', 'Machop', 
+		--[[local choices = {'Bulbasaur', 'Charmander', 'Squirtle', 'Pikachu', 'Vulpix', 'Vulpix-A', 'Meowth', 'Machop',
 						 'Cubone', 'Chikorita', 'Cyndaquil', 'Totodile', 'Houndour', 'Phanpy', 'Magby',
 						 'Larvitar', 'Treecko', 'Torchic', 'Mudkip', 'Poochyena', 'Ralts', 'Skitty',
 						 'Turtwig', 'Chimchar', 'Piplup', 'Shinx', 'Buizel', 'Munchlax', 'Riolu',
 						 'Snivy', 'Oshawatt', 'Lilliup', 'Zorua', 'Minccino', 'Vanillite', 'Mienfoo',
 						 'Chespin', 'Fennekin', 'Froakie', 'Skiddo', 'Espurr', 'Amaura', 'Noibat',
 						 'Rowlet', 'Litten', 'Rockruff', 'Fomantis', 'Scorbunny', 'Wooloo', 'Yamper'}
-			]]--			
+			]]--
 		local choices = {RogueEssence.Dungeon.MonsterID("bulbasaur", 0, "normal", Gender.Genderless),
 						RogueEssence.Dungeon.MonsterID("charmander", 0, "normal", Gender.Genderless),
 						RogueEssence.Dungeon.MonsterID("squirtle", 0, "normal", Gender.Genderless),
@@ -214,20 +214,20 @@ function personality_test.CharacterSelect()
 						RogueEssence.Dungeon.MonsterID("sprigatito", 0, "normal", Gender.Genderless),
 						--RogueEssence.Dungeon.MonsterID("pawmi", 0, "normal", Gender.Genderless),
 						RogueEssence.Dungeon.MonsterID("charcadet", 0, "normal", Gender.Genderless)}
-						
-		--not all moves listed are egg moves. Sometimes, egg move choices are too over or under powered and so something else had to be chosen				
-		local egg_move_list = 
+
+		--not all moves listed are egg moves. Sometimes, egg move choices are too over or under powered and so something else had to be chosen
+		local egg_move_list =
 			{["bulbasaur"] = "sludge", --Sludge bulbasaur
-			 ["charmander"] = "metal_claw", --metal claw, charmander 
-			 ["squirtle"] = "icy_wind", --icy wind, squirtle		
+			 ["charmander"] = "metal_claw", --metal claw, charmander
+			 ["squirtle"] = "icy_wind", --icy wind, squirtle
 			 ["pikachu"] = "disarming_voice", --disarming voice, pikachu
 			 ["vulpix"] = "tail_slap", --tail slap, vulpix and vulpix-a
 			 ["meowth"] = "foul_play", --foul play, meowth and meowth-a
 			 ["machop"] = "bullet_punch", --bullet punch, machop
-			 ["cubone"] = "double_kick", --double kick, cubone 
-			 ["eevee"] = "double_kick", --double kick, eevee 
+			 ["cubone"] = "double_kick", --double kick, cubone
+			 ["eevee"] = "double_kick", --double kick, eevee
 			 ["chikorita"] = "refresh", --refresh, chikorita
-			 ["cyndaquil"] = "double_kick", --double kick, cyndaquil 
+			 ["cyndaquil"] = "double_kick", --double kick, cyndaquil
 			 ["totodile"] = "aqua_jet", --aqua jet, totodile
 			-- ["houndour"] = "thunder_fang", --thunder fang, houndour
 			 ["phanpy"] = "ice_shard", --ice shard, phanpy
@@ -238,31 +238,31 @@ function personality_test.CharacterSelect()
 			 ["mudkip"] = "avalanche", --avalanche, mudkip
 			 --["poochyena"] = "play_rough", --play rough, poochyena
 			 --["ralts"] = "shadow_sneak", --shadow sneak, ralts
-			 ["skitty"] = "zen_headbutt", --zen headbutt, skitty 
+			 ["skitty"] = "zen_headbutt", --zen headbutt, skitty
 			 ["turtwig"] = "sand_tomb", --sand tomb, turtwig
 			 ["chimchar"] = "thunder_punch", --thunder punch, chimchar
 			 ["piplup"] = "icy_wind", --icy wind, piplup
-			 ["shinx"] = "ice_fang", --icy fang, shinx 
-			 --["buizel"] = "fury_cutter", --fury cutter, buizel 
+			 ["shinx"] = "ice_fang", --icy fang, shinx
+			 --["buizel"] = "fury_cutter", --fury cutter, buizel
 			 ["munchlax"] = "zen_headbutt", --zen headbutt, munchlax
 			 ["riolu"] = "bullet_punch", --bullet punch, riolu
-			 ["snivy"] = "twister", --twister, snivy 
-			 ["tepig"] = "sucker_punch", --sucker punch, tepig 
+			 ["snivy"] = "twister", --twister, snivy
+			 ["tepig"] = "sucker_punch", --sucker punch, tepig
 			 ["oshawott"] = "assurance", --assurance, oshawatt
 			 --["lillipup"] = "fire_fang", --fire fang, lillipup
-			 ["zorua"] = "copycat", --copycat, zorua 
+			 ["zorua"] = "copycat", --copycat, zorua
 			 --["minccino"] = "aqua_tail", --aqua tail, minccino
-			 --["vanillite"] = "water_pulse", --water pulse, vanillite 
+			 --["vanillite"] = "water_pulse", --water pulse, vanillite
 			 --["mienfoo"] = "knock_off", --knock off, mienfoo
 			 ["chespin"] = "power_up_punch", --power up punch, chespin
 			 ["fennekin"] = "wish", --wish, fennekin
-			 ["froakie"] = "mud_sport", --mud sport froakie 
+			 ["froakie"] = "mud_sport", --mud sport froakie
 			 ["skiddo"] = "zen_headbutt", --zen headbutt, Skiddo
 			 ["espurr"] = "assist", --assist, espurr (also bad egg moves)
 			 --["amaura"] = "mirror_shot", --mirror coat, amaura (discharge is an absurdly busted option i could give it though)
 			 --["noibat"] = "tailwind", --tailwind, noibat
 			 ["rowlet"] = "confuse_ray", --Confuse Ray, rowlet
-			 ["litten"] = "revenge", --revenge, litten 
+			 ["litten"] = "revenge", --revenge, litten
 			 ["popplio"] = "charm", --popplio, charm
 			 ["rockruff"] = "thunder_fang", --thunder fang, rockruff
 			 --["fomantis"] = "weather_ball", --weather ball, fomantis
@@ -272,28 +272,28 @@ function personality_test.CharacterSelect()
 			 ["sprigatito"] = "copycat", --sprigatito, copycat
 			 ["pawmi"] = "mach_punch", --pawmi, mach punch
 			 ["charcadet"] = "destiny_bond"} --charcadet, destiny bond
-		
-		local continue = false 
+
+		local continue = false
 		local hero_choice = -1
-		
+
 		while not continue do
 			UI:ChooseMonsterMenu(msg, choices)
-			UI:WaitForChoice()	
+			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
 			hero_choice = result
 			UI:ChoiceMenuYesNo("Est-ce que " .. _DATA:GetMonster(hero_choice.Species):GetColoredName() .. " convient ?")
 			UI:WaitForChoice()
 			continue = UI:ChoiceResult()
 		end
-			
 
-		
+
+
 		local gender = 0
 		local gender_choices = {'Garçon', 'Fille', 'Non-binaire'}
 		UI:BeginChoiceMenu("Es-tu un garçon, une fille ou non binaire ?", gender_choices, 1, 1)
 		UI:WaitForChoice()
 		gender = UI:ChoiceResult()
-		
+
 		if gender == 1 then
 			gender = Gender.Male
 		elseif gender == 2 then
@@ -301,7 +301,7 @@ function personality_test.CharacterSelect()
 		else --dunno if this will cause issues with sprites to use
 			gender = Gender.Genderless
 		end
-		
+
 		local monster = _DATA:GetMonster(hero_choice.Species).Forms[hero_choice.Form]
 		local ability = monster.Intrinsic1
 		if monster.Intrinsic2 ~= "none" then--if pokemon has 2 abilities, let player choose which to get
@@ -310,21 +310,21 @@ function personality_test.CharacterSelect()
 			local result = UI:ChoiceResult()
 			if result == 2 then ability = monster.Intrinsic2 end
 		end
-		
 
-		
-		
+
+
+
 		--create hero with a species specific egg move and specific ability
 		local mon_id = hero_choice
 		mon_id.Gender = gender
 		_DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 5, ability, 0))
-		if GAME:GetCharacterSkill(GAME:GetPlayerPartyMember(0), 3) ~= "" then 
+		if GAME:GetCharacterSkill(GAME:GetPlayerPartyMember(0), 3) ~= "" then
 			GAME:SetCharacterSkill(GAME:GetPlayerPartyMember(0), egg_move_list[mon_id.Species], 3)--override move in slot 4 if 4 moves are known. They can always go see slowpoke to get it back
-		else 
+		else
 			GAME:LearnSkill(GAME:GetPlayerPartyMember(0), egg_move_list[mon_id.Species])
 		end
 		GAME:SetTeamLeaderIndex(0)
-		
+
 
 
 		--Partner data
@@ -334,7 +334,7 @@ function personality_test.CharacterSelect()
 		local partner_choice = 0
 		local hero_type = nil
 		local partner_type = nil
-		
+
 		while result.Species == hero_choice.Species or not continue do --do not allow same species for partner and player
 			UI:ChooseMonsterMenu("Ton partenaire.", choices)
 			type_warning = true
@@ -358,13 +358,13 @@ function personality_test.CharacterSelect()
 					UI:WaitForChoice()
 					continue = UI:ChoiceResult()
 				end
-			end	
-		end 
-		
+			end
+		end
+
 		UI:BeginChoiceMenu("Ton partenaire est-il un garçon, une fille ou non binaire ?", gender_choices, 1, 1)
 		UI:WaitForChoice()
 		gender = UI:ChoiceResult()
-		
+
 		if gender == 1 then
 			gender = Gender.Male
 		elseif gender == 2 then
@@ -381,16 +381,16 @@ function personality_test.CharacterSelect()
 			result = UI:ChoiceResult()
 			if result == 2 then ability = monster.Intrinsic2 end
 		end
-		
+
 		mon_id = partner_choice
 		mon_id.Gender = gender
 		_DATA.Save.ActiveTeam.Players:Add(_DATA.Save.ActiveTeam:CreatePlayer(_DATA.Save.Rand, mon_id, 5, ability, 0))--dunno what the -1 and 0 are exactly...
-		if GAME:GetCharacterSkill(GAME:GetPlayerPartyMember(1), 3) ~= "" then 
+		if GAME:GetCharacterSkill(GAME:GetPlayerPartyMember(1), 3) ~= "" then
 			GAME:SetCharacterSkill(GAME:GetPlayerPartyMember(1), egg_move_list[mon_id.Species], 3)--override move in slot 4 if 4 moves are known. They can always go see slowpoke to get it back
-		else 
+		else
 			GAME:LearnSkill(GAME:GetPlayerPartyMember(1), egg_move_list[mon_id.Species])
 		end
-	
+
 	else
 
 		--loop this twice; one for player, one for partner.
@@ -417,7 +417,7 @@ function personality_test.CharacterSelect()
 					continue = false
 					UI:WaitShowDialogue("ATTENTION ![pause=0] L'espèce et la forme choisies ne possèdent pas certaines animations de départ utilisées dans les cinématiques.")
 					UI:WaitShowDialogue("Le jeu devrait tout de même fonctionner,[pause=10] mais certaines cinématiques et expressions des portraits pourraient être incorrectes.")
-					UI:ChoiceMenuYesNo("Cela dit,[pause=10] veux-tu choisir un autre Pokémon comme partenaire de départ ?")
+					UI:ChoiceMenuYesNo("Cela dit,[pause=10]voulez-vous choisir un autre Pokémon comme partenaire de départ ?")
 					UI:WaitForChoice()
 					--Do a not here because of the wording of the variables and the question to the player
 					continue = not UI:ChoiceResult()
@@ -433,9 +433,9 @@ function personality_test.CharacterSelect()
 			end
 		end
 		GAME:SetTeamLeaderIndex(0)
-	end 
-	
-	
+	end
+
+
 	--set player and partner to founders so they cannot be released
 	--set them as partner so they cannot be taken off the active team
     _DATA.Save:UpdateTeamProfile(true)
@@ -458,15 +458,15 @@ function personality_test.CharacterSelect()
 	--_DATA.Save.ActiveTeam.Players[1].MAtkBonus = 1
 	--_DATA.Save.ActiveTeam.Players[1].MDefBonus = 1
 	--_DATA.Save.ActiveTeam.Players[1].SpeedBonus = 1
-	
+
 	_DATA.Save.ActiveTeam.Players[0]:FullRestore()--set hp/pp to full for player and partner
 	_DATA.Save.ActiveTeam.Players[1]:FullRestore()
-	
-	
+
+
 	--assign dungeon AIs
 	local talk_evt = RogueEssence.Dungeon.BattleScriptEvent("HeroInteract")
 	_DATA.Save.ActiveTeam.Players[0].ActionEvents:Add(talk_evt)
-	
+
 	talk_evt = RogueEssence.Dungeon.BattleScriptEvent("PartnerInteract")
 	_DATA.Save.ActiveTeam.Players[1].ActionEvents:Add(talk_evt)
 
@@ -484,30 +484,30 @@ function personality_test.CharacterSelect()
 		yesnoResult = UI:ChoiceResult()
 	end
 
-	
+
 	local hero = GAME:GetPlayerPartyMember(0)
 	local partner = GAME:GetPlayerPartyMember(1)
 
-	
+
 	GAME:SetCharacterNickname(partner, result)
 	GAME:SetTeamName(result) --set team name to partner's name temporarily
 	COMMON.RespawnAllies()
-	
+
 	GAME:WaitFrames(60)
-  
-	
+
+
 	--assign custom variables to the hero and partner to mark them as hero and partner
 	local hTbl = LTBL(hero)
 	local pTbl = LTBL(partner)
 	hTbl.Importance = 'Hero'
 	pTbl.Importance = 'Partner'
-	
+
 	--for beta testing only: skip to another chapter?
 	--[[
 	UI:ChoiceMenuYesNo("Veux-tu passer directement au chapitre 2 ?", true)
 	UI:WaitForChoice()
 	yesnoResult = UI:ChoiceResult()
-	if yesnoResult then 
+	if yesnoResult then
 		 yesnoResult = false
 		while not yesnoResult do
 			UI:NameMenu("Quel sera ton nom ?", "", 60)
@@ -518,7 +518,7 @@ function personality_test.CharacterSelect()
 			UI:WaitForChoice()
 			yesnoResult = UI:ChoiceResult()
 		end
-		
+
 		yesnoResult = false
 		while not yesnoResult do
 			UI:NameMenu("Quel sera le nom de ton équipe ?", "Tu n'as pas besoin d'inclure « Équipe » dans le nom.", 60)
@@ -530,7 +530,7 @@ function personality_test.CharacterSelect()
 			yesnoResult = UI:ChoiceResult()
 		end
 		--set chapter 1 flags to true, note that you can skip talking to guild NPCs but this will mark them as met already
-		SV.Chapter1 = 
+		SV.Chapter1 =
 			{
 				PlayedIntroCutscene = true,
 				PartnerEnteredForest = true,--Did partner go into the forest yet?
@@ -545,7 +545,7 @@ function personality_test.CharacterSelect()
 				MetCranidosMareep = true,
 				MetBreloomGirafarig = true,
 				MetAudino = true,
-				
+
 				--partner dialogue flag on second floor
 				PartnerSecondFloorDialogue = 0
 			}
@@ -562,7 +562,7 @@ function personality_test.CharacterSelect()
 		return
 	end
 	 ]]--
-	
+
 	SOUND:FadeOutBGM(120)
 	GAME:FadeOut(false, 120)
 	GAME:WaitFrames(120)

@@ -32,7 +32,7 @@ local guild_third_floor_lobby = {}
 function guild_third_floor_lobby.Init(map)
 	DEBUG.EnableDbgCoro()
 	print('=>> Init_guild_third_floor_lobby<<=')
-	
+
 	COMMON.RespawnAllies()
 	PartnerEssentials.InitializePartnerSpawn()
 
@@ -70,12 +70,12 @@ end
 
 function guild_third_floor_lobby.PlotScripting()
 	--if generic morning address is flagged, prioritize that.
-	if SV.TemporaryFlags.MorningAddress then 
+	if SV.TemporaryFlags.MorningAddress then
 		guild_third_floor_lobby.MorningAddress(true)
 	else
-	--plot scripting	
+	--plot scripting
 		if SV.ChapterProgression.Chapter == 1 then
-			if SV.Chapter1.TeamCompletedForest and not SV.Chapter1.TeamJoinedGuild then 
+			if SV.Chapter1.TeamCompletedForest and not SV.Chapter1.TeamJoinedGuild then
 				guild_third_floor_lobby_ch_1.GoToGuildmasterRoom()
 			else
 				guild_third_floor_lobby_ch_1.SetupGround()
@@ -83,7 +83,7 @@ function guild_third_floor_lobby.PlotScripting()
 		elseif SV.ChapterProgression.Chapter == 2 then
 			if not SV.Chapter2.FirstMorningMeetingDone then
 				guild_third_floor_lobby_ch_2.FirstMorningMeeting()
-			elseif SV.Chapter2.FinishedNumelTantrum and not SV.Chapter2.FinishedFirstDay then 
+			elseif SV.Chapter2.FinishedNumelTantrum and not SV.Chapter2.FinishedFirstDay then
 				guild_third_floor_lobby_ch_2.BeforeFirstDinner()
 			else
 				guild_third_floor_lobby_ch_2.SetupGround()
@@ -91,15 +91,15 @@ function guild_third_floor_lobby.PlotScripting()
 		elseif SV.ChapterProgression.Chapter == 3 then
 			if not SV.Chapter3.FinishedOutlawIntro then
 				guild_third_floor_lobby_ch_3.FirstMorningAddress()
-			else 
+			else
 				guild_third_floor_lobby_ch_3.SetupGround()
 			end
 		elseif SV.ChapterProgression.Chapter == 4 then
-			if not SV.Chapter4.FinishedFirstAddress then 
+			if not SV.Chapter4.FinishedFirstAddress then
 				guild_third_floor_lobby_ch_4.ExpeditionAnnouncementAddress()
 			else
 				guild_third_floor_lobby_ch_4.SetupGround()
-			end			
+			end
 		elseif SV.ChapterProgression.Chapter == 5 then
 			if not SV.Chapter5.FinishedExpeditionAddress then
 				guild_third_floor_lobby_ch_5.ExpeditionAddress()
@@ -121,29 +121,29 @@ function guild_third_floor_lobby.PostAddressScripting()
 	if SV.ChapterProgression.Chapter == 2 then
 		if SV.Chapter2.FinishedFirstDay and not SV.Chapter2.FinishedCameruptRequestScene then
 			guild_third_floor_lobby_ch_2.PostSecondMorningAddress()--Noctowl will show you to the board for your first job.
-		elseif SV.Chapter2.EnteredRiver then 
+		elseif SV.Chapter2.EnteredRiver then
 			guild_third_floor_lobby_ch_2.FailedRiver()--partner mentions that you need to go return to Illuminant Riverbed to rescue numel
 		end
-	elseif SV.ChapterProgression.Chapter == 3 then 
-		if SV.Chapter3.DefeatedBoss then --Second half of chapter 3, after defeating team style. 
+	elseif SV.ChapterProgression.Chapter == 3 then
+		if SV.Chapter3.DefeatedBoss then --Second half of chapter 3, after defeating team style.
 			guild_third_floor_lobby.GenericMissions()
-		elseif SV.Chapter3.EncounteredBoss then 
-			guild_third_floor_lobby_ch_3.FailedCavernAfterBoss()--You made it to Team Style but haven't beaten them yet. Partner is mad about them. 
-		elseif SV.TemporaryFlags.LastDungeonEntered ~= 'crooked_cavern' then 
+		elseif SV.Chapter3.EncounteredBoss then
+			guild_third_floor_lobby_ch_3.FailedCavernAfterBoss()--You made it to Team Style but haven't beaten them yet. Partner is mad about them.
+		elseif SV.TemporaryFlags.LastDungeonEntered ~= 'crooked_cavern' then
 			guild_third_floor_lobby_ch_3.NotEnteredCavern() --Latest dungeon attempt was not the cavern and you haven't seen Team Style yet.
 		else
 			guild_third_floor_lobby_ch_3.FailedCavernBeforeBoss()--Your last dungeon was the cavern but you've not made it to Team Style yet.
-		end	
-	elseif SV.ChapterProgression.Chapter == 4 then 
+		end
+	elseif SV.ChapterProgression.Chapter == 4 then
 		if SV.Chapter4.FinishedGrove then --Second half of chapter 4, after clearing Apricorn Grove
 			guild_third_floor_lobby.GenericMissions()
-		elseif SV.Chapter4.ReachedGlade then 
-			guild_third_floor_lobby_ch_4.FailedToGrabApricorn()--You made it to the big Apricorn but weren't able to grab it. 
-		elseif SV.TemporaryFlags.LastDungeonEntered ~= 'apricorn_grove' then 
+		elseif SV.Chapter4.ReachedGlade then
+			guild_third_floor_lobby_ch_4.FailedToGrabApricorn()--You made it to the big Apricorn but weren't able to grab it.
+		elseif SV.TemporaryFlags.LastDungeonEntered ~= 'apricorn_grove' then
 			guild_third_floor_lobby_ch_4.NotEnteredGrove() --Latest dungeon attempt was not the grove and you haven't seen the big Apricorn yet.
 		else
 			guild_third_floor_lobby_ch_4.FailedGroveBeforeEnd()--Your last dungeon was the grove but you've not made it to the big Apricorn yet.
-		end	
+		end
 	else --if there's nothing special to do, just give back control. I don't think this block should be reached in normal play.
 		GeneralFunctions.PanCamera()
 		GAME:CutsceneMode(false)
@@ -157,22 +157,22 @@ function guild_third_floor_lobby.GenericMissions()
 	local partner = CH('Teammate1')
 	local hero = CH('PLAYER')
 	local noctowl = CH('Noctowl')
-	
+
 	GROUND:CharAnimateTurnTo(noctowl, Direction.DownLeft, 4)
-	
+
 	UI:SetSpeaker(noctowl)
-	UI:WaitShowDialogue("Team " .. GAME:GetTeamName() .. ".[pause=0] Allow me to give you your assignment for the day.")
-	
+	UI:WaitShowDialogue("Equipe " .. GAME:GetTeamName() .. ".[pause=0]Permettez-moi de vous donner votre mission du jour.")
+
 	GAME:WaitFrames(16)
 	GROUND:CharAnimateTurnTo(partner, Direction.UpRight, 4)
 	GROUND:CharAnimateTurnTo(hero, Direction.UpRight, 4)
-	
-	UI:WaitShowDialogue("Complete requests from the Job Bulletin Board and the Outlaw Notice Board.")
-	UI:WaitShowDialogue("That will be all for today.[pause=0] I wish you luck in your day's endeavors.")
-	
+
+	UI:WaitShowDialogue("Complétez les demandes du Job Bulletin Board et du Outlaw Notice Board.")
+	UI:WaitShowDialogue("Ce sera tout pour aujourd'hui.[pause=0]Je vous souhaite bonne chance dans vos efforts de la journée.")
+
 	GROUND:CharAnimateTurnTo(noctowl, Direction.Down, 4)
 	GAME:WaitFrames(20)
-	
+
 	GeneralFunctions.PanCamera()
 	GAME:CutsceneMode(false)
 	AI:EnableCharacterAI(partner)
@@ -180,21 +180,21 @@ function guild_third_floor_lobby.GenericMissions()
 end
 
 function guild_third_floor_lobby.MorningAddress(generic)
-	
-	if generic == nil then generic = false end 
-	
+
+	if generic == nil then generic = false end
+
 	local hero = CH('PLAYER')
 	local partner = CH('Teammate1')
 
-	local tropius, noctowl, audino, snubbull, growlithe, zigzagoon, girafarig, 
+	local tropius, noctowl, audino, snubbull, growlithe, zigzagoon, girafarig,
 		  breloom, mareep, cranidos = guild_third_floor_lobby_helper.SetupMorningAddress()
 
 	UI:SetSpeaker(tropius)
 	UI:SetSpeakerEmotion("Normal")
 	GROUND:CharSetEmote(tropius, "happy", 0)
-	UI:WaitShowDialogue("One for all...")
+	UI:WaitShowDialogue("Un pour tous...")
 	GAME:WaitFrames(20)
-	
+
 
 	UI:SetSpeaker('[color=#00FFFF]Everyone[color]', true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	GROUND:CharSetEmote(tropius, "", 0)
@@ -205,7 +205,7 @@ function guild_third_floor_lobby.MorningAddress(generic)
 	GROUND:CharSetEmote(audino, "happy", 0)
 	GROUND:CharSetEmote(partner, "happy", 0)
 	UI:WaitShowDialogue("AND ALL FOR ONE!")
-	
+
 	GAME:WaitFrames(20)
 	GROUND:CharSetEmote(growlithe, "", 0)
 	GROUND:CharSetEmote(zigzagoon, "", 0)
@@ -215,15 +215,15 @@ function guild_third_floor_lobby.MorningAddress(generic)
 	GROUND:CharSetEmote(partner, "", 0)
 	UI:SetSpeaker(tropius)
 	UI:SetSpeakerEmotion("Happy")
-	UI:WaitShowDialogue("Alright Pokémon,[pause=10] let's get to the day's adventures!")
+	UI:WaitShowDialogue("Très bien Pokémon,[pause=10], passons aux aventures de la journée !")
 	GAME:WaitFrames(20)
-	
+
 	--HURRAH!
 	GROUND:CharSetEmote(growlithe, "happy", 0)
 	GROUND:CharSetEmote(zigzagoon, "happy", 0)
 	GROUND:CharSetEmote(mareep, "happy", 0)
 	GROUND:CharSetEmote(breloom, "happy", 0)
-	GROUND:CharSetEmote(audino, "happy", 0)	
+	GROUND:CharSetEmote(audino, "happy", 0)
 	GROUND:CharSetEmote(partner, "happy", 0)
 
 	--turn pokemon on the edges up so pose is appropriate
@@ -231,7 +231,7 @@ function guild_third_floor_lobby.MorningAddress(generic)
 	GROUND:EntTurn(zigzagoon, Direction.Up)
 	GROUND:EntTurn(hero, Direction.Up)
 	GROUND:EntTurn(partner, Direction.Up)
-	
+
 	GROUND:CharSetAction(growlithe, RogueEssence.Ground.PoseGroundAction(growlithe.Position, growlithe.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
 	GROUND:CharSetAction(zigzagoon, RogueEssence.Ground.PoseGroundAction(zigzagoon.Position, zigzagoon.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
 	GROUND:CharSetAction(breloom, RogueEssence.Ground.PoseGroundAction(breloom.Position, breloom.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
@@ -239,17 +239,17 @@ function guild_third_floor_lobby.MorningAddress(generic)
 	GROUND:CharSetAction(cranidos, RogueEssence.Ground.PoseGroundAction(cranidos.Position, cranidos.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
 	GROUND:CharSetAction(mareep, RogueEssence.Ground.PoseGroundAction(mareep.Position, mareep.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
 	GROUND:CharSetAction(audino, RogueEssence.Ground.PoseGroundAction(audino.Position, audino.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
-	GROUND:CharSetAction(snubbull, RogueEssence.Ground.PoseGroundAction(snubbull.Position, snubbull.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))	
-	GROUND:CharSetAction(partner, RogueEssence.Ground.PoseGroundAction(partner.Position, partner.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))	
-	GROUND:CharSetAction(hero, RogueEssence.Ground.PoseGroundAction(hero.Position, hero.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))	
-	UI:SetSpeaker('[color=#00FFFF]Everyone[color]', true, "", -1, "", RogueEssence.Data.Gender.Unknown)	
+	GROUND:CharSetAction(snubbull, RogueEssence.Ground.PoseGroundAction(snubbull.Position, snubbull.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
+	GROUND:CharSetAction(partner, RogueEssence.Ground.PoseGroundAction(partner.Position, partner.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
+	GROUND:CharSetAction(hero, RogueEssence.Ground.PoseGroundAction(hero.Position, hero.Direction, RogueEssence.Content.GraphicsManager.GetAnimIndex("Pose")))
+	UI:SetSpeaker('[color=#00FFFF]Everyone[color]', true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	UI:WaitShowDialogue("HURRAH!")
 	GAME:WaitFrames(20)
 	GROUND:CharSetEmote(growlithe, "", 0)
 	GROUND:CharSetEmote(zigzagoon, "", 0)
 	GROUND:CharSetEmote(mareep, "", 0)
 	GROUND:CharSetEmote(breloom, "", 0)
-	GROUND:CharSetEmote(audino, "", 0)	
+	GROUND:CharSetEmote(audino, "", 0)
 	GROUND:CharSetEmote(partner, "", 0)
 
 	GROUND:CharEndAnim(growlithe)
@@ -259,15 +259,15 @@ function guild_third_floor_lobby.MorningAddress(generic)
 	GROUND:CharEndAnim(cranidos)
 	GROUND:CharEndAnim(mareep)
 	GROUND:CharEndAnim(audino)
-	GROUND:CharEndAnim(snubbull)	
-	GROUND:CharEndAnim(partner)	
-	GROUND:CharEndAnim(hero)	
-	
+	GROUND:CharEndAnim(snubbull)
+	GROUND:CharEndAnim(partner)
+	GROUND:CharEndAnim(hero)
+
 	--everyone leaves
 	--TODO? Make this look less robotic, but honestly can't figure out a good way to handle it that is quick and logical
 	GAME:WaitFrames(40)
 	local coro1 = TASK:BranchCoroutine(function() guild_third_floor_lobby_helper.ApprenticeLeave(growlithe) end)
-	local coro2 = TASK:BranchCoroutine(function() --GAME:WaitFrames(6) 
+	local coro2 = TASK:BranchCoroutine(function() --GAME:WaitFrames(6)
 											guild_third_floor_lobby_helper.ApprenticeLeaveBottom(zigzagoon) end)
 	local coro3 = TASK:BranchCoroutine(function() --GAME:WaitFrames(10)
 											guild_third_floor_lobby_helper.ApprenticeLeave(mareep) end)
@@ -281,33 +281,33 @@ function guild_third_floor_lobby.MorningAddress(generic)
 											guild_third_floor_lobby_helper.ApprenticeLeaveFast(breloom) end)
 	local coro8 = TASK:BranchCoroutine(function() GAME:WaitFrames(10)
 											guild_third_floor_lobby_helper.ApprenticeLeaveBottomFast(girafarig) end)
-	local coro9 = TASK:BranchCoroutine(function() GAME:WaitFrames(16) 
+	local coro9 = TASK:BranchCoroutine(function() GAME:WaitFrames(16)
 											GROUND:CharAnimateTurnTo(partner, Direction.Right, 4) end)
-	local coro10 = TASK:BranchCoroutine(function() GAME:WaitFrames(26) 
+	local coro10 = TASK:BranchCoroutine(function() GAME:WaitFrames(26)
 											 GROUND:CharAnimateTurnTo(hero, Direction.Right, 4) end)
 	local coro11 = TASK:BranchCoroutine(function() GAME:WaitFrames(10)
 													GeneralFunctions.CenterCamera({hero, partner}, GAME:GetCameraCenter().X, GAME:GetCameraCenter().Y, 1) end)
-	local coro12 = TASK:BranchCoroutine(function() GAME:WaitFrames(20) 
+	local coro12 = TASK:BranchCoroutine(function() GAME:WaitFrames(20)
 												   GROUND:CharAnimateTurnTo(tropius, Direction.Up, 4)
 												   GROUND:MoveInDirection(tropius, Direction.Up, 24, false, 1)
 												   GAME:GetCurrentGround():RemoveTempChar(tropius) end)
 	TASK:JoinCoroutines({coro1, coro2, coro3, coro4, coro5, coro6, coro7, coro8, coro9, coro10, coro11, coro12})
 
 
-	if generic then 
-		--call post address scripting to see if anything additional is needed if address is generic 
+	if generic then
+		--call post address scripting to see if anything additional is needed if address is generic
 		print("generic address.")
 		SV.TemporaryFlags.MorningAddress = false
 		guild_third_floor_lobby.PostAddressScripting()
-		--[[the commented out functionality below was moved to the scripts that post address scripting calls		
+		--[[the commented out functionality below was moved to the scripts that post address scripting calls
 		GeneralFunctions.PanCamera()
 		GAME:CutsceneMode(false)
 		AI:EnableCharacterAI(partner)
 		AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)	]]--
 	end
 
-	
-end 
+
+end
 
 
 
@@ -325,7 +325,7 @@ end
 
 
 ---------------------------
--- Map Objects 
+-- Map Objects
 ---------------------------
 function guild_third_floor_lobby.Board_Action(chara, activator)
 	local hero = CH('PLAYER')
@@ -333,14 +333,14 @@ function guild_third_floor_lobby.Board_Action(chara, activator)
 	partner.IsInteracting = true
     GROUND:CharSetAnim(partner, 'None', true)
     GROUND:CharSetAnim(hero, 'None', true)
-	
+
 	UI:ResetSpeaker(false)
 	UI:SetCenter(true)
-	UI:WaitShowDialogue("(There are a number of internal guild postings here...)")
-	UI:WaitShowDialogue("(...But you're not really sure what to make of them yet.)")
+	UI:WaitShowDialogue("(Il y a un certain nombre de messages internes à la guilde ici...)")
+	UI:WaitShowDialogue("(... Mais vous ne savez pas encore vraiment quoi en penser.)")
 	UI:SetCenter(false)
-	
-	partner.IsInteracting = false	
+
+	partner.IsInteracting = false
 	GROUND:CharEndAnim(partner)
 	GROUND:CharEndAnim(hero)
 end
@@ -378,7 +378,7 @@ function guild_third_floor_lobby.Test_Action(chara, activator)
 												  GAME:WaitFrames(120)
 												  UI:WaitHideBG(20) end)
 	TASK:JoinCoroutines({coro1, coro2})
-	
+
 	UI:WaitShowDialogue("poop " .. STRINGS:LocalKeyString(9))
 
 end

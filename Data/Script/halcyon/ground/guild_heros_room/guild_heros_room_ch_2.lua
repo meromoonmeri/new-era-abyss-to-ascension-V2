@@ -41,31 +41,31 @@ function guild_heros_room_ch_2.FirstMorning()
 												  GAME:WaitFrames(180)
 												  UI:WaitHideBG(20) end)
 	TASK:JoinCoroutines({coro1, coro2})
-	
+
 	GAME:WaitFrames(120)
 
 	UI:SetAutoFinish(true)
-	UI:WaitShowVoiceOver("The next morning...\n\n", -1)
+	UI:WaitShowVoiceOver("Le lendemain matin...", -1)
 	UI:SetAutoFinish(false)
-	
+
 	GAME:WaitFrames(60)
 	SOUND:PlayBattleSE("DUN_Heal_Bell")
 	GAME:WaitFrames(100)
 	UI:SetSpeaker(STRINGS:Format("\\uE040"), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_001']))
 	GAME:FadeIn(40)
-	
+
 	--sleepyheads
 	GAME:WaitFrames(20)
 	UI:SetSpeaker('', true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_002']))
 	GAME:WaitFrames(40)
-	
+
 	UI:SetSpeaker(audino)
 	UI:SetSpeakerEmotion("Happy")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_003']))
 	GAME:WaitFrames(20)
-	
+
 	GROUND:CharAnimateTurnTo(audino, Direction.Down, 4)
 	GAME:WaitFrames(10)
 	SOUND:PlayBattleSE("DUN_Heal_Bell")
@@ -73,24 +73,24 @@ function guild_heros_room_ch_2.FirstMorning()
 	GAME:WaitFrames(100)
 	GROUND:CharSetAnim(audino, 'None', true)
 	GROUND:CharAnimateTurnTo(audino, Direction.UpRight, 4)
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(partner:GetDisplayName(), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_004']))
 	GAME:WaitFrames(20)
 	GROUND:CharSetAnim(hero, "Laying", true)
 	GROUND:CharSetAnim(partner, "Laying", true)
-		
+
 	coro1 = TASK:BranchCoroutine(function () GAME:WaitFrames(10)
 											 GeneralFunctions.Shake(hero)
 											 GAME:WaitFrames(20)
-											 GeneralFunctions.DoAnimation(hero, 'Wake') 
-											 GROUND:CharAnimateTurnTo(hero, Direction.Down, 4) 
+											 GeneralFunctions.DoAnimation(hero, 'Wake')
+											 GROUND:CharAnimateTurnTo(hero, Direction.Down, 4)
 											 GAME:WaitFrames(20)
 											 GeneralFunctions.LookAround(hero, 2, 4, false, false, false, Direction.DownLeft) end)
 	coro2 = TASK:BranchCoroutine(function () GeneralFunctions.Shake(partner)
 											 GAME:WaitFrames(20)
-											 GeneralFunctions.DoAnimation(partner, 'Wake') 
+											 GeneralFunctions.DoAnimation(partner, 'Wake')
 											 GROUND:CharAnimateTurnTo(partner, Direction.Down, 4)
 											 GAME:WaitFrames(20)
 											 GeneralFunctions.LookAround(partner, 2, 4, false, false, false, Direction.DownLeft) end)
@@ -101,44 +101,44 @@ function guild_heros_room_ch_2.FirstMorning()
 	UI:SetSpeaker(partner)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_005'], audino:GetDisplayName()))
 	GAME:WaitFrames(20)
-	
+
 	SOUND:PlayBGM("Wigglytuff's Guild.ogg", true)
 	UI:SetSpeaker(audino)
 	UI:SetSpeakerEmotion("Happy")
 	local move = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Skill]:Get("heal_bell")--healbell
 
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_006'], move:GetColoredName()))
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_007']))
-	
+
 	GAME:WaitFrames(10)
 	UI:SetSpeaker(partner)
 	GeneralFunctions.EmoteAndPause(partner, "Question", true)
 	UI:SetSpeakerEmotion("Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_008']))
-	
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(audino)
 	UI:SetSpeakerEmotion("Happy")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_009']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_010']))
-	
+
 	GAME:WaitFrames(20)
 	GROUND:CharAnimateTurnTo(audino, Direction.Left, 4)
 	GAME:WaitFrames(60)
 	GROUND:CharAnimateTurnTo(audino, Direction.UpRight, 4)
-	
+
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_011']))
 	GAME:WaitFrames(20)
-	
+
 	GROUND:CharAnimateTurnTo(audino, Direction.Left, 4)
 	GROUND:MoveToPosition(audino, 0, 204, false, 2)
 	GAME:GetCurrentGround():RemoveTempChar(audino)
 	GAME:WaitFrames(20)
-	
+
 	--good morning, hero!
 	GROUND:CharTurnToCharAnimated(partner, hero, 4)
 	GROUND:CharTurnToCharAnimated(hero, partner, 4)
@@ -148,7 +148,7 @@ function guild_heros_room_ch_2.FirstMorning()
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_012'], hero:GetDisplayName()))
 	UI:SetSpeakerEmotion("Normal")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_013']))
-	
+
 	GAME:WaitFrames(20)
 	GeneralFunctions.PanCamera(208, 156)
 	GAME:WaitFrames(20)
@@ -161,18 +161,18 @@ function guild_heros_room_ch_2.FirstMorning()
 	AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
 
 	GAME:CutsceneMode(false)
-		
+
 
 end
 
-function guild_heros_room_ch_2.PostRiverBedtalk() 
+function guild_heros_room_ch_2.PostRiverBedtalk()
 	local hero = CH('PLAYER')
 	local partner = CH('Teammate1')
 	GAME:CutsceneMode(true)
 	guild_heros_room_helper.Bedtime(false)
 	UI:ResetSpeaker()
 	GAME:FadeIn(40)
-	
+
 	local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get("relic_forest")
 
 	SOUND:PlayBGM('Goodnight.ogg', true)
@@ -184,38 +184,38 @@ function guild_heros_room_ch_2.PostRiverBedtalk()
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_016'], CharacterEssentials.GetCharacterName("Camerupt")))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_017']))
 	GAME:WaitFrames(20)
-	
-	GeneralFunctions.HeroDialogue(hero, "(I'm glad we were able to help them too.[pause=0] I feel like some kind of hero!)", "Happy")
-	GeneralFunctions.HeroDialogue(hero, "(Helping Pokémon in need is really fulfilling.[pause=0] I hope " .. partner:GetDisplayName() .. " and I can keep doing it.)", "Happy")
+
+	GeneralFunctions.HeroDialogue(hero, "(Je suis content que nous ayons pu les aider aussi.[pause=0]Je me sens comme une sorte de héros !)", "Happy")
+	GeneralFunctions.HeroDialogue(hero, "(Aider les Pokémon dans le besoin est vraiment gratifiant.[pause=0]J'espère que " .. partner:GetDisplayName() .. " et moi pourrons continuer à le faire.)", "Happy")
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeaker(partner)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_018']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_019'], CharacterEssentials.GetCharacterName("Noctowl")))
 	GAME:WaitFrames(20)
-	
-	GeneralFunctions.HeroDialogue(hero, "(He did say not to worry,[pause=10] but I can't stop thinking about that strange feeling I had at the spring.)", "Worried")
-	GeneralFunctions.HeroDialogue(hero, "(It was sickening,[pause=10] but so similar to how I felt in " .. zone:GetColoredName() .. "...[pause=0] Could those two places be connected?)", "Worried")
+
+	GeneralFunctions.HeroDialogue(hero, "(Il m'a dit de ne pas m'inquiéter,[pause=10]mais je ne peux pas m'empêcher de penser à cette étrange sensation que j'ai ressentie au printemps.)", "Worried")
+	GeneralFunctions.HeroDialogue(hero, "(C'était écoeurant,[pause=10]mais tellement similaire à ce que je ressentais dans " .. zone:GetColoredName() .. "...[pause=0]Ces deux endroits pourraient-ils être connectés ?)", "Worried")
 	GAME:WaitFrames(40)
-	
+
 	GeneralFunctions.HeroSpeak(hero, 60)
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeaker(partner)
 	UI:SetSpeakerEmotion("Worried")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_020'], zone:GetColoredName()))
 	GAME:WaitFrames(20)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_021']))
-	
+
 	GAME:WaitFrames(20)
 	GeneralFunctions.HeroSpeak(hero, 60)
-	
+
 	GAME:WaitFrames(20)
 	GeneralFunctions.Recoil(partner)
 	UI:SetSpeakerEmotion("Surprised")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_022'], zone:GetColoredName()))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_023']))
-	
+
 	GAME:WaitFrames(20)
 	GeneralFunctions.EmoteAndPause(partner, "Sweating", true)
 	UI:SetSpeakerEmotion("Worried")
@@ -223,22 +223,22 @@ function guild_heros_room_ch_2.PostRiverBedtalk()
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_025']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_026'], zone:GetColoredName()))
 
-	--note: there is signficance in the feelings, as both the tablet and the spring are connected to the tree of life, to which the hero has significance as they were "summoned" here to save it 
+	--note: there is signficance in the feelings, as both the tablet and the spring are connected to the tree of life, to which the hero has significance as they were "summoned" here to save it
 	GAME:WaitFrames(20)
-	GeneralFunctions.HeroDialogue(hero, "(That is true...[pause=0] I could be looking for meaning where there is none.)", "Worried")
-	GeneralFunctions.HeroDialogue(hero, "(It's even possible that these feelings have just been the excitement of the situations I've been in.)", "Worried")
-	GeneralFunctions.HeroDialogue(hero, "(It's hard to tell,[pause=10] given my whole situation...)", "Worried")
-	
+	GeneralFunctions.HeroDialogue(hero, "(C'est vrai...[pause=0]Je pourrais chercher un sens là où il n'y en a pas.)", "Worried")
+	GeneralFunctions.HeroDialogue(hero, "(Il est même possible que ces sentiments soient simplement l'excitation des situations dans lesquelles j'ai été.)", "Worried")
+	GeneralFunctions.HeroDialogue(hero, "(C'est difficile à dire,[pause=10]étant donné toute ma situation...)", "Worried")
+
 	GAME:WaitFrames(20)
 	UI:SetSpeaker(partner)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_027']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_028'], CharacterEssentials.GetCharacterName("Noctowl")))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_029']))
-	
+
 	--player is more interested in living pokemon life than figuring shit out? potentially? just an idea
 	GAME:WaitFrames(20)
 	GeneralFunctions.DoAnimation(hero, 'Nod')
-	
+
 	GAME:WaitFrames(40)
 	GROUND:CharAnimateTurnTo(partner, Direction.Down, 4)
 	GeneralFunctions.DoAnimation(partner, "DeepBreath")
@@ -247,15 +247,15 @@ function guild_heros_room_ch_2.PostRiverBedtalk()
 	UI:SetSpeaker(partner)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_030']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_031']))
-	
+
 	GAME:WaitFrames(20)
 	GROUND:CharSetAnim(partner, "Laying", true)
-	
-	
+
+
 	GAME:WaitFrames(60)
-	
+
 	GROUND:CharSetAnim(hero, "Laying", true)
-	
+
 	GAME:WaitFrames(40)
 	UI:SetSpeaker(partner:GetDisplayName(), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_032'], hero:GetDisplayName()))
@@ -263,21 +263,21 @@ function guild_heros_room_ch_2.PostRiverBedtalk()
 	GROUND:CharSetAnim(partner, "EventSleep", true)
 	GAME:WaitFrames(40)
 	GROUND:CharSetAnim(hero, "EventSleep", true)
-	
+
 	GAME:WaitFrames(180)
 	SOUND:FadeOutBGM(120)
 	GAME:FadeOut(false, 120)
 	GAME:CutsceneMode(false)
 	GAME:WaitFrames(60)
 	GAME:EnterGroundMap("guild_guildmasters_room", "Main_Entrance_Marker")
-	
 
-	
-	
-	
-	
-	
-end 
+
+
+
+
+
+
+end
 
 function guild_heros_room_ch_2.FirstNightBedtalk()
 	GAME:FadeOut(false, 1)
@@ -288,44 +288,44 @@ function guild_heros_room_ch_2.FirstNightBedtalk()
 	UI:ResetSpeaker()
 	GROUND:CharSetAnim(hero, 'Laying', true)
 	GROUND:CharSetAnim(partner, 'Laying', true)
-	
+
 	--wait a bit after the transition from dinner scene before starting this one
 	GAME:WaitFrames(60)
 	--characters commenting on the dinner they just had while the screen is still faded out
 	UI:SetSpeaker(CharacterEssentials.GetCharacterName('Tropius'), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_033'], CharacterEssentials.GetCharacterName('Snubbull')))
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeaker(CharacterEssentials.GetCharacterName('Breloom'), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_034']))
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeaker(CharacterEssentials.GetCharacterName('Mareep'), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_035']))
 	GAME:WaitFrames(20)
-	
+
 	UI:SetSpeaker(CharacterEssentials.GetCharacterName('Zigzagoon'), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_036']))
 	GAME:WaitFrames(90)
-	
+
 	GAME:FadeIn(60)
 	SOUND:PlayBGM("Goodnight.ogg", true)
 	GAME:WaitFrames(20)
 	--GAME:WaitFrames(20)
-	
+
 	UI:SetSpeaker(partner:GetDisplayName(), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_037'], hero:GetDisplayName()))
 	GAME:WaitFrames(20)
-	
+
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_038']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_039'], CharacterEssentials.GetCharacterName('Ledian')))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_040']))
-	
+
 	GAME:WaitFrames(40)
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_041']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_042']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GHR2_043'], hero:GetDisplayName()))
-	
+
 	GAME:WaitFrames(20)
 	GROUND:CharSetAnim(partner, 'EventSleep', true)
 	GAME:WaitFrames(10)

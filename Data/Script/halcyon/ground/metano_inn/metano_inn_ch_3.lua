@@ -7,21 +7,21 @@ metano_inn_ch_3 = {}
 
 function metano_inn_ch_3.SetupGround()
 	if SV.Chapter3.DefeatedBoss then
-		
-		local nidorina, nidoking, nidoran_m = 
+
+		local nidorina, nidoking, nidoran_m =
 		CharacterEssentials.MakeCharactersFromList({
 			{'Nidorina', 'Innkeeper_Right'},
 			{'Nidoking', 'Innkeeper_Left'},
 			{'Nidoran_M', 280, 184, Direction.Down}
 
 		})
-		
+
 		AI:SetCharacterAI(nidoran_m, "halcyon.ai.ground_default", RogueElements.Loc(264, 168), RogueElements.Loc(32, 32), 1, 16, 64, 40, 180)
 
-	else 
+	else
 		GROUND:Hide('Innkeeper_Desk_Left')
-		
-		local nidoqueen, nidoran_m, seviper, zangoose = 
+
+		local nidoqueen, nidoran_m, seviper, zangoose =
 			CharacterEssentials.MakeCharactersFromList({
 				{'Nidoqueen', 'Innkeeper_Right'},
 				{'Nidoran_M', 168, 192, Direction.Down},
@@ -29,7 +29,7 @@ function metano_inn_ch_3.SetupGround()
 				{'Zangoose', 317, 210, Direction.Down}
 
 			})
-		
+
 		AI:SetCharacterAI(nidoran_m, "halcyon.ai.ground_default", RogueElements.Loc(152, 176), RogueElements.Loc(32, 32), 1, 16, 64, 40, 180)
 	end
 
@@ -39,7 +39,7 @@ end
 
 
 function metano_inn_ch_3.Nidoran_M_Action(chara, activator)
-	if not SV.Chapter3.DefeatedBoss then 
+	if not SV.Chapter3.DefeatedBoss then
 		GeneralFunctions.StartConversation(chara, "Googoogagee!")
 	else
 		GeneralFunctions.StartConversation(chara, ".........")
@@ -53,19 +53,19 @@ end
 
 function metano_inn_ch_3.Innkeeper_Desk_Left_Action(chara, activator)
 	local nidoking = CH('Nidoking')
-	GeneralFunctions.StartConversation(nidoking, "My daughter here is helpin' me man the front desk today!")
+	GeneralFunctions.StartConversation(nidoking, "Ma fille ici m'aide à gérer la réception aujourd'hui !")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MI3_002']))
 	GeneralFunctions.EndConversation(nidoking)
 end
 
 function metano_inn_ch_3.Innkeeper_Desk_Right_Action(chara, activator)
-	if not SV.Chapter3.DefeatedBoss then 
+	if not SV.Chapter3.DefeatedBoss then
 		local nidoqueen = CH('Nidoqueen')
-		GeneralFunctions.StartConversation(nidoqueen, "Seems like nothin' dangerous was afoot in town after all.[pause=0] That young'un had just wandered off was all!")
+		GeneralFunctions.StartConversation(nidoqueen, "On dirait qu'il n'y avait rien de dangereux en ville après tout.[pause=0]Ce jeune venait de s'éloigner, c'est tout !")
 		UI:SetSpeakerEmotion("Happy")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MI3_003']))
 		GeneralFunctions.EndConversation(nidoqueen)
-	else 
+	else
 		local nidorina = CH('Nidorina')
 		GeneralFunctions.StartConversation(nidorina, ".........")
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MI3_004']))
@@ -76,7 +76,7 @@ end
 
 
 function metano_inn_ch_3.Zangoose_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "This inn is one of the best places we've stayed at in our travels.[pause=0] Guess it's earned its reputation.")
+	GeneralFunctions.StartConversation(chara, "Cette auberge est l'un des meilleurs endroits où nous avons séjourné au cours de nos voyages.[pause=0]Je suppose qu'elle a mérité sa réputation.")
 	--too long with no nicknames
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MI3_005'], CharacterEssentials.GetCharacterName("Seviper")))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MI3_006']))
@@ -84,7 +84,7 @@ function metano_inn_ch_3.Zangoose_Action(chara, activator)
 end
 
 function metano_inn_ch_3.Seviper_Action(chara, activator)
-	GeneralFunctions.StartConversation(chara, "There'ssss been a lot of outlaw activity in this region lately.")
+	GeneralFunctions.StartConversation(chara, "Il y a eu beaucoup d'activités hors-la-loi dans cette région ces derniers temps.")
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MI3_007'], CharacterEssentials.GetCharacterName("Zangoose")))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MI3_008']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MI3_009']))

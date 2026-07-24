@@ -29,16 +29,16 @@ local ledian_dojo = {}
 function ledian_dojo.Init(map)
 	DEBUG.EnableDbgCoro()
 	print('=>> Init_ledian_dojo <<=')
-	
+
 	COMMON.RespawnAllies()
 	PartnerEssentials.InitializePartnerSpawn()
 	GROUND:AddMapStatus("darkness")--darkness
-	
+
 	--Remove nicknames from characters if the nickname mod is enabled.
 	if CONFIG.UseNicknames() then
 		CH('Sensei').Data.Nickname = CharacterEssentials.GetCharacterName('Ledian')
 		CH('Gible').Data.Nickname = CharacterEssentials.GetCharacterName('Gible')
-	else 
+	else
 		CH('Sensei').Data.Nickname = 'Ledian'
 		CH('Gible').Data.Nickname = 'Gible'
 	end
@@ -80,13 +80,13 @@ function ledian_dojo.GameLoad(map)
 end
 
 function ledian_dojo.PlotScripting()
-	
+
 	--Setup Ground first before checking what cutscene to run.
-	if SV.ChapterProgression.Chapter == 2 then 
-			ledian_dojo_ch_2.SetupGround()	
-	elseif SV.ChapterProgression.Chapter == 3 then 
-			ledian_dojo_ch_3.SetupGround()	
-	elseif SV.ChapterProgression.Chapter == 4 then 
+	if SV.ChapterProgression.Chapter == 2 then
+			ledian_dojo_ch_2.SetupGround()
+	elseif SV.ChapterProgression.Chapter == 3 then
+			ledian_dojo_ch_3.SetupGround()
+	elseif SV.ChapterProgression.Chapter == 4 then
 			ledian_dojo_ch_4.SetupGround()
 	else
 		--GAME:FadeIn(20)
@@ -94,8 +94,8 @@ function ledian_dojo.PlotScripting()
 
 	--if a generic ending has been flagged, prioritize that
 	if SV.Dojo.LessonCompletedGeneric or SV.Dojo.TrainingCompletedGeneric or SV.Dojo.TrialCompletedGeneric or SV.Dojo.LessonFailedGeneric or SV.Dojo.TrainingFailedGeneric or SV.Dojo.TrialFailedGeneric then
-	
-		
+
+
 		if SV.Dojo.LessonCompletedGeneric then
 			ledian_dojo.GenericLessonSuccess()
 		elseif SV.Dojo.TrainingCompletedGeneric then
@@ -119,12 +119,12 @@ function ledian_dojo.PlotScripting()
 			ledian_dojo_ch_2.FailedTrainingCutscene()
 		elseif not SV.Chapter2.FinishedDojoCutscenes then--Cutscene for finishing first lesson/maze. cutscene function has logic for appropriate scene
 			ledian_dojo_ch_2.PostTrainingCutscene()
-		else 
+		else
 			GAME:FadeIn(20)
 		end
 	else
-		GAME:FadeIn(20)	
-	end 
+		GAME:FadeIn(20)
+	end
 end
 
 function ledian_dojo.Gible_Action(chara, activator)
@@ -152,10 +152,10 @@ function ledian_dojo.Sensei_Action(chara, activator)
     GROUND:CharSetAnim(partner, 'None', true)
     GROUND:CharSetAnim(hero, 'None', true)
 
-	GROUND:CharTurnToChar(ledian, CH('PLAYER'))		
+	GROUND:CharTurnToChar(ledian, CH('PLAYER'))
     GROUND:CharTurnToChar(hero, ledian)
     local coro1 = TASK:BranchCoroutine(function() GROUND:CharTurnToCharAnimated(partner, ledian, 4) end)
-	
+
 	--ledian mentions if new mazes are unlocked.
 	if SV.Dojo.NewMazeUnlocked then
 		UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dojo_New_Maze_1']))
@@ -163,7 +163,7 @@ function ledian_dojo.Sensei_Action(chara, activator)
 		SV.Dojo.NewMazeUnlocked = false
 		GAME:WaitFrames(20)
 	end
-	
+
 	while state > -1 do
 		local msg = STRINGS:Format(STRINGS.MapStrings['Dojo_Intro'])
 		if repeated == true then
@@ -176,12 +176,12 @@ function ledian_dojo.Sensei_Action(chara, activator)
 		UI:WaitForChoice()
 		local result = UI:ChoiceResult()
 		repeated = true
-		if result == 1 then 
+		if result == 1 then
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dojo_Info_001']))
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dojo_Info_002']))
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dojo_Info_003']))
-		
-		elseif result == 2 then 
+
+		elseif result == 2 then
 			repeated = false
 			while state > -1 do
 				dojo_choices = {STRINGS:Format(STRINGS.MapStrings['Dojo_Menu_Training']),
@@ -223,12 +223,12 @@ function ledian_dojo.Sensei_Action(chara, activator)
 					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dojo_Trial_Info_007']))
 					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dojo_Trial_Info_008']))
 					UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dojo_Trial_Info_009']))
-				else 
+				else
 					state = -1
 				end
 			end
 			state = 0
-				
+
 		else
 			UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['Dojo_Goodbye']))
 			state = -1
@@ -239,10 +239,10 @@ function ledian_dojo.Sensei_Action(chara, activator)
 	GROUND:EntTurn(ledian, olddir)
 	partner.IsInteracting = false
 	ledian.IsInteracting = false
-	
+
 	GROUND:CharEndAnim(partner)
 	GROUND:CharEndAnim(hero)
-end 
+end
 
 --modified version of common's ShowDestinationMenu. Has no capability for grounds, and sets risk to None if the dungeon chosen is a tutorial level
 function ledian_dojo.ShowMazeMenu(dungeon_entrances)
@@ -262,7 +262,7 @@ function ledian_dojo.ShowMazeMenu(dungeon_entrances)
 		table.insert(open_dests, { Name=zone_name, Dest=RogueEssence.Dungeon.ZoneLoc(dungeon_entrances[ii], 0, 0, 0) })
 	end
   end
-  
+
   local dest = RogueEssence.Dungeon.ZoneLoc.Invalid
   if #open_dests == 1 then
       --single dungeon entry
@@ -274,17 +274,17 @@ function ledian_dojo.ShowMazeMenu(dungeon_entrances)
 	    dest = open_dests[1].Dest
 	  end
   elseif #open_dests > 1 then
-    
+
     UI:ResetSpeaker()
     --SOUND:PlaySE("Menu/Skip")
     UI:DestinationMenu(open_dests, default_choice)
 	UI:WaitForChoice()
 	local result = UI:ChoiceResult()
-	if result ~= nil then 
+	if result ~= nil then
 		dest = open_dests[result].Dest
 	end
   end
-  
+
   if dest:IsValid() then
 	local risk = RogueEssence.Data.GameProgress.DungeonStakes.Risk
 	--set risk to none if chosen level is a lesson
@@ -295,36 +295,36 @@ function ledian_dojo.ShowMazeMenu(dungeon_entrances)
 	GAME:EnterDungeon(dest.ID, dest.StructID.Segment, dest.StructID.ID, dest.EntryPoint, risk, true, false)
   end
 end
-		
-		
-		
+
+
+
 function ledian_dojo.GenericTrainingSuccess()
 	local partner = CH('Teammate1')
 	local hero = CH('PLAYER')
 	local ledian = CH('Sensei')
 	--GAME:CutsceneMode(true)
 	AI:DisableCharacterAI(partner)
-	
+
 	--set their animations to none rather than using cutscene mode, as background NPCs need to continue to idle.
 	GROUND:CharSetAnim(hero, "None", true)
 	GROUND:CharSetAnim(partner, "None", true)
-	
-	GROUND:TeleportTo(hero, 208, 200, Direction.Up)	
+
+	GROUND:TeleportTo(hero, 208, 200, Direction.Up)
 	GROUND:TeleportTo(partner, 184, 200, Direction.Up)
 	GAME:MoveCamera(204, 184, 1, false)
 	local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(SV.Dojo.LastZone)
 	GAME:FadeIn(40)
-		
+
 	GAME:WaitFrames(20)
 	GeneralFunctions.EmoteAndPause(ledian, 'Exclaim', true)
 	UI:SetSpeaker(ledian)
 	UI:SetSpeakerEmotion("Normal")
-	UI:WaitShowDialogue("Hoiyah![pause=0] You did it![pause=0] You successfully completed the " .. zone:GetColoredName() .."!")
+	UI:WaitShowDialogue("Hoiyah![pause=0]Vous l'avez fait ![pause=0]Vous avez terminé avec succès le " .. zone:GetColoredName() .. " !")
 	UI:SetSpeakerEmotion("Shouting")
 	local coro1 = TASK:BranchCoroutine(function() ledian_dojo_ch_2.Hwacha(ledian) end)
 	local coro2 = TASK:BranchCoroutine(function() UI:WaitShowTimedDialogue("HWACHA!", 40) end)
 	local coro3 = TASK:BranchCoroutine(function() GAME:WaitFrames(10)
-												  GROUND:CharSetEmote(hero, "exclaim", 1) end)	
+												  GROUND:CharSetEmote(hero, "exclaim", 1) end)
 	local coro4 = TASK:BranchCoroutine(function() GAME:WaitFrames(10)
 												  GeneralFunctions.Recoil(partner, nil, nil, nil, nil, false) end)
 	TASK:JoinCoroutines({coro1, coro2, coro3, coro4})
@@ -332,9 +332,9 @@ function ledian_dojo.GenericTrainingSuccess()
 	GAME:WaitFrames(20)
 
 	UI:SetSpeakerEmotion("Normal")
-	UI:WaitShowDialogue("But this is only the beginning of your journey!")
-	UI:WaitShowDialogue("Hwacha![pause=0] There is still so much training for you ahead!")
-	UI:WaitShowDialogue("Wahtah![pause=0] Be sure to keep giving it your all!")
+	UI:WaitShowDialogue("Mais ce n'est que le début de votre voyage !")
+	UI:WaitShowDialogue("Hwacha![pause=0]Il y a encore tellement de formation pour vous !")
+	UI:WaitShowDialogue("Wahtah![pause=0]Assurez-vous de continuer à tout donner !")
 
 	GAME:WaitFrames(20)
 	GeneralFunctions.PanCamera()
@@ -343,55 +343,55 @@ function ledian_dojo.GenericTrainingSuccess()
 
 	AI:EnableCharacterAI(partner)
 	AI:SetCharacterAI(partner, "origin.ai.ground_partner", CH('PLAYER'), partner.Position)
-	--GAME:CutsceneMode(false)	
+	--GAME:CutsceneMode(false)
 	GROUND:CharEndAnim(partner)
-	GROUND:CharEndAnim(hero)	
+	GROUND:CharEndAnim(hero)
 end
-		
+
 function ledian_dojo.GenericLessonSuccess()
 	--for now, all 3 generic finishes will be the same
 	ledian_dojo.GenericTrainingSuccess()
 	SV.Dojo.LessonCompletedGeneric = false -- reset the flag
 end
-	
+
 function ledian_dojo.GenericTrialSuccess()
-	--for now, all 3 generic finishes will be the same	
+	--for now, all 3 generic finishes will be the same
 	ledian_dojo.GenericTrainingSuccess()
 	SV.Dojo.TrialCompletedGeneric = false -- reset the flag
 
 end
-		
+
 function ledian_dojo.GenericTrainingFailure()
 	local partner = CH('Teammate1')
 	local hero = CH('PLAYER')
 	local ledian = CH('Sensei')
 	--GAME:CutsceneMode(true)
 	AI:DisableCharacterAI(partner)
-	
+
 	--set their animations to none rather than using cutscene mode, as background NPCs need to continue to idle.
 	GROUND:CharSetAnim(hero, "None", true)
 	GROUND:CharSetAnim(partner, "None", true)
-	
-	GROUND:TeleportTo(hero, 208, 200, Direction.Up)	
+
+	GROUND:TeleportTo(hero, 208, 200, Direction.Up)
 	GROUND:TeleportTo(partner, 184, 200, Direction.Up)
 	GAME:MoveCamera(204, 184, 1, false)
 	local zone = _DATA.DataIndices[RogueEssence.Data.DataManager.DataType.Zone]:Get(SV.Dojo.LastZone)
 	GAME:FadeIn(40)
-	
+
 	GAME:WaitFrames(20)
 	GeneralFunctions.EmoteAndPause(ledian, 'Sweating', true)
 	UI:SetSpeaker(ledian)
 	UI:SetSpeakerEmotion("Worried")
-	UI:WaitShowDialogue("Oohcha...[pause=0] You failed to make it to the end...")
+	UI:WaitShowDialogue("Oohcha...[pause=0]Vous n'êtes pas parvenu à aller jusqu'au bout...")
 	GAME:WaitFrames(20)
-	
+
 	GeneralFunctions.DoubleHop(ledian)
 	UI:SetSpeakerEmotion("Normal")
-	UI:WaitShowDialogue("Hoiyah![pause=0] Worry not my students![pause=0] The journey to a stronger self is not an easy one.")
-	UI:WaitShowDialogue("This is simply one of the hardships you will encounter on the path to success.")
-	UI:WaitShowDialogue("Wahtah![pause=0] If you continue to seek victory,[pause=10] it cannot continue to hide!")
-	UI:WaitShowDialogue("Gather your strength,[pause=10] and go give it your all again!")
-	
+	UI:WaitShowDialogue("Hoiyah ![pause=0]Ne vous inquiétez pas, mes élèves ![pause=0]Le voyage vers un moi plus fort n’est pas facile.")
+	UI:WaitShowDialogue("C’est tout simplement l’une des difficultés que vous rencontrerez sur le chemin du succès.")
+	UI:WaitShowDialogue("Wahtah ![pause=0]Si vous continuez à chercher la victoire,[pause=10]il ne peut pas continuer à se cacher !")
+	UI:WaitShowDialogue("Rassemblez vos forces,[pause=10]et allez tout donner à nouveau !")
+
 	GAME:WaitFrames(20)
 	GeneralFunctions.PanCamera()
 
@@ -402,15 +402,15 @@ function ledian_dojo.GenericTrainingFailure()
 	--GAME:CutsceneMode(false)
 	GROUND:CharEndAnim(partner)
 	GROUND:CharEndAnim(hero)
-	
+
 end
-		
+
 function ledian_dojo.GenericLessonFailure()
 	--for now, all 3 generic finishes will be the same
 	ledian_dojo.GenericTrainingFailure()
 	SV.Dojo.LessonFailedGeneric = false -- reset the flag
 end
-		
+
 function ledian_dojo.GenericTrialFailure()
 	--for now, all 3 generic finishes will be the same
 	ledian_dojo.GenericTrainingFailure()
@@ -437,12 +437,12 @@ function ledian_dojo.Dungeon_Entrance_Touch(obj, activator)
     local partner = CH('Teammate1')
     partner.IsInteracting = true
     GROUND:CharSetAnim(partner, 'None', true)
-    GROUND:CharSetAnim(hero, 'None', true)	
-	
-	UI:BeginChoiceMenu("Which would you like to do?", {"Training", "Lesson", "Trial", "Cancel"}, 1, 4)
+    GROUND:CharSetAnim(hero, 'None', true)
+
+	UI:BeginChoiceMenu("Qu'aimeriez-vous faire ?", {"Training", "Lesson", "Trial", "Cancel"}, 1, 4)
 	UI:WaitForChoice()
 	local result = UI:ChoiceResult()
-	
+
 	--these need to be updated as more dojo dungeons are created.
 	if result == 1 then
 		--training mazes
@@ -453,23 +453,23 @@ function ledian_dojo.Dungeon_Entrance_Touch(obj, activator)
 	elseif result == 3 then
 		--trials
 		dungeon_entrances = {}
-		if #dungeon_entrances == 0 then 
-			UI:WaitShowDialogue("There aren't any trials available to you now. Come back later!")
+		if #dungeon_entrances == 0 then
+			UI:WaitShowDialogue("Aucun essai n'est disponible pour le moment. Revenez plus tard !")
 		end
 	else
 		--cancel
 		partner.IsInteracting = false
 		GROUND:CharEndAnim(partner)
-		GROUND:CharEndAnim(hero)	
+		GROUND:CharEndAnim(hero)
 		return
 	end
 	--set the dungeons we can choose from based on whether we are choosing to do a lesson, a training maze, or a trial
 	ledian_dojo.ShowMazeMenu(dungeon_entrances)
-	
+
 	GAME:WaitFrames(10)
 	partner.IsInteracting = false
     GROUND:CharEndAnim(partner)
-    GROUND:CharEndAnim(hero)	
+    GROUND:CharEndAnim(hero)
 end
 
 -------------------------------
