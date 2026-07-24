@@ -1655,22 +1655,13 @@ end
 --Used for the final textline that a character says when dying in a story relevant dungeon.
 --Displays the line, then fades out the textbox like in explorers once the box is cleared.
 --Have to use a bit of a hack to get it to look just right - But should look normal to the player.
+-- Used for the final textline that a character says when dying in a story dungeon.
+-- GAME:EndDungeonRun already handles the result screen. Keep this dialogue
+-- simple so no second front-layer fade can strand the dungeon on black.
 function GeneralFunctions.DeathFadeOutDialogue(chara, dialogue, emotion)
     UI:SetSpeaker(chara)
     UI:SetSpeakerEmotion(emotion)
     UI:WaitShowDialogue(dialogue)
-
-    if _DATA.CurrentReplay == nil then
-      local scripts = RogueEssence.Menu.DialogueBox.CreateScripts({function() return GAME:FadeOutFront(false, 60) end})
-      local empty_action = LUA_ENGINE:MakeLuaAction(function() end)
-      local hackDlg = _MENU:CreateBox(chara.CurrentForm, chara:GetDisplayName(), RogueEssence.Content.EmoteStyle(GeneralFunctions.EmotionToNumber(emotion)), RogueEssence.Menu.SpeakerPortrait.DefaultLoc, false, RogueEssence.Menu.DialogueBox.SOUND_EFFECT, RogueEssence.Menu.DialogueBox.SPEAK_FRAMES, empty_action, 60, false, false, false, RogueEssence.Menu.DialogueBox.DefaultBounds, scripts, dialogue .. "[script=0]")
-      hackDlg:SetTextProgress(string.len(dialogue))
-      UI:SetCustomDialogue(hackDlg)
-      UI:WaitDialog()
-    end
-	
-	GAME:FadeInFront(1)--Quickly undo the fade out on the text layer once the text is cleared - a regular fade out set up on top of this will still be in effect after clearing this
-
 end
 
 --For when emotions needed to be converted to their relevant index number (used in DeathFadeOutDialogue for example)
@@ -2039,16 +2030,23 @@ end
 function GeneralFunctions.RestoreIdleAnim()
 	local player_count = GAME:GetPlayerPartyCount()
 	local guest_count = GAME:GetPlayerGuestCount()
+	-- A KO'd character no longer has a valid dungeon animation/location.
+	-- Trying to restore its idle animation here aborts ExitSegment before the
+	-- transition is requested, leaving the result screen over a black dungeon.
 	for i = 0, player_count - 1, 1 do 
 		local player = GAME:GetPlayerPartyMember(i)
-		local anim = RogueEssence.Dungeon.CharAnimIdle(player.CharLoc, player.CharDir)
-		TASK:WaitTask(player:StartAnim(anim))
+		if not player.Dead then
+			local anim = RogueEssence.Dungeon.CharAnimIdle(player.CharLoc, player.CharDir)
+			TASK:WaitTask(player:StartAnim(anim))
+		end
 	end
 
-	for i = 0, guest_count - 1, 1 do
+	for i = 0, guest_count - 1, 1 do 
 		local guest = GAME:GetPlayerGuestMember(i)
-		local anim = RogueEssence.Dungeon.CharAnimIdle(guest.CharLoc, guest.CharDir)
-		TASK:WaitTask(guest:StartAnim(anim))
+		if not guest.Dead then
+			local anim = RogueEssence.Dungeon.CharAnimIdle(guest.CharLoc, guest.CharDir)
+			TASK:WaitTask(guest:StartAnim(anim))
+		end
 	end
 end
 
