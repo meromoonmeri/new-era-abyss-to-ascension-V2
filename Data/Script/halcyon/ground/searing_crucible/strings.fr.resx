@@ -304,4 +304,10 @@
   <data name="SC5_082" xml:space="preserve">
     <value>L'instabilité...[pause=0] Étrangers...[pause=0] Ce doit être votre œuvre !</value>
   </data>
+  <data name="SC5_083" xml:space="preserve">
+    <value>({0} semblait le penser,[pause=10] puisqu'il nous a accusés...)</value>
+  </data>
+  <data name="SC5_084" xml:space="preserve">
+    <value>(Évidemment, il se trompait,[pause=10] mais...[pause=0] Un Pokémon pourrait-il vraiment être à l'origine de tout ça ?[pause=0] Il est difficile d'imaginer un Pokémon aussi puissant...)</value>
+  </data>
 </root>

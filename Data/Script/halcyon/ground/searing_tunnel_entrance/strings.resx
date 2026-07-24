@@ -694,4 +694,16 @@
   <data name="STE5_212" xml:space="preserve">
     <value>We're OK,[pause=10] Guildmaster.[pause=0] We encountered some trouble in the tunnel so we decided to retreat.</value>
   </data>
+  <data name="STE5_213" xml:space="preserve">
+    <value>Crunch-munch! Om-nom-nom! Chomp-chomp!\nCrunch-munch! Om-nom-nom! Chomp-chomp!</value>
+  </data>
+  <data name="STE5_214" xml:space="preserve">
+    <value>Hmmph,[pause=10] stuck with the housekeepers of the-</value>
+  </data>
+  <data name="STE5_215" xml:space="preserve">
+    <value>Well,[pause=10] at the end of this dungeon,[pause=10] there's-</value>
+  </data>
+  <data name="STE5_216" xml:space="preserve">
+    <value>Hey,[pause=10] that wasn't what-</value>
+  </data>
 </root>

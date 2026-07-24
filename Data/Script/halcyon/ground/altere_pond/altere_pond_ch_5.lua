@@ -32,7 +32,7 @@ function altere_pond_ch_5.Event_Trigger_1_Touch(obj, activator)
 	local partner = CH('Teammate1')
 	local hero = CH('PLAYER')
 	
-	GeneralFunctions.StartPartnerConversation("There's no time for any adventures in " .. zone:GetColoredName() .. "![pause=0] We have to prepare for the expedition!")
+	GeneralFunctions.StartPartnerConversation(STRINGS:Format(STRINGS.MapStrings['AP5_004'], zone:GetColoredName()))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['AP5_001']))
 	UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['AP5_002']))
 	UI:SetSpeakerEmotion("Inspired")

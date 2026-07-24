@@ -1081,4 +1081,22 @@
   <data name="G3L5_129" xml:space="preserve">
     <value>We gotta go get ready too![pause=0] Ooh,[pause=10] this expedition's gonna be a bla-a-a-ast!</value>
   </data>
+  <data name="G3L5_130" xml:space="preserve">
+    <value>Alright Pokémon,[pause=10] let's get to the day's adventures![pause=10]\n(I've always wanted to say that part,[pause=10] heheh!)</value>
+  </data>
+  <data name="G3L5_131" xml:space="preserve">
+    <value>Meh.[pause=30] I prefer catching outlaws to exploring,[pause=10] so I'm not-</value>
+  </data>
+  <data name="G3L5_132" xml:space="preserve">
+    <value>(The expedition is shaping up to be something special![pause=0] I'm feeling pumped up about it!)</value>
+  </data>
+  <data name="G3L5_133" xml:space="preserve">
+    <value>(I don't know if what I'm feeling is that strange tension or just plain excitement,[pause=10] but I don't care!)</value>
+  </data>
+  <data name="G3L5_134" xml:space="preserve">
+    <value>(I'm just happy to be going on this expedition with {0}!)</value>
+  </data>
+  <data name="G3L5_135" xml:space="preserve">
+    <value>Ruff![pause=30] I can't wait any longer![pause=30] I'm gonna head into town right now to get ready,[pause=10] ruff!</value>
+  </data>
 </root>

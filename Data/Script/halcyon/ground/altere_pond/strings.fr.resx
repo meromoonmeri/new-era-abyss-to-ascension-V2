@@ -226,4 +226,7 @@
   <data name="AP5_003" xml:space="preserve">
     <value>Ooooh,[pause=10] c'est si excitant ![pause=0] Allons finir nos préparatifs,[pause=10] {0} !</value>
   </data>
+  <data name="AP5_004" xml:space="preserve">
+    <value>Nous n'avons pas le temps de partir à l'aventure dans {0} ![pause=0] Nous devons nous préparer pour l'expédition !</value>
+  </data>
 </root>

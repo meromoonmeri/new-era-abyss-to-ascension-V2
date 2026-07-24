@@ -1057,4 +1057,22 @@
   <data name="G3L5_129" xml:space="preserve">
     <value>Nous aussi on doit se préparer ![pause=0] Ooh,[pause=10] cette expédition va être génia-a-a-ale !</value>
   </data>
+  <data name="G3L5_130" xml:space="preserve">
+    <value>Très bien les Pokémon,[pause=10] place aux aventures du jour ![pause=10]\n(J'ai toujours rêvé de dire ça,[pause=10] héhé !)</value>
+  </data>
+  <data name="G3L5_131" xml:space="preserve">
+    <value>Bof.[pause=30] Je préfère attraper des hors-la-loi plutôt que d'explorer,[pause=10] alors je ne vais pas-</value>
+  </data>
+  <data name="G3L5_132" xml:space="preserve">
+    <value>(L'expédition promet d'être quelque chose de spécial ![pause=0] Je suis gonflé à bloc !)</value>
+  </data>
+  <data name="G3L5_133" xml:space="preserve">
+    <value>(Je ne sais pas si ce que je ressens est cette étrange tension ou simplement de l'excitation,[pause=10] mais peu importe !)</value>
+  </data>
+  <data name="G3L5_134" xml:space="preserve">
+    <value>(Je suis simplement heureux de partir en expédition avec {0} !)</value>
+  </data>
+  <data name="G3L5_135" xml:space="preserve">
+    <value>Wouf ![pause=30] Je ne peux plus attendre ![pause=30] Je vais aller en ville tout de suite pour me préparer,[pause=10] wouf !</value>
+  </data>
 </root>

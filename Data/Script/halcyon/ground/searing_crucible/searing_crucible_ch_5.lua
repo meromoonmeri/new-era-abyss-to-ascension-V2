@@ -1182,8 +1182,8 @@ function searing_crucible_ch_5.DefeatedBoss()
 	--UI:WaitShowDialogue("But it explains why the lava suddenly blocked our path as we tried to pass through here.")
 	GAME:WaitFrames(20)
 	
-	GeneralFunctions.HeroDialogue(hero, "(" .. magcargo:GetDisplayName() .. " seemed to think so,[pause=10] given that he accused us...)", "Worried")
-	GeneralFunctions.HeroDialogue(hero, "(Obviously he was wrong,[pause=10] but...[pause=0] Could a Pokémon even be causing this?[pause=0] It's hard to imagine one that powerful...)", "Worried")
+	GeneralFunctions.HeroDialogue(hero, STRINGS:Format(STRINGS.MapStrings['SC5_083'], magcargo:GetDisplayName()), "Worried")
+	GeneralFunctions.HeroDialogue(hero, STRINGS:Format(STRINGS.MapStrings['SC5_084']), "Worried")
 	GAME:WaitFrames(60)
 	
 	GeneralFunctions.EmoteAndPause(partner, "Exclaim", true)

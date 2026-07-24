@@ -694,4 +694,16 @@
   <data name="STE5_212" xml:space="preserve">
     <value>Ça va,[pause=10] Maître de Guilde.[pause=0] Nous avons eu des ennuis dans le tunnel, alors nous avons choisi de battre en retraite.</value>
   </data>
+  <data name="STE5_213" xml:space="preserve">
+    <value>Miam-miam ! Nom-nom ! Croc-croc !\nMiam-miam ! Nom-nom ! Croc-croc !</value>
+  </data>
+  <data name="STE5_214" xml:space="preserve">
+    <value>Hmmph,[pause=10] coincé avec les intendants de la-</value>
+  </data>
+  <data name="STE5_215" xml:space="preserve">
+    <value>Eh bien,[pause=10] à la fin de ce donjon,[pause=10] il y a-</value>
+  </data>
+  <data name="STE5_216" xml:space="preserve">
+    <value>Hé,[pause=10] ce n'était pas ce que-</value>
+  </data>
 </root>

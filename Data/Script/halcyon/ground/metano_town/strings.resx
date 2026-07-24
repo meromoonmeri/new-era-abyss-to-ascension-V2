@@ -2422,4 +2422,10 @@
   <data name="MT5_038" xml:space="preserve">
     <value>Ooooh,[pause=10] it's so exciting![pause=0] Let's go finish preparing,[pause=10] {0}!</value>
   </data>
+  <data name="MT5_039" xml:space="preserve">
+    <value>There's no time for any adventures in {0}![pause=0] We have to prepare for the expedition!</value>
+  </data>
+  <data name="MT5_040" xml:space="preserve">
+    <value>There's no time to go on any adventures![pause=0] We have to prepare for the expedition!</value>
+  </data>
 </root>
