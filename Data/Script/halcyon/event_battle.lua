@@ -987,3 +987,25 @@ end
 
 
 
+
+-- Story rescue used by Chapter 6's Gloomy Forest.  This deliberately follows
+-- the same BattleScriptEvent interaction path as ordinary rescue targets.
+function BATTLE_SCRIPT.TeamDazzlingChenipentRescue(owner, ownerChar, context, args)
+  if SV.Chapter6.ChenipentFound then
+    context.CancelState.Cancel = true
+    context.TurnCancel.Cancel = true
+    return
+  end
+
+  context.CancelState.Cancel = true
+  context.TurnCancel.Cancel = true
+  DUNGEON:CharTurnToChar(context.Target, context.User)
+  UI:SetSpeaker(context.Target)
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GF6_001']))
+  UI:SetSpeakerEmotion("Happy")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GF6_002']))
+  SV.Chapter6.ChenipentFound = true
+  UI:ResetSpeaker()
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['GF6_003']))
+end

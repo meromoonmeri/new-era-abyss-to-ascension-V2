@@ -677,6 +677,41 @@
 "Comment": "Chapter 1 - First dungeon of the game",
 "SortOrder": 0
 },
+"gloomy_forest": {
+"$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
+"ExpPercent": 100,
+"Level": -1,
+"LevelCap": false,
+"KeepSkills": false,
+"TeamRestrict": false,
+"TeamSize": -1,
+"MoneyRestrict": false,
+"BagRestrict": -1,
+"KeepTreasure": false,
+"BagSize": -1,
+"Rescues": 0,
+"CountedFloors": 5,
+"Rogue": 0,
+"Grounds": [],
+"Maps": [
+[
+0,
+1,
+2,
+3,
+4
+]
+],
+"Name": {
+"DefaultText": "Gloomy Forest",
+"LocalTexts": {
+"fr": "Forêt Lugubre"
+}
+},
+"Released": true,
+"Comment": "Chapter 6 - rescue mission for Team Dazzling",
+"SortOrder": 0
+},
 "rock_maze": {
 "$type": "RogueEssence.Data.ZoneEntrySummary, RogueEssence",
 "ExpPercent": 125,

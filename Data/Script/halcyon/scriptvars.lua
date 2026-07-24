@@ -782,13 +782,21 @@ SV.Chapter5 =
 	EscapedMountain = false,--Do we need to play the escaped from dungeon scene when loading this map?
 	DiedMountain = false,--Do we need to play the died in dungeon scene when loading this map?
 	
-	NeedGiveSupplies = false--does penticus/phileas need to give supplies out?
+	NeedGiveSupplies = false,--does penticus/phileas need to give supplies out?
+	FinishedExpedition = false--chapter 5 clear boundary; no chapter 5 scene is changed by this flag
 }
 
 
 SV.Chapter6 = 
 {
-
+	-- Chapter 6 starts only after the chapter boundary sets ChapterProgression.Chapter to 6.
+	DazzlingIntroPlayed = false,
+	MissionAvailable = false,
+	MissionAccepted = false,
+	ChenipentFound = false,
+	MissionComplete = false,
+	PostMissionScenePlayed = false,
+	DazzlingTownVisit = 0
 }
 
 

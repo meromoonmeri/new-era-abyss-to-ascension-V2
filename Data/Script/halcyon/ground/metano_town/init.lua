@@ -8,6 +8,7 @@ require 'halcyon.ground.metano_town.metano_town_ch_2'
 require 'halcyon.ground.metano_town.metano_town_ch_3'
 require 'halcyon.ground.metano_town.metano_town_ch_4'
 require 'halcyon.ground.metano_town.metano_town_ch_5'
+require 'halcyon.ground.metano_town.metano_town_ch_6'
 require 'halcyon.menu.single_deal_menu'
 require 'origin.menu.skill.SkillTutorMenu'
 
@@ -94,6 +95,11 @@ function metano_town.PlotScripting()
 		metano_town_ch_4.SetupGround()
 	elseif SV.ChapterProgression.Chapter == 5 then
 		metano_town_ch_5.SetupGround()
+	elseif SV.ChapterProgression.Chapter == 6 then
+		metano_town_ch_6.SetupGround()
+		if SV.Chapter6.MissionComplete and not SV.Chapter6.PostMissionScenePlayed then
+			metano_town_ch_6.PostMissionCutscene()
+		end
 	else
 		GAME:FadeIn(20)
 	end
@@ -2656,6 +2662,31 @@ end
 function metano_town.Mareep_Action(obj, activator)
  DEBUG.EnableDbgCoro() --Enable debugging this coroutine
  assert(pcall(load("metano_town_ch_" .. tostring(SV.ChapterProgression.Chapter) .. ".Mareep_Action(...,...)"), obj, activator))
+end
+
+function metano_town.Butterfree_Action(obj, activator)
+ DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+ assert(pcall(load("metano_town_ch_" .. tostring(SV.ChapterProgression.Chapter) .. ".Butterfree_Action(...,...)"), obj, activator))
+end
+
+function metano_town.Venipede_Action(obj, activator)
+ DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+ assert(pcall(load("metano_town_ch_" .. tostring(SV.ChapterProgression.Chapter) .. ".Venipede_Action(...,...)"), obj, activator))
+end
+
+function metano_town.Adagio_Action(obj, activator)
+ DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+ assert(pcall(load("metano_town_ch_" .. tostring(SV.ChapterProgression.Chapter) .. ".Adagio_Action(...,...)"), obj, activator))
+end
+
+function metano_town.Aria_Action(obj, activator)
+ DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+ assert(pcall(load("metano_town_ch_" .. tostring(SV.ChapterProgression.Chapter) .. ".Aria_Action(...,...)"), obj, activator))
+end
+
+function metano_town.Sonata_Action(obj, activator)
+ DEBUG.EnableDbgCoro() --Enable debugging this coroutine
+ assert(pcall(load("metano_town_ch_" .. tostring(SV.ChapterProgression.Chapter) .. ".Sonata_Action(...,...)"), obj, activator))
 end
 
 function metano_town.Cranidos_Action(obj, activator)

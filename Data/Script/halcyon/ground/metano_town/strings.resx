@@ -2428,4 +2428,129 @@
   <data name="MT5_040" xml:space="preserve">
     <value>There's no time to go on any adventures![pause=0] We have to prepare for the expedition!</value>
   </data>
+
+  <data name="MT6_001" xml:space="preserve">
+    <value>Excuse me! Please help me! My Venipede is lost in the Gloomy Forest!</value>
+  </data>
+  <data name="MT6_002" xml:space="preserve">
+    <value>I was watching over him near the path... then he was simply gone.</value>
+  </data>
+  <data name="MT6_003" xml:space="preserve">
+    <value>We are already committed to missions of greater importance.</value>
+  </data>
+  <data name="MT6_004" xml:space="preserve">
+    <value>A lost child in a forest is unfortunate, but it is not a priority for an elite team.</value>
+  </data>
+  <data name="MT6_005" xml:space="preserve">
+    <value>Oh... I thought you were joking.</value>
+  </data>
+  <data name="MT6_006" xml:space="preserve">
+    <value>You were serious? How touching.</value>
+  </data>
+  <data name="MT6_007" xml:space="preserve">
+    <value>You cannot just turn away someone asking for help!</value>
+  </data>
+  <data name="MT6_008" xml:space="preserve">
+    <value>Me? I did nothing.</value>
+  </data>
+  <data name="MT6_009" xml:space="preserve">
+    <value>...Nothing you can prove.</value>
+  </data>
+  <data name="MT6_010" xml:space="preserve">
+    <value>If you can help and refuse, what does that say about being an exploration team?</value>
+  </data>
+  <data name="MT6_011" xml:space="preserve">
+    <value>We will help you find Venipede.</value>
+  </data>
+  <data name="MT6_012" xml:space="preserve">
+    <value>Thank you! I knew someone would listen.</value>
+  </data>
+  <data name="MT6_013" xml:space="preserve">
+    <value>Oh, a volunteer.</value>
+  </data>
+  <data name="MT6_014" xml:space="preserve">
+    <value>How heroic. Should we applaud?</value>
+  </data>
+  <data name="MT6_015" xml:space="preserve">
+    <value>You are doing your best? It is adorable.</value>
+  </data>
+  <data name="MT6_016" xml:space="preserve">
+    <value>Do not worry. We will make sure your forest walk is memorable.</value>
+  </data>
+  <data name="MT6_017" xml:space="preserve">
+    <value>Team Dazzling. Remember the name.</value>
+  </data>
+  <data name="MT6_018" xml:space="preserve">
+    <value>Thank you again... Venipede has not stopped talking about you.</value>
+  </data>
+  <data name="MT6_019" xml:space="preserve">
+    <value>Is this the exploration team that offered to help?</value>
+  </data>
+  <data name="MT6_020" xml:space="preserve">
+    <value>If you are ready, Venipede should be near the heart of the Gloomy Forest.</value>
+  </data>
+  <data name="MT6_021" xml:space="preserve">
+    <value>Go look for Venipede in the Gloomy Forest?</value>
+  </data>
+  <data name="MT6_022" xml:space="preserve">
+    <value>It is all right. I will wait here.</value>
+  </data>
+  <data name="MT6_023" xml:space="preserve">
+    <value>The mission? We left it to you.</value>
+  </data>
+  <data name="MT6_024" xml:space="preserve">
+    <value>Do not mistake courtesy for approval.</value>
+  </data>
+  <data name="MT6_025" xml:space="preserve">
+    <value>Did you come to thank us for letting you take our mission?</value>
+  </data>
+  <data name="MT6_026" xml:space="preserve">
+    <value>Do not worry. We will not charge you for the lesson.</value>
+  </data>
+  <data name="MT6_027" xml:space="preserve">
+    <value>I saw something strange in your bag.</value>
+  </data>
+  <data name="MT6_028" xml:space="preserve">
+    <value>Never mind. It was only my imagination... probably.</value>
+  </data>
+  <data name="MT6_029" xml:space="preserve">
+    <value>Thank you for bringing him back.</value>
+  </data>
+  <data name="MT6_030" xml:space="preserve">
+    <value>I was scared... but they found me.</value>
+  </data>
+  <data name="MT6_031" xml:space="preserve">
+    <value>Even they had to admit we did it.</value>
+  </data>
+  <data name="MT6_032" xml:space="preserve">
+    <value>Oh, do not look so proud. We merely gave you a chance.</value>
+  </data>
+  <data name="MT6_033" xml:space="preserve">
+    <value>I did nothing! ...This time.</value>
+  </data>
+  <data name="MT6_034" xml:space="preserve">
+    <value>Your choice was not entirely inefficient.</value>
+  </data>
+  <data name="MT6_035" xml:space="preserve">
+    <value>Thank you! The forest was scary.</value>
+  </data>
+
+  <data name="MT6_036" xml:space="preserve">
+    <value>Team Dazzling? They are the sort of explorers people remember after one meeting.</value>
+  </data>
+  <data name="MT6_037" xml:space="preserve">
+    <value>Adagio is the leader. She speaks softly, but somehow everyone listens.</value>
+  </data>
+  <data name="MT6_038" xml:space="preserve">
+    <value>Aria? She smiles like she already knows how you will answer.</value>
+  </data>
+  <data name="MT6_039" xml:space="preserve">
+    <value>Sonata is the one to watch around your belongings. I learned that the hard way.</value>
+  </data>
+  <data name="MT6_040" xml:space="preserve">
+    <value>The three of them are very good explorers.</value>
+  </data>
+  <data name="MT6_041" xml:space="preserve">
+    <value>They are also very good at making the rest of us feel like beginners.</value>
+  </data>
 </root>

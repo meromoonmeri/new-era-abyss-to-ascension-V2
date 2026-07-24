@@ -312,6 +312,51 @@ local characters = {
 			skin = 'normal'
 		},
 		
+	--Team Dazzling
+		-- Their public codenames are deliberately stored as nicknames.  The
+		-- French species name Lockpin belongs to Lopunny in the base data; it
+		-- is not a second character and is therefore not duplicated here.
+		Adagio = {
+			species = "tsareena",
+			nickname = 'Adagio',
+			instance = 'Adagio',
+			gender = Gender.Female,
+			form = 0,
+			skin = "normal"
+		},
+		Aria = {
+			species = "lopunny",
+			nickname = 'Aria',
+			instance = 'Aria',
+			gender = Gender.Female,
+			form = 0,
+			skin = "normal"
+		},
+		Sonata = {
+			species = "mismagius",
+			nickname = 'Sonata',
+			instance = 'Sonata',
+			gender = Gender.Female,
+			form = 0,
+			skin = "normal"
+		},
+		Butterfree = {
+			species = "butterfree",
+			nickname = 'Papilusion',
+			instance = 'Butterfree',
+			gender = Gender.Female,
+			form = 0,
+			skin = "normal"
+		},
+		Venipede = {
+			species = "venipede",
+			nickname = 'Chenipent',
+			instance = 'Venipede',
+			gender = Gender.Unknown,
+			form = 0,
+			skin = "normal"
+		},
+
 	--Vendor/Shop NPCs
 		Kangaskhan = {
 			species = "kangaskhan",

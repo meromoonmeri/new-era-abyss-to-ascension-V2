@@ -567,3 +567,27 @@ function ZONE_GEN_SCRIPT.SpawnChapter5MountGuardian(zoneContext, context, queue,
     })
   end
 end
+
+-- Chapter 6 story target.  The same entrance-placement pipeline used by
+-- mission rescues is reused here; the interaction itself is handled by the
+-- existing BATTLE_SCRIPT event system.
+function ZONE_GEN_SCRIPT.SpawnChapter6Chenipent(zoneContext, context, queue, seed, args)
+  if zoneContext.CurrentID ~= 4 or SV.Chapter6.ChenipentFound then
+    return
+  end
+
+  local specific_team = RogueEssence.LevelGen.SpecificTeamSpawner()
+  local target = RogueEssence.LevelGen.MobSpawn()
+  target.BaseForm = RogueEssence.Dungeon.MonsterID("venipede", 0, "normal", Gender.Unknown)
+  target.Tactic = "slow_wander"
+  target.Level = RogueElements.RandRange(20, 21)
+  local dialogue = RogueEssence.Dungeon.BattleScriptEvent("TeamDazzlingChenipentRescue")
+  target.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnInteractable(dialogue))
+  specific_team.Spawns:Add(target)
+
+  local picker = LUA_ENGINE:MakeGenericType(PresetMultiTeamSpawnerType, { MapGenContextType }, { })
+  picker.Spawns:Add(specific_team)
+  local placement = LUA_ENGINE:MakeGenericType(PlaceEntranceMobsStepType, { MapGenContextType, EntranceType }, { picker })
+  placement.Ally = true
+  queue:Enqueue(RogueElements.Priority(5, 2, 1), placement)
+end

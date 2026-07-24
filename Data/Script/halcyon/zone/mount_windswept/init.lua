@@ -54,6 +54,13 @@ function mount_windswept.ExitSegment(zone, result, rescue, segmentID, mapID)
 	if exited == true then
 		--ExitDungeonMissionCheck already sent the player out (rescue case); do nothing.
 	else
+		--The expedition is complete only after the summit is cleared.  This is a
+		--plot boundary, not a new Chapter 5 scene: the next town visit is Chapter 6.
+		if SV.ChapterProgression.Chapter == 5 and result == RogueEssence.Data.GameProgress.ResultType.Cleared then
+			SV.Chapter5.FinishedExpedition = true
+			SV.ChapterProgression.Chapter = 6
+		end
+
 		--Generic win/loss handling. This zone has no end-of-dungeon ground map yet,
 		--so every outcome must route back to the guild or the run would never end.
 		if result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
