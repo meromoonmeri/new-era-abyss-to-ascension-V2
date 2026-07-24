@@ -14,7 +14,8 @@
 },
 "Desc": {
 "DefaultText": "A food item that somewhat fills the Pokémon's belly, and permanently boosts its stats. It usually boosts Special Attack, and Fire-type Pokémon like it the most.",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Un aliment qui remplit un peu le Ventre et augmente définitivement les stats du Pokémon. Il augmente généralement l’Attaque Spéciale. Les Pokémon de type Feu l’apprécient particulièrement."}
 },
 "Released": true,
 "Comment": "",

@@ -495,3 +495,75 @@ function FLOOR_GEN_SCRIPT.IsBridge(map, loc, args)
 end
 
 
+
+
+-- Chapter 5 fixed encounters.
+-- These are generated only on their designated floor.  The entrance placement
+-- is intentional: the encounter is guaranteed, while the rest of the floor
+-- keeps its normal procedural generation.
+local function QueueChapter5Encounter(queue, members)
+  local specific_team = RogueEssence.LevelGen.SpecificTeamSpawner()
+
+  for _, member in ipairs(members) do
+    local post_mob = RogueEssence.LevelGen.MobSpawn()
+    post_mob.BaseForm = RogueEssence.Dungeon.MonsterID(member.Species, 0, "normal", Gender.Unknown)
+    post_mob.Tactic = "boss"
+    -- RandRange's upper bound is exclusive, so this produces the requested
+    -- fixed level without depending on the dungeon's normal level rolls.
+    post_mob.Level = RogueElements.RandRange(member.Level, member.Level + 1)
+
+    local boost = PMDC.LevelGen.MobSpawnBoost()
+    boost.MaxHPBonus = member.HPBonus
+    post_mob.SpawnFeatures:Add(boost)
+    post_mob.SpawnFeatures:Add(PMDC.LevelGen.MobSpawnLuaTable('{ Role = "Chapter5Guardian" }'))
+    specific_team.Spawns:Add(post_mob)
+  end
+
+  local picker = LUA_ENGINE:MakeGenericType(PresetMultiTeamSpawnerType, { MapGenContextType }, { })
+  picker.Spawns:Add(specific_team)
+  local mob_placement = LUA_ENGINE:MakeGenericType(PlaceEntranceMobsStepType, { MapGenContextType, EntranceType }, { picker })
+  queue:Enqueue(RogueElements.Priority(5, 2, 3), mob_placement)
+end
+
+function ZONE_GEN_SCRIPT.SpawnChapter5SteppeMiniBoss(zoneContext, context, queue, seed, args)
+  if zoneContext.CurrentID == 6 then
+    QueueChapter5Encounter(queue, {
+      { Species = "stantler", Level = 20, HPBonus = 24 },
+      { Species = "mudbray", Level = 19, HPBonus = 16 }
+    })
+  end
+end
+
+function ZONE_GEN_SCRIPT.SpawnChapter5SteppeGuardian(zoneContext, context, queue, seed, args)
+  if zoneContext.CurrentID == 13 then
+    QueueChapter5Encounter(queue, {
+      { Species = "stantler", Level = 23, HPBonus = 36 }
+    })
+  end
+end
+
+function ZONE_GEN_SCRIPT.SpawnChapter5TunnelMiniBoss(zoneContext, context, queue, seed, args)
+  if zoneContext.CurrentID == 4 then
+    QueueChapter5Encounter(queue, {
+      { Species = "torkoal", Level = 21, HPBonus = 30 },
+      { Species = "magmar", Level = 20, HPBonus = 20 }
+    })
+  end
+end
+
+function ZONE_GEN_SCRIPT.SpawnChapter5MountMiniBoss(zoneContext, context, queue, seed, args)
+  if zoneContext.CurrentID == 6 then
+    QueueChapter5Encounter(queue, {
+      { Species = "gligar", Level = 22, HPBonus = 24 },
+      { Species = "skarmory", Level = 21, HPBonus = 20 }
+    })
+  end
+end
+
+function ZONE_GEN_SCRIPT.SpawnChapter5MountGuardian(zoneContext, context, queue, seed, args)
+  if zoneContext.CurrentID == 12 then
+    QueueChapter5Encounter(queue, {
+      { Species = "aerodactyl", Level = 24, HPBonus = 42 }
+    })
+  end
+end

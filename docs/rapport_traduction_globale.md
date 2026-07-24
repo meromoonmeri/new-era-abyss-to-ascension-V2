@@ -70,7 +70,8 @@ Ces textes comprennent notamment :
 - messages de mission ;
 - messages du bureau de poste ;
 - textes d'événements génériques ;
-- descriptions d'objets encore absentes en français.
+- descriptions d'objets désormais complétées pour les 58 entrées qui étaient absentes ;
+- titres des 36 panneaux de la leçon pour débutants désormais ajoutés en français.
 
 ## Important
 
@@ -84,7 +85,7 @@ La prochaine passe doit être faite par blocs fonctionnels :
 4. Metano et ses maisons ;
 5. bureau de poste et missions ;
 6. chapitres 1 à 4 ;
-7. descriptions restantes des objets, statuts, rangs et cartes ;
+7. relecture en jeu des descriptions d'objets, statuts, rangs et cartes ;
 8. contrôle final des clés françaises et test en jeu.
 
 ## Validation après cette passe

@@ -1,4 +1,4 @@
-{
+﻿{
   "Version": "0.8.9.0",
   "Object": {
     "$type": "RogueEssence.Data.ItemData, RogueEssence",
@@ -14,6 +14,7 @@
     "Desc": {
       "DefaultText": "A box that is dainty and fashionable. There is something tasty inside!",
       "LocalTexts": {
+"fr": "Une boîte délicate et élégante. Elle contient quelque chose de savoureux !",
         "de": "Eine schicke, modische Box. Der Inhalt hilft Pokémon generell dabei stärker zu werden.",
         "it": "Un forziere all'ultima moda. Probabilmente contiene qualcosa.",
         "zh-hans": "时尚精致的宝箱。里面的东西似乎很好吃！"

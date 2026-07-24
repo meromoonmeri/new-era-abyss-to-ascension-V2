@@ -1,4 +1,4 @@
-{
+﻿{
   "Version": "0.8.9.0",
   "Object": {
     "$type": "RogueEssence.Data.ItemData, RogueEssence",
@@ -10,7 +10,8 @@
     },
     "Desc": {
       "DefaultText": "A dangerous drink fermented by Dion. Can be lobbed in an arc to cause an explosion when it impacts a target or the ground.",
-      "LocalTexts": {}
+      "LocalTexts": {
+"fr": "Une boisson dangereuse fermentée par Dion. Elle peut être lancée en arc et provoquer une explosion à l’impact ou au contact du sol."}
     },
     "Released": true,
     "Comment": "Cafe ammo item.",

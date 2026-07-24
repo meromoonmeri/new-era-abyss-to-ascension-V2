@@ -5594,4 +5594,113 @@ Comme c'est un volontaire, il ne restera pas avec toi après la sortie.
   <data name="TALK_PINCH_9999" xml:space="preserve">
     <value>C'est un message d'erreur de personnalité. Indique à Palika ce qui a conduit à cette erreur.</value>
   </data>
+
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_1_1_TITLE" xml:space="preserve">
+    <value>Bienvenue dans la leçon pour débutants !</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_1_2_TITLE" xml:space="preserve">
+    <value>S’orienter dans les donjons mystérieux</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_1_3_TITLE" xml:space="preserve">
+    <value>Menus</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_1_4_TITLE" xml:space="preserve">
+    <value>Se déplacer dans un donjon</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_1_5_TITLE" xml:space="preserve">
+    <value>À faire !</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_2_1_TITLE" xml:space="preserve">
+    <value>Les capacités et leurs propriétés</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_2_2_TITLE" xml:space="preserve">
+    <value>Les capacités et leurs propriétés (suite)</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_2_3_TITLE" xml:space="preserve">
+    <value>Utiliser différentes capacités</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_3_1_TITLE" xml:space="preserve">
+    <value>Expérience</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_3_2_TITLE" xml:space="preserve">
+    <value>Gagner de l’expérience</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_4_1_TITLE" xml:space="preserve">
+    <value>Ventre</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_5_1_TITLE" xml:space="preserve">
+    <value>Stats</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_5_2_TITLE" xml:space="preserve">
+    <value>Stats (suite)</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_5_3_TITLE" xml:space="preserve">
+    <value>Modifications temporaires des stats</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_5_4_TITLE" xml:space="preserve">
+    <value>Vitesse de déplacement</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_5_5_TITLE" xml:space="preserve">
+    <value>Précision et esquive</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_6_1_TITLE" xml:space="preserve">
+    <value>Types</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_6_2_TITLE" xml:space="preserve">
+    <value>Double type et STAB</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_7_1_TITLE" xml:space="preserve">
+    <value>Talents</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_7_2_TITLE" xml:space="preserve">
+    <value>Talents différents, même espèce</value>
+  </data>
+  <data name="BEGINNER_LESSON_GENERAL_SIGN_7_3_TITLE" xml:space="preserve">
+    <value>Talents faibles et puissants</value>
+  </data>
+  <data name="BEGINNER_LESSON_STATUS_SIGN_1_1_TITLE" xml:space="preserve">
+    <value>Statuts</value>
+  </data>
+  <data name="BEGINNER_LESSON_STATUS_SIGN_1_2_TITLE" xml:space="preserve">
+    <value>Statuts majeurs</value>
+  </data>
+  <data name="BEGINNER_LESSON_STATUS_SIGN_1_3_TITLE" xml:space="preserve">
+    <value>Statuts majeurs (suite)</value>
+  </data>
+  <data name="BEGINNER_LESSON_STATUS_SIGN_2_1_TITLE" xml:space="preserve">
+    <value>Statuts mineurs</value>
+  </data>
+  <data name="BEGINNER_LESSON_STATUS_SIGN_2_2_TITLE" xml:space="preserve">
+    <value>Exemples de statuts mineurs</value>
+  </data>
+  <data name="BEGINNER_LESSON_STATUS_SIGN_2_3_TITLE" xml:space="preserve">
+    <value>Les statuts mineurs bénéfiques</value>
+  </data>
+  <data name="BEGINNER_LESSON_ITEMS_SIGN_1_1_TITLE" xml:space="preserve">
+    <value>Objets</value>
+  </data>
+  <data name="BEGINNER_LESSON_ITEMS_SIGN_2_1_TITLE" xml:space="preserve">
+    <value>Orbes et baguettes</value>
+  </data>
+  <data name="BEGINNER_LESSON_ITEMS_SIGN_3_1_TITLE" xml:space="preserve">
+    <value>Objets à tenir</value>
+  </data>
+  <data name="BEGINNER_LESSON_ITEMS_SIGN_4_1_TITLE" xml:space="preserve">
+    <value>Armes à lancer et graines résugraine</value>
+  </data>
+  <data name="BEGINNER_LESSON_TERRAIN_SIGN_1_1_TITLE" xml:space="preserve">
+    <value>Terrain</value>
+  </data>
+  <data name="BEGINNER_LESSON_TERRAIN_SIGN_1_2_TITLE" xml:space="preserve">
+    <value>Terrain (suite)</value>
+  </data>
+  <data name="BEGINNER_LESSON_TERRAIN_SIGN_1_3_TITLE" xml:space="preserve">
+    <value>Déplacements précis</value>
+  </data>
+  <data name="BEGINNER_LESSON_TERRAIN_SIGN_2_1_TITLE" xml:space="preserve">
+    <value>Mode Équipe</value>
+  </data>
+  <data name="BEGINNER_LESSON_RECRUITMENT_SIGN_1_1_TITLE" xml:space="preserve">
+    <value>Recruter des Pokémon</value>
+  </data>
 </root>

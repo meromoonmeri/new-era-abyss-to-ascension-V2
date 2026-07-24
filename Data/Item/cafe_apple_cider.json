@@ -1,4 +1,4 @@
-{
+﻿{
   "Version": "0.8.9.0",
   "Object": {
     "$type": "RogueEssence.Data.ItemData, RogueEssence",
@@ -10,7 +10,8 @@
     },
     "Desc": {
       "DefaultText": "Some delicious Apple Cider fermented by Dion. Can contain multiple servings. Each serving restores half of your HP and somewhat fills your Belly.",
-      "LocalTexts": {}
+      "LocalTexts": {
+"fr": "Un délicieux cidre de pomme fermenté par Dion. Il peut contenir plusieurs doses. Chaque dose restaure la moitié des PV et remplit un peu le Ventre."}
     },
     "Released": true,
     "Comment": "Cafe food item.",

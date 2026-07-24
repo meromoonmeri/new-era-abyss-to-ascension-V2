@@ -19,7 +19,8 @@
 },
 "Desc": {
 "DefaultText": "A very sweet and delicious berry. It cures poisoning.",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Une baie très sucrée et délicieuse. Elle soigne l’empoisonnement."}
 },
 "Released": true,
 "Comment": "",

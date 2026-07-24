@@ -1,4 +1,4 @@
-{
+﻿{
   "Version": "0.8.9.0",
   "Object": {
     "$type": "RogueEssence.Data.ItemData, RogueEssence",
@@ -12,6 +12,7 @@
     "Desc": {
       "DefaultText": "A hold item that slightly boosts the Pokémon's Special Defense.",
       "LocalTexts": {
+"fr": "Un objet à tenir qui augmente légèrement la Défense Spéciale du Pokémon.",
         "de": "Ein Item zum Tragen. Die Spezial Verteidigung des Trägers wird leicht erhöht."
       }
     },

@@ -19,7 +19,8 @@
 },
 "Desc": {
 "DefaultText": "A hard, sour berry that is dense with a rich juice. Cures freeze.",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Une baie dure et acide, remplie d’un jus riche. Elle soigne le gel."}
 },
 "Released": true,
 "Comment": "",

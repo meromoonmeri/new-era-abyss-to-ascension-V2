@@ -1,4 +1,4 @@
-{
+﻿{
   "Version": "0.8.9.0",
   "Object": {
     "$type": "RogueEssence.Data.ItemData, RogueEssence",
@@ -10,7 +10,8 @@
     },
     "Desc": {
       "DefaultText": "A hold item that prevents the Pokémon from becoming frozen.",
-      "LocalTexts": {}
+      "LocalTexts": {
+"fr": "Un objet à tenir qui empêche le Pokémon de geler."}
     },
     "Released": true,
     "Comment": "",

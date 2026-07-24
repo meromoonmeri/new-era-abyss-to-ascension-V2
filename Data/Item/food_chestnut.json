@@ -16,7 +16,8 @@
 },
 "Desc": {
 "DefaultText": "A spiky food item with a shell that hurts to peel. It somewhat fills the Pokémon's belly. Loved by Mankey.",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Un aliment hérissé de piquants, protégé par une coque difficile à retirer. Il remplit un peu le Ventre du Pokémon. Les Miamiasme l’adorent."}
 },
 "Released": true,
 "Comment": "",

@@ -1,4 +1,4 @@
-{
+﻿{
   "Version": "0.8.9.0",
   "Object": {
     "$type": "RogueEssence.Data.ItemData, RogueEssence",
@@ -10,7 +10,8 @@
     },
     "Desc": {
       "DefaultText": "A rare scarf made of many unique fibers. Normally dull, it glows a vibrant arrangement of bright colors when near another of its kind, boosting the holders' offensive and defensive stats slightly.",
-      "LocalTexts": {}
+      "LocalTexts": {
+"fr": "Une écharpe rare tissée de nombreuses fibres uniques. Habituellement terne, elle se met à briller de couleurs éclatantes près d’une autre écharpe du même genre et augmente légèrement les stats offensives et défensives de ses porteurs."}
     },
     "Released": true,
     "Comment": "Only works when another synergy scarf is worn by a nearby ally.\r\nBoosts all stats by 10%.\r\nActs as a pass scarf in a pinch.\r\n\r\n",

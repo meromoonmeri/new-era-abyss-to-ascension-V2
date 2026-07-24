@@ -15,6 +15,7 @@
 "Desc": {
 "DefaultText": "An orb that nullifies the Abilities of all enemies on the floor.",
 "LocalTexts": {
+"fr": "Un orbe qui annule les talents de tous les ennemis de l’étage.",
 "de": "Ein Orb, der die Fähigkeiten von allen Gegnern auf der Ebene deaktiviert.",
 "zh-hans": "一种不可思议之玉，使用后能够消除全层对手的特性。"
 }

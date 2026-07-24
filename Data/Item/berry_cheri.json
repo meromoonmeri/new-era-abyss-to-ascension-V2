@@ -19,7 +19,8 @@
 },
 "Desc": {
 "DefaultText": "A bright red berry that is very spicy. It cures paralysis.",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Une baie rouge vif au goût très épicé. Elle soigne la paralysie."}
 },
 "Released": true,
 "Comment": "",

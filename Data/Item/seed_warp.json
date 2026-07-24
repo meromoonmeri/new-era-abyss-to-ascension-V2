@@ -13,6 +13,7 @@
 "Desc": {
 "DefaultText": "A seed that warps the Pokémon and its nearby allies to a different place on the floor.",
 "LocalTexts": {
+"fr": "Une graine qui téléporte le Pokémon et ses alliés proches vers un autre endroit de l’étage.",
 "de": "Ein Samen, der das Pokémon und Verbündete in der Nähe auf eine zufällige Position auf der Ebene teleportiert.",
 "ko": "먹은 포켓몬과 근처의 동료를 다른 곳으로 순간이동시킨다."
 }

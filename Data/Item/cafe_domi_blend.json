@@ -1,4 +1,4 @@
-{
+﻿{
   "Version": "0.8.9.0",
   "Object": {
     "$type": "RogueEssence.Data.ItemData, RogueEssence",
@@ -11,7 +11,8 @@
     },
     "Desc": {
       "DefaultText": "A blend of assorted fermented berries. Dion's specialty. It honestly tastes a bit foul. Fully restores HP of nearby party members. As a side effect, it lowers Atk and Sp. Atk, but in return raises Def and Sp. Def.",
-      "LocalTexts": {}
+      "LocalTexts": {
+"fr": "Un mélange de baies fermentées, la spécialité de Dion. Son goût est franchement douteux. Il restaure entièrement les PV des membres proches de l’équipe. En contrepartie, il réduit l’Attaque et l’Attaque Spéciale, mais augmente la Défense et la Défense Spéciale."}
     },
     "Released": true,
     "Comment": "Cafe food item.",

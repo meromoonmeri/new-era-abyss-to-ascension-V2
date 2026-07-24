@@ -1,4 +1,4 @@
-{
+﻿{
   "Version": "0.8.9.0",
   "Object": {
     "$type": "RogueEssence.Data.ItemData, RogueEssence",
@@ -14,6 +14,7 @@
     "Desc": {
       "DefaultText": "A box that is extravagant and opulent. It looks like something is inside.",
       "LocalTexts": {
+"fr": "Une boîte extravagante et luxueuse. On dirait que quelque chose se trouve à l’intérieur.",
         "de": "Diese Box ist extravagant und üppig. Sieht so aus, als wäre etwas drinnen.",
         "it": "Un forziere sfarzoso e stravagante. Probabilmente contiene qualcosa.",
         "zh-hans": "豪华奢侈的宝箱。里面似乎有什么东西。"

@@ -1,4 +1,4 @@
-{
+﻿{
   "Version": "0.8.9.0",
   "Object": {
     "$type": "RogueEssence.Data.ItemData, RogueEssence",
@@ -14,6 +14,7 @@
     "Desc": {
       "DefaultText": "A box that glitters with dazzling light. Whatever's inside is sure to sell for a high price!",
       "LocalTexts": {
+"fr": "Une boîte qui scintille d’une lumière éblouissante. Son contenu se vend sûrement à prix d’or !",
         "de": "Das Glitzern dieser Box ist blendend. Was auch immer da drinnen ist wird sich sicher gut verkaufen lassen.",
         "it": "Un forziere splendete. Probabilmente contiene qualcosa.",
         "zh-hans": "闪烁耀眼的宝箱。里面的东西肯定很值钱！"

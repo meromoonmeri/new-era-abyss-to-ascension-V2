@@ -1,4 +1,4 @@
-{
+﻿{
   "Version": "0.8.9.0",
   "Object": {
     "$type": "RogueEssence.Data.ItemData, RogueEssence",
@@ -14,6 +14,7 @@
     "Desc": {
       "DefaultText": "A box that is completely impressive. There is something mysterious inside.",
       "LocalTexts": {
+"fr": "Une boîte tout à fait remarquable. Elle contient quelque chose de mystérieux.",
         "de": "Eine Box, die total beeindruckend ist. Der Inhalt hilft Pokémon generell dabei ihre Fähigkeiten zu verbessern.",
         "it": "Un forziere davvero raffinato. Probabilmente contiene qualcosa.",
         "zh-hans": "令人印象深刻的宝箱。里面似乎有些不可思议。"

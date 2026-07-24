@@ -1,4 +1,4 @@
-{
+﻿{
   "Version": "0.8.9.0",
   "Object": {
     "$type": "RogueEssence.Data.ItemData, RogueEssence",
@@ -10,7 +10,8 @@
     },
     "Desc": {
       "DefaultText": "A bitter tonic fermented by Dion. Gives the Endurance Tonic status to the Pokémon that drinks it for a few turns, preventing them from fainting, even if they move around.",
-      "LocalTexts": {}
+      "LocalTexts": {
+"fr": "Un tonique amer fermenté par Dion. Il confère l’état Tonique d’Endurance pendant quelques tours et empêche le Pokémon de tomber K.O., même s’il se déplace."}
     },
     "Released": true,
     "Comment": "Cafe food item.",

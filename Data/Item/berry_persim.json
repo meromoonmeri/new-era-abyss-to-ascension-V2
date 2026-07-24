@@ -19,7 +19,8 @@
 },
 "Desc": {
 "DefaultText": "A berry whose colors grow vivid when exposed to the sun. Cures confusion.",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Une baie dont les couleurs s’intensifient au soleil. Elle soigne la confusion."}
 },
 "Released": true,
 "Comment": "",

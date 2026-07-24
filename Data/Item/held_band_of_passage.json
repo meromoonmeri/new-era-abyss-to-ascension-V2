@@ -1,4 +1,4 @@
-{
+﻿{
   "Version": "0.8.9.0",
   "Object": {
     "$type": "RogueEssence.Data.ItemData, RogueEssence",
@@ -10,7 +10,8 @@
     },
     "Desc": {
       "DefaultText": "Allows the wielder to continue through the lesson without being warped away.",
-      "LocalTexts": {}
+      "LocalTexts": {
+"fr": "Permet à son porteur de poursuivre la leçon sans être téléporté au début."}
     },
     "Released": true,
     "Comment": "For use within the beginner lesson tutorial.",

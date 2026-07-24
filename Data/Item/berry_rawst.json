@@ -19,7 +19,8 @@
 },
 "Desc": {
 "DefaultText": "If the leaves of this berry grow long and curly, the more bitter the berry becomes. Cures burn.",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Plus les feuilles de cette baie sont longues et bouclées, plus elle devient amère. Elle soigne les brûlures."}
 },
 "Released": true,
 "Comment": "",

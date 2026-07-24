@@ -69,9 +69,11 @@ Le Tunnel est le deuxième donjon de l'expédition et le donjon le plus complexe
 
 La zone possède actuellement trois segments techniques :
 
-- segment 0 : 10 étages, plages `0–4` et `5–9` ;
-- segment 1 : 5 étages de profondeurs ;
+- segment 0 : 10 étages normaux, plages `0–4` et `5–9` ;
+- segment 1 : 5 étages normaux de profondeurs ;
 - segment 2 : une arène de boss au Crucible.
+
+La structure de production retenue est donc **15 étages normaux + l’arène du Crucible**. Elle est volontaire et ne doit pas être réduite à l’ancien plan de 10 étages.
 
 Les transitions implémentées sont :
 
@@ -161,7 +163,7 @@ La conclusion prévue comprend :
 | Zone | Publiée | Segments | Étages / structure | État |
 |---|---:|---:|---|---|
 | `vast_steppe` | oui | 1 | 14 étages | jouable |
-| `searing_tunnel` | oui | 3 | 15 étages normaux + arène | jouable, incohérence avec le plan à corriger |
+| `searing_tunnel` | oui | 3 | 15 étages normaux + arène | jouable, structure de production validée statiquement |
 | `mount_windswept` | oui | 1 | 13 étages | jouable |
 | `cloven_ruins` | non | 0 | aucune | volontairement réservée au chapitre 6 |
 
@@ -215,7 +217,23 @@ Une partie des traductions annexes a été corrigée directement dans les script
 
 Le reste du projet, surtout les chapitres 1 à 4, les menus génériques et `PartnerEssentials.lua`, contient encore de l'anglais et ne doit pas être présenté comme entièrement francisé.
 
-## 5. Tests à faire dans PMDO
+## 5. Rencontres fixes du chapitre 5
+
+Les mini-boss et gardiens sont désormais déclarés par `ScriptGenStep` et générés uniquement sur leur étage cible. La génération utilise les classes déjà présentes dans le projet et documentées par PMDO : `SpecificTeamSpawner`, `PresetMultiTeamSpawner`, `PlaceEntranceMobsStep` et `MobSpawn`.
+
+| Zone | Étage affiché | `CurrentID` | Rencontre | Niveau | Génération |
+|---|---:|---:|---|---:|---|
+| Grande Steppe | 7 | 6 | Stantler + Mudbray | 20 / 19 | garantie à l’entrée de l’étage |
+| Grande Steppe | 14 | 13 | Stantler, gardien | 23 | garantie à l’entrée de l’étage |
+| Tunnel Incandescent | 5 | 4 (segment 0) | Torkoal + Magmar | 21 / 20 | garantie à l’entrée de l’étage |
+| Mont Venteux | 7 | 6 | Gligar + Skarmory | 22 / 21 | garantie à l’entrée de l’étage |
+| Mont Venteux | 13 | 12 | Aerodactyl, gardien du sommet | 24 | garantie à l’entrée de l’étage |
+
+Les espèces et les capacités par défaut restent cohérentes avec les tables déjà utilisées dans ces trois zones. Les combats sont des rencontres hostiles normales avec tactique `boss`, sans commande PMDO inventée et sans téléchargement d’asset. La génération ne modifie ni le nombre d’étages du Tunnel, ni son arène.
+
+**Limite de validation :** les rencontres ont été validées par analyse JSON et correspondance des fonctions Lua. PMDO n’est pas installé dans cet environnement ; l’apparition réelle, la position exacte sur une carte générée et l’équilibrage doivent encore être vérifiés en jeu.
+
+## 6. Tests à faire dans PMDO
 
 Le chargement réel dans PMDO n'a pas été effectué dans cet audit statique. Il faut tester :
 
@@ -237,4 +255,4 @@ Le chargement réel dans PMDO n'a pas été effectué dans cet audit statique. I
 
 ## Conclusion
 
-Le contenu narratif du chapitre 5 est présent et ses trois destinations principales sont déclarées. La traduction visible du chapitre 5 a maintenant été complétée par cette passe statique. Le point restant le plus important côté contenu est la différence entre le plan du Tunnel Incandescent — 10 étages + arène — et le JSON actuel — 15 étages + arène.
+Le contenu narratif du chapitre 5 est présent et ses trois destinations principales sont déclarées. La traduction visible du chapitre 5 a été complétée par la passe statique. Les mini-boss et gardiens sont maintenant branchés sur leurs étages cibles. Le Tunnel Incandescent conserve bien sa structure validée de 15 étages normaux + arène ; il reste à effectuer le parcours réel dans PMDO avant de déclarer le chapitre terminé en jeu.

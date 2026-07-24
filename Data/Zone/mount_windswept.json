@@ -599,6 +599,20 @@
 }
 }
 }
+},
+{
+"Key": {
+"str": [
+5,
+2,
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Script": "SpawnChapter5MountMiniBoss",
+"ArgTable": "{}"
+}
 }
 ],
 "Comment": ""
@@ -1288,6 +1302,20 @@
 "Max": 9
 }
 }
+}
+},
+{
+"Key": {
+"str": [
+5,
+2,
+3
+]
+},
+"Value": {
+"$type": "RogueEssence.LevelGen.ScriptGenStep`1[[RogueEssence.LevelGen.MapGenContext, RogueEssence]], RogueEssence",
+"Script": "SpawnChapter5MountGuardian",
+"ArgTable": "{}"
 }
 }
 ],

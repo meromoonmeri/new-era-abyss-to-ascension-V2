@@ -23,12 +23,22 @@ Le mod possède une base jouable et les transitions principales existent. Les po
 
 1. absence de test complet dans PMDO ;
 2. cinématique du Mont Venteux déclarée mais non déclenchée ;
-3. mini-boss/gardiens du chapitre 5 non confirmés dans les étages ;
-4. incohérence de conception du Tunnel Incandescent ;
-5. traductions automatiques récentes à relire en jeu et quelques textes visibles encore suspects ;
-6. descriptions d'objets encore manquantes en français.
+3. mini-boss/gardiens du chapitre 5 désormais branchés statiquement, mais non testés en jeu ;
+4. traductions automatiques récentes à relire en jeu et quelques textes visibles encore suspects ;
+5. descriptions d'objets encore manquantes en français.
 
 ---
+
+## Mise à jour — rencontres fixes du chapitre 5
+
+Les cinq rencontres prévues sont maintenant reliées aux étages concernés par `ScriptGenStep` :
+
+- Grande Steppe : mini-boss à l’étage 7, gardien à l’étage 14 ;
+- Tunnel Incandescent : mini-boss à l’étage 5 ;
+- Mont Venteux : mini-boss à l’étage 7, gardien au sommet ;
+- Tunnel : 15 étages normaux + arène conservés.
+
+Le branchement a été contrôlé par parsing JSON et par correspondance entre les noms `ScriptGenStep` et les fonctions `ZONE_GEN_SCRIPT`. Cela ne remplace pas un test PMDO réel.
 
 ## P0 — À vérifier avant toute release
 
