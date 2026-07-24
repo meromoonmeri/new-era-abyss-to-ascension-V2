@@ -136,7 +136,7 @@ Le code ne joue pas un nom de fichier inexistant. Lorsque les fichiers seront in
 
 ## 4. Dialogue de la première scène
 
-Le rythme suit le format du projet : courtes répliques, pauses fréquentes, réaction du partenaire, puis résolution claire.
+Le rythme suit le format du projet, mais la scène est maintenant une vraie séquence de terrain : **56 clés de dialogue**, arrivée en plusieurs temps, réactions de la foule, déplacements parallèles, interruption d’Aria, farce de Sonata, silence d’Adagio et sortie du trio.
 
 - Papilusion demande de l’aide pour Chenipent.
 - Adagio refuse calmement au nom des missions prioritaires.
