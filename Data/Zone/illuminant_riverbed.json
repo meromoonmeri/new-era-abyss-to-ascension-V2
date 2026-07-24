@@ -4,7 +4,9 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Illuminant Riverbed",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Lit de Rivière Lumineux"
+}
 },
 "Released": true,
 "Comment": "2nd dungeon of the game.",

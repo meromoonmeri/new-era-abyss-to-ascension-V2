@@ -4,7 +4,9 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Relic Forest",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Forêt des Reliques"
+}
 },
 "Released": true,
 "Comment": "Chapter 1 - First dungeon of the game",

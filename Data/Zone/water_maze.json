@@ -4,7 +4,9 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Water Maze",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Labyrinthe Aquatique"
+}
 },
 "Released": true,
 "Comment": "In the second set of training mazes. Unlocked in Chapter 3.",

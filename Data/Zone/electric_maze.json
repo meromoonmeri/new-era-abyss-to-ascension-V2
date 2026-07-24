@@ -4,7 +4,9 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Electric Maze",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Labyrinthe Électrique"
+}
 },
 "Released": true,
 "Comment": "In the fourth set of training mazes. Unlocked in Chapter 5.",

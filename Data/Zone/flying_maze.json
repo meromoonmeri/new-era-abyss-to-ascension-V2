@@ -4,7 +4,9 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Flying Maze",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Labyrinthe Volant"
+}
 },
 "Released": true,
 "Comment": "In the third set of training mazes. Unlocked in Chapter 4.",

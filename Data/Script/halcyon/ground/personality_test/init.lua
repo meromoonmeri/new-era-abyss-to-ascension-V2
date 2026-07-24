@@ -131,11 +131,11 @@ function personality_test.CharacterSelect()
 			end
 		end
 	end
-  	UI:WaitShowVoiceOver("Welcome to the world of Pokémon!", -1)
-  	UI:WaitShowVoiceOver("Ahead of you lies a world full of exciting adventures\n and mysteries to discover!", -1)
-	UI:WaitShowVoiceOver("Before you go, you need to make some important decisions.", -1)
-	UI:WaitShowVoiceOver("Please think carefully before choosing!", -1)
-	UI:WaitShowVoiceOver("Now, make your choices!", -1)
+  	UI:WaitShowVoiceOver("Bienvenue dans le monde des Pokémon !", -1)
+  	UI:WaitShowVoiceOver("Un monde rempli d'aventures palpitantes\n et de mystères à découvrir s'étend devant toi !", -1)
+	UI:WaitShowVoiceOver("Avant de partir, tu dois prendre quelques décisions importantes.", -1)
+	UI:WaitShowVoiceOver("Réfléchis bien avant de choisir !", -1)
+	UI:WaitShowVoiceOver("À présent, fais tes choix !", -1)
 	GAME:WaitFrames(40)
 	
 	SOUND:PlayBGM("Welcome to the World of Pokémon!.ogg", true)
@@ -147,7 +147,7 @@ function personality_test.CharacterSelect()
 	--otherwise, use the standard starter selection script.
 	if CONFIG.RegularStarters() then
 		--Hero data
-		local msg = "Your hero."
+		local msg = "Ton héros."
 		--[[local choices = {'Bulbasaur', 'Charmander', 'Squirtle', 'Pikachu', 'Vulpix', 'Vulpix-A', 'Meowth', 'Machop', 
 						 'Cubone', 'Chikorita', 'Cyndaquil', 'Totodile', 'Houndour', 'Phanpy', 'Magby',
 						 'Larvitar', 'Treecko', 'Torchic', 'Mudkip', 'Poochyena', 'Ralts', 'Skitty',
@@ -281,7 +281,7 @@ function personality_test.CharacterSelect()
 			UI:WaitForChoice()	
 			local result = UI:ChoiceResult()
 			hero_choice = result
-			UI:ChoiceMenuYesNo("Is " .. _DATA:GetMonster(hero_choice.Species):GetColoredName() .. " correct?")
+			UI:ChoiceMenuYesNo("Est-ce que " .. _DATA:GetMonster(hero_choice.Species):GetColoredName() .. " convient ?")
 			UI:WaitForChoice()
 			continue = UI:ChoiceResult()
 		end
@@ -289,8 +289,8 @@ function personality_test.CharacterSelect()
 
 		
 		local gender = 0
-		local gender_choices = {'Boy', 'Girl', "Non-Binary"}
-		UI:BeginChoiceMenu("Are you a boy, girl, or non-binary?", gender_choices, 1, 1)
+		local gender_choices = {'Garçon', 'Fille', 'Non-binaire'}
+		UI:BeginChoiceMenu("Es-tu un garçon, une fille ou non binaire ?", gender_choices, 1, 1)
 		UI:WaitForChoice()
 		gender = UI:ChoiceResult()
 		
@@ -305,7 +305,7 @@ function personality_test.CharacterSelect()
 		local monster = _DATA:GetMonster(hero_choice.Species).Forms[hero_choice.Form]
 		local ability = monster.Intrinsic1
 		if monster.Intrinsic2 ~= "none" then--if pokemon has 2 abilities, let player choose which to get
-			UI:BeginChoiceMenu("Which ability would you like to have?", {_DATA:GetIntrinsic(monster.Intrinsic1):GetColoredName(), _DATA:GetIntrinsic(monster.Intrinsic2):GetColoredName()}, 1, 1)
+			UI:BeginChoiceMenu("Quelle capacité veux-tu avoir ?", {_DATA:GetIntrinsic(monster.Intrinsic1):GetColoredName(), _DATA:GetIntrinsic(monster.Intrinsic2):GetColoredName()}, 1, 1)
 			UI:WaitForChoice()
 			local result = UI:ChoiceResult()
 			if result == 2 then ability = monster.Intrinsic2 end
@@ -336,32 +336,32 @@ function personality_test.CharacterSelect()
 		local partner_type = nil
 		
 		while result.Species == hero_choice.Species or not continue do --do not allow same species for partner and player
-			UI:ChooseMonsterMenu("Your partner.", choices)
+			UI:ChooseMonsterMenu("Ton partenaire.", choices)
 			type_warning = true
 			UI:WaitForChoice()
 			result = UI:ChoiceResult()
 			partner_choice = result
 			if result.Species == hero_choice.Species then
-				UI:WaitShowDialogue("Player and partner may not be the same species.[pause=0] Please choose again.")
+				UI:WaitShowDialogue("Le héros et son partenaire ne peuvent pas être de la même espèce.[pause=0] Choisis à nouveau.")
 			else
 				hero_type = _DATA:GetMonster(hero_choice.Species).Forms[hero_choice.Form].Element1
 				partner_type = _DATA:GetMonster(partner_choice.Species).Forms[partner_choice.Form].Element1
 				if hero_type == partner_type then --warn player if types match
-					UI:WaitShowDialogue("Warning![pause=0] Your hero and partner choices share the same primary type.")
-					UI:WaitShowDialogue("This may make your adventure more difficult than normal.")
-					UI:ChoiceMenuYesNo("Are you sure you wish to continue with these choices?")
+					UI:WaitShowDialogue("Attention ![pause=0] Ton héros et ton partenaire ont le même type principal.")
+					UI:WaitShowDialogue("Cela pourrait rendre ton aventure plus difficile que la normale.")
+					UI:ChoiceMenuYesNo("Veux-tu vraiment continuer avec ces choix ?")
 					UI:WaitForChoice()
 					type_warning = UI:ChoiceResult()
 				end
 				if type_warning then--if they agreed to continue after the warning, or never got the warning, then make sure their choice is correct
-					UI:ChoiceMenuYesNo("Is " .. _DATA:GetMonster(partner_choice.Species):GetColoredName() .. " correct?")
+					UI:ChoiceMenuYesNo("Est-ce que " .. _DATA:GetMonster(partner_choice.Species):GetColoredName() .. " convient ?")
 					UI:WaitForChoice()
 					continue = UI:ChoiceResult()
 				end
 			end	
 		end 
 		
-		UI:BeginChoiceMenu("Your partner, are they a boy, girl, or non-binary?", gender_choices, 1, 1)
+		UI:BeginChoiceMenu("Ton partenaire est-il un garçon, une fille ou non binaire ?", gender_choices, 1, 1)
 		UI:WaitForChoice()
 		gender = UI:ChoiceResult()
 		
@@ -376,7 +376,7 @@ function personality_test.CharacterSelect()
 		local monster = _DATA:GetMonster(partner_choice.Species).Forms[partner_choice.Form]
 		local ability = monster.Intrinsic1
 		if monster.Intrinsic2 ~= "none" then--if pokemon has 2 abilities, let player choose which to get
-			UI:BeginChoiceMenu("Which ability would you like your partner to have?", {_DATA:GetIntrinsic(monster.Intrinsic1):GetColoredName(), _DATA:GetIntrinsic(monster.Intrinsic2):GetColoredName()}, 1, 1)
+			UI:BeginChoiceMenu("Quelle capacité veux-tu donner à ton partenaire ?", {_DATA:GetIntrinsic(monster.Intrinsic1):GetColoredName(), _DATA:GetIntrinsic(monster.Intrinsic2):GetColoredName()}, 1, 1)
 			UI:WaitForChoice()
 			result = UI:ChoiceResult()
 			if result == 2 then ability = monster.Intrinsic2 end
@@ -394,12 +394,12 @@ function personality_test.CharacterSelect()
 	else
 
 		--loop this twice; one for player, one for partner.
-		local menu_title = {"Create the hero", "Create the partner"}
+		local menu_title = {"Créer le héros", "Créer le partenaire"}
 		for charslot = 0, 1, 1 do
 			if charslot == 1 then
 				GAME:WaitFrames(20)
-				UI:WaitShowDialogue("Very well.[pause=0] The choice has been made.")
-				UI:WaitShowDialogue("But what about your partner?")
+				UI:WaitShowDialogue("Très bien.[pause=0] Le choix est fait.")
+				UI:WaitShowDialogue("Mais qu'en est-il de ton partenaire ?")
 			end
 			local continue = false
 
@@ -415,9 +415,9 @@ function personality_test.CharacterSelect()
 				--ask the player again if they selected a character with missing animations
 				if not menu.data.has_animations then
 					continue = false
-					UI:WaitShowDialogue("WARNING![pause=0] The species and form you've chosen lack certain starter animations used in cutscenes.")
-					UI:WaitShowDialogue("The game should still work fine,[pause=10] but some cutscenes and portrait emoting may be off as a result.")
-					UI:ChoiceMenuYesNo("With that said,[pause=10] would you like to choose a different Pokémon as your starter?")
+					UI:WaitShowDialogue("ATTENTION ![pause=0] L'espèce et la forme choisies ne possèdent pas certaines animations de départ utilisées dans les cinématiques.")
+					UI:WaitShowDialogue("Le jeu devrait tout de même fonctionner,[pause=10] mais certaines cinématiques et expressions des portraits pourraient être incorrectes.")
+					UI:ChoiceMenuYesNo("Cela dit,[pause=10] veux-tu choisir un autre Pokémon comme partenaire de départ ?")
 					UI:WaitForChoice()
 					--Do a not here because of the wording of the variables and the question to the player
 					continue = not UI:ChoiceResult()
@@ -474,12 +474,12 @@ function personality_test.CharacterSelect()
 	local result = ""
 	local yesnoResult = false
 	while not yesnoResult do
-		UI:NameMenu("What is your partner's name?", "It is highly recommended to give a nickname.", 60)
+		UI:NameMenu("Quel est le nom de ton partenaire ?", "Il est vivement conseillé de lui donner un surnom.", 60)
 		UI:WaitForChoice()
 		result = UI:ChoiceResult()
 		--if no name given, set name to species name
 		if result == "" then result = _DATA:GetMonster(GAME:GetPlayerPartyMember(1).CurrentForm.Species).Name:ToLocal() end
-		UI:ChoiceMenuYesNo("Is [color=#FFFF00]" .. result .. "[color] correct?")
+		UI:ChoiceMenuYesNo("[color=#FFFF00]" .. result .. "[color] convient ?")
 		UI:WaitForChoice()
 		yesnoResult = UI:ChoiceResult()
 	end
@@ -504,28 +504,28 @@ function personality_test.CharacterSelect()
 	
 	--for beta testing only: skip to another chapter?
 	--[[
-	UI:ChoiceMenuYesNo("Would you like to skip to Chapter 2?", true)
+	UI:ChoiceMenuYesNo("Veux-tu passer directement au chapitre 2 ?", true)
 	UI:WaitForChoice()
 	yesnoResult = UI:ChoiceResult()
 	if yesnoResult then 
 		 yesnoResult = false
 		while not yesnoResult do
-			UI:NameMenu("What will your name be?", "", 60)
+			UI:NameMenu("Quel sera ton nom ?", "", 60)
 			UI:WaitForChoice()
 			result = UI:ChoiceResult()
 			GAME:SetCharacterNickname(GAME:GetPlayerPartyMember(0), result)
-			UI:ChoiceMenuYesNo("Is [color=#FFFF00]" .. result .. "[color] correct?")
+			UI:ChoiceMenuYesNo("[color=#FFFF00]" .. result .. "[color] convient ?")
 			UI:WaitForChoice()
 			yesnoResult = UI:ChoiceResult()
 		end
 		
 		yesnoResult = false
 		while not yesnoResult do
-			UI:NameMenu("What will your team's name be?", "You don't need to put 'Team' in the name itself.", 60)
+			UI:NameMenu("Quel sera le nom de ton équipe ?", "Tu n'as pas besoin d'inclure « Équipe » dans le nom.", 60)
 			UI:WaitForChoice()
 			result = UI:ChoiceResult()
 			GAME:SetTeamName(result)
-			UI:ChoiceMenuYesNo("Is Team " .. GAME:GetTeamName() .. " correct?", true)
+			UI:ChoiceMenuYesNo("L'Équipe " .. GAME:GetTeamName() .. " convient-elle ?", true)
 			UI:WaitForChoice()
 			yesnoResult = UI:ChoiceResult()
 		end

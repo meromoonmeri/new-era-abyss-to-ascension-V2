@@ -1,10 +1,12 @@
-﻿{
+{
 "Version": "0.8.9.0",
 "Object": {
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Cloven Ruins",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Ruines Fendues"
+}
 },
 "Released": false,
 "Comment": "",

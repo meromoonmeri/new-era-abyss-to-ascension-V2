@@ -4,7 +4,9 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Rock Maze",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Labyrinthe Roche"
+}
 },
 "Released": true,
 "Comment": "In the third set of training mazes. Unlocked in Chapter 4.",

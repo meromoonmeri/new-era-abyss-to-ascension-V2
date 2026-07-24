@@ -4,7 +4,9 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Apricorn Grove",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Forêt des Noigrumes"
+}
 },
 "Released": true,
 "Comment": "4th dungeon of the game.",

@@ -4,7 +4,9 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Crooked Cavern",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Caverne Tortueuse"
+}
 },
 "Released": true,
 "Comment": "3rd Dungeon of the game.",

@@ -4,7 +4,9 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Fire Maze",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Labyrinthe de Feu"
+}
 },
 "Released": true,
 "Comment": "In the second set of training mazes. Unlocked in Chapter 3.",

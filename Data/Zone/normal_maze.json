@@ -4,7 +4,9 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Normal Maze",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Labyrinthe Normal"
+}
 },
 "Released": true,
 "Comment": "First training maze. Easy maze.",

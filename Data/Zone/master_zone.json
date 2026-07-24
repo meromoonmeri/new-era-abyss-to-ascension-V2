@@ -6,7 +6,7 @@
 "DefaultText": "Debug",
 "LocalTexts": {
 "de": "Debug",
-"es": "Debug"
+"es": "Debug", "fr": "Débogage"
 }
 },
 "Released": true,

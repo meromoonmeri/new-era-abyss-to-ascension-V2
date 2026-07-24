@@ -4,7 +4,9 @@
 "$type": "RogueEssence.Data.ZoneData, RogueEssence",
 "Name": {
 "DefaultText": "Beginner Lesson",
-"LocalTexts": {}
+"LocalTexts": {
+"fr": "Leçon pour débutants"
+}
 },
 "Released": true,
 "Comment": "First tutorial lesson at Ledian Dojo.",
