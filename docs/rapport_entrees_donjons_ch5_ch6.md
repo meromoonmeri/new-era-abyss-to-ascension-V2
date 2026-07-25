@@ -38,6 +38,8 @@ La nouvelle Ground Map de la Forêt Lugubre réutilise la structure de `relic_fo
 
 Aucun DTEF externe n’est injecté directement dans le mod. Le DTEF reste pertinent pour une future création de tileset, mais il serait incorrect de prétendre qu’un nouveau tileset DTEF a été importé sans passage par le pipeline PMDO et vérification dans l’éditeur.
 
+Pour le boss Zarude, l’OST fournie par la production — `060 - Battle against Dusknoir - Pokémon Mystery Dungeon: Explorers of Sky` — reste une référence humaine. Elle n’est ni téléchargée ni convertie. En attendant l’intégration légitime du fichier, l’arène utilise `Boss Battle!.ogg`, déjà présent dans le projet.
+
 ## Tests obligatoires
 
 ### Tests de flux
@@ -59,7 +61,12 @@ Aucun DTEF externe n’est injecté directement dans le mod. Le DTEF reste perti
 - [ ] Crucible : transition vers l’arène et retour ;
 - [ ] Mont Venteux : arrivée, camp, premier étage ;
 - [ ] Forêt Lugubre : arrivée sur la nouvelle map, cinématique, premier étage ;
-- [ ] Forêt Lugubre : Chenipent au dernier étage et sortie avec mission réussie.
+- [ ] Forêt Lugubre : 18 étages normaux ;
+- [ ] Forêt Lugubre : 3 étages de profondeur ;
+- [ ] Forêt Lugubre : Chenipent au 18e étage ;
+- [ ] Forêt Lugubre : apparition unique de Zarude ;
+- [ ] Forêt Lugubre : double flash blanc et lancement du combat boss ;
+- [ ] Forêt Lugubre : sortie après victoire/défaite du boss.
 
 ### Validation statique
 

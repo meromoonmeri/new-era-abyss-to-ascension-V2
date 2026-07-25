@@ -572,7 +572,7 @@ end
 -- mission rescues is reused here; the interaction itself is handled by the
 -- existing BATTLE_SCRIPT event system.
 function ZONE_GEN_SCRIPT.SpawnChapter6Chenipent(zoneContext, context, queue, seed, args)
-  if zoneContext.CurrentID ~= 4 or SV.Chapter6.ChenipentFound then
+  if zoneContext.CurrentSegment ~= 0 or zoneContext.CurrentID ~= 17 or SV.Chapter6.ChenipentFound then
     return
   end
 

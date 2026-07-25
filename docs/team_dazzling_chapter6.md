@@ -153,7 +153,12 @@ Le nom utilisé dans les dialogues est toujours **Team Dazzling**. « Les Trois 
 
 Une nouvelle zone `gloomy_forest` et une Ground Map `gloomy_forest_entrance` sont créées à partir des ressources forestières déjà présentes dans `relic_forest` :
 
-- 5 étages ;
+- 18 étages normaux ;
+- 3 étages de profondeur ;
+- une arène de boss dédiée pour Zarude ;
+- Zarude niveau 42, capacités vérifiées `fury_swipes`, `scary_face`, `grass_knot`, `bite` et talent `leaf_guard` ;
+- apparition unique sur une Ground Map avant le duel ;
+- double flash blanc et `COMMON.BossTransition()` avant le lancement du combat ;
 - génération procédurale PMDO existante ;
 - Ground Map extérieure avec ruines forestières réutilisées ;
 - musique existante `Mystifying Forest.ogg` ;
@@ -163,7 +168,7 @@ Une nouvelle zone `gloomy_forest` et une Ground Map `gloomy_forest_entrance` son
 - script de zone et script d’entrée séparés ;
 - sortie explicite pour victoire, défaite, fuite et secours.
 
-Au dernier étage, `SpawnChapter6Chenipent` réutilise :
+Au 18e étage normal, `SpawnChapter6Chenipent` réutilise :
 
 - `SpecificTeamSpawner` ;
 - `MobSpawn` ;

@@ -690,10 +690,11 @@
 "KeepTreasure": false,
 "BagSize": -1,
 "Rescues": 0,
-"CountedFloors": 5,
+"CountedFloors": 21,
 "Rogue": 0,
 "Grounds": [
-"gloomy_forest_entrance"
+"gloomy_forest_entrance",
+"gloomy_forest_boss"
 ],
 "Maps": [
 [
@@ -701,7 +702,28 @@
 1,
 2,
 3,
-4
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+13,
+14,
+15,
+16,
+17
+],
+[
+0,
+1,
+2
+],
+[
+0
 ]
 ],
 "Name": {

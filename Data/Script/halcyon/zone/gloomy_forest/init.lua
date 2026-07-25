@@ -10,7 +10,11 @@ function gloomy_forest.Init(zone)
 end
 
 function gloomy_forest.EnterSegment(zone, rescuing, segmentID, mapID)
-	GeneralFunctions.CheckAllowSetRescue(zone.ID)
+	if segmentID == 2 then
+		GAME:SetRescueAllowed(false)
+	else
+		GeneralFunctions.CheckAllowSetRescue(zone.ID)
+	end
 	if rescuing ~= true then
 		COMMON.BeginDungeon(zone.ID, segmentID, mapID)
 	end
@@ -29,20 +33,41 @@ function gloomy_forest.ExitSegment(zone, result, rescue, segmentID, mapID)
 	SV.adventure.Thief = false
 	if exited == true then return end
 
+	if segmentID == 0 and result == RogueEssence.Data.GameProgress.ResultType.Cleared then
+		-- Eighteen normal floors flow directly into the three depth floors.
+		GAME:ContinueDungeon("gloomy_forest", 1, 0, 0, RogueEssence.Data.GameProgress.DungeonStakes.Risk, true, false)
+		return
+	end
+
+	if segmentID == 1 and result == RogueEssence.Data.GameProgress.ResultType.Cleared then
+		if SV.Chapter6.ChenipentFound then
+			GAME:EnterGroundMap('gloomy_forest_boss', 'Main_Entrance_Marker')
+		else
+			-- The rescue objective is required before the heart of the forest opens.
+			SV.Chapter6.MissionAccepted = false
+			GeneralFunctions.EndDungeonRun(result, "master_zone", -1, 1, 0, true, true)
+		end
+		return
+	end
+
+	if segmentID == 2 then
+		if result == RogueEssence.Data.GameProgress.ResultType.Cleared then
+			SV.Chapter6.GloomyBossEncountered = true
+			SV.Chapter6.DefeatedGloomyBoss = true
+			SV.Chapter6.MissionComplete = true
+			SV.Chapter6.MissionAccepted = false
+		else
+			SV.Chapter6.MissionAccepted = false
+		end
+		GeneralFunctions.EndDungeonRun(result, "master_zone", -1, 1, 0, true, true)
+		return
+	end
+
+	-- Any loss, escape or failed objective returns safely to Metano Town.
 	if result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
 		GAME:WaitFrames(20)
 	end
-
-	if result == RogueEssence.Data.GameProgress.ResultType.Cleared and SV.Chapter6.ChenipentFound then
-		SV.Chapter6.MissionComplete = true
-		SV.Chapter6.MissionAccepted = false
-	else
-		SV.Chapter6.MissionAccepted = false
-	end
-
-	-- The chapter 6 mission returns to the town directly.  The result screen is
-	-- still handled by the engine; the next town load plays the short follow-up
-	-- only when Chenipent was actually found.
+	SV.Chapter6.MissionAccepted = false
 	GeneralFunctions.EndDungeonRun(result, "master_zone", -1, 1, 0, true, true)
 end
 

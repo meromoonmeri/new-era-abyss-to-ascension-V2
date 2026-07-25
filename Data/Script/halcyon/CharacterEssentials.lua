@@ -340,6 +340,14 @@ local characters = {
 			form = 0,
 			skin = "normal"
 		},
+		Zarude = {
+			species = "zarude",
+			nickname = 'Zarude',
+			instance = 'Zarude',
+			gender = Gender.Genderless,
+			form = 0,
+			skin = "normal"
+		},
 		Butterfree = {
 			species = "butterfree",
 			nickname = 'Papilusion',
