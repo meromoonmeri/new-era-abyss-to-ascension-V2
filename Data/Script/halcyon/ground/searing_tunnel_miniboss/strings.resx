@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="STM_001" xml:space="preserve">
+    <value>Cette chaleur devient étouffante...[pause=15] On doit approcher d'une poche de magma.</value>
+  </data>
+  <data name="STM_002" xml:space="preserve">
+    <value>Tu entends ça, [player] ?[pause=15] On dirait... de la vapeur sous pression.</value>
+  </data>
+  <data name="STM_003" xml:space="preserve">
+    <value>De la vapeur ![pause=10] Elle vient de partout !</value>
+  </data>
+  <data name="STM_004" xml:space="preserve">
+    <value>Un Torkoal ![pause=10] Il nous barre la route !</value>
+  </data>
+  <data name="STM_005" xml:space="preserve">
+    <value>Un Magmar aussi ![pause=10] Ils nous ont encerclés !</value>
+  </data>
+  <data name="STM_006" xml:space="preserve">
+    <value>Les Maîtres-Forgerons des profondeurs...</value>
+  </data>
+  <data name="STM_007" xml:space="preserve">
+    <value>Cette voix, encore !</value>
+  </data>
+  <data name="STM_008" xml:space="preserve">
+    <value>Ils gardent les fournaises depuis des siècles.[pause=20] Leur chaleur te consumera.</value>
+  </data>
+  <data name="STM_009" xml:space="preserve">
+    <value>À moins que tu ne prouves ta propre flamme...</value>
+  </data>
+  <data name="STM_010" xml:space="preserve">
+    <value>On n'a pas fait tout ce chemin pour rien ![pause=10] [player], en avant !</value>
+  </data>
+  <data name="STM_011" xml:space="preserve">
+    <value>De retour.[pause=15] Cette fois, on est prêts !</value>
+  </data>
+  <data name="STM_012" xml:space="preserve">
+    <value>On a survécu à la fournaise !</value>
+  </data>
+  <data name="STM_013" xml:space="preserve">
+    <value>Cette voix...[pause=15] Elle semble tout savoir de ce donjon.</value>
+  </data>
+  <data name="STM_014" xml:space="preserve">
+    <value>C'est comme si elle nous testait.[pause=20] Continuons.</value>
+  </data>
+  <data name="STM_015" xml:space="preserve">
+    <value>Les flammes t'ont consumé...</value>
+  </data>
+  <data name="STM_016" xml:space="preserve">
+    <value>Mais le feu forge l'acier.[pause=30] Reviens, plus fort.</value>
+  </data>
+</root>

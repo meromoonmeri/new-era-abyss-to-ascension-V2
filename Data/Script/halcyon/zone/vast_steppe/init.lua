@@ -55,6 +55,12 @@ function vast_steppe.ExitSegment(zone, result, rescue, segmentID, mapID)
 
 	if exited == true then
 		--do nothing
+	elseif segmentID == 0 and result == RogueEssence.Data.GameProgress.ResultType.Cleared and SV.ChapterProgression.Chapter == 5 then
+		-- Segment 0 cleared: go to mini-boss ground map
+		GAME:EnterGroundMap('vast_steppe_miniboss', 'Main_Entrance_Marker')
+	elseif segmentID == 2 and result == RogueEssence.Data.GameProgress.ResultType.Cleared and SV.ChapterProgression.Chapter == 5 then
+		-- Segment 2 cleared: go to guardian ground map
+		GAME:EnterGroundMap('vast_steppe_guardian', 'Main_Entrance_Marker')
 	elseif SV.ChapterProgression.Chapter == 5 and result ~= RogueEssence.Data.GameProgress.ResultType.Cleared then
 		GAME:WaitFrames(20)	
 		SV.Chapter5.LostSteppe = true--if escaped or died, they "lost" in the steppe and therefore they dallied somewhat in getting to the tunnel.

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="VSG_001" xml:space="preserve">
+    <value>La brume est encore plus dense ici...[pause=15] C'est presque irréel.</value>
+  </data>
+  <data name="VSG_002" xml:space="preserve">
+    <value>C'est le cœur de la steppe.[pause=20] Il doit y avoir quelque chose qui protège cet endroit.</value>
+  </data>
+  <data name="VSG_003" xml:space="preserve">
+    <value>Ses bois...[pause=10] ils brillent !</value>
+  </data>
+  <data name="VSG_004" xml:space="preserve">
+    <value>Le Gardien des Plaines s'éveille...</value>
+  </data>
+  <data name="VSG_005" xml:space="preserve">
+    <value>Encore cette voix !</value>
+  </data>
+  <data name="VSG_006" xml:space="preserve">
+    <value>Le plus fort de la harde.[pause=20] Il ne pliera pas aussi facilement.</value>
+  </data>
+  <data name="VSG_007" xml:space="preserve">
+    <value>Prouve ta valeur, voyageur...</value>
+  </data>
+  <data name="VSG_008" xml:space="preserve">
+    <value>C'est le dernier obstacle avant la sortie de la steppe ![pause=10] On y va !</value>
+  </data>
+  <data name="VSG_009" xml:space="preserve">
+    <value>On revient à la charge.[pause=15] Cette fois, c'est la bonne !</value>
+  </data>
+  <data name="VSG_010" xml:space="preserve">
+    <value>On a vaincu le gardien de la steppe !</value>
+  </data>
+  <data name="VSG_011" xml:space="preserve">
+    <value>La brume commence à se dissiper...</value>
+  </data>
+  <data name="VSG_012" xml:space="preserve">
+    <value>Cette voix...[pause=15] Elle savait qu'il était là.</value>
+  </data>
+  <data name="VSG_013" xml:space="preserve">
+    <value>On trouvera des réponses plus tard.[pause=20] Allons de l'avant.</value>
+  </data>
+  <data name="VSG_014" xml:space="preserve">
+    <value>Le Gardien ne pardonne pas la faiblesse.</value>
+  </data>
+  <data name="VSG_015" xml:space="preserve">
+    <value>Retourne d'où tu viens.[pause=30] Reviens quand tu seras prêt.</value>
+  </data>
+</root>

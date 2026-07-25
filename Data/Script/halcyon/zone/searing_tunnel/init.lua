@@ -101,10 +101,10 @@ function searing_tunnel.ExitSegment(zone, result, rescue, segmentID, mapID)
 		
 		--Cleared
 		else
-			--During both Chapter 5 and generic situations, go to the midway point ground, but also end the run. 
-			--The first and second half are treated as two different dungeons for the sake of replays/results.	
-			--there are alternatives (only end the run on death, only end the run on leaving the dungeon itself) but this is less satisfactory as replays will be less organized and more random in what segments they actually contain.
-			if SV.ChapterProgression.Chapter == 5 then 
+			-- Chapter 5 mini-boss check: if not yet encountered, go to mini-boss ground first
+			if SV.ChapterProgression.Chapter == 5 and not SV.Chapter5.TunnelMiniBossSeen then
+				GAME:EnterGroundMap('searing_tunnel_miniboss', 'Main_Entrance_Marker')
+			elseif SV.ChapterProgression.Chapter == 5 then 
 				GeneralFunctions.EndDungeonRun(result, "master_zone", -1, 48, 0, false, false)
 			else
 				GeneralFunctions.EndDungeonRun(result, "master_zone", -1, 48, 0, true, true)

@@ -53,6 +53,12 @@ function mount_windswept.ExitSegment(zone, result, rescue, segmentID, mapID)
 
 	if exited == true then
 		--ExitDungeonMissionCheck already sent the player out (rescue case); do nothing.
+	elseif segmentID == 0 and result == RogueEssence.Data.GameProgress.ResultType.Cleared and SV.ChapterProgression.Chapter == 5 then
+		-- Segment 0 cleared: go to mini-boss ground map
+		GAME:EnterGroundMap('mount_windswept_miniboss', 'Main_Entrance_Marker')
+	elseif segmentID == 2 and result == RogueEssence.Data.GameProgress.ResultType.Cleared and SV.ChapterProgression.Chapter == 5 then
+		-- Segment 2 cleared: go to guardian ground map
+		GAME:EnterGroundMap('mount_windswept_guardian', 'Main_Entrance_Marker')
 	else
 		--The expedition is complete only after the summit is cleared.  This is a
 		--plot boundary, not a new Chapter 5 scene: the next town visit is Chapter 6.
