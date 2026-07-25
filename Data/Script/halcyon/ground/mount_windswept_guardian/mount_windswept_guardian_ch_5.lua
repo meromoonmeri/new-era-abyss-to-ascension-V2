@@ -65,61 +65,83 @@ function mount_windswept_guardian_ch_5.FirstPreBossScene()
 
   GAME:WaitFrames(30)
 
-  -- === STORM GATHERS OVERHEAD ===
+  GAME:WaitFrames(30)
+
+  -- === STORM GATHERS — VOICE SPEAKS FIRST ===
   SOUND:FadeOutBGM(80)
 
-  -- Dark clouds swirling
+  -- Dark clouds swirling overhead
   local darkCloud = RogueEssence.Content.FiniteOverlayEmitter()
   darkCloud.FadeIn = 60
-  darkCloud.TotalTime = 120
+  darkCloud.TotalTime = 140
   darkCloud.Layer = DrawLayer.Top
   darkCloud.Anim = RogueEssence.Content.BGAnimData("Thunder", 0)
   GROUND:PlayVFX(darkCloud, 224, 100)
 
-  -- Lightning flash #1
-  GAME:WaitFrames(40)
-  local lightning1 = RogueEssence.Content.FlashEmitter()
-  lightning1.FadeInTime = 1
-  lightning1.HoldTime = 2
-  lightning1.FadeOutTime = 8
-  lightning1.StartColor = Color(200, 220, 255, 0)
-  lightning1.Layer = DrawLayer.Top
-  lightning1.Anim = RogueEssence.Content.BGAnimData("White", 0)
-  GROUND:PlayVFX(lightning1, 224, 140)
-  SOUND:PlayBattleSE('EVT_Battle_Flash')
-  GAME:WaitFrames(30)
+  GAME:WaitFrames(60)
 
-  -- Lightning flash #2, closer
-  GROUND:PlayVFX(lightning1, 224, 160)
-  SOUND:PlayBattleSE('EVT_Battle_Flash')
-  coro1 = TASK:BranchCoroutine(function()
-    GeneralFunctions.EmoteAndPause(partner, "Shock", true)
-  end)
-  coro2 = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(6)
-    GeneralFunctions.EmoteAndPause(hero, "Exclaim", false)
-  end)
-  TASK:JoinCoroutines({coro1, coro2})
-
-  GAME:WaitFrames(30)
-  UI:SetSpeaker(partner)
-  UI:SetSpeakerEmotion("Surprised")
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MWG_003']))
-  -- "C'est...[pause=10] un orage ?!"
+  -- THE VOICE — before anything appears
+  SOUND:PlayBattleSE('EVT_Emote_Shock_2')
+  UI:SetSpeaker(STRINGS.Format("\\uE040"), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
+  UI:WaitShowDialogue(STRINGS.Format(STRINGS.MapStrings['MWG_005']))
+  -- "Le Prédateur Ancestral du Ciel..."
 
   GAME:WaitFrames(20)
+  local coro_voice1 = TASK:BranchCoroutine(function()
+    GeneralFunctions.LookAround(partner, 3, 4, true, true, false, Direction.UpLeft)
+  end)
+  local coro_voice2 = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(6)
+    GeneralFunctions.LookAround(hero, 3, 4, false, false, false, Direction.UpRight)
+  end)
+  TASK:JoinCoroutines({coro_voice1, coro_voice2})
 
-  -- === AERODACTYL DESCENDS FROM THE STORM ===
-  -- Massive thunder clap
-  SOUND:PlayBattleSE('_UNK_EVT_003')
+  GAME:WaitFrames(15)
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("Surprised")
+  UI:WaitShowDialogue(STRINGS.Format(STRINGS.MapStrings['MWG_006']))
+  -- "Toi...[pause=10] Tu savais qu'il était là !"
+
+  GAME:WaitFrames(30)
+
+  UI:SetSpeaker(STRINGS.Format("\\uE040"), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
+  UI:WaitShowDialogue(STRINGS.Format(STRINGS.MapStrings['MWG_007']))
+  -- "L'ultime gardien de la montagne..."
+
+  GAME:WaitFrames(20)
+  UI:WaitShowDialogue(STRINGS.Format(STRINGS.MapStrings['MWG_008']))
+  -- "Si tu triomphes ici..."
+
+  GAME:WaitFrames(15)
+  UI:WaitShowDialogue(STRINGS.Format(STRINGS.MapStrings['MWG_009']))
+  -- "Échoue... et ton voyage s'arrête ici."
+
+  GAME:WaitFrames(30)
+
+  -- === WHITE FLASH + LIGHTNING STRIKE ===
+  local center_flash = GAME:GetCameraCenter()
+  local megaFlash = RogueEssence.Content.FlashEmitter()
+  megaFlash.FadeInTime = 2
+  megaFlash.HoldTime = 4
+  megaFlash.FadeOutTime = 15
+  megaFlash.StartColor = Color(255, 255, 255, 0)
+  megaFlash.Layer = DrawLayer.Top
+  megaFlash.Anim = RogueEssence.Content.BGAnimData("White", 0)
+  GROUND:PlayVFX(megaFlash, center_flash.X, center_flash.Y)
+  SOUND:PlayBattleSE('EVT_Battle_Flash')
   GROUND:MoveScreen(RogueEssence.Content.ScreenMover(4, 8, 20))
+
+  GAME:WaitFrames(10)
+
+  -- === AERODACTYL DESCENDS FROM THE FLASH ===
+  SOUND:PlayBattleSE('_UNK_EVT_003')
 
   local aerodactyl = CharacterEssentials.MakeCharactersFromList({
     {'Aerodactyl', 224, 192, Direction.Down}
   })
   GROUND:Hide('Aerodactyl')
 
-  -- Aerodactyl dive effect — descends through the storm
+  -- Aerodactyl materializes from the lightning strike
   local diveEffect = RogueEssence.Content.StaticAnim(
     RogueEssence.Content.AnimData("Sacred_Fire_Ranger", 3), 2)
   diveEffect:SetupEmitted(
@@ -130,6 +152,7 @@ function mount_windswept_guardian_ch_5.FirstPreBossScene()
   SOUND:PlayBGM('Rising Fear.ogg', true)
   GAME:WaitFrames(15)
   GROUND:Unhide('Aerodactyl')
+  GROUND:CharSetAnim(aerodactyl, "Charge", true)
 
   -- Impact — ground shakes, dust everywhere
   local impactDust = RogueEssence.Content.FiniteOverlayEmitter()
@@ -151,70 +174,30 @@ function mount_windswept_guardian_ch_5.FirstPreBossScene()
   GROUND:MoveScreen(RogueEssence.Content.ScreenMover(3, 5, 30))
 
   GAME:WaitFrames(15)
-  -- Aerodactyl lets out a piercing screech
   SOUND:PlayBattleSE('EVT_Battle_Flash')
-  GROUND:CharSetAnim(aerodactyl, "Charge", true)
 
-  -- Push the team back
+  -- Push the team back with the shockwave
   GAME:WaitFrames(20)
-  coro1 = TASK:BranchCoroutine(function()
+  local coro_push1 = TASK:BranchCoroutine(function()
     GROUND:AnimateInDirection(partner, "None", partner.Direction, Direction.Down, 8, 1, 1)
     GROUND:AnimateInDirection(partner, "Hurt", Direction.Down, Direction.Down, 8, 1, 2)
     GeneralFunctions.Recoil(partner, "Hurt", 12, 12, false, false)
   end)
-  coro2 = TASK:BranchCoroutine(function()
+  local coro_push2 = TASK:BranchCoroutine(function()
     GAME:WaitFrames(6)
     GROUND:AnimateInDirection(hero, "None", hero.Direction, Direction.Down, 8, 1, 1)
     GROUND:AnimateInDirection(hero, "Hurt", Direction.Down, Direction.Down, 8, 1, 2)
   end)
-  TASK:JoinCoroutines({coro1, coro2})
+  TASK:JoinCoroutines({coro_push1, coro_push2})
 
   GAME:WaitFrames(30)
   GROUND:CharSetEmote(partner, "shock", 1)
   UI:SetSpeaker(partner)
   UI:SetSpeakerEmotion("Surprised")
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MWG_004']))
+  UI:WaitShowDialogue(STRINGS.Format(STRINGS.MapStrings['MWG_004']))
   -- "Un...[pause=10] UN AERODACTYL !"
 
   GAME:WaitFrames(30)
-
-  -- === VOICE OF THE ABYSS — most dramatic appearance ===
-  SOUND:PlayBattleSE('EVT_Emote_Shock_2')
-  UI:SetSpeaker(STRINGS:Format("\\uE040"), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MWG_005']))
-  -- "Le Prédateur Ancestral du Ciel..."
-
-  GAME:WaitFrames(20)
-  coro1 = TASK:BranchCoroutine(function()
-    GeneralFunctions.LookAround(partner, 3, 4, true, true, false, Direction.UpLeft)
-  end)
-  coro2 = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(6)
-    GeneralFunctions.LookAround(hero, 3, 4, false, false, false, Direction.UpRight)
-  end)
-  TASK:JoinCoroutines({coro1, coro2})
-
-  GAME:WaitFrames(15)
-  UI:SetSpeaker(partner)
-  UI:SetSpeakerEmotion("Surprised")
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MWG_006']))
-  -- "Toi...[pause=10] Tu savais qu'il était là !"
-
-  GAME:WaitFrames(30)
-  UI:SetSpeaker(STRINGS:Format("\\uE040"), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MWG_007']))
-  -- "L'ultime gardien de la montagne. Il a régné sur ces cieux bien avant que quiconque ne foule ces terres."
-
-  GAME:WaitFrames(20)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MWG_008']))
-  -- "Si tu triomphes ici, le chemin vers les ruines ancestrales s'ouvrira à toi."
-
-  GAME:WaitFrames(20)
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['MWG_009']))
-  -- "Échoue...[pause=30] et ton voyage s'arrête ici."
-
-  GAME:WaitFrames(40)
-
   -- Aerodactyl spreads its wings and roars
   GROUND:CharSetAnim(aerodactyl, "Charge", true)
   local wingWind = RogueEssence.Content.FiniteOverlayEmitter()

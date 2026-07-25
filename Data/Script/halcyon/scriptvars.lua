@@ -783,7 +783,8 @@ SV.Chapter5 =
 	DiedMountain = false,--Do we need to play the died in dungeon scene when loading this map?
 	
 	NeedGiveSupplies = false,--does penticus/phileas need to give supplies out?
-	FinishedExpedition = false--chapter 5 clear boundary; no chapter 5 scene is changed by this flag
+	FinishedExpedition = false,--chapter 5 clear boundary; no chapter 5 scene is changed by this flag
+	FinishedBedtimeCutscene = false,--has player watched the post-expedition bedtime cutscene?
 }
 
 
@@ -800,7 +801,8 @@ SV.Chapter6 =
 	ChenipentFound = false,
 	MissionComplete = false,
 	PostMissionScenePlayed = false,
-	DazzlingTownVisit = 0
+	DazzlingTownVisit = 0,
+	ShowedTitleCard = false,--Has the Chapter 6 title card been shown?
 }
 
 

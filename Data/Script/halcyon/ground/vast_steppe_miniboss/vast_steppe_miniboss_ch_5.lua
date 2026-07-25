@@ -97,106 +97,12 @@ function vast_steppe_miniboss_ch_5.FirstPreBossScene()
 
   GAME:WaitFrames(20)
 
-  -- === MUDBRAY ERUPTS FROM THE EARTH ===
-  local mudbray = CharacterEssentials.MakeCharactersFromList({
-    {'Mudbray', 184, 232, Direction.Down}
-  })
-  GROUND:Hide('Mudbray')
-
-  SOUND:PlayBattleSE('_UNK_EVT_003')
-  local mudbrayEmerge = RogueEssence.Content.StaticAnim(
-    RogueEssence.Content.AnimData("Sacred_Fire_Ranger", 3), 1)
-  mudbrayEmerge:SetupEmitted(
-    RogueElements.Loc(mudbray.Position.X + 8, mudbray.Position.Y + 12),
-    32, RogueElements.Dir8.Down)
-  GROUND:PlayVFXAnim(mudbrayEmerge, RogueEssence.Content.DrawLayer.Front)
-  GAME:WaitFrames(3)
-  GROUND:Unhide('Mudbray')
-
-  -- Ground rupture particles
-  local ruptureLeft = RogueEssence.Content.FiniteOverlayEmitter()
-  ruptureLeft.FadeIn = 5
-  ruptureLeft.TotalTime = 45
-  ruptureLeft.Movement = RogueElements.Loc(-20, -30)
-  ruptureLeft.Layer = DrawLayer.Front
-  ruptureLeft.Anim = RogueEssence.Content.BGAnimData("Dirt_Burst", 0)
-  GROUND:PlayVFX(ruptureLeft, mudbray.Position.X - 16, mudbray.Position.Y)
-  local ruptureRight = RogueEssence.Content.FiniteOverlayEmitter()
-  ruptureRight.FadeIn = 5
-  ruptureRight.TotalTime = 45
-  ruptureRight.Movement = RogueElements.Loc(20, -30)
-  ruptureRight.Layer = DrawLayer.Front
-  ruptureRight.Anim = RogueEssence.Content.BGAnimData("Dirt_Burst", 0)
-  GROUND:PlayVFX(ruptureRight, mudbray.Position.X + 16, mudbray.Position.Y)
-
-  GAME:WaitFrames(40)
-
-  coro1 = TASK:BranchCoroutine(function()
-    GROUND:AnimateInDirection(partner, "None", partner.Direction, Direction.Down, 4, 1, 1)
-    GeneralFunctions.Recoil(partner, "Hurt", 8, 8, false, false)
-  end)
-  coro2 = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(8)
-    GROUND:AnimateInDirection(hero, "None", hero.Direction, Direction.Down, 4, 1, 1)
-  end)
-  TASK:JoinCoroutines({coro1, coro2})
-
-  GAME:WaitFrames(20)
-  GeneralFunctions.EmoteAndPause(partner, "Shock", true)
-  UI:SetSpeaker(partner)
-  UI:SetSpeakerEmotion("Surprised")
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSM_005']))
-  -- "Un Pokémon a surgi du sol !"
-
-  GAME:WaitFrames(20)
-
-  -- === STANTLER EMERGES FROM THE MIST ===
-  local stantler = CharacterEssentials.MakeCharactersFromList({
-    {'Stantler', 152, 200, Direction.DownRight}
-  })
-  GROUND:Hide('Stantler')
-
-  -- Mist effect before Stantler appears
-  local mistEmitter = RogueEssence.Content.FiniteOverlayEmitter()
-  mistEmitter.FadeIn = 30
-  mistEmitter.TotalTime = 90
-  mistEmitter.Layer = DrawLayer.Back
-  mistEmitter.Anim = RogueEssence.Content.BGAnimData("Steam", 0)
-  GROUND:PlayVFX(mistEmitter, 152, 200)
-
-  SOUND:PlayBGM('Rising Fear.ogg', true)
-  GAME:WaitFrames(30)
-  GROUND:Unhide('Stantler')
-
-  -- Stantler steps forward through the mist
-  GAME:WaitFrames(10)
-  coro1 = TASK:BranchCoroutine(function()
-    GROUND:MoveInDirection(stantler, Direction.Down, 24, false, 1)
-    GROUND:CharAnimateTurnTo(stantler, Direction.Down, 4)
-  end)
-  coro2 = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(15)
-    GROUND:CharAnimateTurnTo(hero, Direction.Left, 4)
-  end)
-  coro3 = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(20)
-    GROUND:CharAnimateTurnTo(partner, Direction.UpRight, 4)
-  end)
-  TASK:JoinCoroutines({coro1, coro2, coro3})
-
-  GAME:WaitFrames(20)
-  GROUND:CharSetEmote(partner, "sweating", 1)
-  UI:SetSpeaker(partner)
-  UI:SetSpeakerEmotion("Worried")
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSM_006']))
-  -- "Et celui-là... il nous attendait."
-
+  -- === VOICE OF THE ABYSS SPEAKS FIRST ===
+  -- The tremors stop. An eerie silence falls.
   GAME:WaitFrames(30)
 
-  -- === THE VOICE OF THE ABYSS SPEAKS ===
   SOUND:PlayBattleSE('EVT_Emote_Shock_2')
   UI:SetSpeaker(STRINGS:Format("\\uE040"), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
-  UI:SetSpeakerEmotion("Normal")
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSM_007']))
   -- "La harde protège son territoire..."
 
@@ -218,9 +124,124 @@ function vast_steppe_miniboss_ch_5.FirstPreBossScene()
   -- "Qui... qui a dit ça ?!"
 
   GAME:WaitFrames(30)
+
+  -- === WHITE FLASH ===
+  local center = GAME:GetCameraCenter()
+  local preEmergeFlash = RogueEssence.Content.FlashEmitter()
+  preEmergeFlash.FadeInTime = 3
+  preEmergeFlash.HoldTime = 4
+  preEmergeFlash.FadeOutTime = 10
+  preEmergeFlash.StartColor = Color(255, 255, 255, 0)
+  preEmergeFlash.Layer = DrawLayer.Top
+  preEmergeFlash.Anim = RogueEssence.Content.BGAnimData("White", 0)
+  GROUND:PlayVFX(preEmergeFlash, center.X, center.Y)
+  SOUND:PlayBattleSE("EVT_Battle_Flash")
+  GAME:WaitFrames(20)
+
+  -- === MUDBRAY ERUPTS FROM THE EARTH ===
+  local mudbray = CharacterEssentials.MakeCharactersFromList({
+    {'Mudbray', 184, 232, Direction.Down}
+  })
+  GROUND:Hide('Mudbray')
+
+  -- Ground ruptures open dramatically
+  local ruptureLeft = RogueEssence.Content.FiniteOverlayEmitter()
+  ruptureLeft.FadeIn = 5
+  ruptureLeft.TotalTime = 60
+  ruptureLeft.Movement = RogueElements.Loc(-30, -40)
+  ruptureLeft.Layer = DrawLayer.Front
+  ruptureLeft.Anim = RogueEssence.Content.BGAnimData("Dirt_Burst", 0)
+  GROUND:PlayVFX(ruptureLeft, mudbray.Position.X - 24, mudbray.Position.Y + 8)
+  local ruptureRight = RogueEssence.Content.FiniteOverlayEmitter()
+  ruptureRight.FadeIn = 5
+  ruptureRight.TotalTime = 60
+  ruptureRight.Movement = RogueElements.Loc(30, -40)
+  ruptureRight.Layer = DrawLayer.Front
+  ruptureRight.Anim = RogueEssence.Content.BGAnimData("Dirt_Burst", 0)
+  GROUND:PlayVFX(ruptureRight, mudbray.Position.X + 24, mudbray.Position.Y + 8)
+
+  SOUND:PlayBattleSE('_UNK_EVT_003')
+  local mudbrayEmerge = RogueEssence.Content.StaticAnim(
+    RogueEssence.Content.AnimData("Sacred_Fire_Ranger", 3), 2)
+  mudbrayEmerge:SetupEmitted(
+    RogueElements.Loc(mudbray.Position.X + 8, mudbray.Position.Y + 12),
+    32, RogueElements.Dir8.Down)
+  GROUND:PlayVFXAnim(mudbrayEmerge, RogueEssence.Content.DrawLayer.Front)
+  GAME:WaitFrames(5)
+  GROUND:Unhide('Mudbray')
+  GROUND:CharSetAnim(mudbray, "Idle", true)
+
+  GAME:WaitFrames(30)
+  coro1 = TASK:BranchCoroutine(function()
+    GROUND:AnimateInDirection(partner, "None", partner.Direction, Direction.Down, 4, 1, 1)
+    GeneralFunctions.Recoil(partner, "Hurt", 8, 8, false, false)
+  end)
+  coro2 = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(8)
+    GROUND:AnimateInDirection(hero, "None", hero.Direction, Direction.Down, 4, 1, 1)
+  end)
+  TASK:JoinCoroutines({coro1, coro2})
+
+  GAME:WaitFrames(15)
+  GeneralFunctions.EmoteAndPause(partner, "Shock", true)
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("Surprised")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSM_005']))
+  -- "Un Pokémon a surgi du sol !"
+
+  GAME:WaitFrames(20)
+
+  -- === SECOND WHITE FLASH — STANTLER EMERGES FROM THE MIST ===
+  GROUND:PlayVFX(preEmergeFlash, center.X, center.Y)
+  SOUND:PlayBattleSE("EVT_Battle_Flash")
+
+  local stantler = CharacterEssentials.MakeCharactersFromList({
+    {'Stantler', 152, 200, Direction.DownRight}
+  })
+  GROUND:Hide('Stantler')
+
+  -- Thick mist rolls in, then Stantler materializes from within
+  local mistEmitter = RogueEssence.Content.FiniteOverlayEmitter()
+  mistEmitter.FadeIn = 20
+  mistEmitter.TotalTime = 80
+  mistEmitter.Layer = DrawLayer.Back
+  mistEmitter.Anim = RogueEssence.Content.BGAnimData("Steam", 1)
+  GROUND:PlayVFX(mistEmitter, 152, 200)
+
+  SOUND:PlayBGM('Rising Fear.ogg', true)
+  GAME:WaitFrames(25)
+  GROUND:Unhide('Stantler')
+  GROUND:CharSetAnim(stantler, "Charge", true)
+
+  -- Stantler steps forward through the mist, antlers glowing
+  GAME:WaitFrames(15)
+  coro1 = TASK:BranchCoroutine(function()
+    GROUND:MoveInDirection(stantler, Direction.Down, 28, false, 1)
+    GROUND:CharAnimateTurnTo(stantler, Direction.Down, 4)
+  end)
+  coro2 = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(15)
+    GROUND:CharAnimateTurnTo(hero, Direction.Left, 4)
+  end)
+  coro3 = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(20)
+    GROUND:CharAnimateTurnTo(partner, Direction.UpRight, 4)
+  end)
+  TASK:JoinCoroutines({coro1, coro2, coro3})
+
+  GAME:WaitFrames(20)
+  GROUND:CharSetEmote(partner, "sweating", 1)
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("Worried")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSM_006']))
+  -- "Et celui-là... il nous attendait."
+
+  GAME:WaitFrames(30)
+
+  -- === VOICE SPEAKS AGAIN ===
   UI:SetSpeaker(STRINGS:Format("\\uE040"), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSM_009']))
-  -- "Peu importe. Ces créatures ne te laisseront pas passer sans combattre."
+  -- "Peu importe qui je suis. Ces créatures ne te laisseront pas passer sans combattre."
 
   GAME:WaitFrames(20)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSM_010']))
@@ -228,14 +249,13 @@ function vast_steppe_miniboss_ch_5.FirstPreBossScene()
 
   GAME:WaitFrames(40)
 
-  -- === Mudbray stomps, Stantler charges its antlers ===
+  -- === Mudbray stomps, Stantler roars ===
   coro1 = TASK:BranchCoroutine(function()
     GeneralFunctions.Hop(mudbray)
-    GROUND:CharSetAnim(mudbray, "Idle", true)
   end)
   coro2 = TASK:BranchCoroutine(function()
     GAME:WaitFrames(10)
-    GROUND:CharSetAnim(stantler, "Charge", true)
+    SOUND:PlayBattleSE('EVT_Emote_Exclaim_2')
   end)
   TASK:JoinCoroutines({coro1, coro2})
 

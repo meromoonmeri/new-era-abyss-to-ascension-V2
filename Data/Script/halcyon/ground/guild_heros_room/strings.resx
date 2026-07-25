@@ -595,4 +595,55 @@
   <data name="GHR4_027" xml:space="preserve">
     <value>Good night,[pause=10] {0}.</value>
   </data>
+  <data name="GHR5_001" xml:space="preserve">
+    <value>On l'a fait, [player]...[pause=10] L'expédition est terminée !</value>
+  </data>
+  <data name="GHR5_002" xml:space="preserve">
+    <value>La Grande Steppe, le Tunnel Incandescent, le Mont Venteux...</value>
+  </data>
+  <data name="GHR5_003" xml:space="preserve">
+    <value>On a traversé tellement d'endroits dangereux.[pause=15] Et on est toujours debout !</value>
+  </data>
+  <data name="GHR5_004" xml:space="preserve">
+    <value>(Oui.[pause=15] C'était dur, mais on a réussi ensemble.)</value>
+  </data>
+  <data name="GHR5_005" xml:space="preserve">
+    <value>Mais...[pause=15] cette voix qu'on a entendue.[pause=20] Plusieurs fois.</value>
+  </data>
+  <data name="GHR5_006" xml:space="preserve">
+    <value>Elle semblait tout savoir.[pause=20] Les boss, les lieux...[pause=15] et nous.</value>
+  </data>
+  <data name="GHR5_007" xml:space="preserve">
+    <value>Qui peut bien être derrière tout ça ?</value>
+  </data>
+  <data name="GHR5_008" xml:space="preserve">
+    <value>(Je ne sais pas.[pause=20] Mais cette présence...[pause=15] elle n'est pas hostile.)</value>
+  </data>
+  <data name="GHR5_009" xml:space="preserve">
+    <value>(Elle nous observait. Comme si elle attendait quelque chose de nous.)</value>
+  </data>
+  <data name="GHR5_010" xml:space="preserve">
+    <value>En tout cas, on a prouvé qu'on était de vrais aventuriers !</value>
+  </data>
+  <data name="GHR5_011" xml:space="preserve">
+    <value>La guilde va être fière de nous.[pause=15] Surtout Penticus !</value>
+  </data>
+  <data name="GHR5_012" xml:space="preserve">
+    <value>Bon...[pause=20] on devrait se reposer un peu. Ces derniers jours ont été épuisants.</value>
+  </data>
+  <data name="GHR5_013" xml:space="preserve">
+    <value>Mais dès qu'on est prêts, on devrait continuer à explorer.</value>
+  </data>
+  <data name="GHR5_014" xml:space="preserve">
+    <value>Il y a sûrement d'autres donjons à découvrir, d'autres missions à accomplir.</value>
+  </data>
+  <data name="GHR5_015" xml:space="preserve">
+    <value>(Tu as raison.[pause=20] Prenons quelques jours pour nous entraîner.)</value>
+  </data>
+  <data name="GHR5_016" xml:space="preserve">
+    <value>Bonne nuit, [player].[pause=25] À demain !</value>
+  </data>
+  <data name="GHR5_017" xml:space="preserve">
+    <value>Zzz...</value>
+  </data>
 </root>

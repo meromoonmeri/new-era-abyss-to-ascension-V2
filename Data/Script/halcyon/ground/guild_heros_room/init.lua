@@ -11,6 +11,7 @@ require 'halcyon.ground.guild_heros_room.guild_heros_room_ch_2'
 require 'halcyon.ground.guild_heros_room.guild_heros_room_ch_3'
 require 'halcyon.ground.guild_heros_room.guild_heros_room_ch_4'
 require 'halcyon.ground.guild_heros_room.guild_heros_room_ch_5'
+require 'halcyon.ground.guild_heros_room.guild_heros_room_ch_6'
 require 'halcyon.ground.guild_heros_room.guild_heros_room_helper'
 
 
@@ -101,6 +102,20 @@ function guild_heros_room.CheckTriggerEvent()
 		GeneralFunctions.PromptChapterSaveAndQuit("guild_heros_room", "Main_Entrance_Marker", 2)
 	end
 
+	--Start Chapter 6 a few in game days after finishing the expedition.
+	if SV.ChapterProgression.Chapter == 5 and SV.Chapter5.FinishedExpedition and SV.ChapterProgression.DaysPassed >= SV.ChapterProgression.DaysToReach then
+		SV.ChapterProgression.Chapter = 6
+		SV.TemporaryFlags.MorningAddress = false
+		SV.TemporaryFlags.MorningWakeup = false
+		SV.ChapterProgression.CurrentStoryDungeon = "gloomy_forest"
+		SV.Dojo.NewMazeUnlocked = true
+		GAME:UnlockDungeon("gloomy_forest")
+		GAME:UnlockDungeon("grass_maze")
+		GAME:UnlockDungeon("dark_maze")
+		GAME:WaitFrames(60)
+		GeneralFunctions.PromptChapterSaveAndQuit("guild_heros_room", "Main_Entrance_Marker", 2)
+	end
+
 end
 
 function guild_heros_room.PlotScripting()
@@ -151,6 +166,14 @@ function guild_heros_room.PlotScripting()
 		elseif SV.ChapterProgression.Chapter == 5 then
 			if not SV.Chapter5.ShowedTitleCard then
 				guild_heros_room_ch_5.ShowTitleCard()
+			elseif SV.Chapter5.FinishedExpedition and not SV.Chapter5.FinishedBedtimeCutscene then
+				guild_heros_room_ch_5.PostExpeditionBedtalk()
+			else
+				GAME:FadeIn(20)
+			end
+		elseif SV.ChapterProgression.Chapter == 6 then
+			if not SV.Chapter6.ShowedTitleCard then
+				guild_heros_room_ch_6.ShowTitleCard()
 			else
 				GAME:FadeIn(20)
 			end

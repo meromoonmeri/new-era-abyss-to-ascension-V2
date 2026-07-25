@@ -60,83 +60,18 @@ function vast_steppe_guardian_ch_5.FirstPreBossScene()
 
   GAME:WaitFrames(30)
 
-  -- === STANTLER ALPHA APPEARS ===
-  -- First, the mist thickens dramatically
+  -- === VOICE OF THE ABYSS SPEAKS FIRST ===
+  -- The mist swirls ominously
   local mistEmitter = RogueEssence.Content.FiniteOverlayEmitter()
-  mistEmitter.FadeIn = 60
-  mistEmitter.TotalTime = 120
+  mistEmitter.FadeIn = 40
+  mistEmitter.TotalTime = 100
   mistEmitter.Layer = DrawLayer.Back
   mistEmitter.Anim = RogueEssence.Content.BGAnimData("Steam", 1)
   GROUND:PlayVFX(mistEmitter, 184, 160)
 
   SOUND:FadeOutBGM(60)
-  GAME:WaitFrames(30)
-
-  -- A faint glow appears in the mist
-  local glow = RogueEssence.Content.FlashEmitter()
-  glow.FadeInTime = 30
-  glow.HoldTime = 60
-  glow.FadeOutTime = 30
-  glow.StartColor = Color(180, 220, 255, 0)
-  glow.Layer = DrawLayer.Back
-  glow.Anim = RogueEssence.Content.BGAnimData("White", 0)
-  GROUND:PlayVFX(glow, 184, 160)
-
   GAME:WaitFrames(40)
-  SOUND:PlayBGM('Rising Fear.ogg', true)
 
-  coro1 = TASK:BranchCoroutine(function()
-    GROUND:CharAnimateTurnTo(partner, Direction.Up, 4)
-    GeneralFunctions.EmoteAndPause(partner, "Shock", true)
-  end)
-  coro2 = TASK:BranchCoroutine(function()
-    GAME:WaitFrames(8)
-    GROUND:CharAnimateTurnTo(hero, Direction.Up, 4)
-    GeneralFunctions.EmoteAndPause(hero, "Exclaim", false)
-  end)
-  TASK:JoinCoroutines({coro1, coro2})
-
-  GAME:WaitFrames(20)
-
-  -- Stantler Alpha materializes from the glowing mist
-  local stantler = CharacterEssentials.MakeCharactersFromList({
-    {'Stantler', 184, 200, Direction.Down}
-  })
-  GROUND:Hide('Stantler')
-
-  -- Special ethereal appearance effect
-  local arriveAnim = RogueEssence.Content.StaticAnim(
-    RogueEssence.Content.AnimData("Slugma_Materialize", 3), 2)
-  arriveAnim:SetupEmitted(
-    RogueElements.Loc(stantler.Position.X + 8, stantler.Position.Y + 12),
-    40, RogueElements.Dir8.Down)
-  GROUND:PlayVFXAnim(arriveAnim, RogueEssence.Content.DrawLayer.Front)
-
-  SOUND:PlayBattleSE('EVT_Battle_Flash')
-  GAME:WaitFrames(30)
-  GROUND:Unhide('Stantler')
-  GROUND:CharSetAnim(stantler, "Charge", true)
-
-  GAME:WaitFrames(30)
-
-  -- The Stantler's antlers pulse with light
-  local antlerGlow = RogueEssence.Content.FiniteOverlayEmitter()
-  antlerGlow.FadeIn = 10
-  antlerGlow.TotalTime = 40
-  antlerGlow.Layer = DrawLayer.Front
-  antlerGlow.Anim = RogueEssence.Content.BGAnimData("White", 0)
-  GROUND:PlayVFX(antlerGlow, stantler.Position.X + 8, stantler.Position.Y - 8)
-
-  GAME:WaitFrames(20)
-  GeneralFunctions.EmoteAndPause(partner, "Shock", true)
-  UI:SetSpeaker(partner)
-  UI:SetSpeakerEmotion("Surprised")
-  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSG_003']))
-  -- "Ses bois...[pause=10] ils brillent !"
-
-  GAME:WaitFrames(30)
-
-  -- === VOICE OF THE ABYSS ===
   UI:SetSpeaker(STRINGS:Format("\\uE040"), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSG_004']))
   -- "Le Gardien des Plaines s'éveille..."
@@ -159,6 +94,79 @@ function vast_steppe_guardian_ch_5.FirstPreBossScene()
   -- "Encore cette voix !"
 
   GAME:WaitFrames(30)
+
+  -- === WHITE FLASH ===
+  local center = GAME:GetCameraCenter()
+  local preEmergeFlash = RogueEssence.Content.FlashEmitter()
+  preEmergeFlash.FadeInTime = 3
+  preEmergeFlash.HoldTime = 5
+  preEmergeFlash.FadeOutTime = 12
+  preEmergeFlash.StartColor = Color(255, 255, 255, 0)
+  preEmergeFlash.Layer = DrawLayer.Top
+  preEmergeFlash.Anim = RogueEssence.Content.BGAnimData("White", 0)
+  GROUND:PlayVFX(preEmergeFlash, center.X, center.Y)
+  SOUND:PlayBattleSE("EVT_Battle_Flash")
+  GAME:WaitFrames(20)
+
+  -- === STANTLER ALPHA MATERIALIZES FROM THE FLASH ===
+  SOUND:PlayBGM('Rising Fear.ogg', true)
+
+  local stantler = CharacterEssentials.MakeCharactersFromList({
+    {'Stantler', 184, 200, Direction.Down}
+  })
+  GROUND:Hide('Stantler')
+
+  -- Ethereal blue-white emergence
+  local arriveAnim = RogueEssence.Content.StaticAnim(
+    RogueEssence.Content.AnimData("Slugma_Materialize", 3), 2)
+  arriveAnim:SetupEmitted(
+    RogueElements.Loc(stantler.Position.X + 8, stantler.Position.Y + 12),
+    40, RogueElements.Dir8.Down)
+  GROUND:PlayVFXAnim(arriveAnim, RogueEssence.Content.DrawLayer.Front)
+
+  -- Lingering glow from the flash
+  local afterGlow = RogueEssence.Content.FlashEmitter()
+  afterGlow.FadeInTime = 10
+  afterGlow.HoldTime = 30
+  afterGlow.FadeOutTime = 20
+  afterGlow.StartColor = Color(180, 220, 255, 0)
+  afterGlow.Layer = DrawLayer.Back
+  afterGlow.Anim = RogueEssence.Content.BGAnimData("White", 0)
+  GROUND:PlayVFX(afterGlow, stantler.Position.X, stantler.Position.Y)
+
+  GAME:WaitFrames(30)
+  GROUND:Unhide('Stantler')
+  GROUND:CharSetAnim(stantler, "Charge", true)
+
+  GAME:WaitFrames(20)
+  -- Antler glow — pulsing with ethereal light
+  local antlerGlow = RogueEssence.Content.FiniteOverlayEmitter()
+  antlerGlow.FadeIn = 8
+  antlerGlow.TotalTime = 50
+  antlerGlow.Layer = DrawLayer.Front
+  antlerGlow.Anim = RogueEssence.Content.BGAnimData("White", 0)
+  GROUND:PlayVFX(antlerGlow, stantler.Position.X + 8, stantler.Position.Y - 8)
+
+  coro1 = TASK:BranchCoroutine(function()
+    GROUND:CharAnimateTurnTo(partner, Direction.Up, 4)
+    GeneralFunctions.EmoteAndPause(partner, "Shock", true)
+  end)
+  coro2 = TASK:BranchCoroutine(function()
+    GAME:WaitFrames(8)
+    GROUND:CharAnimateTurnTo(hero, Direction.Up, 4)
+    GeneralFunctions.EmoteAndPause(hero, "Exclaim", false)
+  end)
+  TASK:JoinCoroutines({coro1, coro2})
+
+  GAME:WaitFrames(20)
+  UI:SetSpeaker(partner)
+  UI:SetSpeakerEmotion("Surprised")
+  UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSG_003']))
+  -- "Ses bois...[pause=10] ils brillent !"
+
+  GAME:WaitFrames(30)
+
+  -- === VOICE SPEAKS AGAIN ===
   UI:SetSpeaker(STRINGS:Format("\\uE040"), true, "", -1, "", RogueEssence.Data.Gender.Unknown)
   UI:WaitShowDialogue(STRINGS:Format(STRINGS.MapStrings['VSG_006']))
   -- "Le plus fort de la harde. Il ne pliera pas aussi facilement."
